@@ -34,6 +34,7 @@ static bnode* bnodeInsertNonfull(bnode *node, int val) {
 			i--;
 		}
 		node->vals[i] = val;
+		node->size++;
 	}
 }
 
