@@ -1,0 +1,4 @@
+PROJECT(btree)
+
+SET(SRC_LIST btree.c)
+ADD_EXECUTABLE(btree ${SRC_LIST})
