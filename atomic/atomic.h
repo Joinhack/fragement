@@ -39,14 +39,14 @@ _INLINE uint64_t	atomic_sub_uint64(uint64_t *p, uint64_t v) {
 }
 #else
 #  error "not support atomic"
-#endif
+#endif  //end define the 64 bit
+
 
 
 #ifdef __GCC_HAVE_SYNC_COMPARE_AND_SWAP_4
 _INLINE uint32_t	atomic_add_uint32(uint32_t *p, uint32_t v) {
 	return __sync_add_and_fetch(p, v);
 }
-
 _INLINE uint32_t	atomic_sub_uint32(uint32_t *p, uint32_t v) {
 	return __sync_sub_and_fetch(p, v);
 }
