@@ -11,11 +11,7 @@
 #define realloc(ptr, size) je_realloc(ptr, size)
 #define free(ptr) je_free(ptr)
 #define HAD_MEM_SIZE
-#ifdef __APPLE__
-#define mem_size(ptr) malloc_size(ptr)
-#else
 #define mem_size(ptr) je_malloc_usable_size(ptr)
-#endif
 #else
 #define malloc(size) malloc(size)
 #define realloc(ptr, size) realloc(ptr, size)
