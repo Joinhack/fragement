@@ -4,8 +4,9 @@
 #include "atomic.h"
 #include "jmalloc.h"
 
-
+//if jemalloc please compile the jemalloc use --with-jemalloc-prefix=je_
 #ifdef USE_JEMALLOC
+#include <jemalloc/jemalloc.h>
 #define malloc(size) je_malloc(size)
 #define realloc(ptr, size) je_realloc(ptr, size)
 #define free(ptr) je_free(ptr)
@@ -13,7 +14,7 @@
 #ifdef __APPLE__
 #define mem_size(ptr) malloc_size(ptr)
 #else
-#define mem_size(ptr) malloc_usable_size(ptr)
+#define mem_size(ptr) je_malloc_usable_size(ptr)
 #endif
 #else
 #define malloc(size) malloc(size)
@@ -48,7 +49,7 @@ void *jmalloc(size_t s) {
 #else
 	ptr = malloc(s);
 	oom_test(ptr, s);
-	update_used_mem(s);
+	update_used_mem(mem_size(ptr));
 	return ptr;
 #endif
 }
@@ -63,15 +64,13 @@ void *jrealloc(void *ptr, size_t s) {
 	new_ptr = realloc(real_ptr, s);
 	oom_test(new_ptr, s);
 	*((size_t*)new_ptr) = s;
-	update_used_mem(-old_size);
-	update_used_mem(s);
+	update_used_mem(s - old_size);
 	return (char*)new_ptr + MEM_PREFIX_SIZE;
 #else
 	old_size = mem_size(ptr);
 	new_ptr = realloc(ptr, s);
 	oom_test(new_ptr, s);
-	update_used_mem(-old_size);
-	update_used_mem(s);
+	update_used_mem(mem_size(new_ptr) - old_size);
 	return new_ptr;
 #endif
 }
@@ -86,7 +85,7 @@ void jfree(void* ptr) {
 	free(real_ptr);
 #else
 	size = mem_size(ptr);
-	update_used_mem(-size);
+	update_used_mem(-mem_size(ptr));
 	free(ptr);
 #endif
 	
@@ -94,11 +93,11 @@ void jfree(void* ptr) {
 
 int main(int argc, char const *argv[]) {
 	char *ptr = jmalloc(10);
-	printf("%llu\n", used_mem);
+	printf("%ld\n", used_mem);
 	ptr = jrealloc(ptr, 20);
-	printf("%llu\n", used_mem);
+	printf("%ld\n", used_mem);
 	jfree(ptr);
-	printf("%llu\n", used_mem);
+	printf("%ld\n", used_mem);
 	return 0;
 }
 
