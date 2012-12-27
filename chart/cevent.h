@@ -6,13 +6,12 @@
 #define CEV_READ 0x1
 #define CEV_WRITE 0x1<<1
 
-typedef int read_proc(void *buf, size_t count);
-typedef int write_proc(void *buf, size_t count);
+typedef int event_proc(void *buf, size_t count);
 
 typedef struct _cevent {
 	int mask;
-	read_proc *read;
-	write_proc *write;
+	event_proc *read;
+	event_proc *write;
 } cevent;
 
 typedef struct _cevent_fired {
@@ -29,7 +28,7 @@ typedef struct _cevents {
 
 cevent *create_cevents();
 void destory_cevents(cevents *cevts);
-
-
+void cevents_add_event(cevents *cevts, int fd, int mask, event_proc *proc);
+void cevents_del_event(cevents *cevts, int fd, int mask);
 
 #endif /*end define cevent**/
