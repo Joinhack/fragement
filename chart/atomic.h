@@ -1,5 +1,5 @@
-#ifndef __ATOMIC_H
-#define __ATOMIC_H
+#ifndef ATOMIC_H
+#define ATOMIC_H
 
 #ifndef _INLINE
 #define _INLINE __inline__

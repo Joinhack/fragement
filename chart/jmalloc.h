@@ -1,5 +1,5 @@
-#ifndef __JMALLOC_H
-#define __JMALLOC_H
+#ifndef JMALLOC_H
+#define JMALLOC_H
 
 
 void *jmalloc(size_t s);
