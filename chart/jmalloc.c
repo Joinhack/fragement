@@ -103,6 +103,7 @@ void *malloc_test(void *p) {
 }
 #endif
 
+#ifdef TEST_JMALLOC
 int main(int argc, char const *argv[]) {
 	char *ptr = jmalloc(10);
 #ifdef THREAD_TEST
@@ -124,5 +125,6 @@ int main(int argc, char const *argv[]) {
 	printf("%ld\n", used_mem);
 	return 0;
 }
+#endif
 
 
