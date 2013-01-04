@@ -1,6 +1,10 @@
 #ifndef CQUEUE_H
 #define CQUEUE_H
 
+#ifndef INLINE
+#define INLINE inline //USE C99 keyword.
+#endif
+
 typedef struct _cqueue_item {
 	struct _cqueue_item *prev;
 	struct _cqueue_item *next;
@@ -16,6 +20,9 @@ cqueue *create_cqueue();
 void destory_cqueue(cqueue *cq);
 void *cqueue_pop(cqueue *cq);
 void cqueue_push(cqueue *cq, void *data);
-size_t cqueue_len(cqueue *cq);
+
+INLINE size_t cqueue_len(cqueue *cq) {
+	return cq->count;
+}
 
 #endif /* end define common queue **/

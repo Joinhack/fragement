@@ -63,10 +63,6 @@ void cqueue_push(cqueue *cq, void *data) {
 	cq->count++;
 }
 
-size_t cqueue_len(cqueue *cq) {
-	return cq->count;
-}
-
 #ifdef TEST_CQUEUE
 int main(int argc, char const *argv[]) {
 	cqueue *cq;
@@ -84,7 +80,7 @@ int main(int argc, char const *argv[]) {
 	cqueue_pop(cq);
 	cqueue_pop(cq);
 	for(i = 0; i < 1; i++) {
-		printf("%ld, %ld, %ld\n", cqi, cqi->next, cqi->prev);
+		printf("%lld, %lld, %lld\n", (void*)cqi, (void*)cqi->next, (void*)cqi->prev);
 		cqi = cqi->next;
 	}
 	cqueue_pop(cq);
