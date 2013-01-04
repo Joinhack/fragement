@@ -25,14 +25,14 @@
 
 
 
-#define update_used_mem(size) atomic_add_uint64(&used_mem, size)
+#define update_used_mem(size) atomic_add_uint64(&_used_mem, size)
 #define oom_test(ptr, size) \
 if(ptr == NULL) { \
 	fprintf(stderr, "Out of memory trying to allocate %ld\n", size); \
 	abort(); \
 }
 
-uint64_t used_mem = 0;
+static uint64_t _used_mem = 0;
 
 void *jmalloc(size_t s) {
 	void *ptr;
@@ -84,47 +84,11 @@ void jfree(void* ptr) {
 	update_used_mem(-mem_size(ptr));
 	free(ptr);
 #endif
-	
 }
 
-#ifdef THREAD_TEST
-#include <pthread.h>
-void *malloc_test(void *p) {
-	char *ptr;
-	size_t i,times = 50000;
-	for(i = 0; i < times; i++) {
-		ptr = jmalloc(10);
-		printf("%ld\n", used_mem);
-		ptr = jrealloc(ptr, 20);
-		printf("%ld\n", used_mem);
-		jfree(ptr);
-		printf("%ld\n", used_mem);
-	}
+uint64_t used_mem() {
+	return _used_mem;
 }
-#endif
 
-#ifdef TEST_JMALLOC
-int main(int argc, char const *argv[]) {
-	char *ptr = jmalloc(10);
-#ifdef THREAD_TEST
-#define NUMS 30
-	size_t i;
-	void *code;
-	pthread_t threads[30];
-	for(i = 0; i < NUMS; i++) {
-		pthread_create(&threads[i], NULL, malloc_test, NULL);	
-	}
-	for(i = 0; i < NUMS; i++) {
-		pthread_join(threads[i], &code);
-	}
-#endif
-	printf("%ld\n", used_mem);
-	ptr = jrealloc(ptr, 20);
-	printf("%ld\n", used_mem);
-	jfree(ptr);
-	printf("%ld\n", used_mem);
-	return 0;
-}
-#endif
 
 

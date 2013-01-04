@@ -12,11 +12,11 @@
 typedef uint32_t spinlock_t;
 
 #ifndef CINLINE
-int spinlock_trylock(spinlock_t *lock);
+void spinlock_trylock(spinlock_t *lock);
 void spinlock_unlock(spinlock_t *lock);
 #endif
 
-int spinlock_lock(spinlock_t *lock);
+void spinlock_lock(spinlock_t *lock);
 
 
 CINLINE int spinlock_trylock(spinlock_t *lock) {

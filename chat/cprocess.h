@@ -8,6 +8,10 @@
 #define CSCHED_YIELD()  usleep(1)
 #endif
 
+#ifndef CPU_NUM
+#define CPU_NUM 2 //normal cpu is 2.
+#endif
+
 #if( __i386__ || __i386 || __amd64__ || __amd64 )
 #define CPU_PAUSE() __asm__("pause")
 #else
