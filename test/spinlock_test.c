@@ -6,16 +6,18 @@
 
 #define NUMS 30
 
-spinlock_t lock = SL_UNLOCK;
+//spinlock_t lock = SL_UNLOCK;
+pthread_spinlock_t lock;
 int count = 0;
+
 
 void *spinlock_test(void *d) {
 	int i, j;
 	for(j = 0; j < 1000; j++) {
-		spinlock_lock(&lock);
+		pthread_spin_lock(&lock);
 		for(i = 0; i < 1000; i++)
 			count++;
-		spinlock_unlock(&lock);
+		pthread_spin_unlock(&lock);
 	}
 }
 
@@ -36,6 +38,7 @@ int main(int argc, char const *argv[]) {
 	
 	size_t i;
 	void *code;
+	pthread_spin_init(&lock, 0);
 	pthread_t threads[30];
 	for(i = 0; i < NUMS; i++) {
 		pthread_create(&threads[i], NULL, spinlock_test, NULL);	
