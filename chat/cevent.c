@@ -8,6 +8,20 @@ static int cevents_add_event_impl(cevents *cevts, int fd, int mask);
 static int cevents_del_event_impl(cevents *cevts, int fd, int mask);
 static int cevents_poll_impl(cevents *cevts);
 
+void cevents_push_fired(cevents *cevts, cevent_fired *fired) {
+	spinlock_lock(&cevts->fired_lock);
+	cqueue_push(cevts->fired_queue, (void*)fired);
+	spinlock_unlock(&cevts->fired_lock);
+}
+
+cevent_fired *cevents_pop_fired(cevents *cevts) {
+	cevent_fired *fevt;
+	spinlock_lock(&cevts->fired_lock);
+	fevt = (cevent_fired*)cqueue_pop(cevts->fired_queue);
+	spinlock_unlock(&cevts->fired_lock);
+	return fevt;
+}
+
 cevent *create_cevents() {
 	cevents *cevts;
 	int len;
@@ -15,7 +29,8 @@ cevent *create_cevents() {
 	evts = (cevents *)jmalloc(len);
 	memset((void *)evts, len, 0);
 	evts.events = jmalloc(sizeof(cevent) * MAX_EVENTS);
-	evts.fired = jmalloc(sizeof(cevent_fired) * MAX_EVENTS);
+	evts.fired_queue = create_cqueue();
+	evnts.fired_lock = SL_UNLOCK;
 	return evts;
 }
 
@@ -25,7 +40,8 @@ void destory_cevents(cevents *cevts) {
 	if(cevts->events != NULL)
 		jfree(cevts->events);
 	if(cevts->fired != NULL)
-		jfree(cevts->fired);
+		destory_cqueue(cevts->fired);
+	cevts->fired_lock = SL_UNLOCK;
 	cevts->events = NULL;
 	cevts->fired = NULL;
 	jfree(cevts);

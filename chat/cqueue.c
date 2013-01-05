@@ -63,3 +63,10 @@ void cqueue_push(cqueue *cq, void *data) {
 	cq->head = item;
 	cq->count++;
 }
+
+void destory_cqueue(cqueue *cq) {
+	while(cq->count > 0) {
+		cqueue_pop(cq);
+	}
+	jfree(cq);
+}

@@ -22,7 +22,6 @@ void *cqueue_pop_mt(void *data) {
 	while(cqueue_len(cq) > 0) {
 		count++;
 		fprintf(stdout, "%ld pop\n", pthread_self());
-		usleep(100);
 		cqueue_pop(cq);
 	}
 	spinlock_unlock(&lock);
@@ -60,6 +59,7 @@ int main(int argc, char const *argv[]) {
 	for(i = 0; i < NUMS; i++) {
 		pthread_join(threads[i], &code);
 	}
+	destory_cqueue(cq);
 	printf("%ld\n", cqueue_len(cq));
 	printf("%lu\n", count);
 	return 0;
