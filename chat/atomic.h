@@ -1,9 +1,6 @@
 #ifndef ATOMIC_H
 #define ATOMIC_H
-
-#ifndef CINLINE
-#define CINLINE static inline //USE C99 keyword.
-#endif
+#include "common.h"
 
 #ifndef CINLINE
 uint64_t	atomic_add_uint64(uint64_t *p, uint64_t v);

@@ -3,10 +3,8 @@
 
 #define SL_UNLOCK 0
 #define SL_LOCKED 1
+#include "common.h"
 
-#ifndef CINLINE
-#define CINLINE static inline
-#endif
 #include "atomic.h"
 
 typedef uint32_t spinlock_t;
