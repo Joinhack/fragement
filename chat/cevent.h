@@ -31,11 +31,11 @@ typedef struct {
 	void *priv_data; //use for implement data.
 } cevents;
 
-cevent *create_cevents();
+cevents *create_cevents();
 void destory_cevents(cevents *cevts);
 int cevents_add_event(cevents *cevts, int fd, int mask, event_proc *proc);
 int cevents_del_event(cevents *cevts, int fd, int mask);
-size_t cevents_poll(cevent *cevts);
+int cevents_poll(cevents *cevts, msec_t ms);
 void cevents_push_fired(cevents *cevts, cevent_fired *fired);
 cevent_fired *cevents_pop_fired(cevents *cevts);
 

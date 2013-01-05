@@ -3,6 +3,7 @@
 
 #include "common.h"
 
+
 #ifndef CINLINE
 uint64_t	atomic_add_uint64(uint64_t *p, uint64_t v);
 uint64_t	atomic_sub_uint64(uint64_t *p, uint64_t v);
