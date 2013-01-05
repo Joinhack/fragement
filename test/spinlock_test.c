@@ -6,18 +6,25 @@
 
 #define NUMS 30
 
-//spinlock_t lock = SL_UNLOCK;
+#ifdef PT_TEST
 pthread_spinlock_t lock;
-int count = 0;
+#define LOCK(lock) pthread_spin_lock(lock)
+#define UNLOCK(lock) pthread_spin_unlock(lock)
+#else
+spinlock_t lock = SL_UNLOCK;
+#define LOCK(lock) spinlock_lock(lock)
+#define UNLOCK(lock) spinlock_unlock(lock)
+#endif
+long count = 0;
 
 
 void *spinlock_test(void *d) {
 	int i, j;
-	for(j = 0; j < 1000; j++) {
-		pthread_spin_lock(&lock);
-		for(i = 0; i < 1000; i++)
+	for(j = 0; j < 10000; j++) {
+		LOCK(&lock);
+		for(i = 0; i < 10000; i++)
 			count++;
-		pthread_spin_unlock(&lock);
+		UNLOCK(&lock);
 	}
 }
 
@@ -38,7 +45,9 @@ int main(int argc, char const *argv[]) {
 	
 	size_t i;
 	void *code;
+	#ifdef PT_TEST
 	pthread_spin_init(&lock, 0);
+	#endif
 	pthread_t threads[30];
 	for(i = 0; i < NUMS; i++) {
 		pthread_create(&threads[i], NULL, spinlock_test, NULL);	
@@ -46,7 +55,7 @@ int main(int argc, char const *argv[]) {
 	for(i = 0; i < NUMS; i++) {
 		pthread_join(threads[i], &code);
 	}
-	printf("%d\n", count);
+	printf("%ld\n", count);
 	return 0;
 }
 
