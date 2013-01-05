@@ -73,7 +73,7 @@ int cevents_add_event(cevents *cevts, int fd, int mask, event_proc *proc) {
 int cevents_del_event(cevents *cevts, int fd, int mask) {
 	size_t j;
 	if(fd > MAX_EVENTS)
-		return J_ERR; //TODO: change to error code
+		return J_ERR;
 	cevent *evt = &cevts->events[fd];
 	//don't unbind the method, maybe should be used again.
 	//if(mask & CEV_READ) evt->read = NULL;
