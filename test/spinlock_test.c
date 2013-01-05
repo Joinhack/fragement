@@ -48,7 +48,7 @@ int main(int argc, char const *argv[]) {
 	#ifdef PT_TEST
 	pthread_spin_init(&lock, 0);
 	#endif
-	pthread_t threads[30];
+	pthread_t threads[NUMS];
 	for(i = 0; i < NUMS; i++) {
 		pthread_create(&threads[i], NULL, spinlock_test, NULL);	
 	}

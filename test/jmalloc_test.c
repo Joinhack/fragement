@@ -25,7 +25,7 @@ int main(int argc, char const *argv[]) {
 #define NUMS 30
 	size_t i;
 	void *code;
-	pthread_t threads[30];
+	pthread_t threads[NUMS];
 	for(i = 0; i < NUMS; i++) {
 		pthread_create(&threads[i], NULL, malloc_test, NULL);	
 	}

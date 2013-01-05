@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <stdint.h>
 #include <string.h>
 #include "jmalloc.h"
 #include "cqueue.h"
@@ -31,11 +31,12 @@ cqueue *create_cqueue() {
 void *cqueue_pop(cqueue *cq) {
 	void *data;
 	cqueue_item *item;
-	if(cq->count == 0)
+	if(cq->count == 0) {
 		return NULL;
+	}
 	item = cq->head->prev;
 	data = item->data;
-	if(cq->count--) {
+	if(--cq->count) {
 		item->prev->next = item->next;
 		item->next->prev = item->prev;
 	} else {
@@ -62,30 +63,3 @@ void cqueue_push(cqueue *cq, void *data) {
 	cq->head = item;
 	cq->count++;
 }
-
-#ifdef TEST_CQUEUE
-int main(int argc, char const *argv[]) {
-	cqueue *cq;
-	size_t i;
-	cq = create_cqueue();
-
-	cqueue_item *cqi;
-	for(i = 0; i < 6; i++)
-		cqueue_push(cq, NULL);
-	cqi = cq->head;
-	cqueue_pop(cq);
-	cqueue_pop(cq);
-	cqueue_pop(cq);
-	cqueue_pop(cq);
-	cqueue_pop(cq);
-	cqueue_pop(cq);
-	for(i = 0; i < 1; i++) {
-		printf("%lld, %lld, %lld\n", (void*)cqi, (void*)cqi->next, (void*)cqi->prev);
-		cqi = cqi->next;
-	}
-	cqueue_pop(cq);
-	printf("%ld\n", cqueue_len(cq));
-	return 0;
-}
-#endif
-

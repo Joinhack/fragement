@@ -1,11 +1,11 @@
 #ifndef SPINLOCK_H
 #define SPINLOCK_H
 
+#include "common.h"
+#include "atomic.h"
+
 #define SL_UNLOCK 0
 #define SL_LOCKED 1
-#include "common.h"
-
-#include "atomic.h"
 
 typedef uint32_t spinlock_t;
 

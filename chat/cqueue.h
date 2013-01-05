@@ -1,7 +1,7 @@
 #ifndef CQUEUE_H
 #define CQUEUE_H
-#include "common.h"
 
+#include "common.h"
 
 typedef struct _cqueue_item {
 	struct _cqueue_item *prev;
@@ -12,7 +12,6 @@ typedef struct _cqueue_item {
 typedef struct {
 	cqueue_item *head;
 	size_t count;
-	spinlock_t lock;
 } cqueue;
 
 cqueue *create_cqueue();

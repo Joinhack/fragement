@@ -1,5 +1,6 @@
 #ifndef ATOMIC_H
 #define ATOMIC_H
+
 #include "common.h"
 
 #ifndef CINLINE
@@ -77,7 +78,7 @@ CINLINE int atomic_cmp_set_uint32(uint32_t *p, uint32_t o, uint32_t n) {
 	return __sync_bool_compare_and_swap(p, o, n);
 }
 
-#elif (defined(__i386__) || defined(__amd64_) || defined(__x86_64__))
+#elif (defined(__i386__) || defined(__amd64__) || defined(__x86_64__))
 
 CINLINE uint32_t	atomic_add_uint32(uint32_t *p, uint32_t v) {
 	asm volatile (

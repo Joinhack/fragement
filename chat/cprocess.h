@@ -1,7 +1,7 @@
 #ifndef CPROCESS_H
 #define CPROCESS_H
 
-#if (HAVE_SCHED_YIELD)
+#if (USE_SCHED_YIELD)
 #include <sched.h>
 #define CSCHED_YIELD()  sched_yield()
 #else
