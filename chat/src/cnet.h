@@ -4,7 +4,7 @@
 #include <sys/stat.h>
 #include "common.h"
 
-int cnet_tcp_accept(int fd, char *ebuf, size_t len, char *ip, int *port);
+int cnet_tcp_accept(int fd, char *ip, int *port, char *ebuf, size_t len);
 
 int cnet_unix_accept(int fd, char *ebuf, size_t len);
 
