@@ -16,6 +16,15 @@ static int cevents_poll_impl(cevents *cevts, msec_t ms);
 #include "cevent_select.c"
 #endif
 
+int master_fired_event_proc(cevents *cevts, cevent_fired *fired) {
+	int fd = fired->fd;
+	int mask = fired->mask;
+	cevent *evt = &cevts->events[fd];
+	if(mask & CEV_MASTER)
+			return evt->master_proc(cevts, fd, evt->priv, mask);
+	return 0;
+}
+
 void cevents_push_fired(cevents *cevts, cevent_fired *fired) {
 	spinlock_lock(&cevts->fired_lock);
 	cqueue_push(cevts->fired_queue, (void*)fired);
@@ -57,15 +66,23 @@ void destory_cevents(cevents *cevts) {
 	jfree(cevts);
 }
 
-int cevents_add_event(cevents *cevts, int fd, int mask, event_proc *proc) {
+int cevents_add_event(cevents *cevts, int fd, int mask, event_proc *proc, void *priv) {
 	int ret;
+	cevent *evt;
 	if(fd > MAX_EVENTS)
 		return J_ERR;
+	evt = &cevts->events[fd];
+	//this is spec process.
+	if(mask & CEV_MASTER) {
+		evt->mask |= mask;
+		evt->master_proc = proc;
+		return J_OK;
+	}
 	if(!(ret = cevents_add_event_impl(cevts, fd, mask)))
 		return ret;
-	cevent *evt = &cevts->events[fd];
-	if(mask & CEV_READ) evt->read = proc;
-	if(mask & CEV_WRITE) evt->write = proc;
+	if(mask & CEV_READ) evt->read_proc = proc;
+	if(mask & CEV_WRITE) evt->write_proc = proc;
+	evt->priv = priv;
 	evt->mask |= mask;
 	return J_OK;
 }
@@ -76,8 +93,8 @@ int cevents_del_event(cevents *cevts, int fd, int mask) {
 		return J_ERR;
 	cevent *evt = &cevts->events[fd];
 	//don't unbind the method, maybe should be used again.
-	//if(mask & CEV_READ) evt->read = NULL;
-	//if(mask & CEV_WRITE) evt->write = NULL;
+	if(mask & CEV_READ) evt->read_proc = NULL;
+	if(mask & CEV_WRITE) evt->write_proc = NULL;
 	evt->mask &= ~mask; //remove mask
 	
 	//change maxfd
@@ -87,6 +104,14 @@ int cevents_del_event(cevents *cevts, int fd, int mask) {
 				cevts->maxfd = j;
 		}
 	}
+	return cevents_del_event_impl(cevts, fd, mask);
+}
+
+int cevents_enable_event(cevents *cevts, int fd, int mask) {
+	return cevents_add_event_impl(cevts, fd, mask);
+}
+
+int cevents_disable_event(cevents *cevts, int fd, int mask) {
 	return cevents_del_event_impl(cevts, fd, mask);
 }
 
