@@ -5,7 +5,7 @@ int main(int argc, char const *argv[]) {
 	int fd;
 	int clifd;
 	char buff[1024];
-	fd = cnet_tcp_server("0.0.0.0", 19999, buff, sizeof(buff));
+	fd = cnet_tcp_server("192.168.1.3", 19999, buff, sizeof(buff));
 	if(fd < 0) {
 		printf("%s\n", buff);
 		return -1;

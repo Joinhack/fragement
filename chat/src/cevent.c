@@ -72,18 +72,14 @@ int cevents_add_event(cevents *cevts, int fd, int mask, event_proc *proc, void *
 	if(fd > MAX_EVENTS)
 		return J_ERR;
 	evt = &cevts->events[fd];
-	//this is spec process.
-	if(mask & CEV_MASTER) {
-		evt->mask |= mask;
-		evt->master_proc = proc;
-		return J_OK;
-	}
-	if(!(ret = cevents_add_event_impl(cevts, fd, mask)))
+	if((ret = cevents_add_event_impl(cevts, fd, mask)))
 		return ret;
 	if(mask & CEV_READ) evt->read_proc = proc;
 	if(mask & CEV_WRITE) evt->write_proc = proc;
-	evt->priv = priv;
+	if(mask & CEV_MASTER) evt->master_proc = proc;
 	evt->mask |= mask;
+	if(fd > cevts->maxfd && evt->mask != CEV_NONE) cevts->maxfd = fd;
+	evt->priv = priv;
 	return J_OK;
 }
 
@@ -98,8 +94,8 @@ int cevents_del_event(cevents *cevts, int fd, int mask) {
 	evt->mask &= ~mask; //remove mask
 	
 	//change maxfd
-	if(cevts->maxfd && evt->mask == CEV_NONE) {
-		for(j = cevts->maxfd - 1; j>= 0; j--) {
+	if(cevts->maxfd == fd && evt->mask == CEV_NONE) {
+		for(j = cevts->maxfd - 1; j >= 0; j--) {
 			if(cevts->events[j].mask != CEV_NONE)
 				cevts->maxfd = j;
 		}

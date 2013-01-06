@@ -24,6 +24,7 @@ int cio_write(int fd, char *ptr, size_t len) {
 		ptr += wn;
 		count += wn;
 	}
+	return count;
 }
 
 int cio_read(int fd, char *ptr, size_t len) {
@@ -36,5 +37,6 @@ int cio_read(int fd, char *ptr, size_t len) {
 		ptr += rn;
 		count += rn;
 	}
+	return count;
 }
 

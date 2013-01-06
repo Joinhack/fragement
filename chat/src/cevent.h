@@ -5,7 +5,7 @@
 #include "cqueue.h"
 #include "spinlock.h"
 
-#define MAX_EVENTS (1024*6)
+#define MAX_EVENTS (10240*20)
 #define CEV_NONE 0x0
 #define CEV_READ 0x1
 #define CEV_WRITE 0x1<<1
@@ -29,13 +29,13 @@ typedef struct {
 	int fd;
 } cevent_fired;
 
-typedef struct _cevents {
+struct _cevents {
 	int maxfd;
 	cevent *events; //should be MAX_EVENTS
 	cqueue *fired_queue;
 	spinlock_t fired_lock;
 	void *priv_data; //use for implement data.
-} cevents;
+};
 
 cevents *create_cevents();
 void destory_cevents(cevents *cevts);
