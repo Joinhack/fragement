@@ -1,6 +1,7 @@
 #ifndef CNET_H
 #define CNET_H
 
+#include <sys/stat.h>
 #include "common.h"
 
 int cnet_tcp_accept(int fd, char *ebuf, size_t len, char *ip, int *port);

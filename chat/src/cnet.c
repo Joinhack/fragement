@@ -17,29 +17,29 @@ static cnet_fmt_err(char *err, size_t len, const char *fmt, ...) {
 }
 
 static int cnet_accept_impl(int fd, struct sockaddr *sa, socklen_t *len,char *ebuf, size_t ebuflen) {
-	int fd;
+	int clifd;
 	while(1) {
-		fd = accept(fd, sa, len);
-		if(ret == -1) {
+		clifd = accept(fd, sa, len);
+		if(clifd == -1) {
 			if(errno == EINTR)
 				continue;
 			else {
-				cnet_fmt_err(err, len, "accept error: %s\n", strerror(errno));
+				cnet_fmt_err(ebuf, len, "accept error: %s\n", strerror(errno));
 				return -1;
 			}
 		}
-		return fd;
+		return clifd;
 	}
 }
 
 static int cnet_bind_listen(int fd, struct sockaddr *sa, socklen_t slen,  char *ebuf, size_t len) {
 	int ret;
 	if(bind(fd, sa, slen) < 0) {
-		cnet_fmt_err(err, len, "bind error: %s\n", strerror(errno));
+		cnet_fmt_err(ebuf, len, "bind error: %s\n", strerror(errno));
 		return -1;
 	}
 	if(listen(fd, 511) < 0) {
-		cnet_fmt_err(err, len, "listen error: %s\n", strerror(errno));
+		cnet_fmt_err(ebuf, len, "listen error: %s\n", strerror(errno));
 		return -1;
 	}
 	return 0;
@@ -65,11 +65,11 @@ int cnet_create_sock(int domain, int type, char *ebuf, size_t len) {
 	int fd, on = 1;
 	fd = socket(domain, type, 0);
 	if(fd < 0) {
-		cnet_fmt_err(err, len, "socket create error: %s\n", strerror(errno));
+		cnet_fmt_err(ebuf, len, "socket create error: %s\n", strerror(errno));
 		return -1;
 	}
 	if(setsockopt(s, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on)) == -1) {
-		cnet_fmt_err(err, len, "socket set reuse error: %s\n", strerror(errno));
+		cnet_fmt_err(ebuf, len, "socket set reuse error: %s\n", strerror(errno));
 		close(fd);
 		return -1;
 	}
@@ -103,7 +103,7 @@ int cnet_unix_server(char *path, mode_t perm,char *ebuf, size_t len) {
 		return -1;
 	}
 	if(fchmod(fd, mode) < 0) {
-		cnet_fmt_err(err, len, "socket set reuse error: %s\n", strerror(errno));
+		cnet_fmt_err(ebuf, len, "socket set reuse error: %s\n", strerror(errno));
 		close(fd);
 		return -1;
 	}

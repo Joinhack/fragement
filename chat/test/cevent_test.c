@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdint.h>
+#include <sys/stat.h>
 #include <cevent.h>
 
 int main(int argc, char const *argv[]) {
