@@ -54,7 +54,7 @@ static int cevents_poll_impl(cevents *cevts, msec_t ms) {
 	if(rs > 0) {
 		for(i = 0; i <= cevts->maxfd; i++) {
 			mask = CEV_NONE;
-			event = &cevts->events[i];
+			event = cevts->events + i;
 			if(event->mask == CEV_NONE)
 				continue;
 			if((event->mask & CEV_WRITE) && FD_ISSET(i, &work_wfds))
@@ -62,7 +62,7 @@ static int cevents_poll_impl(cevents *cevts, msec_t ms) {
 			if((event->mask & CEV_READ) && FD_ISSET(i, &work_rfds))
 				mask |= CEV_READ;
 			if(event->mask & CEV_MASTER) mask |= CEV_MASTER;
-			fired = &cevts->fired[count];
+			fired = cevts->fired + count;
 			fired->fd = i;
 			fired->mask = mask;
 			count++;

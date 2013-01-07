@@ -19,7 +19,7 @@ static int cevents_poll_impl(cevents *cevts, msec_t ms);
 int master_fired_event_proc(cevents *cevts, cevent_fired *fired) {
 	int fd = fired->fd;
 	int mask = fired->mask;
-	cevent *evt = &cevts->events[fd];
+	cevent *evt = cevts->events + fd;
 	if(mask & CEV_MASTER)
 			return evt->master_proc(cevts, fd, evt->priv, mask);
 	return 0;
@@ -75,7 +75,7 @@ int cevents_add_event(cevents *cevts, int fd, int mask, event_proc *proc, void *
 	cevent *evt;
 	if(fd > MAX_EVENTS)
 		return J_ERR;
-	evt = &cevts->events[fd];
+	evt = cevts->events + fd;
 	if((ret = cevents_add_event_impl(cevts, fd, mask)))
 		return ret;
 	if(mask & CEV_READ) evt->read_proc = proc;
@@ -92,7 +92,7 @@ int cevents_del_event(cevents *cevts, int fd, int mask) {
 	size_t j;
 	if(fd > MAX_EVENTS)
 		return J_ERR;
-	cevent *evt = &cevts->events[fd];
+	cevent *evt = cevts->events + fd;
 	//don't unbind the method, maybe should be used again.
 	if(mask & CEV_READ) evt->read_proc = NULL;
 	if(mask & CEV_WRITE) evt->write_proc = NULL;
@@ -136,7 +136,7 @@ int cevents_poll(cevents *cevts, msec_t ms) {
 		return J_ERR;
 	if(ret > 0) {
 		for(i = 0; i < ret; i++) {
-			fired = &cevts->fired[i];
+			fired = cevts->fired + i;
 			if(!master_fired_event_proc(cevts, fired)) {
 					continue;
 			}
