@@ -39,6 +39,7 @@ static int cnet_bind_listen(int fd, struct sockaddr *sa, socklen_t slen,  char *
 		cnet_fmt_err(ebuf, ebuflen, "bind error: %s\n", strerror(errno));
 		return -1;
 	}
+	//magic number copy from ngnix.
 	if(listen(fd, 511) < 0) {
 		cnet_fmt_err(ebuf, ebuflen, "listen error: %s\n", strerror(errno));
 		return -1;
