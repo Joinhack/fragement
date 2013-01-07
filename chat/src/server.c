@@ -23,7 +23,7 @@ int create_tcp_server() {
 		fprintf(stderr, "%s\n", buff);
 		return -1;
 	}
-	printf("%d\n",cio_set_noblock(fd));
+	cio_set_noblock(fd);
 	return fd;
 }
 

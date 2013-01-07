@@ -78,7 +78,8 @@ int cevents_add_event(cevents *cevts, int fd, int mask, event_proc *proc, void *
 	if(mask & CEV_WRITE) evt->write_proc = proc;
 	if(mask & CEV_MASTER) evt->master_proc = proc;
 	evt->mask |= mask;
-	if(fd > cevts->maxfd && evt->mask != CEV_NONE) cevts->maxfd = fd;
+	if(fd > cevts->maxfd && evt->mask != CEV_NONE) 
+		cevts->maxfd = fd;
 	evt->priv = priv;
 	return J_OK;
 }

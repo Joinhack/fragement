@@ -22,10 +22,8 @@ static int cevents_destory_priv_impl(cevents *cevts) {
 
 static int cevents_add_event_impl(cevents *cevts, int fd, int mask) {
 	rwfd_set *rwfds = (rwfd_set*)cevts->priv_data;
-	if(mask & CEV_READ) 
-		FD_SET(fd, &rwfds->rfds);
-	if(mask & CEV_WRITE) 
-		FD_SET(fd, &rwfds->wfds);
+	if(mask & CEV_READ) FD_SET(fd, &rwfds->rfds);
+	if(mask & CEV_WRITE) FD_SET(fd, &rwfds->wfds);
 	return 0;
 }
 
@@ -52,8 +50,7 @@ static int cevents_poll_impl(cevents *cevts, msec_t ms) {
 	//copy the read write fd_set, if use original, will have problem.
 	work_rfds = rwfds->rfds;
 	work_wfds = rwfds->wfds;
-	rs = select(cevts->maxfd, &work_rfds, &work_wfds, NULL, &tv);
-	printf("%d\n", cevts->maxfd);
+	rs = select(cevts->maxfd+1, &work_rfds, &work_wfds, NULL, &tv);
 	if(rs > 0) {
 		for(i = 0; i <= cevts->maxfd; i++) {
 			mask = CEV_NONE;
