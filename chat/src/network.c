@@ -17,5 +17,6 @@ int tcp_accept_event_proc(cevents *cevts, int fd, void *priv, int mask) {
 	}
 	//TODO: create connection
 	cio_write(clifd, "aa\n", 3);
+	close(clifd);
 	return 0;
 }

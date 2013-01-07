@@ -61,16 +61,10 @@ static int cevents_poll_impl(cevents *cevts, msec_t ms) {
 				mask |= CEV_WRITE;
 			if((event->mask & CEV_READ) && FD_ISSET(i, &work_rfds))
 				mask |= CEV_READ;
-			fired = jmalloc(sizeof(cevent_fired));
-			fired->fd = i;
-			
 			if(event->mask & CEV_MASTER) mask |= CEV_MASTER;
+			fired = &cevts->fired[count];
+			fired->fd = i;
 			fired->mask = mask;
-			if(master_fired_event_proc(cevts, fired)) {
-				jfree(fired);
-				continue;
-			}
-			cevents_push_fired(cevts, fired);
 			count++;
 		}
 	}

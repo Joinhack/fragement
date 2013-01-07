@@ -32,6 +32,7 @@ typedef struct {
 struct _cevents {
 	int maxfd;
 	cevent *events; //should be MAX_EVENTS
+	cevent_fired *fired; //should be MAX_EVENTS, push to top level
 	cqueue *fired_queue;
 	spinlock_t fired_lock;
 	void *priv_data; //use for implement data.

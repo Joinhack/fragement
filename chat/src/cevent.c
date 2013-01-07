@@ -46,6 +46,7 @@ cevents *create_cevents() {
 	evts = (cevents *)jmalloc(len);
 	memset((void *)evts, len, 0);
 	evts->events = jmalloc(sizeof(cevent) * MAX_EVENTS);
+	evts->fired = jmalloc(sizeof(cevent_fired) * MAX_EVENTS);
 	evts->fired_queue = create_cqueue();
 	evts->fired_lock = SL_UNLOCK;
 	cevents_create_priv_impl(evts);
@@ -57,10 +58,13 @@ void destory_cevents(cevents *cevts) {
 		return;
 	if(cevts->events != NULL)
 		jfree(cevts->events);
+	if(cevts->fired != NULL)
+		jfree(cevts->fired);
 	if(cevts->fired_queue != NULL)
 		destory_cqueue(cevts->fired_queue);
 	cevts->fired_lock = SL_UNLOCK;
 	cevts->events = NULL;
+	cevts->fired = NULL;
 	cevts->fired_queue = NULL;
 	cevents_destory_priv_impl(cevts);
 	jfree(cevts);
@@ -112,9 +116,17 @@ int cevents_disable_event(cevents *cevts, int fd, int mask) {
 	return cevents_del_event_impl(cevts, fd, mask);
 }
 
+static cevent_fired *clone_cevent_fired(cevent_fired *fired) {
+	cevent_fired *new_cevent_fired = jmalloc(sizeof(cevent_fired));
+	new_cevent_fired->fd = fired->fd;
+	new_cevent_fired->mask = fired->mask;
+	return new_cevent_fired;
+}
+
 //return J_OK or J_ERR
 int cevents_poll(cevents *cevts, msec_t ms) {
-	int ret;
+	int ret, i;
+	cevent_fired *fired;
 	if(cevts == NULL) {
 		fprintf(stderr, "can't be happend\n");
 		abort();
@@ -122,5 +134,14 @@ int cevents_poll(cevents *cevts, msec_t ms) {
 	ret = cevents_poll_impl(cevts, ms);
 	if(ret == J_ERR)
 		return J_ERR;
+	if(ret > 0) {
+		for(i = 0; i < ret; i++) {
+			fired = &cevts->fired[i];
+			if(!master_fired_event_proc(cevts, fired)) {
+					continue;
+			}
+			cevents_push_fired(cevts, clone_cevent_fired(fired));
+		}
+	}
 	return J_OK;
 }
