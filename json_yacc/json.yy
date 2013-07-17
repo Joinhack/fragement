@@ -15,7 +15,7 @@
 %token<s>     tok_str_constant
 %token<iconst> tok_int_constant
 %token<dconst> tok_double_constant
-%token tok_obj_start tok_obj_end tok_colon tok_null tok_quote tok_comma
+%token tok_obj_start tok_obj_end tok_colon tok_null tok_quote tok_comma tok_array_start tok_array_end
 
 %type<json> OBJECT
 %type<json> MEMBERS
@@ -25,8 +25,12 @@
 
 %%
 
-JSON: OBJECT
-;
+JSON: OBJECT {
+
+}
+| ARRAY {
+
+}
 
 OBJECT: tok_obj_start tok_obj_end {
   $$ = malloc(sizeof(json_t));
@@ -34,17 +38,29 @@ OBJECT: tok_obj_start tok_obj_end {
 | tok_obj_start MEMBERS tok_obj_end {
   printf("with members\n");
 }
-;
 
 MEMBERS: PAIR {
   printf("members\n");
 }
-| PAIR MEMBERS {
+| PAIR tok_comma MEMBERS {
 
 }
-;
 
 PAIR: STRING tok_colon VALUES {
+
+}
+
+ARRAY: tok_array_start tok_array_end {
+
+}
+| tok_array_start ELEMENTS tok_array_end {
+
+}
+
+ELEMENTS: VALUES {
+
+}
+| VALUES tok_comma ELEMENTS {
 
 }
 
@@ -70,6 +86,7 @@ VALUES: STRING {
 | OBJECT {
 
 }
+
 ;
 
 %%
