@@ -21,6 +21,7 @@ dconst             ([+-]?[0-9]*(\.[0-9]+)?([eE][+-]?[0-9]+)?)
 whitespace         ([ \t\r\n]*)
 unicode            ("\\u"[0-9A-Za-z]{4})
 strconst           unicode|([a-zA-Z-][\.a-zA-Z_0-9-]*)|unicode
+quoteconst         ([\"])
 
 %%
 
@@ -63,6 +64,22 @@ strconst           unicode|([a-zA-Z-][\.a-zA-Z_0-9-]*)|unicode
 
 "}" {
   return tok_obj_end;
+}
+
+"[" {
+  return tok_array_start;
+}
+
+"]" {
+  return tok_array_end;
+}
+
+"," {
+  return tok_comma;
+}
+
+{quoteconst} {
+  return tok_quote;
 }
 
 ":" {
