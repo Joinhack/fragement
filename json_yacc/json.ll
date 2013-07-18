@@ -25,8 +25,8 @@ quoteconst         ([\"])
 
 %%
 
-"false"            { yylval.iconst=0; return tok_int_constant; }
-"true"             { yylval.iconst=1; return tok_int_constant; }
+"false"            { yylval.bconst=0; return tok_bool_constant; }
+"true"             { yylval.bconst=1; return tok_bool_constant; }
 "null"             { return tok_null; }
 {whitespace}       { /* do nothing */                 }
 

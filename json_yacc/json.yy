@@ -1,6 +1,7 @@
 %{
 
 #include <stdint.h>
+#include <string.h>
 #include "json.h"
 
 %}
@@ -9,19 +10,21 @@
   char *s;
   int64_t iconst;
   double dconst;
-  json_t *json;
+  int bconst;
+  json_object *json;
 }
 
 %token<s>     tok_str_constant
 %token<iconst> tok_int_constant
 %token<dconst> tok_double_constant
+%token<bconst> tok_bool_constant
 %token tok_obj_start tok_obj_end tok_colon tok_null tok_quote tok_comma tok_array_start tok_array_end
 
 %type<json> OBJECT
 %type<json> MEMBERS
 %type<json> PAIR
-
-
+%type<json> VALUES
+%type<json> STRING
 
 %%
 
@@ -33,7 +36,8 @@ JSON: OBJECT {
 }
 
 OBJECT: tok_obj_start tok_obj_end {
-  $$ = malloc(sizeof(json_t));
+  json_object *o = json_new(json_type_object);
+  $$ = o;
 }
 | tok_obj_start MEMBERS tok_obj_end {
   printf("with members\n");
@@ -47,7 +51,6 @@ MEMBERS: PAIR {
 }
 
 PAIR: STRING tok_colon VALUES {
-
 }
 
 ARRAY: tok_array_start tok_array_end {
@@ -65,26 +68,41 @@ ELEMENTS: VALUES {
 }
 
 STRING: tok_quote tok_quote {
-
+  json_object *o = json_new(json_type_string);
+  $$ = o;
 }
 |tok_quote tok_str_constant tok_quote {
-
+  json_object *o = json_new(json_type_string);
+  o->o.str.ptr = $2;
+  o->o.str.len = strlen($2);
+  $$ = o;
 }
 
 VALUES: STRING {
-  printf("value\n");
+  $$ = $1;
 }
 | tok_int_constant {
-
+  json_object *o = json_new(json_type_int);
+  o->o.i = $1;
+  $$ = o;
 } 
 | tok_double_constant {
-
+  json_object *o = json_new(json_type_double);
+  o->o.d = $1;
+  $$ = o;
 } 
+| tok_bool_constant {
+  json_object *o = json_new(json_type_bool);
+  o->o_type = json_type_bool;
+  o->o.b = $1;
+  $$ = o;
+}
 | tok_null {
-
+  json_object *o = json_new(json_type_null);
+  $$ = o;
 }
 | OBJECT {
-
+  $$ = $1;
 }
 
 ;
