@@ -1,7 +1,9 @@
 %{
 
+#include <stdio.h>
 #include <stdint.h>
 #include <string.h>
+#define USE_SETTING
 #include "json.h"
 
 %}
@@ -12,6 +14,7 @@
   double dconst;
   int bconst;
   json_object *json;
+  arraylist *list;
 }
 
 %token<s>     tok_str_constant
@@ -23,8 +26,10 @@
 %type<json> OBJECT
 %type<json> MEMBERS
 %type<json> PAIR
-%type<json> VALUES
+%type<json> VALUE
 %type<json> STRING
+%type<json> ARRAY
+%type<list> ELEMENTS
 
 %%
 
@@ -32,6 +37,8 @@ JSON: OBJECT {
 
 }
 | ARRAY {
+
+  printf("len:%p\n", $1->o.array->len);
 
 }
 
@@ -50,21 +57,28 @@ MEMBERS: PAIR {
 
 }
 
-PAIR: STRING tok_colon VALUES {
+PAIR: STRING tok_colon VALUE {
 }
 
 ARRAY: tok_array_start tok_array_end {
-
+  json_object *o = json_new(json_type_array);
+  $$ = o;
 }
 | tok_array_start ELEMENTS tok_array_end {
-
+  json_object *o = json_new(json_type_array);
+  arraylist_move(o->o.array, $2);
+  arraylist_free($2);
+  $$ = o;
 }
 
-ELEMENTS: VALUES {
-
+ELEMENTS: VALUE {
+  arraylist *l = arraylist_new();
+  arraylist_add(l, $1);
+  $$ = l;
 }
-| VALUES tok_comma ELEMENTS {
-
+| VALUE tok_comma ELEMENTS {
+  arraylist_add($3, $1);
+  $$ = $3;
 }
 
 STRING: tok_quote tok_quote {
@@ -78,7 +92,7 @@ STRING: tok_quote tok_quote {
   $$ = o;
 }
 
-VALUES: STRING {
+VALUE: STRING {
   $$ = $1;
 }
 | tok_int_constant {
@@ -93,13 +107,15 @@ VALUES: STRING {
 } 
 | tok_bool_constant {
   json_object *o = json_new(json_type_bool);
-  o->o_type = json_type_bool;
   o->o.b = $1;
   $$ = o;
 }
 | tok_null {
   json_object *o = json_new(json_type_null);
   $$ = o;
+}
+| ARRAY {
+  $$ = $1;
 }
 | OBJECT {
   $$ = $1;

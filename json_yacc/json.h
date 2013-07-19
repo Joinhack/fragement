@@ -41,4 +41,29 @@ json_object *json_new(enum json_type);
 
 void json_free(json_object *o);
 
+#ifdef USE_SETTING
+
+static inline void* setting_malloc(size_t s) {
+  setting *setting = get_setting();
+  return setting->malloc(s);
+}
+
+static  inline void* setting_realloc(void *p, size_t s) {
+  setting *setting = get_setting();
+  return setting->realloc(p, s);
+}
+
+static inline void setting_free(void *p) {
+  setting *setting = get_setting();
+  setting->free(p);
+}
+
+#define malloc(s) setting_malloc(s)
+
+#define realloc(p, s) setting_realloc(p, s)
+
+#define free(p) setting_free(p)
+
+#endif
+
 #endif

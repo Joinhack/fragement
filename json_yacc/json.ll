@@ -2,13 +2,19 @@
 #pragma GCC diagnostic ignored "-Wunused-function"
 #pragma GCC diagnostic ignored "-Wunused-label"
 
+#define USE_SETTING
+
 #include <stdio.h>
+#include "setting.h"
 #include "json.h"
 #include "json_yy.h"
 void integer_overflow(char* text) {
   yyerror("This integer is too big: \"%s\"\n", text);
   exit(1);
 }
+
+
+
 %}
 
 %option lex-compat

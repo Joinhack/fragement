@@ -3,6 +3,7 @@
 
 static setting default_setting = {
   .malloc = malloc,
+  .realloc = realloc,
   .free = free
 };
 

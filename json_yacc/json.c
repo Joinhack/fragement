@@ -25,6 +25,7 @@ json_object *json_new(enum json_type type) {
   memset(o, 0, sizeof(json_object));
   o->o_type = type;
   switch(type) {
+  case json_type_int:
   case json_type_null:
   case json_type_bool:
   case json_type_double:
@@ -34,10 +35,10 @@ json_object *json_new(enum json_type type) {
     o->free = json_string_free;
     break;
   case json_type_array:
+    o->o.array = arraylist_new();
     o->free = json_array_free;
     break;
   case json_type_object:
-
     break;
   default:
     setting->free(o);

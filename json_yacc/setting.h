@@ -5,6 +5,8 @@ typedef struct setting {
 
   void* (*malloc)(size_t size);
 
+  void* (*realloc)(void *p, size_t size);
+
   void (*free)(void *m);
 
 } setting;
