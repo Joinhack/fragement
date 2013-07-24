@@ -15,7 +15,7 @@ json:${objs}
 	$(CC) $(LIBS) -o $@  $?
 
 ${LL_PREFIX}.c:json.ll
-	$(LEX) -o $@ $?
+	$(LEX) --header-file=${LL_PREFIX}.h -o $@ $?
 
 ${YY_PREFIX}.c:json.yy
 	$(YACC) -d -o $@ $?

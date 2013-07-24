@@ -26,7 +26,10 @@ void arraylist_free(arraylist *l) {
   int i;
   for(i = 0; i < l->len; i++)
     l->vec[i]->free(l->vec[i]);
+  if(l->vec != NULL)
+    setting->free(l->vec);  
   setting->free(l);
+
 }
 
 void arraylist_move(arraylist *d, arraylist *s) {

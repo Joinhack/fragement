@@ -3,6 +3,7 @@
 #include "setting.h"
 #include "json.h"
 #include "json_yy.h"
+#include "json_ll.h"
 
 static inline void _json_free(json_object *o) {
   setting *setting = get_setting();
