@@ -6,8 +6,6 @@
 #define USE_SETTING
 #include "json.h"
 
-#define yyerror(s) fprintf(stderr, s)
-
 %}
 
 %union {
@@ -33,6 +31,10 @@
 %type<json> ARRAY
 %type<list> ELEMENTS
 
+%destructor {json_free($$);} VALUE ARRAY STRING
+%destructor {arraylist_free($$);} ELEMENTS
+%destructor {free($$);} tok_str_constant
+
 %%
 
 JSON: OBJECT {
@@ -47,11 +49,9 @@ OBJECT: tok_obj_start tok_obj_end {
   $$ = o;
 }
 | tok_obj_start MEMBERS tok_obj_end {
-  printf("with members\n");
 }
 
 MEMBERS: PAIR {
-  printf("members\n");
 }
 | PAIR tok_comma MEMBERS {
 

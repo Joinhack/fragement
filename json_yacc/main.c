@@ -8,13 +8,14 @@
 
 int main(int argc, char *argv[]) {
   int i;
-  char *p ="[1,2,3,4,5,6,7,[1,2,3,4,5,[1,2,34,5,6,[2,3,4,[1,2,3,[1,2,3]]]]]]";
+  char *p ="[1,2,3,4, 5,4]";
   
   long start = (long)clock();
   
-  for(i = 0; i < 100000; i++) {
+  for(i = 0; i < 1000000; i++) {
     json_object *j = json_parse(p, strlen(p));
-    json_free(j);
+    if(j)
+      json_free(j);
   }
   
   long end = (long)clock();

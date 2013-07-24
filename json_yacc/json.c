@@ -58,8 +58,10 @@ json_object *json_parse(char *buf, int len) {
   int rs;
   yy_scan_bytes(buf, len);
   rs = yyparse();
-  if(rs != 0)
+  yylex_destroy();
+  if(rs != 0) {
     return NULL;
+  }
   return json_rs_object;
 }
 

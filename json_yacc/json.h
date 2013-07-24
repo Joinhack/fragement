@@ -2,6 +2,8 @@
 #define JSON_H
 
 #include <stdint.h>
+#include <stdio.h>
+#include <stdarg.h>
 #include "setting.h"
 #include "arraylist.h"
 
@@ -44,6 +46,22 @@ void json_free(json_object *o);
 json_object *json_parse(char *buff, int len);
 
 extern json_object *json_rs_object;
+
+extern int yylineno;
+
+extern char yytext[];
+
+inline static void yyerror(const char* fmt, ...) {
+  va_list args;
+  fprintf(stderr,
+          "ERROR:line:%d (last token was '%s') \n",
+          yylineno,
+          yytext);
+
+  va_start(args, fmt);
+  vfprintf(stderr, fmt, args);
+  va_end(args);
+}
 
 #ifdef USE_SETTING
 

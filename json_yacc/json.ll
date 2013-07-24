@@ -9,8 +9,6 @@
 #include "json.h"
 #include "json_yy.h"
 
-#define yyerror(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__)
-
 //#define YY_INPUT(buf,result,max_size) input_from_buf(buf, &result, max_size)
 
 
