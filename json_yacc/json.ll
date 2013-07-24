@@ -8,12 +8,17 @@
 #include "setting.h"
 #include "json.h"
 #include "json_yy.h"
+
+#define yyerror(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__)
+
+//#define YY_INPUT(buf,result,max_size) input_from_buf(buf, &result, max_size)
+
+
+
 void integer_overflow(char* text) {
   yyerror("This integer is too big: \"%s\"\n", text);
   exit(1);
 }
-
-
 
 %}
 
@@ -91,6 +96,7 @@ quoteconst         ([\"])
 ":" {
   return tok_colon;
 }
+
 
 %%
 

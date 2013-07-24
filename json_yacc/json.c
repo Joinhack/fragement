@@ -2,6 +2,7 @@
 #include <string.h>
 #include "setting.h"
 #include "json.h"
+#include "json_yy.h"
 
 static inline void _json_free(json_object *o) {
   setting *setting = get_setting();
@@ -49,6 +50,17 @@ json_object *json_new(enum json_type type) {
 
 void json_free(json_object *o) {
   o->free(o);
+}
+
+json_object *json_rs_object;
+
+json_object *json_parse(char *buf, int len) {
+  int rs;
+  yy_scan_bytes(buf, len);
+  rs = yyparse();
+  if(rs != 0)
+    return NULL;
+  return json_rs_object;
 }
 
 

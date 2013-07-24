@@ -1,8 +1,23 @@
 #include <stdio.h>
+#include <time.h>
+#include <sys/time.h>
 #include "json.h"
 #include "json_yy.h"
 
+
+
 int main(int argc, char *argv[]) {
-  yyparse();
+  int i;
+  char *p ="[1,2,3,4,5,6,7,[1,2,3,4,5,[1,2,34,5,6,[2,3,4,[1,2,3,[1,2,3]]]]]]";
+  
+  long start = (long)clock();
+  
+  for(i = 0; i < 100000; i++) {
+    json_object *j = json_parse(p, strlen(p));
+    json_free(j);
+  }
+  
+  long end = (long)clock();
+  printf("clock delta: %ld\n", end - start);
   return 0;
 }

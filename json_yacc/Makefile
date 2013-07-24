@@ -1,7 +1,7 @@
 CC=gcc
 YACC=bison
 LEX=flex
-LIBS=-ly
+LIBS=
 CFLAGS="-Wall" -g
 
 

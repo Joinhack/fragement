@@ -6,6 +6,8 @@
 #define USE_SETTING
 #include "json.h"
 
+#define yyerror(s) fprintf(stderr, s)
+
 %}
 
 %union {
@@ -34,12 +36,10 @@
 %%
 
 JSON: OBJECT {
-
+  json_rs_object =  $1
 }
 | ARRAY {
-
-  printf("len:%p\n", $1->o.array->len);
-
+  json_rs_object =  $1
 }
 
 OBJECT: tok_obj_start tok_obj_end {
