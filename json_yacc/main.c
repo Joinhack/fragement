@@ -9,7 +9,7 @@
 
 int main(int argc, char *argv[]) {
   int i;
-  char *p ="[1,2,3,4,5,[1,2,3,4,5,6,[1,1,2,3,[1,2,3,4,[1,2,3]]]]]";
+  char *p ="{nulla:[],a:2, m:[]}";
   
   long start = (long)clock();
   

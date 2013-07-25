@@ -21,16 +21,25 @@ dict *dict_new(dict_opts *opts) {
 void dict_rehash(dict *d, unsigned int nsize) {
   setting *s = get_setting();
   dict *nd = dict_new(d->opts);
-  dict_entry *entry;
+  dict_entry *entry, *next;
+  if(nd->cap > nsize)
+    return;
+  if(nd->cap == 0 && nsize == 0)
+    nsize = 4;
   nd->cap = nsize;
   nd->entries = s->malloc(sizeof(struct dict_entry *) * nd->cap);
   memset(nd->entries, 0, sizeof(struct dict_entry *) * nd->cap);
-  for(entry = d->head; entry != NULL; entry = entry->next) {
+  entry = d->head;
+  while(entry) {
     dict_replace(nd, entry->key, entry->value);
+    next = entry->next;
     s->free(entry);
+    entry = next;
   }
-  s->free(d->entries);
+  if(d->entries)
+    s->free(d->entries);
   *d = *nd;
+  s->free(nd);
 }
 
 static inline dict_entry* _dict_find(dict *d, unsigned int idx, void *k) {
@@ -51,8 +60,7 @@ void dict_replace(dict *d, void *k, void *v) {
   setting *s = get_setting();
   if(d->size >= d->cap * DICT_RESIZE_FACTOR) dict_rehash(d, d->cap * 2);
   hash = DICT_HASH(d, k);
-  idx = hash % d->size;
-
+  idx = hash % d->cap;
   entry = _dict_find(d, idx, k);
   if(entry) {
     DICT_VALUE_FREE(d, entry->value);
@@ -62,8 +70,10 @@ void dict_replace(dict *d, void *k, void *v) {
 
   entry = s->malloc(sizeof(struct dict_entry));
   memset(entry, 0, sizeof(struct dict_entry));
-  entry->bulk_next = entry;
+  entry->bulk_next = d->entries[idx];
   d->entries[idx] = entry;
+  entry->key = k;
+  entry->value = v;
   if(d->head == NULL) {
     d->tail = d->head = entry;
   } else {
@@ -92,7 +102,6 @@ void dict_del(dict *d, void *k) {
     if(d->opts->key_compare(entry->key, k) == 0) {
       if(prev)
         prev->bulk_next = entry->bulk_next;
-      
       if(entry == d->head && entry == d->tail) {
         d->head = NULL;
         d->tail = NULL;
@@ -116,13 +125,33 @@ void dict_del(dict *d, void *k) {
 }
 
 void dict_free(dict *d) {
-  dict_entry *entry;
+  dict_entry *entry, *next;
   setting *s = get_setting();
-  for(entry = d->head; entry != NULL; entry = entry->next) {
+  entry = d->head;
+  while(entry) {
     DICT_KEY_FREE(d, entry->key);
     DICT_VALUE_FREE(d, entry->value);
+    next = entry->next;
     s->free(entry);
+    entry = next;
   }
-  s->free(d->entries);
+  if(d->entries)
+    s->free(d->entries);
   s->free(d);
+}
+
+void dict_move(dict *d, dict *s) {
+  dict_entry *entry, *next;
+  setting *setting = get_setting();
+  entry = s->head;
+  while(entry) {
+    dict_replace(d, entry->key, entry->value);
+    next = entry->next;
+    setting->free(entry);
+    entry = next;
+  }
+
+  if(s->entries)
+    setting->free(s->entries);
+  memset(s, 0, sizeof(struct dict));
 }

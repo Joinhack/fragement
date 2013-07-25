@@ -5,24 +5,51 @@
 #include "json_yy.h"
 #include "json_ll.h"
 
-static inline void _json_free(json_object *o) {
+
+static inline int key_compare(const void *k1, const void *k2) {
+  return strcmp((char*)k1, (char*)k2);
+}
+
+static inline void _general_free(void *o) {
   setting *setting = get_setting();
   setting->free(o);
 }
 
-static void json_string_free(json_object *o) {
+static inline void _json_free(json_object *o) {
+  _general_free((void*)o);
+}
+
+static inline void json_value_free(void *v) {
+  json_free((json_object*)v);
+}
+
+static inline unsigned int json_key_hash(const void *key) {
+  return dict_generic_hash(key, strlen(key));
+}
+
+dict_opts json_dict_opts = {
+  .hash = json_key_hash,
+  .key_compare = key_compare,
+  .key_free = _general_free,
+  .value_free = json_value_free
+};
+
+static inline void json_string_free(json_object *o) {
   setting *setting = get_setting();
-  setting->free(o->o.str.ptr);
+  if(o->o.str.ptr)
+    setting->free(o->o.str.ptr);
   _json_free(o);
 }
 
-static void json_array_free(json_object *o) {
-  arraylist_free(o->o.array);
+static inline void json_array_free(json_object *o) {
+  if(o->o.array)
+    arraylist_free(o->o.array);
   _json_free(o);
 }
 
-static void json_dict_free(json_object *o) {
-  dict_free(o->o.array);
+static inline void json_dict_free(json_object *o) {
+  if(o->o.dict)
+    dict_free(o->o.dict);
   _json_free(o);
 }
 
@@ -46,7 +73,6 @@ json_object *json_new(enum json_type type) {
     o->free = json_array_free;
     break;
   case json_type_object:
-    
     o->free = json_dict_free;
     break;
   default:

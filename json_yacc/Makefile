@@ -2,7 +2,7 @@ CC=gcc
 YACC=bison
 LEX=flex
 LIBS=
-CFLAGS="-Wall" -O3
+CFLAGS="-Wall" -g
 
 
 YY_PREFIX=json_yy

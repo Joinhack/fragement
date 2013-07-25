@@ -4,8 +4,10 @@
 #include <stdint.h>
 #include <string.h>
 #define USE_SETTING
+
 #include "json.h"
 #include "json_ll.h"
+
 %}
 
 %union {
@@ -22,11 +24,11 @@
 %token<iconst> tok_int_constant
 %token<dconst> tok_double_constant
 %token<bconst> tok_bool_constant
-%token tok_obj_start tok_obj_end tok_colon tok_null tok_quote tok_comma tok_array_start tok_array_end
+%token tok_obj_start tok_obj_end tok_colon tok_null tok_quote tok_comma tok_array_start tok_array_end 
 
 %type<json> OBJECT
-%type<json> MEMBERS
-%type<json> PAIR
+%type<dict> MEMBERS
+%type<dict> PAIR
 %type<json> VALUE
 %type<json> STRING
 %type<json> ARRAY
@@ -35,6 +37,7 @@
 %destructor {json_free($$);} VALUE ARRAY STRING
 %destructor {arraylist_free($$);} ELEMENTS
 %destructor {free($$);} tok_str_constant
+%destructor {dict_free($$);} MEMBERS PAIR
 
 %%
 
@@ -50,15 +53,29 @@ OBJECT: tok_obj_start tok_obj_end {
   $$ = o;
 }
 | tok_obj_start MEMBERS tok_obj_end {
+  json_object *o = json_new(json_type_object);
+  o->o.dict = $2;
+  $$ = o;
 }
 
 MEMBERS: PAIR {
+  $$ = $1;
 }
 | PAIR tok_comma MEMBERS {
-
+  dict_move($3, $1);
+  dict_free($1);
+  $$ = $3;
 }
 
-PAIR: STRING tok_colon VALUE {
+PAIR: tok_str_constant tok_colon VALUE {
+  dict *d = dict_new(&json_dict_opts);
+  dict_replace(d, $1, $3);
+  $$ = d;
+}
+| tok_quote tok_str_constant tok_quote  tok_colon VALUE {
+  dict *d = dict_new(&json_dict_opts);
+  dict_replace(d, $2, $5);
+  $$ = d;
 }
 
 ARRAY: tok_array_start tok_array_end {

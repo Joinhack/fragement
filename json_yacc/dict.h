@@ -31,6 +31,8 @@ void dict_free(dict *d);
 
 void dict_replace(dict *d, void *k, void *v);
 
+void dict_move(dict *d, dict *s);
+
 void dict_del(dict *d, void *k);
 
 void dict_rehash(dict *d, unsigned int ns);

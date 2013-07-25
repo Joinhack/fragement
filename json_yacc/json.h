@@ -65,6 +65,9 @@ inline static void yyerror(const char* fmt, ...) {
   va_end(args);
 }
 
+
+extern dict_opts json_dict_opts;
+
 #ifdef USE_SETTING
 
 static inline void* setting_malloc(size_t s) {
