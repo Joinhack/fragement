@@ -7,7 +7,7 @@ CFLAGS="-Wall" -g
 
 YY_PREFIX=json_yy
 LL_PREFIX=json_ll
-objs= ${YY_PREFIX}.o ${LL_PREFIX}.o main.o setting.o arraylist.o json.o
+objs= ${YY_PREFIX}.o ${LL_PREFIX}.o dict.o setting.o arraylist.o json.o main.o
 
 all:json
 	

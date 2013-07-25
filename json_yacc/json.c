@@ -21,6 +21,11 @@ static void json_array_free(json_object *o) {
   _json_free(o);
 }
 
+static void json_dict_free(json_object *o) {
+  dict_free(o->o.array);
+  _json_free(o);
+}
+
 json_object *json_new(enum json_type type) {
   setting *setting = get_setting();
   json_object *o = setting->malloc(sizeof(json_object));
@@ -41,6 +46,8 @@ json_object *json_new(enum json_type type) {
     o->free = json_array_free;
     break;
   case json_type_object:
+    
+    o->free = json_dict_free;
     break;
   default:
     setting->free(o);

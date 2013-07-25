@@ -6,6 +6,7 @@
 #include <stdarg.h>
 #include "setting.h"
 #include "arraylist.h"
+#include "dict.h"
 
 enum json_type {
   json_type_null,
@@ -35,6 +36,7 @@ typedef struct json_object {
 
     //array
     arraylist *array;
+    dict *dict;
   } o;
   void (*free)(struct json_object *obj);
 } json_object;

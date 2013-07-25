@@ -5,7 +5,7 @@
 #include <string.h>
 #define USE_SETTING
 #include "json.h"
-
+#include "json_ll.h"
 %}
 
 %union {
@@ -15,6 +15,7 @@
   int bconst;
   json_object *json;
   arraylist *list;
+  dict *dict;
 }
 
 %token<s>     tok_str_constant
