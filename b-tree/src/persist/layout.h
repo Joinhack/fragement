@@ -10,8 +10,8 @@
 namespace ndb {
 
 struct BlockMeta {
-  size_t offset;
-  size_t size;
+  uint64_t offset;
+  uint64_t size;
 };
 
 #define NDB_MAGIC 0x6e646200
@@ -46,14 +46,17 @@ public:
 
   static Buffer newBuffer(size_t size) {
     void *p;
-    int rs = posix_memalign(&p, PAGE_SIZE, PAGE_ROUND_UP(size));
+    size_t l = PAGE_ROUND_UP(size);
+    int rs = posix_memalign(&p, PAGE_SIZE, l);
     assert(rs == 0);
-    return Buffer((char*)p, size);
+    return Buffer((char*)p, l);
   }
 
   bool init(bool create);
 
   bool flushSuperBlock();
+
+  bool loadSuperBlock();
 
   bool flushIndex();
 
@@ -61,11 +64,21 @@ public:
     free((void*)b.raw());
   }
 
+  SuperBlock *getSuperBlock() {
+    return _superBlock;
+  }
+
   ~Layout();
 protected:
+
+  bool readBlockMeta(BlockReader &br, BlockMeta *meta);
+
+  bool writeBlockMeta(BlockWriter &br, BlockMeta *meta);
+
   bool writeSuperBlock(Block &b);
 
-  bool loadSuperBlock(Block &b);
+  bool readSuperBlock(Block &b);
+
 private:
   AIOFile &_file;
   //file offset, always point the end of file.

@@ -121,33 +121,37 @@ void AIOFile::write(size_t offset, Buffer &buffer, aio_cb_t cb, void *ctx) {
 }
 
 struct SyncAIORequest {
+  SyncAIORequest():cond(mutex) {
+    
+  }
+  Mutex mutex;
   Cond cond;
   AIOStatus status;
 };
 
 static void syncReqestHandle(void *ctx, AIOStatus status) {
   SyncAIORequest *req = static_cast<SyncAIORequest*>(ctx);
-  req->cond._mutex->lock();
+  req->mutex.lock();
   req->status = status;
-  req->cond._mutex->unlock();
   req->cond.notify();
+  req->mutex.unlock();
 }
 
 AIOStatus AIOFile::read(size_t offset, Buffer &buffer) {
   SyncAIORequest req;
-  req.cond._mutex->lock();
+  req.mutex.lock();
   read(offset, buffer, syncReqestHandle, &req);
   req.cond.wait();
-  req.cond._mutex->unlock();
+  req.mutex.unlock();
   return req.status;
 }
 
 AIOStatus AIOFile::write(size_t offset, Buffer &buffer) {
   SyncAIORequest req;
-  req.cond._mutex->lock();
+  req.mutex.lock();
   write(offset, buffer, syncReqestHandle, &req);
   req.cond.wait();
-  req.cond._mutex->unlock();
+  req.mutex.unlock();
   return req.status;
 }
 

@@ -26,6 +26,9 @@ public:
 
   ~Mutex();
 
+private:
+  friend class Cond;
+
   pthread_mutex_t _mutex;
 };
 
@@ -39,13 +42,13 @@ public:
 
   bool notify();
 
-  Cond(Mutex *);
+  Cond(Mutex &mutex);
 
   ~Cond();
 
-  Mutex *_mutex;
-  //if mutex object is create by Cond, free it.
-  bool _isCreateMutex;
+private:
+  Mutex &_mutex;
+
   pthread_cond_t _cond;
 };
 
