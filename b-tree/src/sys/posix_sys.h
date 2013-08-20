@@ -13,7 +13,7 @@ inline static struct timeval now() {
   return t;
 }
 
-
+//pthread mutex
 class Mutex {
 public:
   Mutex();
@@ -32,6 +32,20 @@ private:
   pthread_mutex_t _mutex;
 };
 
+//lock in scope. release lock when exit the scope
+class ScopeLock {
+public:
+  ScopeLock(Mutex &mutex):_mutex(mutex) {
+    _mutex.lock();
+  }
+  ~ScopeLock() {
+    _mutex.unlock(); 
+  }
+private:
+  Mutex _mutex;
+};
+
+//pthread cond
 class Cond {
 public:
   Cond();
