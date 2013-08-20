@@ -16,8 +16,16 @@ add_executable(
   ${SOURCE}
 )
 
+IF (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+  set(LIBS
+    rt
+  )
+ENDIF()
+
 target_link_libraries (
   test_btree
+  btree
+  ${LIBS}
   ${GTEST_LIBS}
 )
 

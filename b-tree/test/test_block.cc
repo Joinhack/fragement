@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include "persist/block.h"
 
+using namespace ndb;
+
 TEST(Block, readwrite) {
   char buf[128] = {0};
   Buffer buffer = Buffer(buf, sizeof(buf));

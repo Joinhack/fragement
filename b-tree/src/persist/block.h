@@ -6,6 +6,8 @@
 
 typedef uint64_t bid_t;
 
+namespace ndb {
+
 class Block {
 public:
   Block(Buffer &buffer, size_t offset):_buffer(buffer), _size(0), _begin(offset) {
@@ -162,6 +164,8 @@ private:
 
   Block& _block;
   size_t _offset;
+};
+
 };
 
 #endif /**BLOCK_H*/

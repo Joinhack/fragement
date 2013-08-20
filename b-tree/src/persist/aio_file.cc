@@ -7,6 +7,7 @@
 #include <signal.h>
 #include <sys/types.h>
 #include "aio_file.h"
+#include "sys/posix_sys.h"
 
 using namespace ndb;
 
@@ -29,6 +30,7 @@ struct AIORequest {
   RequestType type;
   int fd;
   char *buf;
+  void *ctx;
   size_t buf_len;
   size_t offset;
 };
@@ -47,7 +49,7 @@ static void notify_function(union sigval sigval) {
     else
       aioStatus.success = true;
   }
-  req->cb(aioStatus);
+  req->cb(req->ctx, aioStatus);
   delete req;
 }
 
@@ -63,7 +65,7 @@ static void aiocb_init(AIORequest *req) {
   req->aiocb.aio_sigevent.sigev_value.sival_ptr = req;
 }
 
-void AIOFile::read(size_t offset, Buffer &buffer, aio_cb_t cb) {
+void AIOFile::read(size_t offset, Buffer &buffer, aio_cb_t cb, void *ctx) {
   AIORequest *req = new AIORequest;
   req->fd = _fd;
   req->type = READ;
@@ -71,6 +73,7 @@ void AIOFile::read(size_t offset, Buffer &buffer, aio_cb_t cb) {
   req->buf = (char*)buffer.raw();
   req->buf_len = buffer.size();
   req->cb = cb;
+  req->ctx = ctx;
   aiocb_init(req);
 
   while (true) {
@@ -83,13 +86,13 @@ void AIOFile::read(size_t offset, Buffer &buffer, aio_cb_t cb) {
       AIOStatus status;
       status.success = false;
       status.rs = rs;
-      cb(status); // failed
+      cb(ctx, status); // failed
     }
     return;
   }
 }
 
-void AIOFile::write(size_t offset, Buffer &buffer, aio_cb_t cb) {
+void AIOFile::write(size_t offset, Buffer &buffer, aio_cb_t cb, void *ctx) {
   AIORequest *req = new AIORequest;
   req->fd = _fd;
   req->type = WRITE;
@@ -97,6 +100,7 @@ void AIOFile::write(size_t offset, Buffer &buffer, aio_cb_t cb) {
   req->buf = (char*)buffer.raw();
   req->buf_len = buffer.size();
   req->cb = cb;
+  req->ctx = ctx;
   aiocb_init(req);
 
   while (true) {
@@ -110,10 +114,41 @@ void AIOFile::write(size_t offset, Buffer &buffer, aio_cb_t cb) {
       AIOStatus status;
       status.success = false;
       status.rs = rs;
-      cb(status); // failed
+      cb(ctx, status); // failed
     }
     return;
   }
+}
+
+struct SyncAIORequest {
+  Cond cond;
+  AIOStatus status;
+};
+
+static void syncReqestHandle(void *ctx, AIOStatus status) {
+  SyncAIORequest *req = static_cast<SyncAIORequest*>(ctx);
+  req->cond._mutex->lock();
+  req->status = status;
+  req->cond._mutex->unlock();
+  req->cond.notify();
+}
+
+AIOStatus AIOFile::read(size_t offset, Buffer &buffer) {
+  SyncAIORequest req;
+  req.cond._mutex->lock();
+  read(offset, buffer, syncReqestHandle, &req);
+  req.cond.wait();
+  req.cond._mutex->unlock();
+  return req.status;
+}
+
+AIOStatus AIOFile::write(size_t offset, Buffer &buffer) {
+  SyncAIORequest req;
+  req.cond._mutex->lock();
+  write(offset, buffer, syncReqestHandle, &req);
+  req.cond.wait();
+  req.cond._mutex->unlock();
+  return req.status;
 }
 
 bool AIOFile::truncate(size_t offset) {

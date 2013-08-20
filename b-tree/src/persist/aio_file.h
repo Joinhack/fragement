@@ -14,7 +14,7 @@ struct AIOStatus {
   ssize_t rs;
 };
 
-typedef void (*aio_cb_t)(AIOStatus s);
+typedef void (*aio_cb_t)(void *ctx, AIOStatus s);
 
 enum RequestType {  
   READ,
@@ -27,9 +27,17 @@ public:
 
   bool open();
 
-  void read(size_t offset, Buffer &buffer, aio_cb_t cb);
+  //async read
+  void read(size_t offset, Buffer &buffer, aio_cb_t cb, void *ctx);
 
-  void write(size_t offset, Buffer &buffer, aio_cb_t cb);
+  //sync read
+  AIOStatus read(size_t offset, Buffer &buffer);
+
+  //async write
+  void write(size_t offset, Buffer &buffer, aio_cb_t cb, void *ctx);
+
+  //sync write
+  AIOStatus write(size_t offset, Buffer &buffer);
 
   bool truncate(size_t offset);
 
