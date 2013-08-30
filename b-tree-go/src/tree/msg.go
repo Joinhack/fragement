@@ -1,7 +1,7 @@
 package tree
 
 import (
-  "sort"
+  a "util/algorithm"
 )
 
 type MsgType int
@@ -26,26 +26,14 @@ type MsgCache struct {
   comparator Comparator
 }
 
-func (mc *MsgCache) WriteCache(msg *Msg) {
+func (mc *MsgCache) WriteMsg(msg *Msg) {
 
   if mc.cache == nil {
     mc.cache = make([]*Msg, 0, 32)
   }
 
-  //bin search find the low bound
-  // for max >= min {
-  //   mid := (max + min)/2
-  //   rs := mc.comparator(msg.key, mc.cache[mid].key)
-  //   if rs > 0 {
-  //     min = mid + 1
-  //   } else if rs < 0 {
-  //     max = mid - 1
-  //   } else {
-  //     min = mid
-  //     break;
-  //   }
-  // }
-  min := sort.Search(len(mc.cache), func(mid int) bool {return mc.comparator(msg.key, mc.cache[mid].key) <= 0})
+  
+  min := a.Search(len(mc.cache), func(mid int) bool {return mc.comparator(msg.key, mc.cache[mid].key) <= 0})
   //if cache contain the key. replace it
   if min < len(mc.cache) && mc.comparator(msg.key, mc.cache[min].key) == 0 {
     mc.cache[min].value = msg.value

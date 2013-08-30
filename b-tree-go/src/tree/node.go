@@ -29,7 +29,7 @@ type InnerNode struct {
 }
 
 func (node *InnerNode)WriteMsg(msg *Msg) {
-    
+  
 }
 
 

@@ -16,7 +16,7 @@ func TestMsgCache(t *testing.T) {
 
   for i := 0; i < 255; i++  {
     b := byte(rand.Intn(255))
-    mc.Write(&Msg{&[]byte{b}, nil, MsgPut})
+    mc.WriteMsg(&Msg{&[]byte{b}, nil, MsgPut})
   }
   for _, msg := range(mc.cache) {
     t.Log((*msg.key)[0])
