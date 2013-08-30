@@ -1,4 +1,4 @@
-file(GLOB_RECURSE SOURCE RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "*.cc")
+file(GLOB_RECURSE SOURCE RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "test_tree.cc")
 
 include_directories (
   ${PROJECT_SOURCE_DIR}/thirdparty/gtest/include

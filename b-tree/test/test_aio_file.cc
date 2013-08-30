@@ -81,18 +81,23 @@ TEST(AIOFile, syncreadwrite) {
   EXPECT_TRUE(file.open());
   Buffer buffer = Layout::newBuffer(4096);
 
+  EXPECT_TRUE(file.truncate(4096*2));
+
   memset((void*)buffer.raw(), 100, buffer.size());
-  AIOStatus status = file.write(0, buffer);
+  AIOStatus status = file.write(100, buffer);
   EXPECT_EQ(status.success, true);
   EXPECT_EQ(status.rs, 4096);
 
   memset((void*)buffer.raw(), 0, buffer.size());
-  status = file.read(0, buffer);
+  status = file.read(100, buffer);
   EXPECT_EQ(status.success, true);
   EXPECT_EQ(status.rs, 4096);
   Buffer expectBuffer = Layout::newBuffer(4096);
   memset((void*)expectBuffer.raw(), 100, expectBuffer.size());
   EXPECT_EQ(memcmp((void*)expectBuffer.raw(), (void*)buffer.raw(), buffer.size()), 0);
+
+
+
 
   Layout::freeBuffer(expectBuffer);
   Layout::freeBuffer(buffer);

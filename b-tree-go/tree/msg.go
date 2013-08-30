@@ -26,7 +26,11 @@ type MsgCache struct {
   comparator Comparator
 }
 
-func (mc *MsgCache) Write(msg *Msg) {
+func (mc *MsgCache) WriteCache(msg *Msg) {
+
+  if mc.cache == nil {
+    mc.cache = make([]*Msg, 0, 32)
+  }
 
   //bin search find the low bound
   // for max >= min {
@@ -55,9 +59,9 @@ func (mc *MsgCache) Write(msg *Msg) {
 
 func CreateMsgCahe(comparator Comparator) MsgCache {
   var mc MsgCache
-  mc.comparator = comparator;
+  mc.comparator = comparator
   //init the default cache size
-  mc.cache = make([]*Msg,0,32)
+  mc.cache = nil
   return mc
 }
 

@@ -47,8 +47,32 @@ bool Cond::notify() {
   return ::pthread_cond_signal(&_cond) == 0; 
 }
 
+RWLock::RWLock() {
+  assert(pthread_rwlock_init(&_rwlock, NULL) == 0);
+}
+
+RWLock::~RWLock() {
+  assert(pthread_rwlock_destroy(&_rwlock) == 0);
+}
 
 
+bool RWLock::rdlock() {
+  return pthread_rwlock_rdlock(&_rwlock) == 0;
+}
 
+bool RWLock::tryrdlock() {
+  return pthread_rwlock_tryrdlock(&_rwlock) == 0;
+}
 
+bool RWLock::unlock() {
+  return pthread_rwlock_unlock(&_rwlock) == 0;
+}
+
+bool RWLock::wrlock() {
+  return pthread_rwlock_wrlock(&_rwlock) == 0;
+}
+
+bool RWLock::trywrlock() {
+  return pthread_rwlock_trywrlock(&_rwlock) == 0;
+}
 

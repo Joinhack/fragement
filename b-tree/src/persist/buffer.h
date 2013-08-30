@@ -12,22 +12,32 @@ class Buffer {
 public:
   Buffer(): _buf(NULL), _size(0) {}
 
-  Buffer(const char *s): _buf(s), _size(strlen(s)) {}
+  Buffer(const string &s): _buf((void*)s.c_str()), _size(s.length()) {}
 
-  Buffer(const string &s): _buf(s.c_str()), _size(s.length()) {}
+  Buffer(void *b, size_t len): _buf(b), _size(len) {}
 
-  Buffer(const char *s, size_t len): _buf(s), _size(len) {}
-
-  const char *raw() {
+  void *raw() {
     return _buf;
+  }
+
+  Buffer clone() {
+    Buffer buff;
+    buff._buf = static_cast<void*>(new char[_size]);
+    buff._size = _size;
+    memcpy(buff._buf, _buf, _size);
+    return buff;
+  }
+
+  void destroy() {
+    delete []static_cast<char*>(_buf);
   }
 
   size_t size() {
     return _size;
   }
+
 private:
-  
-  const char *_buf;
+  void *_buf;
   size_t _size;
 };
 

@@ -7,15 +7,14 @@ namespace ndb {
 
 using namespace std;
 
-class Comparator {
-public:
-  virtual int compare(Buffer &b1, Buffer &b2) = 0;
+struct Comparator {
+  virtual int compare(Buffer b1, Buffer b2) = 0;
 };
 
 template<typename T>
-class RawComparator : Comparator {
+struct RawComparator : Comparator {
 public:
-  int compare(Buffer &b1,Buffer &b2) {
+  int compare(Buffer b1,Buffer b2) {
     return *((T*)b1.raw()) - *((T*)b2.raw());
   }
 };
@@ -26,7 +25,7 @@ enum MsgType {
   DEL
 };
 
-class Msg {
+struct Msg {
 public:
   Msg(Buffer key, Buffer value):_key(key), _value(value) {}
 
@@ -60,16 +59,26 @@ public:
     return s;
   }
 
-private:
   MsgType _type;
   Buffer _key;
   Buffer _value;
 };
 
+struct MsgCompare {
+  MsgCompare(Comparator *comparator): _comparator(comparator) {}
+  bool operator()(Msg msg, Buffer b2) const {
+    return _comparator->compare(msg._key, b2) < 0;
+  }
+  Comparator *_comparator;
+};
+
 
 class MsgBuffer {
 public:
-  typedef vector<Msg*> ContainerType;
+
+  MsgBuffer(Comparator *comparator): _comparator(comparator) {}
+
+  typedef vector<Msg> ContainerType;
   typedef ContainerType::iterator Iterator;
 
   bool write(Msg &msg);
@@ -79,7 +88,10 @@ public:
   }
 
 private:
+
   ContainerType _container;
+
+  Comparator *_comparator;
 };
 
 };

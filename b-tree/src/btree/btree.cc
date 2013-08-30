@@ -6,6 +6,7 @@ BTree::BTree(Layout &layout, Comparator *comparator):_layout(layout) {
   _innerNodeBID = NID_START;
   _leafnodeBID = NID_LEAF_START;
   _comparator = comparator;
+  _root = NULL;
 }
 
 

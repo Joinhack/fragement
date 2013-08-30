@@ -4,20 +4,26 @@
 #include <assert.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <map>
+#include <vector>
 #include "block.h"
+#include "sys/posix_sys.h"
 #include "aio_file.h"
 
 namespace ndb {
+
+using namespace std;
 
 struct BlockMeta {
   uint64_t offset;
   uint64_t size;
 };
 
-#define NDB_MAGIC 0x6e646200
+#define NDB_MAGIC 0x6e6462FF
 
 //the data file head.
 struct SuperBlock {
+
   SuperBlock() {
     magic_number = NDB_MAGIC;
     major_version = 0x1;
@@ -36,33 +42,36 @@ struct SuperBlock {
 
 #define PAGE_SIZE 4096
 
+#define SUPBLOCK_SIZE PAGE_SIZE
+
 #define PAGE_ROUND_UP(x) (((x) + PAGE_SIZE-1)&(~(PAGE_SIZE-1)))
 
 #define PAGE_ROUND_DOWN(x) (((x) + PAGE_SIZE-1)&(~(PAGE_SIZE-1)))
 
 class Layout {
 public:
+
   Layout(AIOFile &file);
 
-  static Buffer newBuffer(size_t size) {
-    void *p;
-    size_t l = PAGE_ROUND_UP(size);
-    int rs = posix_memalign(&p, PAGE_SIZE, l);
-    assert(rs == 0);
-    return Buffer((char*)p, l);
-  }
+  //alloc aligned mem buffer
+  static Buffer newBuffer(size_t size);
+
+  //free buffer from newBuffer
+  static void freeBuffer(Buffer &b);
 
   bool init(bool create);
 
+  //sync write superblock to file
   bool flushSuperBlock();
 
+  //sync read superblock from file
   bool loadSuperBlock();
 
+  //sync write index from file
   bool flushIndex();
 
-  static void freeBuffer(Buffer &b) {
-    free((void*)b.raw());
-  }
+  //sync read index from file
+  bool loadIndex();
 
   SuperBlock *getSuperBlock() {
     return _superBlock;
@@ -70,19 +79,71 @@ public:
 
   ~Layout();
 protected:
+  //set the _offset 
+  bool init();
 
+  //read block meta from block
   bool readBlockMeta(BlockReader &br, BlockMeta *meta);
 
+  //write block meta to block
   bool writeBlockMeta(BlockWriter &br, BlockMeta *meta);
 
+  //write superblock to block
   bool writeSuperBlock(Block &b);
 
+  //write index to block
+  bool writeIndex(Block &b);
+
+  //read index from block
+  bool readIndex(Block &b);
+
+  //write buffer to file
+  bool write(size_t offset, Buffer &buffer);
+
+  //read buffer from file
+  bool read(size_t offset, Buffer &buffer);
+
+  //read superblock from block
   bool readSuperBlock(Block &b);
 
+  //get index persist length, it should be index size + sizeof(uint64_t)
+  size_t getIndexLength() {
+    return _index.size() * (sizeof(uint64_t) + sizeof(BlockMeta)) + sizeof(uint64_t);
+  };
+
+  //get offset for write
+  size_t getOffset(size_t s);
+
+  //not used block info
+  struct FreeBlock {
+    uint64_t offset;
+    uint64_t size;
+  };
+
+  typedef map<bid_t, BlockMeta*> IndexType;
+
+  typedef vector<FreeBlock> FreeBlockListType;
+
+  bool addFreeBlock(FreeBlock fb);
+
 private:
+
+  //index mutex
+  Mutex _idxMutex;
+
+  Mutex _mutex;
+
+  Mutex _freeBlockMutex;
+
+  IndexType _index;
+
   AIOFile &_file;
+
+  FreeBlockListType _freeBlocks;
+
   //file offset, always point the end of file.
   size_t _offset;
+
   SuperBlock *_superBlock;
 };
 

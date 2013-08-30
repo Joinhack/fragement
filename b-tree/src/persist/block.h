@@ -4,9 +4,9 @@
 #include <assert.h>
 #include "buffer.h"
 
-typedef uint64_t bid_t;
-
 namespace ndb {
+
+typedef uint64_t bid_t;
 
 class Block {
 public:
@@ -60,9 +60,10 @@ public:
 
   bool writeBuffer(Buffer buffer) {
     char *p;
+    if(!writeUInt32((uint32_t)buffer.size())) return false;
     if(!_getWriteRaw(buffer.size(), p))
       return false;
-    memcpy((void*)p, (void*)buffer.raw(), buffer.size());
+    memcpy((void*)p, buffer.raw(), buffer.size());
     return true;
   }
 
@@ -130,9 +131,11 @@ public:
   bool readBuffer(Buffer &b) {
     char *p;
     assert(_offset < _block.capacity());
-    if(!_getReadRaw(b.size(), p))
+    uint32_t l;
+    readUInt32(l);
+    if(!_getReadRaw(l, p))
       return false;
-    memcpy((void*)b.raw(), p, b.size());
+    memcpy(b.raw(), p, b.size());
     return true;
   }
 

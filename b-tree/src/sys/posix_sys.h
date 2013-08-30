@@ -66,6 +66,25 @@ private:
   pthread_cond_t _cond;
 };
 
+class RWLock {
+public:
+  RWLock();
+
+  bool rdlock();
+
+  bool tryrdlock();
+
+  bool unlock();
+
+  bool wrlock();
+
+  bool trywrlock();
+
+  ~RWLock();
+private:
+  pthread_rwlock_t _rwlock;
+};
+
 };
 
 #endif
