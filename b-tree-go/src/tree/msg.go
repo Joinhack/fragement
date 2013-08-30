@@ -1,7 +1,7 @@
 package tree
 
 import (
-  a "util/algorithm"
+  "util"
 )
 
 type MsgType int
@@ -12,18 +12,26 @@ const (
 )
 
 type Msg struct {
-  key *[]byte
-  value *[]byte
+  key []byte
+  value []byte
   msgType MsgType
 }
 
 
-type Comparator func(b1 *[]byte, b2 *[]byte) int
+type Comparator func(b1 []byte, b2 []byte) int
 
 
 type MsgCache struct {
   cache []*Msg
   comparator Comparator
+}
+
+func NewMsg(key []byte, value []byte, msgType MsgType) *Msg {
+  var msg = new(Msg)
+  msg.key = key 
+  msg.value = value
+  msg.msgType = msgType
+  return msg
 }
 
 func (mc *MsgCache) WriteMsg(msg *Msg) {
@@ -32,8 +40,7 @@ func (mc *MsgCache) WriteMsg(msg *Msg) {
     mc.cache = make([]*Msg, 0, 32)
   }
 
-  
-  min := a.Search(len(mc.cache), func(mid int) bool {return mc.comparator(msg.key, mc.cache[mid].key) <= 0})
+  min := util.Search(len(mc.cache) - 1, func(mid int) int {return mc.comparator(msg.key, mc.cache[mid].key)})
   //if cache contain the key. replace it
   if min < len(mc.cache) && mc.comparator(msg.key, mc.cache[min].key) == 0 {
     mc.cache[min].value = msg.value
@@ -45,11 +52,11 @@ func (mc *MsgCache) WriteMsg(msg *Msg) {
   }
 }
 
-func CreateMsgCahe(comparator Comparator) MsgCache {
+func NewMsgCahe(comparator Comparator) *MsgCache {
   var mc MsgCache
   mc.comparator = comparator
   //init the default cache size
   mc.cache = nil
-  return mc
+  return &mc
 }
 

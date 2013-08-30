@@ -25,12 +25,22 @@ type Skeleton struct {
 
 type InnerNode struct {
   Node
-  skeletons *[]Skeleton
+  skeletons []*Skeleton
 }
 
 func (node *InnerNode)WriteMsg(msg *Msg) {
+  if node.skeletons == nil {
+    node.skeletons = make([]*Skeleton, 0, 32)
+  }
   
 }
+
+func NewInnerNode(nid uint64) *InnerNode {
+  var node = new(InnerNode)
+  node.nid = nid
+  return node
+}
+
 
 
 
