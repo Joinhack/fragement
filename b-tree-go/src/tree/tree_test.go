@@ -12,16 +12,21 @@ func IntComparator(b1 []byte, b2 []byte) int {
 func TestMsgCache(t *testing.T) {
   var node InnerNode
   t.Log(node.GetNid())
-  var mc = NewMsgCahe(IntComparator)
+  var mc = NewMsgCache(IntComparator)
 
   for i := 0; i < 255; i++  {
     b := byte(rand.Intn(255))
-    mc.WriteMsg(&Msg{[]byte{b}, nil, MsgPut})
+    mc.WriteMsg(NewMsg([]byte{b}, []byte{b}, MsgPut))
   }
   for _, msg := range(mc.cache) {
     t.Log(msg.key[0])
   }
+}
 
+func TestTreeWrite(t *testing.T) {
+  var opts TreeOptions
+  tree := NewTree(opts)
+  tree.Put([]byte{1}, []byte{2})
 }
 
 func TestSlice(t *testing.T) {
