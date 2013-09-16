@@ -14,9 +14,10 @@ func TestMsgCache(t *testing.T) {
 	var node InnerNode
 	t.Log(node.GetNid())
 	var mc = NewMsgCache(StrComparator)
-
-	for i := 0; i < 255; i++ {
+	randint := make([]byte, 0)
+	for i := 0; i < 1; i++ {
 		b := byte(rand.Intn(255))
+		randint = append(randint, b)
 		s := string(strconv.AppendInt(nil, int64(b), 10))
 		mc.WriteMsg(NewMsg([]byte(s), []byte(s), MsgPut))
 	}
@@ -24,19 +25,47 @@ func TestMsgCache(t *testing.T) {
 	for _, msg := range mc.cache {
 		t.Log(msg.key[0])
 	}
+
+	for _, k := range randint {
+		s := string(strconv.AppendInt(nil, int64(k), 10))
+		mc.WriteMsg(NewMsg([]byte(s), []byte(s), MsgDel))
+	}
+	t.Log("After Del, Cache Size,", mc.Len())
+	if mc.Len() != 1 {
+		panic("should be zero")
+	}
 	mc.Clear()
 }
 
 func TestTreeWrite(t *testing.T) {
-	var opts = TreeOptions{MaxMsgLen: 20, MaxRecordLen: 10, MaxInnerChildNodeSize: 10}
+	var opts = TreeOptions{MaxMsgLen: 5, MaxRecordLen: 4, MaxInnerChildNodeSize: 4}
 	opts.Comparator = StrComparator
 	tree := NewTree(opts)
-	for i := 1; i <= 100000; i++ {
+	for i := 1; i <= 10000; i++ {
 		tree.Put(strconv.AppendInt(nil, int64(i), 10), strconv.AppendInt(nil, int64(i), 10))
 	}
 	println(tree.deep)
-	for i := 1; i <= 100000; i++ {
+	for i := 1; i <= 10000; i++ {
 		_, v := tree.Get(strconv.AppendInt(nil, int64(i), 10))
+		if v == nil {
+			panic(v)
+		}
+		t.Log(string(v))
+	}
+}
+
+func TestTreeRandWrite(t *testing.T) {
+	var opts = TreeOptions{MaxMsgLen: 20, MaxRecordLen: 10, MaxInnerChildNodeSize: 10}
+	opts.Comparator = StrComparator
+	tree := NewTree(opts)
+	randint := make([]int, 0)
+	for i := 1; i <= 5000; i++ {
+		r := rand.Intn(5000)
+		randint = append(randint, r)
+		tree.Put(strconv.AppendInt(nil, int64(r), 10), strconv.AppendInt(nil, int64(i), 10))
+	}
+	for _, r := range randint {
+		_, v := tree.Get(strconv.AppendInt(nil, int64(r), 10))
 		if v == nil {
 			panic(v)
 		}

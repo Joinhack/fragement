@@ -37,6 +37,11 @@ func (tree *Tree) Put(key []byte, value []byte) error {
 	return nil
 }
 
+func (tree *Tree) Del(key []byte) error {
+	tree.root.WriteMsg(NewMsg(key, nil, MsgDel))
+	return nil
+}
+
 func (tree *Tree) Get(key []byte) (error, []byte) {
 	value := tree.root.find(key)
 	return nil, value

@@ -101,11 +101,12 @@ func (mc *MsgCache) WriteMsg(msg *Msg) bool {
 	}
 
 	min := sort.Search(len(mc.cache), func(mid int) bool {
-		return mc.comparator(msg.key, mc.cache[mid].key) < 0
+		return mc.comparator(msg.key, mc.cache[mid].key) <= 0
 	})
 	//if cache contain the key. replace it
-	if min < len(mc.cache) && mc.comparator(msg.key, mc.cache[min].key) == 0 {
+	if min != len(mc.cache) && mc.comparator(msg.key, mc.cache[min].key) == 0 {
 		mc.cache[min].value = msg.value
+		mc.cache[min].msgType = msg.msgType
 		mc.size += (msg.Size() - mc.cache[min].Size())
 		return false
 	} else {

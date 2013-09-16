@@ -196,6 +196,36 @@ func (node *InnerNode) setChild(idx int, cid uint64) {
 	}
 }
 
+func (node *InnerNode) removeSkeleton(nid uint64, path *[]NodeInterface) {
+	if node.firstNid == nid {
+		//the last child
+		if len(node.skeletons) == 0 {
+			if len(*path) == 0 {
+				//this root reset the root
+				//node.tree.setRoot(root)
+			} else {
+				pNode := popPath(path).(*InnerNode)
+				pNode.removeSkeleton(node.nid, path)
+			}
+			return
+		}
+		//shift from second child
+		node.firstNid = node.skeletons[0].nid
+		node.firstMsgCache = node.skeletons[0].msgCache
+		node.msgLen -= node.firstMsgCache.Len()
+		node.skeletons = node.skeletons[1:]
+	} else {
+		idx := sort.Search(len(node.skeletons), func(mid int) bool {
+			return node.skeletons[mid].nid != nid
+		})
+		//remove the skeleton
+		node.msgLen -= node.skeletons[idx].msgCache.Len()
+		copy(node.skeletons[idx:], node.skeletons[idx+1:])
+		node.skeletons = node.skeletons[:len(node.skeletons)-1]
+	}
+
+}
+
 func (node *InnerNode) cascade(mc *MsgCache, parent *InnerNode) {
 	tree := node.tree
 	if node.status == NSkeletonLoaded {
@@ -307,7 +337,6 @@ func (node *LeafNode) split(arch []byte) {
 	path := make([]NodeInterface, 0, 8)
 
 	node.tree.lockPath(arch, &path)
-
 	if n := popPath(&path); n != node {
 		panic("error, the last should be self")
 	}
@@ -343,15 +372,25 @@ func (node *LeafNode) merge(arch []byte) {
 		panic("error, the last should be self")
 	}
 
+	if node.leftLeafNId > LeafNidStart {
+		leftNode := node.tree.loadNode(node.leftLeafNId).(*LeafNode)
+		leftNode.rightLeafNId = node.rightLeafNId
+	}
+	if node.rightLeafNId > LeafNidStart {
+		rightNode := node.tree.loadNode(node.rightLeafNId).(*LeafNode)
+		rightNode.leftLeafNId = node.leftLeafNId
+	}
 	node.balancing = false
+	pNode := popPath(&path).(*InnerNode)
+	pNode.removeSkeleton(node.nid, &path)
 }
 
 func (node *LeafNode) find(key []byte) []byte {
 	idx := sort.Search(node.bulk.Len(), func(mid int) bool {
-		return node.tree.opts.Comparator(key, node.bulk.records[mid].key) < 0
+		return node.tree.opts.Comparator(key, node.bulk.records[mid].key) <= 0
 	})
 
-	record := node.bulk.records[idx-1]
+	record := node.bulk.records[idx]
 	if node.tree.opts.Comparator(key, record.key) == 0 {
 		return record.value
 	}
