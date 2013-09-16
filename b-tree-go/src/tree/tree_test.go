@@ -41,11 +41,11 @@ func TestTreePut(t *testing.T) {
 	var opts = TreeOptions{MaxMsgLen: 5, MaxRecordLen: 4, MaxInnerChildNodeSize: 4}
 	opts.Comparator = StrComparator
 	tree := NewTree(opts)
-	for i := 1; i <= 10000; i++ {
+	max := 10000
+	for i := 1; i <= max; i++ {
 		tree.Put(strconv.AppendInt(nil, int64(i), 10), strconv.AppendInt(nil, int64(i), 10))
 	}
-	println(tree.deep)
-	for i := 1; i <= 10000; i++ {
+	for i := 1; i <= max; i++ {
 		_, v := tree.Get(strconv.AppendInt(nil, int64(i), 10))
 		if v == nil {
 			panic(v)
@@ -56,11 +56,12 @@ func TestTreePut(t *testing.T) {
 
 func TestTreeRandPut(t *testing.T) {
 	var opts = TreeOptions{MaxMsgLen: 20, MaxRecordLen: 10, MaxInnerChildNodeSize: 10}
+	max := 5000
 	opts.Comparator = StrComparator
 	tree := NewTree(opts)
 	randint := make([]int, 0)
-	for i := 1; i <= 5000; i++ {
-		r := rand.Intn(5000)
+	for i := 1; i <= max; i++ {
+		r := rand.Intn(max)
 		randint = append(randint, r)
 		tree.Put(strconv.AppendInt(nil, int64(r), 10), strconv.AppendInt(nil, int64(i), 10))
 	}
@@ -77,13 +78,22 @@ func TestTreePutDel(t *testing.T) {
 	var opts = TreeOptions{MaxMsgLen: 20, MaxRecordLen: 10, MaxInnerChildNodeSize: 10}
 	opts.Comparator = StrComparator
 	tree := NewTree(opts)
-	for i := 1; i <= 100; i++ {
+	max := 1000
+	for i := 1; i <= max; i++ {
 		tree.Put(strconv.AppendInt(nil, int64(i), 10), strconv.AppendInt(nil, int64(i), 10))
 	}
-	for i := 1; i <= 100; i++ {
+	for i := 1; i <= max; i++ {
+		_, v := tree.Get(strconv.AppendInt(nil, int64(i), 10))
+
+		if v == nil {
+			panic(string(v))
+		}
+	}
+	for i := 1; i <= max; i++ {
 		tree.Del(strconv.AppendInt(nil, int64(i), 10))
 	}
-	for i := 1; i <= 100; i++ {
+
+	for i := 1; i <= max; i++ {
 		_, v := tree.Get(strconv.AppendInt(nil, int64(i), 10))
 
 		if v != nil {
@@ -91,6 +101,36 @@ func TestTreePutDel(t *testing.T) {
 		}
 	}
 	t.Log("After del, deep:", tree.deep)
+}
+
+func TestTreeRandPutDel(t *testing.T) {
+	var opts = TreeOptions{MaxMsgLen: 20, MaxRecordLen: 10, MaxInnerChildNodeSize: 10}
+	opts.Comparator = StrComparator
+	tree := NewTree(opts)
+	randint := make([]int, 0)
+	max := 5000
+	for i := 1; i <= max; i++ {
+		r := rand.Intn(max)
+		randint = append(randint, r)
+		tree.Put(strconv.AppendInt(nil, int64(r), 10), strconv.AppendInt(nil, int64(i), 10))
+	}
+	for _, r := range randint {
+		_, v := tree.Get(strconv.AppendInt(nil, int64(r), 10))
+		if v == nil {
+			panic(v)
+		}
+		t.Log(string(v))
+	}
+	for _, r := range randint {
+		tree.Del(strconv.AppendInt(nil, int64(r), 10))
+	}
+	for _, r := range randint {
+		_, v := tree.Get(strconv.AppendInt(nil, int64(r), 10))
+		if v != nil {
+			panic(v)
+		}
+		t.Log(string(v))
+	}
 }
 
 func TestSlice(t *testing.T) {
