@@ -3,7 +3,7 @@ package tree
 import (
 	"fmt"
 	"sort"
-	"util"
+	//"util"
 )
 
 type MsgType int
@@ -100,8 +100,8 @@ func (mc *MsgCache) WriteMsg(msg *Msg) bool {
 		mc.cache = make([]*Msg, 0, 8)
 	}
 
-	min := util.Search(len(mc.cache)-1, func(mid int) int {
-		return mc.comparator(msg.key, mc.cache[mid].key)
+	min := sort.Search(len(mc.cache), func(mid int) bool {
+		return mc.comparator(msg.key, mc.cache[mid].key) < 0
 	})
 	//if cache contain the key. replace it
 	if min < len(mc.cache) && mc.comparator(msg.key, mc.cache[min].key) == 0 {

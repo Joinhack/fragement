@@ -31,11 +31,11 @@ func TestTreeWrite(t *testing.T) {
 	var opts = TreeOptions{MaxMsgLen: 20, MaxRecordLen: 10, MaxInnerChildNodeSize: 10}
 	opts.Comparator = StrComparator
 	tree := NewTree(opts)
-	for i := 1; i <= 10000; i++ {
+	for i := 1; i <= 100000; i++ {
 		tree.Put(strconv.AppendInt(nil, int64(i), 10), strconv.AppendInt(nil, int64(i), 10))
 	}
 	println(tree.deep)
-	for i := 1; i <= 10000; i++ {
+	for i := 1; i <= 100000; i++ {
 		_, v := tree.Get(strconv.AppendInt(nil, int64(i), 10))
 		if v == nil {
 			panic(v)

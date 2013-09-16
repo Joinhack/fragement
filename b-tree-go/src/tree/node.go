@@ -2,7 +2,6 @@ package tree
 
 import (
 	"sort"
-	"util"
 )
 
 type NStatusType int
@@ -86,8 +85,8 @@ func (node *LeafNode) lockPath(key []byte, path *[]NodeInterface) {
 
 func (node *InnerNode) findSkeletonIdx(key []byte) int {
 	//binary search the low bound
-	idx := util.Search(len(node.skeletons)-1, func(mid int) int {
-		return node.tree.opts.Comparator(key, node.skeletons[mid].key)
+	idx := sort.Search(len(node.skeletons), func(mid int) bool {
+		return node.tree.opts.Comparator(key, node.skeletons[mid].key) < 0
 	})
 	return idx
 }
@@ -305,12 +304,12 @@ func (node *LeafNode) split(arch []byte) {
 
 	node.balancing = true
 
-	path := make([]NodeInterface, 0, 16)
+	path := make([]NodeInterface, 0, 8)
 
 	node.tree.lockPath(arch, &path)
 
 	if n := popPath(&path); n != node {
-		panic("error the last should be ")
+		panic("error, the last should be self")
 	}
 
 	var nleaf = node.tree.NextLeafNode()
@@ -327,6 +326,22 @@ func (node *LeafNode) split(arch []byte) {
 	pNode := popPath(&path).(*InnerNode)
 
 	pNode.addSkeleton(key, nleaf.GetNid(), &path)
+
+	node.balancing = false
+}
+
+func (node *LeafNode) merge(arch []byte) {
+	if node.balancing {
+		return
+	}
+
+	path := make([]NodeInterface, 0, 8)
+
+	node.tree.lockPath(arch, &path)
+
+	if popPath(&path) != node {
+		panic("error, the last should be self")
+	}
 
 	node.balancing = false
 }
@@ -348,7 +363,7 @@ func (node *LeafNode) cascade(mc *MsgCache, parent *InnerNode) {
 	records := make([]*Record, 0, mc.Len()+node.bulk.Len())
 	var cacheIdx = 0
 	var recordIdx = 0
-	key := mc.cache[0].key
+	arch := mc.cache[0].key
 	mLen := mc.Len()
 	for cacheIdx < mc.Len() && recordIdx < node.bulk.Len() {
 		msg := mc.cache[cacheIdx]
@@ -387,8 +402,11 @@ func (node *LeafNode) cascade(mc *MsgCache, parent *InnerNode) {
 
 	parent.msgLen = parent.msgLen - mLen + mc.Len()
 	node.bulk.records = records
+	if node.bulk.Len() == 0 {
+		node.merge(arch)
+	}
 	if node.bulk.Len() > node.tree.opts.MaxRecordLen {
-		node.split(key)
+		node.split(arch)
 	}
 
 }
