@@ -37,6 +37,11 @@ func (tree *Tree) Put(key []byte, value []byte) error {
 	return nil
 }
 
+func (tree *Tree) Get(key []byte) (error, []byte) {
+	value := tree.root.find(key)
+	return nil, value
+}
+
 func (tree *Tree) NextLeafNode() *LeafNode {
 	tree.leafNid++
 	node := NewLeafNode(tree.leafNid, tree)

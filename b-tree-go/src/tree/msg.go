@@ -1,6 +1,8 @@
 package tree
 
 import (
+	"fmt"
+	"sort"
 	"util"
 )
 
@@ -17,11 +19,15 @@ type Msg struct {
 	msgType MsgType
 }
 
+func (msg *Msg) String() string {
+	return fmt.Sprintf("%d:..", msg.key[0])
+}
+
 func (msg *Msg) Size() int {
 	return len(msg.key) + len(msg.value)
 }
 
-type Comparator func(b1 []byte, b2 []byte) int
+type Comparator func(b1, b2 []byte) int
 
 func strcmp(a, b string) int {
 	min := len(b)
@@ -38,7 +44,7 @@ func strcmp(a, b string) int {
 	return diff
 }
 
-func StrComparator(b1 []byte, b2 []byte) int {
+func StrComparator(b1, b2 []byte) int {
 	return strcmp(string(b1), string(b2))
 }
 
@@ -48,7 +54,7 @@ type MsgCache struct {
 	comparator Comparator
 }
 
-func NewMsg(key []byte, value []byte, msgType MsgType) *Msg {
+func NewMsg(key, value []byte, msgType MsgType) *Msg {
 	var msg = new(Msg)
 	msg.key = key
 	msg.value = value
@@ -58,6 +64,25 @@ func NewMsg(key []byte, value []byte, msgType MsgType) *Msg {
 
 func (mc *MsgCache) Size() int {
 	return mc.size
+}
+
+func (mc *MsgCache) find(key []byte) *Msg {
+
+	if mc.Len() == 0 {
+		return nil
+	}
+
+	idx := sort.Search(len(mc.cache), func(mid int) bool {
+		return mc.comparator(key, mc.cache[mid].key) <= 0
+	})
+
+	if idx == mc.Len() {
+		idx -= 1
+	}
+	if mc.comparator(key, mc.cache[idx].key) == 0 {
+		return mc.cache[idx]
+	}
+	return nil
 }
 
 func (mc *MsgCache) Len() int {

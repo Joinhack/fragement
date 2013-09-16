@@ -1,6 +1,7 @@
 package tree
 
 import (
+	"sort"
 	"util"
 )
 
@@ -15,6 +16,8 @@ const (
 type NodeInterface interface {
 	GetNid() uint64
 	lockPath(key []byte, path *[]NodeInterface)
+	find(key []byte) []byte
+	dump(level int)
 	cascade(cache *MsgCache, p *InnerNode)
 }
 
@@ -51,6 +54,24 @@ type LeafNode struct {
 	rightLeafNId uint64
 	leftLeafNId  uint64
 	bulk         *RecordBulk
+}
+
+func (node *InnerNode) find(key []byte) []byte {
+	idx := node.findSkeletonIdx(key)
+	mc := node.getMsgCache(idx)
+	msg := mc.find(key)
+	if msg != nil && msg.msgType == MsgPut {
+		if node.tree.opts.Comparator(msg.key, key) == 0 {
+			return msg.value
+		}
+	}
+	cnid := node.childNid(idx)
+	if cnid == NilNid {
+		return nil
+	}
+	cnode := node.tree.loadNode(cnid)
+
+	return cnode.find(key)
 }
 
 func (node *InnerNode) lockPath(key []byte, path *[]NodeInterface) {
@@ -176,14 +197,6 @@ func (node *InnerNode) setChild(idx int, cid uint64) {
 	}
 }
 
-func getRealLen(node *InnerNode) int {
-	l := node.firstMsgCache.Len()
-	for _, sk := range node.skeletons {
-		l += sk.msgCache.Len()
-	}
-	return l
-}
-
 func (node *InnerNode) cascade(mc *MsgCache, parent *InnerNode) {
 	tree := node.tree
 	if node.status == NSkeletonLoaded {
@@ -224,8 +237,9 @@ func (node *InnerNode) split(path *[]NodeInterface) {
 	ni.skeletons = append(ni.skeletons, node.skeletons[mid+1:]...)
 	ni.firstNid = midSkel.nid
 	ni.firstMsgCache = midSkel.msgCache
-	node.skeletons = node.skeletons[:len(node.skeletons)-mid-1]
+	node.skeletons = node.skeletons[:len(node.skeletons)-mid]
 	niMsgLen := ni.firstMsgCache.Len()
+
 	for _, skel := range ni.skeletons {
 		niMsgLen += skel.msgCache.Len()
 	}
@@ -279,7 +293,7 @@ func popPath(path *[]NodeInterface) NodeInterface {
 	return node
 }
 
-func (node *LeafNode) split(key []byte) {
+func (node *LeafNode) split(arch []byte) {
 	if node.balancing {
 		return
 	}
@@ -293,7 +307,7 @@ func (node *LeafNode) split(key []byte) {
 
 	path := make([]NodeInterface, 0, 16)
 
-	node.tree.lockPath(key, &path)
+	node.tree.lockPath(arch, &path)
 
 	if n := popPath(&path); n != node {
 		panic("error the last should be ")
@@ -308,12 +322,25 @@ func (node *LeafNode) split(key []byte) {
 	}
 	nleaf.rightLeafNId = node.rightLeafNId
 	node.rightLeafNId = nleaf.nid
+	key := node.bulk.split(nleaf.bulk)
 
 	pNode := popPath(&path).(*InnerNode)
 
 	pNode.addSkeleton(key, nleaf.GetNid(), &path)
 
 	node.balancing = false
+}
+
+func (node *LeafNode) find(key []byte) []byte {
+	idx := sort.Search(node.bulk.Len(), func(mid int) bool {
+		return node.tree.opts.Comparator(key, node.bulk.records[mid].key) < 0
+	})
+
+	record := node.bulk.records[idx-1]
+	if node.tree.opts.Comparator(key, record.key) == 0 {
+		return record.value
+	}
+	return nil
 }
 
 func (node *LeafNode) cascade(mc *MsgCache, parent *InnerNode) {
