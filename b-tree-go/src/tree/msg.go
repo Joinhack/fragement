@@ -76,10 +76,7 @@ func (mc *MsgCache) find(key []byte) *Msg {
 		return mc.comparator(key, mc.cache[mid].key) <= 0
 	})
 
-	if idx == mc.Len() {
-		idx -= 1
-	}
-	if mc.comparator(key, mc.cache[idx].key) == 0 {
+	if idx != mc.Len() && mc.comparator(key, mc.cache[idx].key) == 0 {
 		return mc.cache[idx]
 	}
 	return nil

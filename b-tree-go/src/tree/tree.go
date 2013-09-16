@@ -65,6 +65,12 @@ func (tree *Tree) loadNode(nid uint64) NodeInterface {
 	return tree.nodes[nid]
 }
 
+func (tree *Tree) resetRoot() {
+	nroot := NewRoot(tree)
+	tree.root = nroot
+	tree.deep = 0
+}
+
 func (tree *Tree) setRoot(root *InnerNode) {
 	tree.root = root
 	tree.deep++

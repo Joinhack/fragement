@@ -37,7 +37,7 @@ func TestMsgCache(t *testing.T) {
 	mc.Clear()
 }
 
-func TestTreeWrite(t *testing.T) {
+func TestTreePut(t *testing.T) {
 	var opts = TreeOptions{MaxMsgLen: 5, MaxRecordLen: 4, MaxInnerChildNodeSize: 4}
 	opts.Comparator = StrComparator
 	tree := NewTree(opts)
@@ -54,7 +54,7 @@ func TestTreeWrite(t *testing.T) {
 	}
 }
 
-func TestTreeRandWrite(t *testing.T) {
+func TestTreeRandPut(t *testing.T) {
 	var opts = TreeOptions{MaxMsgLen: 20, MaxRecordLen: 10, MaxInnerChildNodeSize: 10}
 	opts.Comparator = StrComparator
 	tree := NewTree(opts)
@@ -71,6 +71,26 @@ func TestTreeRandWrite(t *testing.T) {
 		}
 		t.Log(string(v))
 	}
+}
+
+func TestTreePutDel(t *testing.T) {
+	var opts = TreeOptions{MaxMsgLen: 20, MaxRecordLen: 10, MaxInnerChildNodeSize: 10}
+	opts.Comparator = StrComparator
+	tree := NewTree(opts)
+	for i := 1; i <= 100; i++ {
+		tree.Put(strconv.AppendInt(nil, int64(i), 10), strconv.AppendInt(nil, int64(i), 10))
+	}
+	for i := 1; i <= 100; i++ {
+		tree.Del(strconv.AppendInt(nil, int64(i), 10))
+	}
+	for i := 1; i <= 100; i++ {
+		_, v := tree.Get(strconv.AppendInt(nil, int64(i), 10))
+
+		if v != nil {
+			panic(string(v))
+		}
+	}
+	t.Log("After del, deep:", tree.deep)
 }
 
 func TestSlice(t *testing.T) {

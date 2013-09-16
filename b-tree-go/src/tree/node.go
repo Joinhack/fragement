@@ -59,9 +59,11 @@ func (node *InnerNode) find(key []byte) []byte {
 	idx := node.findSkeletonIdx(key)
 	mc := node.getMsgCache(idx)
 	msg := mc.find(key)
-	if msg != nil && msg.msgType == MsgPut {
-		if node.tree.opts.Comparator(msg.key, key) == 0 {
+	if msg != nil {
+		if msg.msgType == MsgPut {
 			return msg.value
+		} else {
+			return nil
 		}
 	}
 	cnid := node.childNid(idx)
@@ -200,10 +202,13 @@ func (node *InnerNode) removeSkeleton(nid uint64, path *[]NodeInterface) {
 	if node.firstNid == nid {
 		//the last child
 		if len(node.skeletons) == 0 {
+
 			if len(*path) == 0 {
 				//this root reset the root
-				//node.tree.setRoot(root)
+				println(3333333222)
+				node.tree.resetRoot()
 			} else {
+				println(3333333333)
 				pNode := popPath(path).(*InnerNode)
 				pNode.removeSkeleton(node.nid, path)
 			}
@@ -211,19 +216,23 @@ func (node *InnerNode) removeSkeleton(nid uint64, path *[]NodeInterface) {
 		}
 		//shift from second child
 		node.firstNid = node.skeletons[0].nid
-		node.firstMsgCache = node.skeletons[0].msgCache
 		node.msgLen -= node.firstMsgCache.Len()
+		node.firstMsgCache = node.skeletons[0].msgCache
 		node.skeletons = node.skeletons[1:]
 	} else {
-		idx := sort.Search(len(node.skeletons), func(mid int) bool {
-			return node.skeletons[mid].nid != nid
-		})
+		var idx int
+		for i, ske := range node.skeletons {
+			if ske.nid == nid {
+				idx = i
+				break
+			}
+		}
+
 		//remove the skeleton
 		node.msgLen -= node.skeletons[idx].msgCache.Len()
 		copy(node.skeletons[idx:], node.skeletons[idx+1:])
 		node.skeletons = node.skeletons[:len(node.skeletons)-1]
 	}
-
 }
 
 func (node *InnerNode) cascade(mc *MsgCache, parent *InnerNode) {
@@ -390,9 +399,11 @@ func (node *LeafNode) find(key []byte) []byte {
 		return node.tree.opts.Comparator(key, node.bulk.records[mid].key) <= 0
 	})
 
-	record := node.bulk.records[idx]
-	if node.tree.opts.Comparator(key, record.key) == 0 {
-		return record.value
+	if idx != node.bulk.Len() {
+		record := node.bulk.records[idx]
+		if node.tree.opts.Comparator(key, record.key) == 0 {
+			return record.value
+		}
 	}
 	return nil
 }
