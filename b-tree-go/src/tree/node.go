@@ -1,7 +1,9 @@
 package tree
 
 import (
+	"log"
 	"sort"
+	"sync"
 )
 
 type NStatusType int
@@ -16,6 +18,10 @@ type NodeInterface interface {
 	GetNid() uint64
 	lockPath(key []byte, path *[]NodeInterface)
 	find(key []byte) []byte
+	rlock()
+	lock()
+	runlock()
+	unlock()
 	dump(level int)
 	cascade(cache *MsgCache, p *InnerNode)
 }
@@ -25,6 +31,26 @@ type Node struct {
 	status NStatusType
 	tree   *Tree
 	nid    uint64
+	rwmtx  sync.RWMutex
+}
+
+//lock for reading
+func (n *Node) rlock() {
+	n.rwmtx.RLock()
+}
+
+func (n *Node) runlock() {
+	n.rwmtx.RUnlock()
+}
+
+//unlock for writing
+func (n *Node) unlock() {
+	n.rwmtx.Unlock()
+}
+
+//lock for writing
+func (n *Node) lock() {
+	n.rwmtx.Lock()
 }
 
 func (n *Node) GetNid() uint64 {
@@ -58,7 +84,9 @@ type LeafNode struct {
 func (node *InnerNode) find(key []byte) []byte {
 	idx := node.findSkeletonIdx(key)
 	mc := node.getMsgCache(idx)
+	mc.rlock()
 	msg := mc.find(key)
+	mc.runlock()
 	if msg != nil {
 		if msg.msgType == MsgPut {
 			return msg.value
@@ -79,6 +107,7 @@ func (node *InnerNode) lockPath(key []byte, path *[]NodeInterface) {
 	idx := node.findSkeletonIdx(key)
 	child := node.tree.loadNode(node.childNid(idx))
 	*path = append(*path, child)
+	child.lock()
 	child.lockPath(key, path)
 }
 
@@ -102,18 +131,16 @@ func (node *InnerNode) getMsgCache(idx int) *MsgCache {
 }
 
 func (node *InnerNode) WriteMsg(msg *Msg) error {
+	node.rlock()
 	idx := node.findSkeletonIdx(msg.key)
 	if node.status == NSkeletonLoaded {
 		if err := node.loadAllMsgCache(); err != nil {
 			return err
 		}
 	}
-	cache := node.getMsgCache(idx)
-	oldSize := cache.Size()
-	if cache.WriteMsg(msg) {
+	if node.writemsg2cache(idx, msg) {
 		node.msgLen++
 	}
-	node.msgSize = node.msgSize + cache.Size() - oldSize
 	node.maybeCascade()
 	return nil
 }
@@ -155,6 +182,7 @@ func (node *InnerNode) childNid(idx int) uint64 {
 }
 
 func (node *InnerNode) addSkeleton(key []byte, nid uint64, path *[]NodeInterface) {
+	log.Println("addSkel", nid)
 	tree := node.tree
 	idx := node.findSkeletonIdx(key)
 	skeleton := &Skeleton{nid: nid, key: key, msgCache: NewMsgCache(tree.opts.Comparator)}
@@ -164,6 +192,10 @@ func (node *InnerNode) addSkeleton(key []byte, nid uint64, path *[]NodeInterface
 	node.skeletons[idx] = skeleton
 	if len(node.skeletons)+1 > tree.opts.MaxInnerChildNodeSize {
 		node.split(path)
+	} else {
+		for i := len(*path) - 1; i >= 0; i-- {
+			(*path)[i].unlock()
+		}
 	}
 }
 
@@ -173,21 +205,21 @@ func (node *InnerNode) maybeCascade() {
 	if node.msgLen > tree.opts.MaxMsgLen {
 		idx = node.findMaxLenIndex()
 	} else {
+		node.runlock()
 		return
 	}
 
 	cache := node.getMsgCache(idx)
-
 	cnid := node.childNid(idx)
-	var nNode NodeInterface
+	var cnode NodeInterface
 	if cnid == NilNid {
-		nNode = tree.NextLeafNode()
-		node.setChild(idx, nNode.GetNid())
+		cnode = tree.NextLeafNode()
+		node.setChild(idx, cnode.GetNid())
 	} else {
-		nNode = tree.loadNode(cnid)
+		cnode = tree.loadNode(cnid)
 	}
 
-	nNode.cascade(cache, node)
+	cnode.cascade(cache, node)
 }
 
 func (node *InnerNode) setChild(idx int, cid uint64) {
@@ -202,14 +234,13 @@ func (node *InnerNode) removeSkeleton(nid uint64, path *[]NodeInterface) {
 	if node.firstNid == nid {
 		//the last child
 		if len(node.skeletons) == 0 {
-
+			popPath(path)
+			node.unlock()
 			if len(*path) == 0 {
 				//this root reset the root
-				println(3333333222)
 				node.tree.resetRoot()
 			} else {
-				println(3333333333)
-				pNode := popPath(path).(*InnerNode)
+				pNode := (*path)[len(*path)-1].(*InnerNode)
 				pNode.removeSkeleton(node.nid, path)
 			}
 			return
@@ -233,22 +264,35 @@ func (node *InnerNode) removeSkeleton(nid uint64, path *[]NodeInterface) {
 		copy(node.skeletons[idx:], node.skeletons[idx+1:])
 		node.skeletons = node.skeletons[:len(node.skeletons)-1]
 	}
+	for i := len(*path) - 1; i >= 0; i-- {
+		(*path)[i].unlock()
+	}
+}
+
+func (node *InnerNode) writemsg2cache(idx int, msg *Msg) bool {
+	cache := node.getMsgCache(idx)
+	cache.lock()
+	defer cache.unlock()
+	return cache.WriteMsg(msg)
 }
 
 func (node *InnerNode) cascade(mc *MsgCache, parent *InnerNode) {
+	node.rlock()
+
 	tree := node.tree
 	if node.status == NSkeletonLoaded {
 		node.loadAllMsgCache()
 	}
+	mc.lock()
 	mcLen := mc.Len()
 	cacheIdx := 0
 	idx := 0
+
 	for cacheIdx < mcLen && idx < len(node.skeletons) {
 		msg := mc.cache[cacheIdx]
 		skel := node.skeletons[idx]
 		if tree.opts.Comparator(msg.key, skel.key) < 0 {
-			cache := node.getMsgCache(idx)
-			cache.WriteMsg(msg)
+			node.writemsg2cache(idx, msg)
 			cacheIdx++
 		} else {
 			idx++
@@ -257,13 +301,14 @@ func (node *InnerNode) cascade(mc *MsgCache, parent *InnerNode) {
 
 	for cacheIdx < mcLen {
 		msg := mc.cache[cacheIdx]
-		cache := node.getMsgCache(idx)
-		cache.WriteMsg(msg)
+		node.writemsg2cache(idx, msg)
 		cacheIdx++
 	}
 	mc.Clear()
 	parent.msgLen = parent.msgLen - mcLen + mc.Len()
 	node.msgLen += mcLen
+	mc.unlock()
+	parent.runlock()
 	node.maybeCascade()
 }
 
@@ -283,6 +328,7 @@ func (node *InnerNode) split(path *[]NodeInterface) {
 	}
 	ni.msgLen = niMsgLen
 	node.msgLen -= niMsgLen
+	popPath(path).unlock()
 
 	//it's root now
 	if len(*path) == 0 {
@@ -292,9 +338,13 @@ func (node *InnerNode) split(path *[]NodeInterface) {
 		skel := &Skeleton{key: key, msgCache: NewMsgCache(node.tree.opts.Comparator), nid: ni.nid}
 		nroot.skeletons = append(nroot.skeletons, skel)
 		nroot.msgLen = ni.msgLen + node.msgLen
+		log.Println("set root")
+		node.tree.lock()
 		node.tree.setRoot(nroot)
+		node.tree.unlock()
+
 	} else {
-		pn := popPath(path).(*InnerNode)
+		pn := (*path)[len(*path)-1].(*InnerNode)
 		pn.addSkeleton(key, ni.nid, path)
 	}
 
@@ -333,21 +383,23 @@ func popPath(path *[]NodeInterface) NodeInterface {
 
 func (node *LeafNode) split(arch []byte) {
 	if node.balancing {
+		node.unlock()
 		return
+	}
+	node.balancing = true
+	node.unlock()
+	path := make([]NodeInterface, 0, 8)
+	node.tree.lockPath(arch, &path)
+	if n := path[len(path)-1]; n != node {
+		panic("error, the last should be self")
 	}
 
 	if node.bulk.Len() <= 1 ||
 		node.bulk.Len() <= node.tree.opts.MaxRecordLen/2 {
+		for i := len(path) - 1; i >= 0; i-- {
+			path[i].unlock()
+		}
 		return
-	}
-
-	node.balancing = true
-
-	path := make([]NodeInterface, 0, 8)
-
-	node.tree.lockPath(arch, &path)
-	if n := popPath(&path); n != node {
-		panic("error, the last should be self")
 	}
 
 	var nleaf = node.tree.NextLeafNode()
@@ -359,25 +411,27 @@ func (node *LeafNode) split(arch []byte) {
 	}
 	nleaf.rightLeafNId = node.rightLeafNId
 	node.rightLeafNId = nleaf.nid
+
 	key := node.bulk.split(nleaf.bulk)
-
-	pNode := popPath(&path).(*InnerNode)
-
+	popPath(&path)
+	node.unlock()
+	pNode := path[len(path)-1].(*InnerNode)
 	pNode.addSkeleton(key, nleaf.GetNid(), &path)
-
 	node.balancing = false
 }
 
 func (node *LeafNode) merge(arch []byte) {
 	if node.balancing {
+		node.unlock()
 		return
 	}
+	node.unlock()
 
 	path := make([]NodeInterface, 0, 8)
 
 	node.tree.lockPath(arch, &path)
 
-	if popPath(&path) != node {
+	if path[len(path)-1] != node {
 		panic("error, the last should be self")
 	}
 
@@ -390,11 +444,15 @@ func (node *LeafNode) merge(arch []byte) {
 		rightNode.leftLeafNId = node.leftLeafNId
 	}
 	node.balancing = false
-	pNode := popPath(&path).(*InnerNode)
+	popPath(&path)
+	node.unlock()
+	pNode := path[len(path)-1].(*InnerNode)
 	pNode.removeSkeleton(node.nid, &path)
 }
 
 func (node *LeafNode) find(key []byte) []byte {
+	node.rlock()
+	defer node.runlock()
 	idx := sort.Search(node.bulk.Len(), func(mid int) bool {
 		return node.tree.opts.Comparator(key, node.bulk.records[mid].key) <= 0
 	})
@@ -410,9 +468,18 @@ func (node *LeafNode) find(key []byte) []byte {
 
 func (node *LeafNode) cascade(mc *MsgCache, parent *InnerNode) {
 	//will sort ascending add all data to new records
+	node.lock()
+	mc.lock()
+	if mc.Len() == 0 {
+		mc.unlock()
+		node.unlock()
+		parent.runlock()
+		return
+	}
 	records := make([]*Record, 0, mc.Len()+node.bulk.Len())
 	var cacheIdx = 0
 	var recordIdx = 0
+	log.Println("cascade", mc.Len(), parent.msgLen, parent.nid)
 	arch := mc.cache[0].key
 	mLen := mc.Len()
 	for cacheIdx < mc.Len() && recordIdx < node.bulk.Len() {
@@ -452,11 +519,14 @@ func (node *LeafNode) cascade(mc *MsgCache, parent *InnerNode) {
 
 	parent.msgLen = parent.msgLen - mLen + mc.Len()
 	node.bulk.records = records
+	mc.unlock()
+	parent.runlock()
 	if node.bulk.Len() == 0 {
 		node.merge(arch)
-	}
-	if node.bulk.Len() > node.tree.opts.MaxRecordLen {
+	} else if node.bulk.Len() > node.tree.opts.MaxRecordLen {
 		node.split(arch)
+	} else {
+		node.unlock()
 	}
 
 }

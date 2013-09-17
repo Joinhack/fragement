@@ -1,5 +1,10 @@
 package tree
 
+import (
+	"sync"
+	"sync/atomic"
+)
+
 const (
 	NilNid        uint64 = 0
 	InnerNidStart uint64 = 1
@@ -21,10 +26,22 @@ type Tree struct {
 	innerNid uint64
 	leafNid  uint64
 	deep     int
+	rwmtx    sync.RWMutex
 	nodes    map[uint64]NodeInterface
 }
 
+func (tree *Tree) lock() {
+	tree.rwmtx.Lock()
+}
+
+func (tree *Tree) unlock() {
+	tree.rwmtx.Unlock()
+}
+
 func (tree *Tree) lockPath(key []byte, path *[]NodeInterface) {
+	tree.lock()
+	defer tree.unlock()
+	tree.root.lock()
 	*path = append(*path, tree.root)
 	tree.root.lockPath(key, path)
 }
@@ -48,16 +65,16 @@ func (tree *Tree) Get(key []byte) (error, []byte) {
 }
 
 func (tree *Tree) NextLeafNode() *LeafNode {
-	tree.leafNid++
-	node := NewLeafNode(tree.leafNid, tree)
-	tree.nodes[tree.leafNid] = node
+	nid := atomic.AddUint64(&tree.leafNid, 1)
+	node := NewLeafNode(nid, tree)
+	tree.nodes[nid] = node
 	return node
 }
 
 func (tree *Tree) NextInnerNode() *InnerNode {
-	tree.innerNid++
-	node := NewInnerNode(tree.innerNid, tree)
-	tree.nodes[tree.innerNid] = node
+	nid := atomic.AddUint64(&tree.innerNid, 1)
+	node := NewInnerNode(nid, tree)
+	tree.nodes[nid] = node
 	return node
 }
 

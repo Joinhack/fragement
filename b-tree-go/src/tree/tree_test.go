@@ -3,6 +3,7 @@ package tree
 import (
 	"math/rand"
 	"strconv"
+	"sync"
 	"testing"
 )
 
@@ -20,6 +21,7 @@ func TestMsgCache(t *testing.T) {
 		randint = append(randint, b)
 		s := string(strconv.AppendInt(nil, int64(b), 10))
 		mc.WriteMsg(NewMsg([]byte(s), []byte(s), MsgPut))
+
 	}
 
 	for _, msg := range mc.cache {
@@ -50,7 +52,6 @@ func TestTreePut(t *testing.T) {
 		if v == nil {
 			panic(v)
 		}
-		t.Log(string(v))
 	}
 }
 
@@ -70,7 +71,42 @@ func TestTreeRandPut(t *testing.T) {
 		if v == nil {
 			panic(v)
 		}
-		t.Log(string(v))
+	}
+}
+
+var (
+	tree *Tree
+)
+
+func init() {
+	var opts = TreeOptions{MaxMsgLen: 20, MaxRecordLen: 200, MaxInnerChildNodeSize: 200}
+	opts.Comparator = StrComparator
+	tree = NewTree(opts)
+}
+
+func dataPrepare() {
+	var wg sync.WaitGroup
+	mod := 100
+	for i := 1; i < 5; i++ {
+		wg.Add(1)
+		go func(m int) {
+			defer wg.Done()
+			for i := (m - 1) * mod; i < m*mod; i++ {
+				tree.Put(strconv.AppendInt(nil, int64(i), 10), strconv.AppendInt(nil, int64(i), 10))
+			}
+		}(i)
+	}
+	wg.Wait()
+}
+
+func TestCOTreeGet(t *testing.T) {
+	dataPrepare()
+	for i := 0; i < 400; i++ {
+		_, v := tree.Get(strconv.AppendInt(nil, int64(i), 10))
+		if v == nil {
+			println(i)
+			panic(i)
+		}
 	}
 }
 
@@ -89,8 +125,10 @@ func TestTreePutDel(t *testing.T) {
 			panic(string(v))
 		}
 	}
-	for i := 1; i <= max; i++ {
-		tree.Del(strconv.AppendInt(nil, int64(i), 10))
+	for m := 0; m < 5; m++ {
+		for i := 1; i <= max; i++ {
+			tree.Del(strconv.AppendInt(nil, int64(i), 10))
+		}
 	}
 
 	for i := 1; i <= max; i++ {
@@ -100,36 +138,31 @@ func TestTreePutDel(t *testing.T) {
 			panic(string(v))
 		}
 	}
-	t.Log("After del, deep:", tree.deep)
 }
 
 func TestTreeRandPutDel(t *testing.T) {
 	var opts = TreeOptions{MaxMsgLen: 20, MaxRecordLen: 10, MaxInnerChildNodeSize: 10}
 	opts.Comparator = StrComparator
 	tree := NewTree(opts)
-	randint := make([]int, 0)
+	randint := make(map[int]interface{}, 0)
 	max := 5000
 	for i := 1; i <= max; i++ {
 		r := rand.Intn(max)
-		randint = append(randint, r)
+		randint[r] = nil
 		tree.Put(strconv.AppendInt(nil, int64(r), 10), strconv.AppendInt(nil, int64(i), 10))
 	}
-	for _, r := range randint {
-		_, v := tree.Get(strconv.AppendInt(nil, int64(r), 10))
+	for k, _ := range randint {
+		_, v := tree.Get(strconv.AppendInt(nil, int64(k), 10))
 		if v == nil {
 			panic(v)
 		}
-		t.Log(string(v))
+		tree.Del(strconv.AppendInt(nil, int64(k), 10))
 	}
-	for _, r := range randint {
-		tree.Del(strconv.AppendInt(nil, int64(r), 10))
-	}
-	for _, r := range randint {
-		_, v := tree.Get(strconv.AppendInt(nil, int64(r), 10))
+	for k, _ := range randint {
+		_, v := tree.Get(strconv.AppendInt(nil, int64(k), 10))
 		if v != nil {
 			panic(v)
 		}
-		t.Log(string(v))
 	}
 }
 

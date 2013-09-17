@@ -3,7 +3,7 @@ package tree
 import (
 	"fmt"
 	"sort"
-	//"util"
+	"sync"
 )
 
 type MsgType int
@@ -52,6 +52,7 @@ type MsgCache struct {
 	cache      []*Msg
 	size       int
 	comparator Comparator
+	rwmtx      sync.RWMutex
 }
 
 func NewMsg(key, value []byte, msgType MsgType) *Msg {
@@ -84,6 +85,24 @@ func (mc *MsgCache) find(key []byte) *Msg {
 
 func (mc *MsgCache) Len() int {
 	return len(mc.cache)
+}
+
+//lock for writting
+func (mc *MsgCache) lock() {
+	mc.rwmtx.Lock()
+}
+
+//unlock for writting
+func (mc *MsgCache) unlock() {
+	mc.rwmtx.Unlock()
+}
+
+func (mc *MsgCache) runlock() {
+	mc.rwmtx.RUnlock()
+}
+
+func (mc *MsgCache) rlock() {
+	mc.rwmtx.RLock()
 }
 
 func (mc *MsgCache) Clear() {
