@@ -79,7 +79,7 @@ var (
 )
 
 func init() {
-	var opts = TreeOptions{MaxMsgLen: 20, MaxRecordLen: 200, MaxInnerChildNodeSize: 200}
+	var opts = TreeOptions{MaxMsgLen: 20, MaxRecordLen: 20, MaxInnerChildNodeSize: 20}
 	opts.Comparator = StrComparator
 	tree = NewTree(opts)
 }

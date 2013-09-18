@@ -1,7 +1,6 @@
 package tree
 
 import (
-	"log"
 	"sort"
 	"sync"
 )
@@ -22,7 +21,6 @@ type NodeInterface interface {
 	lock()
 	runlock()
 	unlock()
-	dump(level int)
 	cascade(cache *MsgCache, p *InnerNode)
 }
 
@@ -182,7 +180,6 @@ func (node *InnerNode) childNid(idx int) uint64 {
 }
 
 func (node *InnerNode) addSkeleton(key []byte, nid uint64, path *[]NodeInterface) {
-	log.Println("addSkel", nid)
 	tree := node.tree
 	idx := node.findSkeletonIdx(key)
 	skeleton := &Skeleton{nid: nid, key: key, msgCache: NewMsgCache(tree.opts.Comparator)}
@@ -338,7 +335,6 @@ func (node *InnerNode) split(path *[]NodeInterface) {
 		skel := &Skeleton{key: key, msgCache: NewMsgCache(node.tree.opts.Comparator), nid: ni.nid}
 		nroot.skeletons = append(nroot.skeletons, skel)
 		nroot.msgLen = ni.msgLen + node.msgLen
-		log.Println("set root")
 		node.tree.lock()
 		node.tree.setRoot(nroot)
 		node.tree.unlock()
@@ -479,7 +475,7 @@ func (node *LeafNode) cascade(mc *MsgCache, parent *InnerNode) {
 	records := make([]*Record, 0, mc.Len()+node.bulk.Len())
 	var cacheIdx = 0
 	var recordIdx = 0
-	log.Println("cascade", mc.Len(), parent.msgLen, parent.nid)
+
 	arch := mc.cache[0].key
 	mLen := mc.Len()
 	for cacheIdx < mc.Len() && recordIdx < node.bulk.Len() {
