@@ -1,5 +1,4 @@
-#include <stdio.h>
-
+#include <stdlib.h>
 
 void insertSort(int *array, size_t arrayLen) {
 	size_t idx, i;
@@ -15,15 +14,3 @@ void insertSort(int *array, size_t arrayLen) {
 	}
 }
 
-
-int main() {
-	int array[] = {9,8,2,5,7,3,65,2};
-	size_t idx;
-	size_t arrayLen = sizeof(array)/sizeof(int);
-	insertSort(array, arrayLen);
-	for(idx = 0; idx < arrayLen; idx++) {
-		printf("%d ", array[idx]);
-	}
-	printf("\n");
-	return 0;
-}
