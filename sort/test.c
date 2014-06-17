@@ -22,5 +22,14 @@ int main() {
 	quickSort(copyArray, arrayLen);
 	DUMP(copyArray, arrayLen);
 	
+	printf("comb sort:\n");
+	memcpy((void*)copyArray, (void*)array, sizeof(array));
+	combSort(copyArray, arrayLen);
+	DUMP(copyArray, arrayLen);
+
+	printf("merge sort:\n");
+	memcpy((void*)copyArray, (void*)array, sizeof(array));
+	combSort(copyArray, arrayLen);
+	DUMP(copyArray, arrayLen);
 	return 0;
 }

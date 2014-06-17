@@ -9,5 +9,7 @@ printf("\n");
 void insertSort(int*, size_t);
 void bubbleSort(int*, size_t);
 void quickSort(int*, size_t);
+void combSort(int *, size_t);
+void mergeSort(int *, size_t);
 
 #endif
