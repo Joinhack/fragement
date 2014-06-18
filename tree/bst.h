@@ -6,6 +6,7 @@
 template<typename Key, typename Comparator>
 class BSTree {
 public:
+	BSTree():root_(NULL) {}
 	struct Node;
 	Node* NewNode(const Key&, void*);
 	Node* Search(const Key&);
@@ -19,7 +20,7 @@ public:
 protected:
 	static void Free(Node* n) {delete  n;}
 	Node* Find(const Key&);
-	void Link(Node *p, Node *n, Node *n2);
+	void Link(Node *n, Node *n2);
 private:
 	Node* root_;
 	Comparator cmp_;
@@ -29,7 +30,8 @@ template<typename Key, typename Comparator>
 struct BSTree<Key, Comparator>::Node {
 	Key key;
 	void* value;
-	Node(const Key &k, void* v):key(k), value(v), left_(NULL), right_(NULL) {}
+	Node(const Key &k, void* v):key(k), value(v), left_(NULL), right_(NULL), parent_(NULL) {}
+	Node *parent_;
 	Node *left_;
 	Node *right_;
 };
@@ -43,11 +45,16 @@ typename BSTree<Key, Comparator>::Node* BSTree<Key, Comparator>::Search(const Ke
 }
 
 template<typename Key, typename Comparator>
-inline void BSTree<Key, Comparator>::Link(Node *p, Node *n, Node *n2) {
-	if(p->left_ == n)
-		p->left_ = n2;
-	else if(p->right_ == n)
-		p->right_ = n2;
+inline void BSTree<Key, Comparator>::Link(Node *n, Node *n2) {
+	if(n->parent_ == NULL) 
+		root_ = n2;
+	else if(n->parent_->left_ == n)
+		n->parent_->left_ = n2;
+	else {
+		n->parent_->right_ = n2;
+	}
+	if(n2) 
+		n2->parent_ = n->parent_;
 }
 
 template<typename Key, typename Comparator>
@@ -95,50 +102,33 @@ inline void BSTree<Key, Comparator>::Walk(const T &caller) {
 
 template<typename Key, typename Comparator>
 bool BSTree<Key, Comparator>::Delete(const Key &key) {
-	Node *n = root_;
-	Node *parent = n;
-	int rs;
-	while(n) {
-		rs = cmp_(key, n->key);
-		if(rs == 0) break;
-		if(rs > 0) {
-			if (n->right_) {
-				parent = n;
-				n = n->right_;
-			} else break;
-		}
-		else {
-			if (n->left_) {
-				parent = n;
-				n = n->left_;
-			} else break;
-		}
-	}
+	Node *n = Find(key);
 	//no node found.
-	if (n == NULL || rs != 0)
+	if (n == NULL || cmp_(key, n->key) != 0)
 		return false;
+
 	//root
 	if (!n->left_) {
-		Link(parent, n, n->right_);
+		Link(n, n->right_);
 	} else if (!n->right_) {
-		Link(parent, n, n->left_);
+		Link(n, n->left_);
 	} else {
 		Node *rmin = n->right_;
-		Node *pmin = rmin;
 		while(rmin) {
 			if(!rmin->left_)
 				break;
-			pmin = rmin;
 			rmin = rmin->left_;
 		}
+		if(rmin->parent_ != n) {
+			Link(rmin, rmin->right_);
+			rmin->right_ = n->right_;
+			rmin->right_->parent_ = rmin;
+		}
+		Link(n, rmin);
 		rmin->left_ = n->left_;
-		rmin->right_ = n->right_;
-		if(pmin != rmin)
-			pmin->left_ = NULL;
-		Link(parent, n, rmin);
-		if(n == root_)
-			root_ = rmin;
+		rmin->left_->parent_ = rmin;
 	}
+	
 	delete n;
 	return true;
 }
@@ -157,6 +147,7 @@ typename BSTree<Key, Comparator>::Node* BSTree<Key, Comparator>::Insert(const Ke
 			return n;
 		}
 		nNode = NewNode(key, val);
+		nNode->parent_ = n;
 		if(rs < 0)
 			n->left_ = nNode;
 		else

@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stdlib.h>
+#include <assert.h>
 #include "bst.h"
 
 
@@ -17,13 +19,18 @@ void DumpPrint(const BSTree<int, Comparator<int> >::Node *n) {
 
 int main() {
 	BSTree<int, Comparator<int> > bst = BSTree<int, Comparator<int> >();
-	bst.Insert(5, NULL);
-	for(int i = 10; i >= 0; i--) {
-		bst.Insert(i, NULL);
+	size_t len = 100;
+	int k[len];
+	for(int i = 0; i < len; i++) {
+		k[i] = (int)rand();
+		bst.Insert(k[i], NULL);
 	}
-	bst.Delete(5);
-	bst.Walk(DumpPrint);
-	bst.Delete(9);
-	bst.Walk(DumpPrint);
+	for(int i = 0; i < len; i++) {
+		assert(k[i] == bst.Search(k[i])->key);
+	}
+	for(int i = 0; i < len; i++) {
+		assert(bst.Delete(k[i]));
+	}
+
 	return 0;
 }
