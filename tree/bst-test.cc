@@ -4,7 +4,6 @@
 #include "bst.h"
 
 
-
 template<typename T>
 class Comparator {
 public:
@@ -22,7 +21,17 @@ int main() {
 	size_t len = 100;
 	int k[len];
 	for(int i = 0; i < len; i++) {
-		k[i] = (int)rand();
+		
+		while(true) {
+			L1:
+			int v = (int)rand();
+			for(int m; m < i; m++) {
+				if(v == k[m])
+					goto L1;
+			}
+			k[i] = v;
+			break;
+		}
 		bst.Insert(k[i], NULL);
 	}
 	for(int i = 0; i < len; i++) {

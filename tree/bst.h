@@ -107,7 +107,6 @@ bool BSTree<Key, Comparator>::Delete(const Key &key) {
 	if (n == NULL || cmp_(key, n->key) != 0)
 		return false;
 
-	//root
 	if (!n->left_) {
 		Link(n, n->right_);
 	} else if (!n->right_) {
@@ -119,11 +118,13 @@ bool BSTree<Key, Comparator>::Delete(const Key &key) {
 				break;
 			rmin = rmin->left_;
 		}
+		//n right values always be bigger than min in n->right.
 		if(rmin->parent_ != n) {
 			Link(rmin, rmin->right_);
 			rmin->right_ = n->right_;
 			rmin->right_->parent_ = rmin;
 		}
+		//n left values always be smaller than min in n->right.
 		Link(n, rmin);
 		rmin->left_ = n->left_;
 		rmin->left_->parent_ = rmin;
@@ -148,6 +149,7 @@ typename BSTree<Key, Comparator>::Node* BSTree<Key, Comparator>::Insert(const Ke
 		}
 		nNode = NewNode(key, val);
 		nNode->parent_ = n;
+		//keeper left be smaller than n, right be bigger than n.
 		if(rs < 0)
 			n->left_ = nNode;
 		else
