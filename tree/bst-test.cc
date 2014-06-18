@@ -21,7 +21,9 @@ int main() {
 	for(int i = 10; i >= 0; i--) {
 		bst.Insert(i, NULL);
 	}
-	bst.Delete(8);
+	bst.Delete(5);
+	bst.Walk(DumpPrint);
+	bst.Delete(9);
 	bst.Walk(DumpPrint);
 	return 0;
 }
