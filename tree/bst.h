@@ -89,14 +89,18 @@ template<typename T>
 inline void BSTree<Key, Comparator>::Walk(const T &caller) {
 	Node *node;
 	std::vector<Node*> nodes;
-	if(root_ != NULL)
-		nodes.push_back(root_);
-	while(!nodes.empty()) {
-		node = nodes.back();
-		nodes.pop_back();
-		if (node->left_) nodes.push_back(node->left_);
-		if (node->right_) nodes.push_back(node->right_);
-		caller(node);
+	node = root_;
+	while(node || !nodes.empty()) {
+		while(node) {
+			nodes.push_back(node);
+			node = node->left_;
+		}
+		if(!nodes.empty()) {
+			node = nodes.back();
+			nodes.pop_back();
+			caller(node);
+			node = node->right_;
+		}
 	}
 }
 
