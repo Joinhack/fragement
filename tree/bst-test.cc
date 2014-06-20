@@ -42,7 +42,7 @@ int main() {
 			k[i] = v;
 			break;
 		}
-		bst.Insert(k[i], NULL);
+		bst.Insert(k[i]);
 	}
 	for(int i = 0; i < len; i++) {
 		assert(k[i] == bst.Search(k[i])->key);

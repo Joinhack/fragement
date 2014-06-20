@@ -8,9 +8,8 @@ class BSTree {
 public:
 	BSTree():root_(NULL) {}
 	struct Node;
-	Node* NewNode(const Key&, void*);
 	Node* Search(const Key&);
-	Node* Insert(const Key&, void*);
+	Node* Insert(const Key&);
 	bool Delete(const Key&);
 	template<typename T>
 	void Walk(const T &);
@@ -18,6 +17,7 @@ public:
 		Walk(Free);
 	}
 protected:
+	Node* NewNode(const Key&);
 	static void Free(Node* n) {delete  n;}
 	Node* Find(const Key&);
 	void Link(Node *n, Node *n2);
@@ -29,15 +29,14 @@ private:
 template<typename Key, typename Comparator>
 struct BSTree<Key, Comparator>::Node {
 	Key key;
-	void* value;
-	Node(const Key &k, void* v):key(k), value(v), left_(NULL), right_(NULL), parent_(NULL) {}
+	Node(const Key &k):key(k), left_(NULL), right_(NULL), parent_(NULL) {}
 	Node *parent_;
 	Node *left_;
 	Node *right_;
 };
 
 template<typename Key, typename Comparator>
-typename BSTree<Key, Comparator>::Node* BSTree<Key, Comparator>::Search(const Key &key) {
+typename BSTree<Key, Comparator>::Node* BSTree<Key, Comparator>::Search(const Key& key) {
 	Node *n = Find(key);
 	if(n && cmp_(n->key, key) == 0)
 		return n;
@@ -45,7 +44,7 @@ typename BSTree<Key, Comparator>::Node* BSTree<Key, Comparator>::Search(const Ke
 }
 
 template<typename Key, typename Comparator>
-inline void BSTree<Key, Comparator>::Link(Node *n, Node *n2) {
+inline void BSTree<Key, Comparator>::Link(Node* n, Node* n2) {
 	if(n->parent_ == NULL) 
 		root_ = n2;
 	else if(n->parent_->left_ == n)
@@ -58,8 +57,8 @@ inline void BSTree<Key, Comparator>::Link(Node *n, Node *n2) {
 }
 
 template<typename Key, typename Comparator>
-typename BSTree<Key, Comparator>::Node* BSTree<Key, Comparator>::Find(const Key &key) {
-	Node *n = root_;
+typename BSTree<Key, Comparator>::Node* BSTree<Key, Comparator>::Find(const Key& key) {
+	Node* n = root_;
 	while(n) {
 		int rs = cmp_(key, n->key);
 		if(rs == 0) return n;
@@ -80,14 +79,15 @@ typename BSTree<Key, Comparator>::Node* BSTree<Key, Comparator>::Find(const Key 
 }
 
 template<typename Key, typename Comparator>
-typename BSTree<Key, Comparator>::Node* BSTree<Key, Comparator>::NewNode(const Key &key, void *val) {
-	return new Node(key, val);
+inline typename BSTree<Key, Comparator>::Node* BSTree<Key, Comparator>::NewNode(const Key& key) {
+	return new Node(key);
 }
 
+//In-Order traversal
 template<typename Key, typename Comparator>
 template<typename T>
-inline void BSTree<Key, Comparator>::Walk(const T &caller) {
-	Node *node;
+void BSTree<Key, Comparator>::Walk(const T &caller) {
+	Node* node;
 	std::vector<Node*> nodes;
 	node = root_;
 	while(node || !nodes.empty()) {
@@ -98,15 +98,17 @@ inline void BSTree<Key, Comparator>::Walk(const T &caller) {
 		if(!nodes.empty()) {
 			node = nodes.back();
 			nodes.pop_back();
+			//maybe free the node in caller. so get right node before call caller
+			Node *rnode = node->right_;
 			caller(node);
-			node = node->right_;
+			node = rnode;
 		}
 	}
 }
 
 template<typename Key, typename Comparator>
-bool BSTree<Key, Comparator>::Delete(const Key &key) {
-	Node *n = Find(key);
+bool BSTree<Key, Comparator>::Delete(const Key& key) {
+	Node* n = Find(key);
 	//no node found.
 	if (n == NULL || cmp_(key, n->key) != 0)
 		return false;
@@ -116,7 +118,7 @@ bool BSTree<Key, Comparator>::Delete(const Key &key) {
 	} else if (!n->right_) {
 		Link(n, n->left_);
 	} else {
-		Node *rmin = n->right_;
+		Node* rmin = n->right_;
 		while(rmin) {
 			if(!rmin->left_)
 				break;
@@ -140,18 +142,17 @@ bool BSTree<Key, Comparator>::Delete(const Key &key) {
 
 
 template<typename Key, typename Comparator>
-typename BSTree<Key, Comparator>::Node* BSTree<Key, Comparator>::Insert(const Key &key, void *val) {
+typename BSTree<Key, Comparator>::Node* BSTree<Key, Comparator>::Insert(const Key& key) {
 	int rs;
-	Node *n = Find(key);
-	Node *nNode;
+	Node* n = Find(key);
+	Node* nNode;
 	if(n) {
 		rs = cmp_(key, n->key);
 		//if node exist, just modify the value.
 		if(!rs) {
-			n->value = val;
 			return n;
 		}
-		nNode = NewNode(key, val);
+		nNode = NewNode(key);
 		nNode->parent_ = n;
 		//keeper left be smaller than n, right be bigger than n.
 		if(rs < 0)
@@ -159,7 +160,7 @@ typename BSTree<Key, Comparator>::Node* BSTree<Key, Comparator>::Insert(const Ke
 		else
 			n->right_ = nNode;
 	} else {
-		nNode = NewNode(key, val);
+		nNode = NewNode(key);
 		root_ = nNode;
 	}
 	return nNode;
