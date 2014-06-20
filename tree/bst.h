@@ -3,6 +3,17 @@
 
 #include <vector>
 
+/**
+binary search tree
+in a node, the left is smaller than node, and the right is greater than node
+follow is example.
+
+        10
+        /\
+       8  20
+      / \  \
+     6   9  21
+**/
 template<typename Key, typename Comparator>
 class BSTree {
 public:
