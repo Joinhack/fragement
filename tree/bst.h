@@ -3,6 +3,7 @@
 
 #include <vector>
 
+
 /**
 binary search tree
 in a node, the left is smaller than node, and the right is greater than node
@@ -78,8 +79,7 @@ typename BSTree<Key, Comparator>::Node* BSTree<Key, Comparator>::Find(const Key&
 				n = n->right_;
 			else
 				break;
-		}
-		else {
+		} else {
 			if (n->left_)
 				n = n->left_;
 			else
