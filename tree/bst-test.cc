@@ -64,11 +64,7 @@ void Test(BST bst) {
 		bst.Walk(Bigger<BST>);
 		prev = ULONG_MAX;
 	}
-	for(int i = 0; i < len; i++)
-		printf("%d ", k[i]);
-	std::cout << std::endl;
 	for(int i = 0; i < len; i++) {
-		printf("%d\n", i);
 		assert(bst.Delete(k[i]));
 		bst.Walk(Bigger<BST>);
 		prev = ULONG_MAX;
@@ -78,15 +74,10 @@ void Test(BST bst) {
 int main() {
 	BSTree<int, Comparator<int> > bst = BSTree<int, Comparator<int> >();
 	std::cout << "binary search tree testing." << std::endl;
-	//Test(bst);
+	Test(bst);
 	AVLTree<int, Comparator<int> > avl = AVLTree<int, Comparator<int> >();
 	std::cout << "AVL tree testing." << std::endl;
-	//Test(avl);
-	int a[] = {1808657241,306980362,961551518,1016368862,1837220744,1171225787,956825477,1366759434,23817393,1963737312};
-	for(int i = 0; i < sizeof(a)/sizeof(int); i++)
-		avl.Insert(a[i]);
-	for(int i = 0; i < sizeof(a)/sizeof(int); i++) {
-		avl.Delete(a[i]);
-	}
+	Test(avl);
+	
 	return 0;
 }

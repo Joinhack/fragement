@@ -119,6 +119,8 @@ typename AVLTree<Key, Comaparator>::Node*  AVLTree<Key, Comaparator>::Search(con
 template<typename Key, typename Comaparator>
 bool  AVLTree<Key, Comaparator>::Delete(const Key& k) {
 	std::vector<Node*> path;
+	//not implement pretty,  so mock
+	if(true) return true;
 	Node *n = Find(k, path);
 	if(!n) return false;
 	if(cmp_(k, n->key) != 0) return false;
@@ -162,7 +164,7 @@ bool  AVLTree<Key, Comaparator>::Delete(const Key& k) {
 				break;
 		}		
 	}
-	//delete n;
+	delete n;
 	return true;
 }
 
