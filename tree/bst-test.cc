@@ -5,6 +5,7 @@
 #include <time.h>
 #include "bst.h"
 #include "avltree.h"
+#include "btree.h"
 
 template<typename T>
 class Comparator {
@@ -78,6 +79,5 @@ int main() {
 	AVLTree<int, Comparator<int> > avl = AVLTree<int, Comparator<int> >();
 	std::cout << "AVL tree testing." << std::endl;
 	Test(avl);
-	
 	return 0;
 }
