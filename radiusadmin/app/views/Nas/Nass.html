@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin</title>
+    {{template "header"}}
+</head>
+<body>
+<section id="container">
+    {{template "top" .session.operator}}
+    <!--sidebar start-->
+		<aside>
+		<div id="sidebar" class="nav-collapse">
+		<!-- sidebar menu start-->
+		{{template "menus" .session.menus}}
+		<!-- sidebar menu end-->
+		</div>
+		</aside>
+    <!--sidebar end-->
+    <!--main content start-->
+    <section id="main-content">
+    <section class="wrapper">
+    <div class='row'>
+    <div class='col-sm-12'>
+    <section class="panel">
+    <header class="panel-heading">
+        NAS
+    <span class="tools pull-right">
+        <a href="/admin/nas/add" class=''>添加</a>
+    </span>
+    </header>
+    <div class='panel-body'>
+    <div style="text-align:center">
+    {{if .flash.error}}<span class="label label-danger">错误:</span>{{.flash.error}}{{end}}
+    {{if .flash.success}}<span class="label label-success">操作成功:</span>{{.flash.success}}{{end}}
+    </div>
+
+
+    <div class="adv-table">
+		<table  class="display table table-bordered table-striped dataTable" id="dynamic-table">
+		<thead>
+			<tr>
+			<th>ID</th>
+			<th>名字</th>
+			<th>IP</th>
+			<th>厂商ID</th>
+			<th>厂商</th>
+			<th >操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{$vendors := .vendors}}
+			{{range $item := .nass}}
+			<tr>
+			<td>{{$item.Id}}</td>
+			<td>{{$item.Name}}</td>
+			<td>{{$item.Ip}}</td>
+			<td>{{$item.Vendor}}</td>
+			<td>{{$vendors.NasVerbose $item.Vendor}}</td>
+			<td>
+			
+			<a href='/admin/nas/{{$item.Id}}/edit'>
+			<span class="btn btn-default btn-xs">
+			编辑
+			</span>
+			</a>
+
+			<a href='javascript:del("{{$item.Id}}");'>
+			<span class="btn btn-default btn-xs">
+			删除
+			</span>
+			</a>
+
+			</td>
+			</tr>
+			{{end}}
+		</tbody>
+		</table>
+		</div>
+		</div>
+		</section>
+		</div>
+		</div>
+		</section>
+    <!--main content end-->
+		</section>
+{{template "corejs"}}
+<script>
+$(function() {
+	$('#dynamic-table').dataTable({
+		bFilter:false,
+		bLengthChange:false
+	});
+	window.del = function(i) {
+		if(!confirm("你确定要删除？")) {
+			return
+		}
+		window.location = "/admin/nas/" + i +"/del";
+	}
+})
+</script>
+</body>
+</html>

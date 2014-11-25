@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin</title>
+    {{template "header"}}
+</head>
+<body>
+<section id="container">
+    {{template "top" .session.operator}}
+    <!--sidebar start-->
+		<aside>
+		<div id="sidebar" class="nav-collapse">
+		<!-- sidebar menu start-->
+		{{template "menus" .session.menus}}
+		<!-- sidebar menu end-->
+		</div>
+		</aside>
+    <!--sidebar end-->
+    <!--main content start-->
+    <section id="main-content">
+    <section class="wrapper">
+    <div class='row'>
+    <div class='col-sm-12'>
+    <section class="panel">
+    <header class="panel-heading">
+        用户
+    <span class="tools pull-right">
+        <a href="/admin/user/add" class=''>添加</a>
+    </span>
+    </header>
+    <div class='panel-body'>
+    <div style="text-align:center">
+    {{if .flash.error}}<span class="label label-danger">错误:</span>{{.flash.error}}{{end}}
+    {{if .flash.success}}<span class="label label-success">操作成功:</span>{{.flash.success}}{{end}}
+    </div>
+
+
+    <div class="adv-table">
+		<table  class="display table table-bordered table-striped dataTable" id="dynamic-table">
+		<thead>
+			<tr>
+			<th>ID</th>
+			<th>登录名</th>
+			<th>用户名</th>
+			<th >最大在线</th>
+			<th >状态</th>
+			<th >操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{range $item := .users}}
+			<tr>
+			<td>{{$item.Id}}</td>
+			<td>{{$item.LoginId}}</td>
+			<td>{{$item.Name}}</td>
+			<td>{{$item.MaxOnline}}</td>
+			<td>
+			<span class="label {{if eq $item.Status 1 }}label-success{{else}}label-danger{{end}}">
+			{{$item.StatusLabel}}
+			</span>
+			</td>
+			<td>
+			
+			<a href='/admin/user/{{$item.Id}}/edit'>
+			<span class="btn btn-default btn-xs">
+			编辑
+			</span>
+			</a>
+
+			<a href='javascript:del("{{$item.Id}}");'>
+			<span class="btn btn-default btn-xs">
+			删除
+			</span>
+			</a>
+
+			</td>
+			</tr>
+			{{end}}
+		</tbody>
+		</table>
+		</div>
+		</div>
+		</section>
+		</div>
+		</div>
+		</section>
+    <!--main content end-->
+		</section>
+{{template "corejs"}}
+<script>
+$(function() {
+	$('#dynamic-table').dataTable({
+		bFilter:false,
+		bLengthChange:false,
+		bProcessing: true,
+		sAjaxDataProp: "data",
+		"columnDefs": [{
+			targets:-2,
+			"createdCell": function (td, cellData, rowData, row, col) {
+				$(td).contents().remove();
+
+				var span = $("<span class='label'/>");
+				if(cellData == 1) {
+					span.addClass("label-success");
+					span.append("正常");
+				} else {
+					span.addClass("label-danger");
+					span.append("停用");
+				}
+				$(td).append(span);
+		 	}
+		},{
+			targets:-1,
+			orderable: false,
+			"createdCell": function (td, cellData, rowData, row, col) {
+				$(td).contents().remove();
+		 		$(td).append($("<a href='/admin/user/"+cellData+"/edit'><span class='btn btn-default btn-xs'>编辑</a>"));
+		 		$(td).append(" ");
+		 		$(td).append($("<a href='javascript:del(\""+cellData+"\");'><span class='btn btn-default btn-xs'>删除</a>"));
+		 	}
+		}],
+		fnServerParams: function(aoData){
+			this.formatAOData(aoData);
+		},
+		"sAjaxSource": "users/json",
+		"bServerSide": true,
+	});
+	window.del = function(i) {
+		if(!confirm("你确定要删除？")) {
+			return
+		}
+		window.location = "/admin/user/" + i +"/del";
+	}
+})
+</script>
+</body>
+</html>

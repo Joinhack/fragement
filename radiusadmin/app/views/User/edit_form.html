@@ -1,0 +1,50 @@
+{{define "user.edit"}}
+
+{{if .user}}
+<div class="form-group">
+<label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Id</label>
+<div class="col-lg-10">
+<input type="text" readonly class="form-control" value="{{.user.Id}}" id="user.Id" name="user.Id" >
+</div>
+</div>
+{{end}}
+
+<div class="form-group">
+<label for="" class="col-lg-2 col-sm-2 control-label">登录ID</label>
+<div class="col-lg-10">
+<input type="text" class="form-control" required title="请输入有效登录ID" {{if .user}}readonly{{end}} value="{{.user.LoginId}}" id="user.LoginId" name="user.LoginId" >
+</div>
+</div>
+
+<div class="form-group">
+<label for="" class="col-lg-2 col-sm-2 control-label">名字</label>
+<div class="col-lg-10">
+<input type="text" required minlength="2" title="请输入名字" class="form-control" value="{{.user.Name}}" id="Name" name="user.Name" >
+</div>
+</div>
+
+<div class="form-group">
+<label for="" class="col-lg-2 col-sm-2 control-label">最大在线</label>
+<div class="col-lg-10">
+<input type="text" re="\d+" required  title="请输入最大在线" value="{{.user.MaxOnline}}" class="form-control" id="user.MaxOnline" name="user.MaxOnline" >
+</div>
+</div>
+
+<div class="form-group">
+<label for="" class="col-lg-2 col-sm-2 control-label">密码</label>
+<div class="col-lg-10">
+<input type="password" required minlength="6" title="请输入密码" value="{{.user.Password}}" class="form-control" id="user.Password" name="user.Password" >
+</div>
+</div>
+
+<div class="form-group">
+<label for="" class="col-lg-2 col-sm-2 control-label">状态</label>
+<div class="col-lg-10">
+<select name="user.Status" class="form-control" id="user.Status">
+<option value='1'  {{with .user}}{{if eq .Status 1}}selected{{end}}{{end}}>正常</option>
+<option value='2' {{with .user}}{{if eq .Status 2}}selected{{end}}{{end}}>停用</option>
+</select>
+</div>
+</div>
+
+{{end}}

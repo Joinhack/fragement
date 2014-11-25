@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin</title>
+    {{template "header"}}
+</head>
+<body>
+<section id="container">
+    {{template "top" .session.operator}}
+    <!--sidebar start-->
+		<aside>
+		<div id="sidebar" class="nav-collapse">
+		<!-- sidebar menu start-->
+		{{template "menus" .session.menus}}
+		<!-- sidebar menu end-->
+		</div>
+		</aside>
+    <!--sidebar end-->
+    <!--main content start-->
+    <section id="main-content">
+    <!--main content end-->
+		</section>
+{{template "corejs"}}
+</body>
+</html>

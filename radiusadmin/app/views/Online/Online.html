@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin</title>
+    {{template "header"}}
+</head>
+<body>
+<section id="container">
+    {{template "top" .session.operator}}
+    <!--sidebar start-->
+		<aside>
+		<div id="sidebar" class="nav-collapse">
+		<!-- sidebar menu start-->
+		{{template "menus" .session.menus}}
+		<!-- sidebar menu end-->
+		</div>
+		</aside>
+    <!--sidebar end-->
+    <!--main content start-->
+    <section id="main-content">
+    <section class="wrapper">
+    <div class='row'>
+    <div class='col-sm-12'>
+    <section class="panel">
+    <header class="panel-heading">
+        在线列表
+    <span class="tools pull-right">
+    </span>
+    </header>
+    <div class='panel-body'>
+    <div style="text-align:center">
+    {{if .flash.error}}<span class="label label-danger">错误:</span>{{.flash.error}}{{end}}
+    {{if .flash.success}}<span class="label label-success">操作成功:</span>{{.flash.success}}{{end}}
+    </div>
+
+
+    <div class="adv-table">
+		<table  class="display table table-bordered table-striped dataTable" id="dynamic-table">
+		<thead>
+			<tr>
+			<th>ID</th>
+			<th>用户</th>
+			<th>会话ID</th>
+			<th>开始时间</th>
+			<th>更新时间</th>
+			<th>状态</th>
+			<th>上行流量</th>
+			<th>下行流量</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+		</table>
+		</div>
+		</div>
+		</section>
+		</div>
+		</div>
+		</section>
+    <!--main content end-->
+		</section>
+{{template "corejs"}}
+<script>
+$(function() {
+	$('#dynamic-table').dataTable({
+		bFilter:false,
+		bLengthChange:false,
+		bProcessing: true,
+		sAjaxDataProp: "data",
+		fnServerParams: function(aoData){
+			this.formatAOData(aoData);
+		},
+		"sAjaxSource": "online/json",
+		"bServerSide": true,
+	});
+})
+</script>
+</body>
+</html>

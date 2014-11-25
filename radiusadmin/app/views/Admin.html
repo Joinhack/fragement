@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <title>登录</title>
+    {{template "header"}}
+</head>
+
+<body class="login-body">
+<div class="container">
+
+<form class="form-signin" action="/login" method="post">
+<h2 class="form-signin-heading">Radius Admin</h2>
+<h4 style="align-center">{{.info}}</h3>
+<div class="login-wrap">
+  <div class="user-login-info">
+      <input type="text" required title="请输入用户名" name="name" class="form-control" placeholder="User ID" autofocus>
+      <input type="password" required title="密码至少是6位" minlength="6" name="password" class="form-control" placeholder="Password">
+  </div>
+  <button class="btn btn-lg btn-login btn-block" type="submit">进入</button>
+</div>
+
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Forgot Password ?</h4>
+            </div>
+            <div class="modal-body">
+                <p>Enter your e-mail address below to reset your password.</p>
+                <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                <button class="btn btn-success" type="button">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+</div>
+{{template "corejs"}}
+<script>
+$(function() {
+	$('form').validate();
+})
+</script>
+</body>
+</html>

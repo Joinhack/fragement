@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin</title>
+    {{template "header"}}
+</head>
+<body>
+<section id="container">
+    {{template "top" .session.operator}}
+    <!--sidebar start-->
+		<aside>
+		<div id="sidebar" class="nav-collapse">
+		<!-- sidebar menu start-->
+		{{template "menus" .session.menus}}
+		<!-- sidebar menu end-->
+		</div>
+		</aside>
+    <!--sidebar end-->
+    <!--main content start-->
+    <section id="main-content">
+    <section class="wrapper">
+    <div class='row'>
+    <div class='col-sm-12'>
+    <section class="panel">
+    <header class="panel-heading">
+        用户添加
+    </header>
+    <div class='panel-body '>
+    <div style="text-align:center">
+    {{if .flash.error}}<span class="label label-danger">错误:</span>{{.flash.error}}{{end}}
+    {{if .flash.success}}<span class="label label-success">操作成功:</span>{{.flash.success}}{{end}}
+    </div>
+
+    <div class='position-center'>
+    <form class="form-horizontal" action="/admin/user/save" method="POST" role="form">
+    <input type='hidden' name="opType" value="add" />
+    {{template "user.edit"}}
+    <div style="text-align:center">
+		<button type="submit" class="btn btn-success">确认</button>
+		<button type="button" id='cancel' class="btn btn-success">取消</button>
+		</div>
+    </form>
+    </div>
+
+		</div>
+		</div>
+		</section>
+		</div>
+		</div>
+		</section>
+    <!--main content end-->
+		</section>
+{{template "corejs"}}
+<script>
+$(function(){
+	$('form').validate({
+		rules: {
+			"user.LoginId": {
+				"required":true,
+				"remote": "/admin/user/exists"
+			}
+		},
+		messages: {
+			"user.LoginId": {
+				"required": "登录ID不能为空",
+				"remote": "登录ID已经存在"
+			}
+		}
+	});
+	$('#cancel').click(function(){
+		window.location="/admin/users";
+	});
+
+})
+
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{{define "menus"}}
+
+<ul class="sidebar-menu" id="nav-accordion">
+{{range $index, $item := .}}
+	{{$subLen := len $item.SubMenus}}
+  <li {{if $subLen}}class="sub-menu"{{end}} {{if eq $index 1}}class="current_menu_expand"{{end}}>
+  		{{$item.Url}}
+      <a href="{{if $item.Url}}{{$item.Url}}{{else}}javascript:;{{end}}">
+          <i class="fa fa-dashboard"></i>
+          <span>{{$item.Name}}</span>
+      </a>
+      {{if $subLen}}
+      <ul class="sub">
+      	{{range $i, $sub := $item.SubMenus}}
+          <li><a href="{{if $sub.Url}}{{$sub.Url}}{{else}}javascript:;{{end}}">{{$sub.Name}}</a></li>
+         {{end}} 
+
+      </ul>
+      {{end}}
+  </li>
+  {{end}}
+</ul>
+{{end}}
