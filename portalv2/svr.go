@@ -12,11 +12,16 @@ import (
 	"time"
 )
 
+type processingHandle struct {
+	channel chan *PkgV2
+	pkg *PkgV2
+}
+
 type PortalSvr struct {
 	laddr      *net.UDPAddr
 	udp        *net.UDPConn
 	addrs      map[string]*net.UDPAddr
-	processing map[string]chan *PkgV2
+	processing map[string]*processingHandle
 	seqs       map[string]uint16
 	basAddr    string
 	basSecret  []byte
@@ -27,7 +32,7 @@ func NewPortalSvr() *PortalSvr {
 	svr := &PortalSvr{}
 	svr.seqs = make(map[string]uint16)
 	svr.addrs = make(map[string]*net.UDPAddr)
-	svr.processing = make(map[string]chan *PkgV2)
+	svr.processing = make(map[string]*processingHandle)
 	svr.mtx = new(sync.Mutex)
 	return svr
 }
@@ -145,7 +150,8 @@ func (v2 *PkgV2) Bytes() []byte {
 	b := buf.Bytes()
 	sum := md5.Sum(b)
 	ptr := b[16:]
-	copy(ptr, sum[:])
+	v2.AuthCode = sum[:]
+	copy(ptr, v2.AuthCode)
 	return b[:len(b)-len(v2.Secret)]
 }
 
@@ -173,18 +179,25 @@ func (svr *PortalSvr) recieveJob() {
 			continue
 		}
 		var pkg *PkgV2
-		if pkg = unmarshal(buf[:n]); pkg == nil {
+		buf = buf[:n]
+		if pkg = unmarshal(buf); pkg == nil {
 			continue
 		}
-		var channel chan *PkgV2
+		var handle *processingHandle
 
 		var udpAddr = addr.(*net.UDPAddr)
 		key := fmt.Sprintf("%s:%d-%x", udpAddr.IP.String(), udpAddr.Port, pkg.SerialNO)
 		svr.mtx.Lock()
-		channel, _ = svr.processing[key]
+		handle, _ = svr.processing[key]
 		svr.mtx.Unlock()
-		if channel != nil {
-			channel <- pkg
+		if handle != nil {
+			copy(buf[16:], handle.pkg.AuthCode)
+			sum := md5.Sum(buf)
+			if bytes.Compare(sum[:], pkg.AuthCode) == 0 {
+				handle.channel <- pkg
+			} else {
+				log.Println("auth code error, please check.")
+			}
 		}
 	}
 }
@@ -223,9 +236,9 @@ func (svr *PortalSvr) Auth(userName, password, uaddr string) (err error) {
 	}
 
 	key := fmt.Sprintf("%s-%x", svr.basAddr, seq)
-	recvChan := make(chan *PkgV2)
+	handle := &processingHandle{make(chan *PkgV2), v2}
 	svr.mtx.Lock()
-	svr.processing[key] = recvChan
+	svr.processing[key] = handle
 	svr.mtx.Unlock()
 
 	defer func(key string) {
@@ -234,7 +247,7 @@ func (svr *PortalSvr) Auth(userName, password, uaddr string) (err error) {
 		svr.mtx.Unlock()
 	}(key)
 	select {
-	case pkg := <-recvChan:
+	case pkg := <-handle.channel:
 		if pkg.ErrCode == 0 {
 			return
 		} else {
