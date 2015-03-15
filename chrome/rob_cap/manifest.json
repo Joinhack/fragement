@@ -1,0 +1,30 @@
+{
+  "name": "rob.",
+  "version": "1.0",
+  "permissions":["tabs","http://www.yxdr.com/bijiaqi/bns/youxibi/*", "http://consignment.5173.com/*", "https://mypay.5173.com/*", "http://danbao.5173.com/*","http://www.dd373.com/*", "http://*.uu898.com/*"],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://www.yxdr.com/bijiaqi/bns/youxibi/*"],
+      "js" : ["jquery.js","polling.js"]
+    },
+    {
+      "matches": ["http://consignment.5173.com/*", "https://mypay.5173.com/*", "http://danbao.5173.com/*"],
+      "js" : ["comm.js","jquery.js","5173.js"]
+    },
+
+    {
+      "matches": ["http://www.dd373.com/*"],
+      "js" : ["comm.js","jquery.js","dd373.js"]
+    },
+    {
+      "matches": ["http://*.uu898.com/*"],
+      "js" : ["comm.js","jquery.js","uu898.js"]
+    }
+  ],
+  "web_accessible_resources": ["5173_step1.js", "5173_step2.js", "5173_step3.js", "5173_step4.js", "close.js", "dd373_step1.js", "dd373_step2.js", "uu898_step1.js","uu898_step2.js","uu898_step3.js"],
+  "manifest_version": 2
+}
