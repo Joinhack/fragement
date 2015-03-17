@@ -79,17 +79,17 @@ chrome.extension.onMessage.addListener(function(msg, sender, sendResponse) {
 
 	if(msg.event == "queryPoicy") {
 		var server = policies[msg.queryCond["server"]];
-		var policy = null
+		var policy = null;
+		currentPolicy = null;
 		if(server != null) {
 				var game = msg.queryCond["game"];
 				if(game.indexOf("/") == -1)
-					policy = $.extend({'settingPrice':currentPay.price}, setting , server[game]);
+					policy = $.extend({'price':currentPay.price}, setting , server[game]);
 				else {
 					var games = game.split("/");
-					policy = {'settingPrice':currentPay.price};
 					for(var i = 0; i < games.length; i++) {
 						if(server[games[i].trim()] != null) {
-							policy = $.extend(policy, setting , server[games[i].trim()]);
+							policy = $.extend({'price':currentPay.price}, setting , server[games[i].trim()]);
 							break;
 						}
 					}
@@ -97,7 +97,7 @@ chrome.extension.onMessage.addListener(function(msg, sender, sendResponse) {
 				currentPolicy = policy;
 		}
 		sendResponse({
-			policy:policy
+			policy:currentPolicy
 		});
 		return;
 	}
@@ -219,7 +219,7 @@ if(polciyText != null)
 	$('#policy').val(polciyText);
 
 $('#policyBtn').click(function(){
-	console.log($('#policy').val());
+	buildPolicy();
 	localStorage.setItem('polciyText',$('#policy').val());
 	$('#policyBtn').hide();
 });
@@ -256,7 +256,7 @@ var buildPolicy = function(){
 		game["name"] = items[3];
 		game["role"] = items[4];
 		game["level"] = items[5];
-		game["price"] = parseFloat(items[6]);
+		game["settingPrice"] = parseFloat(items[6]);
 		server[items[2]] = game;
 	}
 }
@@ -274,7 +274,7 @@ $('#qpolicybtn').click(function(){
 	for(var s in policies) {
 		for(var g in policies[s]) {
 			var game = policies[s][g];
-			var price = sserv==s?qv:game["price"];
+			var price = sserv==s?qv:game["settingPrice"];
 			rs += "腾讯|" + s + "|" + g + "|" + game["name"] + "|" + game["role"] + "|" + game["level"] + "|" + price + "\n";
 		}
 	}
@@ -286,6 +286,8 @@ $('#capture').click(function(){
 	allow = true;
 	setting.phone = $('#phone').val();
 	setting.gameRule = $('#gameRule').val();
+	setting.secAnswer = $('#secAnswer').val();
+	setting.secType = parseInt($('#secType').val());
 	priceLimit = parseFloat($('#price').val());
 	totalPriceLimit = parseFloat($('#totalPrice').val());
 	delay = parseInt($('#delay').val());

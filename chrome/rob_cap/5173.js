@@ -7,6 +7,9 @@ chrome.extension.sendMessage(null, {
 		var location  = window.location.toString();
 		$(document).ready(function(){
 			if(location.indexOf('http://danbao.5173.com/detail') == 0) {
+				processNext();
+				if(1==1) return;
+				//------
 				if($('.btn_o140.btn_left').length > 0) {
 					var policy = {};
 					policy["server"] = $('#hlGameArea').text();
@@ -98,7 +101,16 @@ chrome.extension.sendMessage(null, {
 			
 
 			if(location.indexOf("https://mypay.5173.com/payorder/paydirectly.aspx") == 0) {
-				addjs(chrome.extension.getURL('5173_step4.js'));
+				chrome.extension.sendMessage(null, {
+						event:"currentPoicy",
+						queryCond:policy
+					}, function(rs){
+						var policy = rs.policy;
+						$($('#PayDirectlyAuthType1_ddlSecurityAnswer option')[policy.secType]).attr('selected', 'selected');
+						$('#PayDirectlyAuthType1_txtSecurityAnswer').val(policy.secAnswer);
+
+						addjs(chrome.extension.getURL('5173_step4.js'));
+					});
 			} 
 
 			if(location.indexOf("http://consignment.5173.com/PurchaseProcess/getGoods.aspx") == 0 ||location.indexOf("http://danbao.5173.com/auction/buy/Common.aspx") ==0) {
