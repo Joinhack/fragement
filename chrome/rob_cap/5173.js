@@ -7,9 +7,6 @@ chrome.extension.sendMessage(null, {
 		var location  = window.location.toString();
 		$(document).ready(function(){
 			if(location.indexOf('http://danbao.5173.com/detail') == 0) {
-				processNext();
-				if(1==1) return;
-				//------
 				if($('.btn_o140.btn_left').length > 0) {
 					var policy = {};
 					policy["server"] = $('#hlGameArea').text();
@@ -20,9 +17,13 @@ chrome.extension.sendMessage(null, {
 					}, function(rs){
 						var policy = rs.policy;
 						if(policy == null || policy.price == null || policy.price > policy.settingPrice) {
-
 							processNext();
 							return	
+						}
+
+						if(!policy.danbao5173) {
+							processNext();
+							return		
 						}
 
 						addjs(chrome.extension.getURL('5173_step1.js'));

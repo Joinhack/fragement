@@ -45,6 +45,7 @@ chrome.extension.sendMessage(null, {
 				});
 			}
 			if(location.indexOf('http://user.uu898.com/pay.aspx') == 0) {
+				$('#uv1_txtZhifuPass').val(policy.payPasswd);
 				addjs(chrome.extension.getURL('uu898_step3.js'));
 			}
 			if(location.indexOf('http://www.uu898.com/orderInfo.aspx') == 0) {

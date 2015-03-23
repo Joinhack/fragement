@@ -287,6 +287,8 @@ $('#capture').click(function(){
 	setting.phone = $('#phone').val();
 	setting.gameRule = $('#gameRule').val();
 	setting.secAnswer = $('#secAnswer').val();
+	setting.payPasswd = $('#payPasswd').val();
+	setting.danbao5173 = $('#danbao5173').prop("checked");
 	setting.secType = parseInt($('#secType').val());
 	priceLimit = parseFloat($('#price').val());
 	totalPriceLimit = parseFloat($('#totalPrice').val());

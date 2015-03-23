@@ -44,6 +44,7 @@ chrome.extension.sendMessage(null, {
 					
 					$('input[name=Weike_90a66fec-8acc-4376-aef4-dbda1ee0de41]').val(policy.phone);
 					$('input[name=Weike_1e524ee5-f040-45b9-8eed-a74bbd023c4d]').val(policy.gameRule);
+					$('input[name=verify_paypassword]').val(policy.payPasswd);
 					addjs(chrome.extension.getURL('dd373_step2.js'));
 				});
 			}
@@ -52,20 +53,6 @@ chrome.extension.sendMessage(null, {
 			}
 		});
 		
-		
-
-		// if(location.indexOf("https://mypay.5173.com/payorder/paydirectly.aspx") == 0) {
-		// 	addjs(chrome.extension.getURL('5173_step4.js'));
-		// } 
-
-		// if(location.indexOf("http://consignment.5173.com/PurchaseProcess/getGoods.aspx") == 0 ||location.indexOf("http://danbao.5173.com/auction/buy/Common.aspx") ==0) {
-		// 		chrome.extension.sendMessage(null, {
-		// 			event:"processnext"
-		// 		}, function(event){
-		// 			addjs(chrome.extension.getURL('close.js'));
-		// 		});
-		// }
-
 	}
 });
 

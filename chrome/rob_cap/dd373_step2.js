@@ -5,7 +5,7 @@ $(document).ready(function  () {
 	}
 	$($('#promit option')[1]).attr('selected', 'selected');
 	
-	$('input[name=verify_paypassword]').val('oy666999');
+	
 	$('.ClassSub').click();
 	$("#succesform").submit();
 });
