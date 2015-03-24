@@ -40,16 +40,22 @@ chrome.extension.sendMessage(null, {
 					
 					$('#txtGameAccount').val(policy.name);
 					$('#txtGameAccountR').val(policy.name);
-					$('input[name=txtLevel]').val(policy.level);
+					$('input[name=txtLevel]').val(policy.role);
 					addjs(chrome.extension.getURL('uu898_step2.js'));
 				});
 			}
 			if(location.indexOf('http://user.uu898.com/pay.aspx') == 0) {
-				$('#uv1_txtZhifuPass').val(policy.payPasswd);
-				addjs(chrome.extension.getURL('uu898_step3.js'));
+				chrome.extension.sendMessage(null, {
+					event:"currentPoicy",
+					queryCond:policy
+				}, function(rs){
+					var policy = rs.policy;
+					$('#uv1_txtZhifuPass').val(policy.payPasswd);
+					addjs(chrome.extension.getURL('uu898_step3.js'));
+				});
 			}
 			if(location.indexOf('http://www.uu898.com/orderInfo.aspx') == 0) {
-				processNext();
+				processNext("finish");
 			}
 		});
 		

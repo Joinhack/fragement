@@ -17,9 +17,11 @@ function addjs (url) {
 	(document.head||document.documentElement).appendChild(s);
 }
 
-function processNext() {
+function processNext(reason) {
+	if(reason == null) reason = "skip";
 	chrome.extension.sendMessage(null, {
-		event:"processnext"
+		event:"processnext",
+		"reason": reason
 	}, function(event){
 		window.close();
 	});

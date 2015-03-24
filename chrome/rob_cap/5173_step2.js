@@ -1,10 +1,7 @@
 
 $(document).ready(function () {
 	var location  = window.location.toString();
-	$('#rdOldRole').attr('checked', 'checked');
-	if(window.chang) {
-		chang($('#rdOldRole'), 1);
-	}
+	
 	
 	$('#divGameRoleItems input:checked').click();
 	$('#liNewRole  input[type=radio]:checked').click();

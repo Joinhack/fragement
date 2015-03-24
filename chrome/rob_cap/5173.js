@@ -68,7 +68,7 @@ chrome.extension.sendMessage(null, {
 							$('#PurchaseOrderNew1_BuyerGameRoleInfo1_txtGameRole,#PurchaseOrderNew1_BuyerGameRoleInfo1_txtGameRoleValidate').val(policy.name);
 						}
 						
-						$('#PurchaseOrderNew1_txtRoleGrade').val(policy.level);
+						$('#PurchaseOrderNew1_txtRoleGrade').val(policy.role);
 						addjs(chrome.extension.getURL('5173_step2.js'));
 					});
 			} 
@@ -89,7 +89,7 @@ chrome.extension.sendMessage(null, {
 							$('#txtOldRole,#txtReceivingRole,#txtSureReceivingRole,#txtReOldRole').val(policy.name);
 						}
 						
-						$('#PurchaseOrderNew1_txtRoleGrade').val(policy.level);
+						$('#PurchaseOrderNew1_txtRoleGrade').val(policy.role);
 						addjs(chrome.extension.getURL('5173_step2.js'));
 					});
 			}
@@ -115,7 +115,7 @@ chrome.extension.sendMessage(null, {
 			} 
 
 			if(location.indexOf("http://consignment.5173.com/PurchaseProcess/getGoods.aspx") == 0 ||location.indexOf("http://danbao.5173.com/auction/buy/Common.aspx") ==0) {
-					processNext();
+					processNext("finish");
 			}
 
 		});

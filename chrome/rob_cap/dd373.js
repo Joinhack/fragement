@@ -40,7 +40,7 @@ chrome.extension.sendMessage(null, {
 						$('input[type=radio][name=RoleName][value=]').attr('checked', 'checked');
 						$('input[name=Weike_b9b2eb9c-99fa-4930-bb4b-989d3c3d65da]').val(policy.name);
 					}
-					$('input[name=Weike_105afd79-a7af-4c51-88ac-d0f001e0fe82]').val(policy.level);
+					$('input[name=Weike_105afd79-a7af-4c51-88ac-d0f001e0fe82]').val(policy.role);
 					
 					$('input[name=Weike_90a66fec-8acc-4376-aef4-dbda1ee0de41]').val(policy.phone);
 					$('input[name=Weike_1e524ee5-f040-45b9-8eed-a74bbd023c4d]').val(policy.gameRule);
@@ -49,7 +49,7 @@ chrome.extension.sendMessage(null, {
 				});
 			}
 			if(location.indexOf('http://www.dd373.com/buy/finish.html') == 0) {
-				processNext();
+				processNext("finish");
 			}
 		});
 		

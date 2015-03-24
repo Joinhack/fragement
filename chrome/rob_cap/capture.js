@@ -124,7 +124,7 @@ chrome.extension.onMessage.addListener(function(msg, sender, sendResponse) {
 		try{
 			chrome.tabs.remove(currentTab.id);
 		}catch(e){}
-		startPay();
+		startPay(msg.reason);
 	}
 });
 
@@ -144,9 +144,9 @@ var processingData = function(data) {
 	startPay();
 }
 
-var startPay = function() {
+var startPay = function(r) {
 	if(currentPay != null) {
-		currentPay.state = "finish";
+		currentPay.state = r?r:"skip";
 		$(".state", currentPay.view).contents().remove();
 		$(".state", currentPay.view).append(currentPay.state);
 		$(".state", currentPay.view).css('color', 'green');
@@ -230,6 +230,8 @@ var policies = {};
 
 })();
 
+
+
 var buildPolicy = function(){
 	var policyText = $('#policy').val();
 	var lines = policyText.split('\n');
@@ -281,6 +283,24 @@ $('#qpolicybtn').click(function(){
 	$('#policy').val(rs);
 	$('#policy').change();
 });
+
+$('input[type=text],input[type=password],select').change(function(){
+	localStorage.setItem($(this).attr('id'),$(this).val());
+});
+
+$('input[type=text],input[type=password]').each(function(){
+	var v = localStorage.getItem($(this).attr('id'));
+	if(v != null)  $(this).val(v);
+});
+
+$('select').each(function(){
+	var v = localStorage.getItem($(this).attr('id'));
+	if(v != null)  {
+		console.log($("option[value="+ v +"]", this));
+		$("option[value="+ v +"]", this).prop("selected", true);
+	}
+});
+
 
 $('#capture').click(function(){
 	allow = true;
