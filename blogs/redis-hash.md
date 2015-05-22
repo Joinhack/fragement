@@ -15,20 +15,20 @@ redis的hash表
 
 hash表添加KEY-VALUE
 
-1. 将KEY计算hash，将KEY的hash值与bulks数求莫后找到对应bulk. 如果bulk有值循环整个bulk对应的KEY-VALUE 如果bulk中的KEY与加入的KEY相等 就覆盖其VALUE， 如果不等就追加到bulk后面。
-2. 达到占用bulks的阀值expand bulks, 遍历已有的数据重新加入扩展后的bulks中(rehashing)。
+1. 将KEY计算hash，将KEY的hash值与slots数求莫后找到对应slot. 如果slot有值循环整个slot对应的KEY-VALUE 如果slot中的KEY与加入的KEY相等 就覆盖其VALUE， 如果不等就追加到slot后面。
+2. 达到占用slots的阀值expand slots, 遍历已有的数据重新加入扩展后的slots中(rehashing)。
 3. 未达到阀值，完成hash插入操作。
 
 
 hash表删除KEY
 
-1. 将KEY计算hash，将KEY的hash值与bulks数求莫后 找到对应的bulk。
-2. 遍历整个bulk依次对比KEY， 找到与KEY相等的KEY-VALUE将其移除。
+1. 将KEY计算hash，将KEY的hash值与slots数求莫后 找到对应的slot。
+2. 遍历整个slot依次对比KEY， 找到与KEY相等的KEY-VALUE将其移除。
 
 hash表查找KEY的对象
 
-1. 将KEY计算hash，将KEY的hash值与bulks数求莫后 找到对应的bulk。
-2. 遍历整个bulk依次对比KEY， 找到与KEY相等的KEY-VALUE将VALUE返回。
+1. 将KEY计算hash，将KEY的hash值与slots数求莫后 找到对应的slot。
+2. 遍历整个slot依次对比KEY， 找到与KEY相等的KEY-VALUE将VALUE返回。
 
 上面就是hash表的工作原理。总体来说hash表的查询都是O(1) 删除也算是O(1), 从整体上来看也是一个O(1)操作， 这里不考虑hash碰撞的情况（如果碰撞最坏情况就变成O(N)）。 但是事实上如果插入非常频繁，从步骤就能看出, 就会经常expand， 这样插入肯定不会是O(1)的。
 
@@ -36,7 +36,7 @@ redis的提供的数据结构之一也是hash表，但是redis的hash表明做�
 
 	//数据结果是从dict.h拷贝来的。
 	typedef struct dictht {
-	    dictEntry **table;  //这里就是上面提到的bulks 一般是一个链表
+	    dictEntry **table;  //这里就是上面提到的slots 一般是一个链表
 	    unsigned long size;
 	    unsigned long sizemask;
 	    unsigned long used;
@@ -56,7 +56,7 @@ redis 写优化结构的hash表 与普通hash表最主要的区别就是rehashin
 redis hash表添加KEY-VALUE (rehashing 过程中)
 
 1. 将老表(dict中ht[0])中的一个KEY-VALUE移动到新表(dict中ht[1])中去。
-2. 新表作中(dict中ht[0])bulks作为添加数据的目标， 然后将KEY-VALUE添加入hash表。
+2. 新表作中(dict中ht[0])slots作为添加数据的目标， 然后将KEY-VALUE添加入hash表。
 
 
 
