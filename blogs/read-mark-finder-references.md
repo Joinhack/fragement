@@ -22,4 +22,5 @@ not a given value in that region is a reference."
 需要额外的信息来描述栈上的当前值是否是指向的堆(指针), 标记额外值有以下方式。
 
 1.标记法(tagging) 值本身携带自描述信息
+
 2.stack map 通过编译器找出偏移信息
