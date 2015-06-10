@@ -21,7 +21,7 @@ var setting = {};
 var currentPay = null;
 var currentTab = null;
 var currentPolicy = null;
-var servers = [
+/*var servers = [
 	"dianxin2kuafu",
 	"dianxinyiqukuafu",
 	"dianxin3kuafu",
@@ -42,7 +42,9 @@ var servers = [
 	"wangtongbinghunqukuafu",
 	"wangtongkaitaikuafu",
 	"nantianguokuafu"
-];
+];*/
+
+var servers = [];
 
 chrome.extension.onMessage.addListener(function(msg, sender, sendResponse) {
 	if(msg.event == "allowScan") {
@@ -129,13 +131,13 @@ chrome.extension.onMessage.addListener(function(msg, sender, sendResponse) {
 });
 
 var processingData = function(data) {
+	$("#result").children().remove();
 	$(data).each(function(){
 		if(ready[this.url] != null)
 			return;
 		var div = $("<div />").append("单价:" + this.price + " 总价:"  + this.totalPrice + " 平台:" + this.vendor + " server:" + this.server);
 		div.append("  状态：");
 		div.append($('<span class="state"/>').append("ready"));
-		console.log(this);
 		ready[this.url] = this;
 		this.view = div;
 		this.state = 'ready';
@@ -145,13 +147,19 @@ var processingData = function(data) {
 }
 
 var startPay = function(r) {
+	if(r == "skipAll") {
+		next(false);
+		return;
+	}
 	if(currentPay != null) {
+
 		currentPay.state = r?r:"skip";
 		$(".state", currentPay.view).contents().remove();
 		$(".state", currentPay.view).append(currentPay.state);
 		$(".state", currentPay.view).css('color', 'green');
-		currentPay = null;
+
 	}
+	currentPay = null;
 	if(Object.keys(ready).length == 0) {
 		next(false);
 		return;
@@ -284,7 +292,7 @@ $('#qpolicybtn').click(function(){
 	$('#policy').change();
 });
 
-$('input[type=text],input[type=password],select').change(function(){
+$('input[type=text],input[type=password],select[name=secType],select[name=secType],#qpolicysel').change(function(){
 	localStorage.setItem($(this).attr('id'),$(this).val());
 });
 
@@ -293,7 +301,7 @@ $('input[type=text],input[type=password]').each(function(){
 	if(v != null)  $(this).val(v);
 });
 
-$('select').each(function(){
+$('select[name=secType],#qpolicysel').each(function(){
 	var v = localStorage.getItem($(this).attr('id'));
 	if(v != null)  {
 		console.log($("option[value="+ v +"]", this));
@@ -304,6 +312,11 @@ $('select').each(function(){
 
 $('#capture').click(function(){
 	allow = true;
+
+	servers = [];
+	$('#serverList option:selected').each(function(){
+		servers.push($(this).val());
+	});
 	setting.phone = $('#phone').val();
 	setting.gameRule = $('#gameRule').val();
 	setting.secAnswer = $('#secAnswer').val();

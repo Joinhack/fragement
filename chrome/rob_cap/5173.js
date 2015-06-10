@@ -17,7 +17,7 @@ chrome.extension.sendMessage(null, {
 					}, function(rs){
 						var policy = rs.policy;
 						if(policy == null || policy.price == null || policy.price > policy.settingPrice) {
-							processNext();
+							processNext("skipAll");
 							return	
 						}
 
@@ -43,7 +43,7 @@ chrome.extension.sendMessage(null, {
 					}, function(rs){
 						var policy = rs.policy;
 						if(policy == null || policy.price == null || policy.price > policy.settingPrice) {
-							processNext();
+							processNext("skipAll");
 							return	
 						}
 						addjs(chrome.extension.getURL('5173_step1.js'));

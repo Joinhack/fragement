@@ -19,7 +19,7 @@ chrome.extension.sendMessage(null, {
 					}, function(rs){
 						var policy = rs.policy;
 						if(policy == null || policy.price == null || policy.price > policy.settingPrice) {
-							processNext();
+							processNext("skipAll");
 							return	
 						}
 						addjs(chrome.extension.getURL('dd373_step1.js'));
