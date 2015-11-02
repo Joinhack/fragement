@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<story>
+		<id>1</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>2</id>
+		<storyText>CreateModel 1 2017 21644 5744 0,236,0</storyText>
+	</story>
+	<story>
+		<id>3</id>
+		<storyText>Sleep 2000</storyText>
+	</story>
+	<story>
+		<id>4</id>
+		<storyText>MoveCamera 0 10,0.1,90,0 0.1,0.1,90,0 1000 209.57,5.38,56.44</storyText>
+	</story>
+	<story>
+		<id>5</id>
+		<storyText>Sleep 4000</storyText>
+	</story>
+	<story>
+		<id>6</id>
+		<storyText>PlayOneAction 1 3</storyText>
+	</story>
+	<story>
+		<id>7</id>
+		<storyText>PlaySfx 1 201710</storyText>
+	</story>
+	<story>
+		<id>8</id>
+		<storyText>Sleep 800</storyText>
+	</story>
+	<story>
+		<id>9</id>
+		<storyText>MoveCamera 0 0.1,0.1,90,0 10,0.1,90,0 500 209.57,5.38,56.44</storyText>
+	</story>
+	<story>
+		<id>10</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>11</id>
+		<storyText>ZoomCamera 0 8 0.1,90 1000 1000</storyText>
+	</story>
+	<story>
+		<id>12</id>
+		<storyText>Sleep 2000</storyText>
+	</story>
+	<story>
+		<id>13</id>
+		<storyText>MoveCamera 0 8,0.1,90,0 10,45,135,0 1500</storyText>
+	</story>
+	<story>
+		<id>14</id>
+		<storyText>Sleep 1500</storyText>
+	</story>
+	<story>
+		<id>15</id>
+		<storyText>DestroyModel 1</storyText>
+	</story>
+	<story>
+		<id>16</id>
+		<storyText>LockSight</storyText>
+	</story>
+	<story>
+		<id>17</id>
+		<storyText>End</storyText>
+	</story>
+</root>

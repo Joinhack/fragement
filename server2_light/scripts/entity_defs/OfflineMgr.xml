@@ -1,0 +1,109 @@
+<root>
+
+<Properties>
+    <m_OfflineInf>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </m_OfflineInf>
+    <m_OpList>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </m_OpList>
+    <m_Loading>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </m_Loading>
+
+    <!--玩家身上已添加的timer-->
+    <hasTimer>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </hasTimer>
+
+    <updateItems>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </updateItems>
+    <!---->
+    <redis_key_format>
+        <Type> STRING </Type>
+        <Flags> BASE </Flags>
+    </redis_key_format>
+    <redis_ud>
+        <Type> REDIS_HASH </Type>
+        <Flags> BASE </Flags>
+    </redis_ud>
+    <redis_seq>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </redis_seq>
+</Properties>
+
+<BaseMethods>
+    <Add>
+        <Arg> UINT32 </Arg>    
+        <Arg> UINT64 </Arg> 
+        <Arg> LUA_TABLE </Arg>   
+    </Add>
+    <!--ReplaceInto( OffType, acceptId, it, fromIdIndex, dbid )-->
+    <Rep>
+        <Arg> UINT32 </Arg>    
+        <Arg> UINT64 </Arg> 
+        <Arg> LUA_TABLE </Arg>
+        <Arg> UINT8 </Arg>    
+        <Arg> UINT64 </Arg>
+    </Rep>
+
+    <DelTypeOf>
+        <Arg> UINT32 </Arg>    
+        <Arg> UINT64 </Arg>  
+    </DelTypeOf>
+    <!--
+    <RepOfflineItemByOffType>
+        <Arg> UINT32 </Arg>    
+        <Arg> UINT64 </Arg> 
+        <Arg> LUA_TABLE </Arg> 
+    </RepOfflineItemByOffType>
+    -->
+    <GetTypeOf>
+        <Arg> STRING </Arg>    
+        <Arg> UINT32 </Arg>
+        <Arg> UINT8 </Arg>
+        <Arg> UINT64 </Arg> 
+        <Arg> UINT8 </Arg>
+    </GetTypeOf>
+
+    <Del>
+        <Arg> UINT32 </Arg>    
+        <Arg> UINT64 </Arg>
+        <Arg> UINT32 </Arg>    
+        <Arg> UINT64 </Arg> 
+    </Del>
+    
+    <DelCb>
+        <Arg> STRING </Arg>    
+        <Arg> UINT32 </Arg> 
+        <Arg> UINT32 </Arg>
+        <Arg> UINT64 </Arg>
+        <Arg> UINT8 </Arg>
+        <Arg> UINT64 </Arg> 
+    </DelCb>
+
+    <Get>
+        <Arg> STRING </Arg>    
+        <Arg> UINT32 </Arg>  
+        <Arg> UINT32 </Arg>
+        <Arg> UINT64 </Arg>
+        <Arg> UINT8 </Arg>
+        <Arg> UINT64 </Arg> 
+        <Arg> UINT8 </Arg>
+    </Get>
+    
+    <GetAll>
+        <Arg> STRING </Arg>    
+        <Arg> UINT64 </Arg>  
+    </GetAll>
+</BaseMethods>
+
+
+</root>

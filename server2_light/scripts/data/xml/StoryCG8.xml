@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<story>
+		<id>1</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>2</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>3</id>
+		<storyText>WhiteCamera 0,0 250</storyText>
+	</story>
+	<story>
+		<id>4</id>
+		<storyText>Sleep 250</storyText>
+	</story>
+	<story>
+		<id>5</id>
+		<storyText>CreateModel 1 150002 3765 4122 0,0,0</storyText>
+	</story>
+	<story>
+		<id>6</id>
+		<storyText>SetPosition 0 35.29,8.821,50.546</storyText>
+	</story>
+	<story>
+		<id>7</id>
+		<storyText>SetRotation 0 0,194.17,0</storyText>
+	</story>
+	<story>
+		<id>8</id>
+		<storyText>NormalCamera 0,0 1000</storyText>
+	</story>
+	<story>
+		<id>9</id>
+		<storyText>Sleep 250</storyText>
+	</story>
+	<story>
+		<id>10</id>
+		<storyText>MoveCamera 0 7,15.9,57.5,0 4,15.9,57.5,0 2000</storyText>
+	</story>
+	<story>
+		<id>11</id>
+		<storyText>MoveTo 0 32.01,9.01,41.36 2000</storyText>
+	</story>
+	<story>
+		<id>12</id>
+		<storyText>Sleep 2000</storyText>
+	</story>
+	<story>
+		<id>13</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>14</id>
+		<storyText>SetRotation 0 0,81,0</storyText>
+	</story>
+	<story>
+		<id>15</id>
+		<storyText>ZoomCamera 1 4 5,57.5 500 500</storyText>
+	</story>
+	<story>
+		<id>16</id>
+		<storyText>ShowDialog 150002 301 105050</storyText>
+	</story>
+	<story>
+		<id>17</id>
+		<storyText>OpenUI</storyText>
+	</story>
+	<story>
+		<id>18</id>
+		<storyText>Wait 6</storyText>
+	</story>
+	<story>
+		<id>19</id>
+		<storyText>CloseUI</storyText>
+	</story>
+	<story>
+		<id>20</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>21</id>
+		<storyText>MoveCamera 1 3,5,57.5,0 3,5,0,0 3000</storyText>
+	</story>
+	<story>
+		<id>22</id>
+		<storyText>PlayOneAction 1 21</storyText>
+	</story>
+	<story>
+		<id>23</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>24</id>
+		<storyText>ShowDialog 150002 301 105015</storyText>
+	</story>
+	<story>
+		<id>25</id>
+		<storyText>OpenUI</storyText>
+	</story>
+	<story>
+		<id>26</id>
+		<storyText>Wait 6</storyText>
+	</story>
+	<story>
+		<id>27</id>
+		<storyText>CloseUI</storyText>
+	</story>
+	<story>
+		<id>28</id>
+		<storyText>PlaySfx 1 6030</storyText>
+	</story>
+	<story>
+		<id>29</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>30</id>
+		<storyText>PlayOneAction 1 100</storyText>
+	</story>
+	<story>
+		<id>31</id>
+		<storyText>PlaySfx 2 6030 100 36.83,8.9,49.23</storyText>
+	</story>
+	<story>
+		<id>32</id>
+		<storyText>PlaySfx 3 6030 1000 36.83,8.9,49.23</storyText>
+	</story>
+	<story>
+		<id>33</id>
+		<storyText>PlaySfx 4 6030 2000 36.83,8.9,49.23</storyText>
+	</story>
+	<story>
+		<id>34</id>
+		<storyText>PlaySfx 5 6030 3000 36.83,8.9,49.23</storyText>
+	</story>
+	<story>
+		<id>35</id>
+		<storyText>PlaySfx 6 6030 4000 36.83,8.9,49.23</storyText>
+	</story>
+	<story>
+		<id>36</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>37</id>
+		<storyText>MoveCamera 0 0.1,27.6,349.64,0 1,27.6,349.46,0 6000 37.522,11.644,44.634</storyText>
+	</story>
+	<story>
+		<id>38</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>39</id>
+		<storyText>ShowDialog 150002 301 105016</storyText>
+	</story>
+	<story>
+		<id>40</id>
+		<storyText>OpenUI</storyText>
+	</story>
+	<story>
+		<id>41</id>
+		<storyText>Wait 6</storyText>
+	</story>
+	<story>
+		<id>42</id>
+		<storyText>CloseUI</storyText>
+	</story>
+	<story>
+		<id>43</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>44</id>
+		<storyText>LockSight</storyText>
+	</story>
+	<story>
+		<id>45</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>46</id>
+		<storyText>StopSfx 2</storyText>
+	</story>
+	<story>
+		<id>47</id>
+		<storyText>StopSfx 3</storyText>
+	</story>
+	<story>
+		<id>48</id>
+		<storyText>StopSfx 4</storyText>
+	</story>
+	<story>
+		<id>49</id>
+		<storyText>StopSfx 5</storyText>
+	</story>
+	<story>
+		<id>50</id>
+		<storyText>StopSfx 6</storyText>
+	</story>
+	<story>
+		<id>51</id>
+		<storyText>DestroyModel 1</storyText>
+	</story>
+	<story>
+		<id>52</id>
+		<storyText>End</storyText>
+	</story>
+</root>

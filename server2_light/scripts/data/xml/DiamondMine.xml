@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<config>
+		<id_i>1</id_i>
+		<date_open_y>2014-02-11 17:00:00</date_open_y>
+		<date_end_y>2020-02-14 17:00:00</date_end_y>
+		<vip_need_m>1:1,2:2,3:2,4:3</vip_need_m>
+		<cost_m>1:100,2:400,3:800,4:1600</cost_m>
+		<reward_m>1:300,2:600,3:1200,4:2400</reward_m>
+	</config>
+</root>

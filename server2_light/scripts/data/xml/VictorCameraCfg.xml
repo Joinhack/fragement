@@ -1,0 +1,34 @@
+<root>
+    <item>
+      <id>1</id>
+      <path>cam_victory_blade</path>
+    </item>
+    <item>
+      <id>2</id>
+      <path>cam_victory_fist</path>
+    </item>
+	 <item>
+      <id>3</id>
+      <path>cam_victory_dagger</path>
+    </item>
+	<item>
+      <id>4</id>
+      <path>cam_victory_twinblade</path>
+    </item>
+    <item>
+      <id>5</id>
+      <path>cam_victory_staff</path>
+    </item>
+    <item>
+      <id>6</id>
+      <path>cam_victory_fan</path>
+    </item>
+	<item>
+      <id>7</id>
+      <path>cam_victory_bow</path>
+    </item>
+	<item>
+      <id>8</id>
+      <path>cam_victory_gun</path>
+    </item>
+</root>

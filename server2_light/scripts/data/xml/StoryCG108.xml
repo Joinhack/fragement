@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<story>
+		<id>1</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>2</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>3</id>
+		<storyText>SetPosition 0 36.75,25.77,28.43</storyText>
+	</story>
+	<story>
+		<id>4</id>
+		<storyText>MoveTo 0 41.5,25.77,26.4 1700</storyText>
+	</story>
+	<story>
+		<id>5</id>
+		<storyText>Sleep 1700</storyText>
+	</story>
+	<story>
+		<id>6</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>7</id>
+		<storyText>SetPosition 0 41.5,25.77,26.4</storyText>
+	</story>
+	<story>
+		<id>8</id>
+		<storyText>Sleep 5000</storyText>
+	</story>
+	<story>
+		<id>9</id>
+		<storyText>MoveTo 0 35.67,25.79,23.35 1000</storyText>
+	</story>
+	<story>
+		<id>10</id>
+		<storyText>Sleep 1500</storyText>
+	</story>
+	<story>
+		<id>11</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>12</id>
+		<storyText>SetPosition 0 35.67,25.79,23.35</storyText>
+	</story>
+	<story>
+		<id>13</id>
+		<storyText>MoveTo 0 36.09,25.78,20.77 500</storyText>
+	</story>
+	<story>
+		<id>14</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>15</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>16</id>
+		<storyText>SetPosition 0 36.09,25.78,20.77</storyText>
+	</story>
+	<story>
+		<id>17</id>
+		<storyText>MoveTo 0 54.95,25.75,22.68 4000</storyText>
+	</story>
+	<story>
+		<id>18</id>
+		<storyText>Sleep 4000</storyText>
+	</story>
+	<story>
+		<id>19</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>20</id>
+		<storyText>SetPosition 0 54.95,25.75,22.68</storyText>
+	</story>
+	<story>
+		<id>21</id>
+		<storyText>MoveTo 0 56.05,25.75,26.7 1000</storyText>
+	</story>
+	<story>
+		<id>22</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>23</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>24</id>
+		<storyText>SetPosition 0 56.05,25.75,26.7</storyText>
+	</story>
+	<story>
+		<id>25</id>
+		<storyText>LockSight</storyText>
+	</story>
+	<story>
+		<id>26</id>
+		<storyText>End</storyText>
+	</story>
+</root>

@@ -1,0 +1,56 @@
+<root>
+  <entities>
+    <entity>
+      <id>3</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>3472,5376,3896,4702,3477,4559,3860,5152,3079,5147,3079,4713,2696,4926,3093,4334,3814,4399,4202,4921,3851,5471,3089,5512</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>102063, 202063</levelID>
+      <triggeRangeX>3479</triggeRangeX>
+      <triggeRangeY>4924</triggeRangeY>
+      <triggeRangeLength>1300</triggeRangeLength>
+      <triggeRangeWidth>1300</triggeRangeWidth>
+      <homerangeX>3515</homerangeX>
+      <homerangeY>4895</homerangeY>
+      <homerangeLength>2800</homerangeLength>
+      <homerangeWidth>2800</homerangeWidth>
+    </entity>
+    <entity>
+      <id>99</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>3477,4922</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>102060, 202060</levelID>
+      <triggeRangeX>0</triggeRangeX>
+      <triggeRangeY>0</triggeRangeY>
+      <triggeRangeLength>0</triggeRangeLength>
+      <triggeRangeWidth>0</triggeRangeWidth>
+      <homerangeX>3515</homerangeX>
+      <homerangeY>4895</homerangeY>
+      <homerangeLength>2800</homerangeLength>
+      <homerangeWidth>2800</homerangeWidth>
+    </entity>
+    <entity>
+      <id>1</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>3472,5376,3896,4702,3477,4559,3860,5152,3079,5147,3079,4713,2696,4926,3093,4334,3814,4399,4202,4921,3851,5471,3089,5512</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>102061, 202061</levelID>
+      <triggeRangeX>3479</triggeRangeX>
+      <triggeRangeY>4924</triggeRangeY>
+      <triggeRangeLength>1300</triggeRangeLength>
+      <triggeRangeWidth>1300</triggeRangeWidth>
+      <homerangeX>3515</homerangeX>
+      <homerangeY>4895</homerangeY>
+      <homerangeLength>2800</homerangeLength>
+      <homerangeWidth>2800</homerangeWidth>
+    </entity>
+  </entities>
+  <mapname>10409_Cerberus_s</mapname>
+</root>

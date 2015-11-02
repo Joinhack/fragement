@@ -1,0 +1,26 @@
+<root>
+    <effect>
+        <id_i>1</id_i>
+        <maxHp_i>0</maxHp_i>
+        <hitRating_i>0</hitRating_i>
+        <critRating_i>0</critRating_i>
+        <extraCritDmg_i>0</extraCritDmg_i>
+        <trueStrikeRating_i>0</trueStrikeRating_i>
+        <constitution_i>0</constitution_i>
+        <strength_i>0</strength_i>
+        <dexterity_i>0</dexterity_i>
+        <intelligence_i>0</intelligence_i>
+        <phyDef_i>0</phyDef_i>
+        <magicDef_i>0</magicDef_i>
+        <earthDef_i>0</earthDef_i>
+        <airDef_i>0</airDef_i>
+        <waterDef_i>0</waterDef_i>
+        <fireDef_i>0</fireDef_i>
+        <phyDmg_i>0</phyDmg_i>
+        <magicDmg_i>0</magicDmg_i>
+        <earthDmg_i>0</earthDmg_i>
+        <airDmg_i>0</airDmg_i>
+        <waterDmg_i>0</waterDmg_i>
+        <fireDmg_i>0</fireDmg_i>
+    </effect>
+</root>

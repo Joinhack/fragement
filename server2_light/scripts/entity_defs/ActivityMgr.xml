@@ -1,0 +1,120 @@
+<root>
+
+    <Properties>
+
+        <!-- 等待列表，记录正在等待系统匹配的玩家 -->
+        <WaitingList>
+            <Type> LUA_TABLE </Type>
+            <Flags> BASE </Flags>
+        </WaitingList>
+
+        <!-- 邀请列表 -->
+        <InviteList>
+            <Type> LUA_TABLE </Type>
+            <Flags> BASE </Flags>
+        </InviteList>
+
+        <!--活动状态，主要是标记哪个活动在进行中-->
+        <state>
+            <Type> BLOB </Type>
+            <Flags> BASE </Flags>
+        </state>
+
+        <!-- 塔防副本等待队列 -->
+        <TowerDefenceWaitingList>
+            <Type> LUA_TABLE </Type>
+            <Flags> BASE </Flags>
+        </TowerDefenceWaitingList>
+
+        <TowerDefenceWaitingMapList>
+            <Type> LUA_TABLE </Type>
+            <Flags> BASE </Flags>
+        </TowerDefenceWaitingMapList>
+
+        <!-- 临时数据 -->
+        <TempData>
+            <Type> LUA_TABLE </Type>
+            <Flags> BASE </Flags>
+        </TempData>
+
+        <!-- 塔防副本中用于申请副本的ID -->
+        <TowerDefenceId>
+            <Type> UINT32 </Type>
+            <Flags> BASE </Flags>
+        </TowerDefenceId>
+
+    </Properties>
+
+    <ClientMethods>
+
+    </ClientMethods>
+
+    <BaseMethods>
+
+        <CampaignGetOnlineFriends>
+            <Arg> STRING </Arg>    <!-- PlayerMbStr -->
+            <Arg> UINT64 </Arg>    <!-- PlayerDbid -->
+            <Arg> LUA_TABLE </Arg>    <!-- dbids -->
+            <Arg> UINT16 </Arg>    <!-- Campaign -->
+        </CampaignGetOnlineFriends>
+
+        <CampaignInvite>
+            <Arg> STRING </Arg>    <!-- PlayerMbStr -->
+            <Arg> UINT64 </Arg>    <!-- PlayerDbid -->
+            <Arg> STRING </Arg>    <!-- Player名字 -->
+            <Arg> UINT16 </Arg>    <!-- 活动ID -->
+            <Arg> UINT64 </Arg>    <!-- 被邀请方的dbid -->
+            <Arg> STRING </Arg>    <!-- 被邀请方的mb -->
+        </CampaignInvite>
+
+        <CampaignInvitedResp>
+            <Arg> STRING </Arg>    <!-- PlayerMbStr -->
+            <Arg> UINT64 </Arg>    <!-- PlayerDbid -->
+            <Arg> STRING </Arg>    <!-- Player名字 -->
+            <Arg> UINT16 </Arg>    <!-- 活动ID -->
+            <Arg> UINT8 </Arg>     <!-- 接受或者拒绝 -->
+            <Arg> UINT64 </Arg>    <!-- 邀请方的dbid -->
+        </CampaignInvitedResp>
+
+        <CampaignJoin>
+            <Arg> UINT8 </Arg>     <!-- 活动ID -->
+            <Arg> STRING </Arg>    <!-- 玩家mb -->
+            <Arg> UINT64 </Arg>    <!-- 玩家dbid -->
+            <Arg> STRING </Arg>    <!-- 玩家名字 -->
+            <Arg> UINT8 </Arg>     <!-- 玩家等级 -->
+        </CampaignJoin>
+
+        <SelectMapResp>
+            <Arg> UINT16 </Arg>    <!-- 玩家的实际地图ID -->
+            <Arg> UINT16 </Arg>    <!-- 玩家的实际地图分线ID -->
+            <Arg> LUA_TABLE </Arg> <!-- 选中的sp的base的mb -->
+            <Arg> LUA_TABLE </Arg> <!-- 选中的sp的cell的mb -->
+            <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+            <Arg> LUA_TABLE </Arg> <!-- 玩家选择分线时穿进来的参数，此时再返回给他 -->
+        </SelectMapResp>
+
+        <TowerDefenceMatch/>
+
+        <CampaignLeave>
+            <Arg> UINT8 </Arg>     <!-- 活动ID -->
+            <Arg> STRING </Arg>    <!-- 玩家mb -->
+            <Arg> UINT64 </Arg>    <!-- 玩家dbid -->
+        </CampaignLeave>
+
+        <CampaignLeaveAll>
+            <Arg> STRING </Arg>    <!-- 玩家mb -->
+            <Arg> UINT64 </Arg>    <!-- 玩家dbid -->
+        </CampaignLeaveAll>
+
+        <StartActivity>
+            <Arg> UINT8 </Arg>     <!-- 活动ID -->
+        </StartActivity>
+
+        <StopActivity>
+            <Arg> UINT8 </Arg>     <!-- 活动ID -->
+        </StopActivity>
+
+    </BaseMethods>
+
+
+</root>

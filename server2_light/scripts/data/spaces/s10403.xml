@@ -1,0 +1,73 @@
+<root>
+  <entities>
+    <entity>
+      <id>31</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>2604,10596,3840,11055,4284,10494,4415,10909,2898,11034,2662,10814,4563,10407,2315,10777,4172,11137,2962,10648,2955,10320,3179,10143,3822,10267,4102,10244,3883,10027,4216,9939</monsterSpawntPoint>
+      <triggerType>1</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>104033, 204033</levelID>
+      <triggeRangeX>0</triggeRangeX>
+      <triggeRangeY>0</triggeRangeY>
+      <triggeRangeLength>0</triggeRangeLength>
+      <triggeRangeWidth>0</triggeRangeWidth>
+      <homerangeX>3554</homerangeX>
+      <homerangeY>10213</homerangeY>
+      <homerangeLength>4479</homerangeLength>
+      <homerangeWidth>4320</homerangeWidth>
+    </entity>
+    <entity>
+      <id>5</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>2882,4998,4969,5333,3252,5474,5116,4784,5065,5095,4766,4865,2505,4985,4736,5133,2741,5241,2728,4747,3957,5747,3082,3956,5074,4093,4345,5682</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>104032, 204032</levelID>
+      <triggeRangeX>3879</triggeRangeX>
+      <triggeRangeY>5837</triggeRangeY>
+      <triggeRangeLength>6009</triggeRangeLength>
+      <triggeRangeWidth>1000</triggeRangeWidth>
+      <homerangeX>3835</homerangeX>
+      <homerangeY>4959</homerangeY>
+      <homerangeLength>4320</homerangeLength>
+      <homerangeWidth>4150</homerangeWidth>
+    </entity>
+    <entity>
+      <id>99</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>2902,4257,4822,4266</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>104030, 204030</levelID>
+      <triggeRangeX>3879</triggeRangeX>
+      <triggeRangeY>5837</triggeRangeY>
+      <triggeRangeLength>6009</triggeRangeLength>
+      <triggeRangeWidth>1000</triggeRangeWidth>
+      <homerangeX>3835</homerangeX>
+      <homerangeY>4959</homerangeY>
+      <homerangeLength>4320</homerangeLength>
+      <homerangeWidth>4150</homerangeWidth>
+    </entity>
+    <entity>
+      <id>4</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>2604,10596,3840,11055,4284,10494,4415,10909,2898,11034,2662,10814,4563,10407,2315,10777,4172,11137,2962,10648,2955,10320,3179,10143,3822,10267,4102,10244,3883,10027,4216,9939</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>104031, 204031</levelID>
+      <triggeRangeX>0</triggeRangeX>
+      <triggeRangeY>0</triggeRangeY>
+      <triggeRangeLength>0</triggeRangeLength>
+      <triggeRangeWidth>0</triggeRangeWidth>
+      <homerangeX>3554</homerangeX>
+      <homerangeY>10213</homerangeY>
+      <homerangeLength>4479</homerangeLength>
+      <homerangeWidth>4320</homerangeWidth>
+    </entity>
+  </entities>
+  <mapname>10403_Shaman_s</mapname>
+</root>

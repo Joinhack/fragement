@@ -1,0 +1,265 @@
+<root>
+
+<Properties>
+    <name>
+        <Type> STRING </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+        <UniqueIndex/>
+    </name>
+	<!--管理的spaceloader basemb 队列-->
+    <spaces>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </spaces>
+    <!--未使用过的分线
+    <idleSpaces>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </idleSpaces> -->
+    <!--使用过的分线
+    <usedSpaces>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </usedSpaces> -->
+    <!--正在被使用的分线
+    <lv2Spaces>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </lv2Spaces> -->
+    <m_wbData>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </m_wbData>
+    <!--周排行榜-->
+    <m_weekContribution>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </m_weekContribution>
+    <!--天排行榜-->
+    <m_dayContribution>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </m_dayContribution>
+    <!--管理的boss信息-->
+    <bossInfo>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </bossInfo>
+    <!--已添加的timer-->
+    <hasTimer>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </hasTimer>
+    <!---->
+    <bossHpMgr>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </bossHpMgr>
+    <!---->
+    <summoner>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </summoner>
+    <!---->
+    <state>
+        <Type> INT8 </Type>
+        <Flags> BASE </Flags>
+        <Default> 0 </Default>
+    </state>
+
+    <sortState>
+        <Type> INT8 </Type>
+        <Flags> BASE </Flags>
+        <Default> 0 </Default>
+    </sortState>
+
+    <nextStartTime>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </nextStartTime>
+    <nextOpenTime>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </nextOpenTime>
+    <nextEndTime>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </nextEndTime>
+    
+    <m_data_count>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+    </m_data_count>
+    <m_data_loaded>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+    </m_data_loaded>
+    <!--下一次重置天贡献和排位的时间-->
+    <nextDayReTime>
+		<Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+        <Default> 0 </Default>
+    </nextDayReTime>
+    <!--标识是否已发过当天的奖励-->
+    <dayRewarded>
+    	<Type> UINT8 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+        <Default> 0 </Default>
+    </dayRewarded>
+
+    <nextWeekReTime> 
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+        <Default> 0 </Default>
+    </nextWeekReTime>
+
+</Properties>
+
+<ClientMethods>
+
+</ClientMethods>
+
+<BaseMethods>
+    <Init/>
+
+	<Register>
+        <Arg> STRING </Arg>    <!-- MapId -->
+        <Arg> STRING </Arg>    <!-- spBaseMbStr -->
+        <Arg> STRING </Arg>    <!-- spCellMbStr -->
+    </Register>
+
+    <RegisterBoss>
+        <Arg> STRING </Arg>    <!-- MapId -->
+        <Arg> STRING </Arg>    <!-- spCellMbStr -->
+        <Arg> UINT32 </Arg>    <!-- eid -->
+    </RegisterBoss>
+    
+    <UnregisterBoss>
+        <Arg> STRING </Arg>    <!-- MapId -->
+        <Arg> UINT32 </Arg>    <!-- eid -->
+    </UnregisterBoss>
+
+    <onTimer>
+    	<Arg> UINT32 </Arg>
+    	<Arg> UINT32 </Arg>
+    </onTimer>
+    <!--Enter(mbStr, dbid, name, level, viplevel)-->
+    <Enter>
+        <Arg> STRING </Arg>    <!-- mbStr -->
+        <Arg> UINT64 </Arg>    <!-- dbid -->
+        <Arg> STRING </Arg>    <!-- name -->
+        <Arg> UINT32 </Arg>    <!-- level -->
+        <Arg> UINT32 </Arg>    <!-- viplevel -->
+    </Enter>
+    <!--EnterResp(dbid, name, level, imap_id, mbStr, errId)-->
+    <EnterResp>
+        <Arg> UINT64 </Arg>    <!-- dbid -->
+        <Arg> STRING </Arg>    <!-- name -->
+        <Arg> UINT32 </Arg>    <!-- level -->
+        <Arg> STRING </Arg>    <!-- imap_id -->
+        <Arg> STRING </Arg>    <!-- mbStr -->
+        <Arg> UINT8 </Arg>    <!-- errId -->
+    </EnterResp>
+
+    <UpdateBossHp>
+    	<Arg> UINT64 </Arg>
+    	<Arg> INT32 </Arg>
+    </UpdateBossHp>
+
+    <SynByTimer/>
+
+    <PlayerLeave>
+        <Arg> UINT64 </Arg>    <!-- dbid -->
+    </PlayerLeave>
+    <!--获取排名列表-->
+    <GetRankingList>
+        <Arg> STRING </Arg>    <!-- BaseMbStr -->
+        <Arg> UINT64 </Arg>    <!-- dbid -->
+    </GetRankingList>
+    <!--获取我的信息-->
+    <GetMyInfo>
+        <Arg> STRING </Arg>    <!-- BaseMbStr -->
+        <Arg> UINT64 </Arg>    <!-- dbid -->
+        <Arg> STRING </Arg>    <!-- name -->
+        <Arg> UINT32 </Arg>    <!-- level -->
+    </GetMyInfo>
+    <!--获取下一次进入信息-->
+    <GetNextStartTime>
+        <Arg> STRING </Arg>    <!-- BaseMbStr -->
+        <Arg> UINT64 </Arg>    <!-- dbid -->
+    </GetNextStartTime>
+
+    <!--取消世界Boss活动-->
+    <DisableWBActivity/>
+    <!--启动世界Boss活动-->
+    <EnableWBActivity/>
+
+    <BuyEnterTimeReq>
+        <Arg> STRING </Arg>    <!-- BaseMbStr -->
+        <Arg> UINT64 </Arg>    <!-- dbid -->
+        <Arg> UINT8 </Arg>    <!-- viplevel -->
+    </BuyEnterTimeReq>
+
+    <CanBuyEnterInfo>
+        <Arg> STRING </Arg>    <!-- BaseMbStr -->
+        <Arg> UINT64 </Arg>    <!-- dbid -->
+        <Arg> UINT8 </Arg>    <!-- viplevel -->
+    </CanBuyEnterInfo>
+
+    <AddBuyTime>
+        <Arg> STRING </Arg>    <!-- mbStr -->
+        <Arg> UINT64 </Arg>    <!-- dbid -->
+        <Arg> STRING </Arg>    <!-- name -->
+        <Arg> UINT32 </Arg>    <!-- level -->
+        <Arg> UINT32 </Arg>    <!-- viplevel -->
+    </AddBuyTime>
+
+    <!--GMOpen(openTime, startTime, endTime)-->
+    <GMOpen>
+        <Arg> UINT32 </Arg>    <!-- openTime -->
+        <Arg> UINT32 </Arg>    <!-- startTime -->
+        <Arg> UINT32 </Arg>    <!-- endTime -->
+    </GMOpen>
+
+    <CheckEnter>
+        <Arg> STRING </Arg>    <!-- mbStr -->
+        <Arg> UINT16 </Arg>    <!-- map_id -->
+        <Arg> UINT16 </Arg>    <!-- line -->
+        <Arg> UINT64 </Arg>    <!-- dbid -->
+        <Arg> STRING </Arg>    <!-- name -->
+    </CheckEnter>
+
+    <BossDie>
+        <Arg> STRING </Arg>    <!-- mbStr -->
+    </BossDie>
+
+    <!--设置world boss data的数目-->
+    <SetDataCount>
+        <Arg> UINT32 </Arg>     <!--count-->
+    </SetDataCount>
+
+    <!--设置一个world boss data-->
+    <SetData>
+        <Arg> UINT32 </Arg>     <!--entity_id-->
+    </SetData>
+    <SanctuaryLogin>
+        <Arg> STRING </Arg>    <!-- mb_str -->
+    </SanctuaryLogin>
+
+    <GetWeekCtrbuRewardReq>
+        <Arg> STRING </Arg>    <!-- mb_str -->
+        <Arg> UINT64 </Arg>    <!-- dbid -->
+        <Arg> UINT32 </Arg>     <!--reward_id-->
+    </GetWeekCtrbuRewardReq>
+    <add_week_score>
+        <Arg> STRING </Arg>    <!-- mb_str -->
+        <Arg> UINT64 </Arg>    <!-- dbid -->
+        <Arg> UINT32 </Arg>     <!--score-->
+    </add_week_score>
+</BaseMethods>
+
+</root>

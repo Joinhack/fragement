@@ -1,0 +1,56 @@
+<root>
+  <ControllerOfWeapon>
+    <id>0</id>
+    <controller>101_fist.controller</controller>
+    <controllerInCity>101_idle.controller</controllerInCity>
+  </ControllerOfWeapon>
+  <ControllerOfWeapon>
+    <id>1</id>
+    <controller>101_blade.controller</controller>
+    <controllerInCity>101_idle.controller</controllerInCity>
+  </ControllerOfWeapon>
+
+  <ControllerOfWeapon>
+    <id>2</id>
+    <controller>101_fist.controller</controller>
+    <controllerInCity>101_idle.controller</controllerInCity>
+  </ControllerOfWeapon>
+
+  <ControllerOfWeapon>
+    <id>3</id>
+    <controller>104_dagger.controller</controller>
+    <controllerInCity>104_idle.controller</controllerInCity>
+  </ControllerOfWeapon>
+
+  <ControllerOfWeapon>
+    <id>4</id>
+    <controller>104_twinblade.controller</controller>
+    <controllerInCity>104_idle.controller</controllerInCity>
+  </ControllerOfWeapon>
+
+
+  <ControllerOfWeapon>
+    <id>5</id>
+    <controller>102_staff.controller</controller>
+    <controllerInCity>102_idle.controller</controllerInCity>
+  </ControllerOfWeapon>
+
+  <ControllerOfWeapon>
+    <id>6</id>
+    <controller>102_fan.controller</controller>
+    <controllerInCity>102_idle.controller</controllerInCity>
+  </ControllerOfWeapon>
+
+  <ControllerOfWeapon>
+    <id>7</id>
+    <controller>103_bow.controller</controller>
+    <controllerInCity>103_idle.controller</controllerInCity>
+  </ControllerOfWeapon>
+
+  <ControllerOfWeapon>
+    <id>8</id>
+    <controller>103_gun.controller</controller>
+    <controllerInCity>103_idle.controller</controllerInCity>
+  </ControllerOfWeapon>
+
+</root>

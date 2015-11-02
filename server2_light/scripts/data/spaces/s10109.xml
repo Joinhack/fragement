@@ -1,0 +1,39 @@
+<root>
+  <entities>
+    <entity>
+      <id>1</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>5227,7087,5127,7779,5520,7148,5148,7296,5707,7602,5414,7764,5369,7486,5641,7350,5000,7481,5261,7994,5641,7948</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>101091, 201091</levelID>
+      <triggeRangeX>5398</triggeRangeX>
+      <triggeRangeY>7529</triggeRangeY>
+      <triggeRangeLength>1800</triggeRangeLength>
+      <triggeRangeWidth>680</triggeRangeWidth>
+      <homerangeX>5344</homerangeX>
+      <homerangeY>7311</homerangeY>
+      <homerangeLength>2600</homerangeLength>
+      <homerangeWidth>2600</homerangeWidth>
+    </entity>
+    <entity>
+      <id>99</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>5388,7044</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>101090, 201090</levelID>
+      <triggeRangeX>5398</triggeRangeX>
+      <triggeRangeY>7529</triggeRangeY>
+      <triggeRangeLength>1800</triggeRangeLength>
+      <triggeRangeWidth>680</triggeRangeWidth>
+      <homerangeX>5344</homerangeX>
+      <homerangeY>7311</homerangeY>
+      <homerangeLength>2600</homerangeLength>
+      <homerangeWidth>2600</homerangeWidth>
+    </entity>
+  </entities>
+  <mapname>10406_Ferryman_s</mapname>
+</root>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<bt>
+        <id_i>1</id_i>
+        <btFileIds_l>1,2,3,4,5,6,11,101,1001,1006,1007,1010,1013,1015,1020,1024,1025,1031,1037,1044,1054,1058,2007,2008,2009,2016,2017,2050,501,502</btFileIds_l>
+	</bt>
+</root>

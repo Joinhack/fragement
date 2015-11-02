@@ -1,0 +1,22 @@
+<root>
+	<config>
+		<id_i>1</id_i>
+		<date_open_y>2014-01-20 20:00:00</date_open_y>
+		<date_end_y>2014-01-29 20:00:00</date_end_y>
+		<times_limit_m>0:0,1:0,2:1,3:5</times_limit_m>
+		<cost_m>2:50</cost_m>
+		<pool_add_m>1:1</pool_add_m>
+		<pool_type_i>1</pool_type_i>
+		<pool_limit_i>1</pool_limit_i>
+	</config>
+	<config>
+		<id_i>2</id_i>
+		<date_open_y>2014-01-20 20:00:00</date_open_y>
+		<date_end_y>2014-01-29 20:00:00</date_end_y>
+		<times_limit_m>0:0,1:0,2:1,3:5</times_limit_m>
+		<cost_m>3:100</cost_m>
+		<pool_add_m>1:1</pool_add_m>
+		<pool_type_i>2</pool_type_i>
+		<pool_limit_i>1</pool_limit_i>
+	</config>
+</root>

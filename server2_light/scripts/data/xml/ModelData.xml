@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<node>
+		<id_i>1</id_i>
+		<name_i>1</name_i>
+		<model_i>1</model_i>
+		<mapx_i>2595</mapx_i>
+		<mapy_i>2762</mapy_i>
+		<rotation_l>0.0, 0.0, 0.0</rotation_l>
+	</node>
+</root>

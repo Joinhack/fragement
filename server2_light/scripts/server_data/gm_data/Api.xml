@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">	    
+     <instruction>
+        <name_s>send_sys_bulletin</name_s>
+        
+        <param_1_m>name:msg_type,type:int,is_ness:1</param_1_m>
+        <param_2_m>name:content,type:string,is_ness:1</param_2_m>
+        <param_3_m>name:copy_text,type:string,is_ness:0</param_3_m>
+        <param_4_m>name:link_text,type:string,is_ness:0</param_4_m>
+        <param_5_m>name:text_color,type:string,is_ness:0</param_5_m>
+        <param_6_m>name:link_color,type:string,is_ness:0</param_6_m>
+    </instruction>
+    
+    <instruction>
+    	<name_s>user_count</name_s>
+    	<param_1_m>name:time,type:int,is_ness:1</param_1_m>
+    	<param_2_m>name:game_id,type:string,is_ness:1</param_2_m>
+    	<param_3_m>name:platform_id,type:string,is_ness:1</param_3_m>
+    	<param_4_m>name:flag,type:string,is_ness:1</param_4_m>
+    </instruction>
+    
+     <instruction>
+        <name_s>user_info_detail</name_s>
+        
+				<param_1_m>name:user_id,type:int,is_ness:1</param_1_m>
+				<param_2_m>name:user_name,type:string,is_ness:1</param_2_m>
+				<param_3_m>name:account,type:string,is_ness:1</param_3_m>
+    </instruction>
+    
+    
+         <instruction>
+        <name_s>ban_chat</name_s>
+        
+				<param_1_m>name:user_names,type:string,is_ness:1</param_1_m>
+				<param_2_m>name:is_ban,type:int,is_ness:1</param_2_m>
+				<param_3_m>name:ban_date,type:string,is_ness:1</param_3_m>
+				<param_4_m>name:reason,type:string,is_ness:0</param_4_m>
+    </instruction>
+    
+         <instruction>
+        <name_s>forbid_login</name_s>
+        
+				<param_1_m>name:user_names,type:string,is_ness:1</param_1_m>
+				<param_2_m>name:is_forbid,type:int,is_ness:1</param_2_m>
+				<param_3_m>name:forbid_time,type:int,is_ness:1</param_3_m>
+				<param_4_m>name:reason,type:string,is_ness:0</param_4_m>
+
+    </instruction>
+    
+    <instruction>
+        <name_s>ip_ban</name_s>
+        
+				<param_1_m>name:ip,type:string,is_ness:1</param_1_m>
+				<param_2_m>name:is_forbid,type:int,is_ness:1</param_2_m>
+				<param_3_m>name:forbid_time,type:int,is_ness:1</param_3_m>
+				<param_4_m>name:reason,type:string,is_ness:0</param_4_m>
+
+    </instruction>
+    
+     <instruction>
+        <name_s>kick_user</name_s>
+        
+		    <param_1_m>name:user_names,type:string,is_ness:1</param_1_m>
+				<param_2_m>name:kick_all,type:int,is_ness:1</param_2_m>
+				<param_3_m>name:reason,type:string,is_ness:0</param_3_m>
+
+    </instruction>
+        
+    
+    <instruction>
+        <name_s>send_mail</name_s>
+        
+        <param_1_m>name:action,type:int,is_ness:1</param_1_m>
+				<param_2_m>name:user_names,type:string,is_ness:1</param_2_m>
+				<param_3_m>name:user_ids,type:string,is_ness:1</param_3_m>
+				<param_4_m>name:min_lv,type:int,is_ness:1</param_4_m>
+				<param_5_m>name:max_lv,type:int,is_ness:1</param_5_m>
+				<param_6_m>name:min_login_time,type:int,is_ness:1</param_6_m>
+				<param_7_m>name:max_login_time,type:int,is_ness:1</param_7_m>
+				<param_8_m>name:min_reg_time,type:int,is_ness:1</param_8_m>
+				<param_9_m>name:max_reg_time,type:int,is_ness:1</param_9_m>
+				<param_10_m>name:sex,type:int,is_ness:1</param_10_m>
+				<param_11_m>name:career,type:int,is_ness:1</param_11_m>
+				<param_12_m>name:guild,type:string,is_ness:1</param_12_m>
+				<param_13_m>name:mail_title,type:string,is_ness:1</param_13_m>
+				<param_14_m>name:mail_content,type:string,is_ness:1</param_14_m>
+				<param_15_m>name:viptype,type:int,is_ness:1</param_15_m>
+				<param_16_m>name:orderid,type:string,is_ness:1</param_16_m>
+
+    </instruction>
+    
+        <instruction>
+        <name_s>admin_send_gift</name_s>
+        
+        <param_1_m>name:action,type:int,is_ness:1</param_1_m>
+				<param_2_m>name:user_names,type:string,is_ness:1</param_2_m>
+				<param_3_m>name:user_ids,type:string,is_ness:1</param_3_m>
+				<param_4_m>name:min_lv,type:int,is_ness:1</param_4_m>
+				<param_5_m>name:max_lv,type:int,is_ness:1</param_5_m>
+				<param_6_m>name:min_login_time,type:int,is_ness:1</param_6_m>
+				<param_7_m>name:max_login_time,type:int,is_ness:1</param_7_m>
+				<param_8_m>name:min_reg_time,type:int,is_ness:1</param_8_m>
+				<param_9_m>name:max_reg_time,type:int,is_ness:1</param_9_m>
+				<param_10_m>name:sex,type:int,is_ness:1</param_10_m>
+				<param_11_m>name:career,type:int,is_ness:1</param_11_m>
+				<param_12_m>name:guild,type:string,is_ness:1</param_12_m>
+				<param_13_m>name:mail_title,type:string,is_ness:1</param_13_m>
+				<param_14_m>name:mail_content,type:string,is_ness:1</param_14_m>
+				<param_15_m>name:money_amounts,type:string,is_ness:1</param_15_m>
+				<param_16_m>name:money_types,type:string,is_ness:1</param_16_m>
+				<param_17_m>name:item_ids,type:string,is_ness:1</param_17_m>
+				<param_18_m>name:item_types,type:string,is_ness:1</param_18_m>
+				<param_19_m>name:item_counts,type:string,is_ness:1</param_19_m>
+				<param_20_m>name:item_levels,type:string,is_ness:1</param_20_m>
+				<param_21_m>name:viptype,type:int,is_ness:1</param_21_m>
+				<param_22_m>name:orderid,type:string,is_ness:1</param_22_m>
+
+    </instruction>
+    
+    
+     <instruction>
+        <name_s>complain_reply</name_s>
+        
+        <param_1_m>name:user_name,type:string,is_ness:1</param_1_m>
+				<param_2_m>name:content,type:string,is_ness:1</param_2_m>
+				<param_3_m>name:compain_id,type:string,is_ness:0</param_3_m>
+
+    </instruction>
+    
+    
+
+    <instruction>
+        <name_s>add_giftbag</name_s>        
+        <param_1_m>name:dbid,type:int,is_ness:1</param_1_m>
+				<param_2_m>name:item_id,type:int,is_ness:1</param_2_m>
+    </instruction>
+    
+    <instruction>
+        <name_s>charge</name_s> 
+				<param_1_m>name:plat,type:string,is_ness:1</param_1_m>
+				<param_2_m>name:order_id,type:string,is_ness:1</param_2_m>
+				<param_3_m>name:game_id,type:string,is_ness:1</param_3_m>
+				<param_4_m>name:server_id,type:string,is_ness:1</param_4_m>
+				<param_5_m>name:uid,type:string,is_ness:1</param_5_m>
+				<param_6_m>name:pay_way,type:string,is_ness:1</param_6_m>
+				<param_7_m>name:amount,type:string,is_ness:1</param_7_m>
+				<param_8_m>name:callback_info,type:string,is_ness:1</param_8_m>
+				<param_9_m>name:order_status,type:string,is_ness:1</param_9_m>
+				<param_10_m>name:failed_desc,type:string,is_ness:1</param_10_m>
+    </instruction>
+    
+    
+</root>

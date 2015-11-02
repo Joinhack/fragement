@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<notice>
+		<id_i>1</id_i>
+		<title_s>我是补偿1耶</title_s>
+		<text_s>我是补偿1内容</text_s>
+		<items_m>1100032:1,1100034:1</items_m>
+		<start_time_i>1375459200</start_time_i>
+		<end_time_i>1376582400</end_time_i>
+	</notice>
+	<notice>
+		<id_i>2</id_i>
+		<title_s>我是补偿2耶</title_s>
+		<items_m>1100032:2,1100034:3</items_m>
+		<start_time_i>1375722000</start_time_i>
+		<end_time_i>1375894800</end_time_i>
+	</notice>
+</root>

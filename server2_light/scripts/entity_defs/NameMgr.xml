@@ -1,0 +1,61 @@
+<root>
+
+<Properties>
+    <!---->
+    <base_mbstr>
+        <Type> STRING </Type>
+        <Flags> BASE </Flags>
+    </base_mbstr>
+    <!---->
+    <usingPool>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </usingPool>
+    
+</Properties>
+
+<ClientMethods>
+
+</ClientMethods>
+
+<BaseMethods>
+    <OnRegistered/>
+    <Init/>
+
+    <onAvatarSelectResp>
+        <Arg> LUA_TABLE </Arg>
+    </onAvatarSelectResp>
+    
+    <!--GetRandomName(accountName, vocation, mbStr)-->
+    <GetRandomName>
+        <Arg> STRING </Arg>
+        <Arg> UINT8 </Arg>
+        <Arg> STRING </Arg>
+    </GetRandomName>
+    <!--SendName(tableP, ret)-->
+    <SendName>
+        <Arg> LUA_TABLE </Arg>
+        <Arg> UINT8 </Arg>
+    </SendName>
+
+    <OnInited>
+        <Arg> LUA_TABLE </Arg>
+    </OnInited>
+
+    <UseName>
+        <Arg> STRING </Arg>
+        <Arg> STRING </Arg>
+    </UseName>
+    <UnuseName>
+        <Arg> STRING </Arg>
+    </UnuseName>
+    <random_n_names>
+        <Arg> UINT8 </Arg>
+    </random_n_names>
+    <RecoverName>
+        <Arg> STRING </Arg>
+    </RecoverName>
+</BaseMethods>
+
+
+</root>

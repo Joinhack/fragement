@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<record>
+		<id>0</id>
+		<name>MonsterShader.shader</name>
+	</record>
+	<record>
+		<id>1</id>
+		<name>MogoFakeLight.shader</name>
+		<color_l>213,26,247,255</color_l>
+	</record>
+	<record>
+		<id>2</id>
+		<name>MogoFakeLight.shader</name>
+		<color_l>255,242,55,255</color_l>
+	</record>
+	<record>
+		<id>3</id>
+		<name>MogoFakeLight.shader</name>
+		<color_l>255,242,55,255</color_l>
+	</record>
+</root>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<story>
+		<id>1</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>2</id>
+		<storyText>Sleep 700</storyText>
+	</story>
+	<story>
+		<id>3</id>
+		<storyText>SetPosition 0 10.48,3.32,28.08</storyText>
+	</story>
+	<story>
+		<id>4</id>
+		<storyText>SetRotation 0 0,109,0</storyText>
+	</story>
+	<story>
+		<id>5</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>6</id>
+		<storyText>MoveCamera 1 0.1,55,155.1,0 2,55,155.1,0 2500 16.51,8.07,22.3</storyText>
+	</story>
+	<story>
+		<id>7</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>8</id>
+		<storyText>PlaySfx 1 200714</storyText>
+	</story>
+	<story>
+		<id>9</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>10</id>
+		<storyText>ShakeCamera 0,0.1,0 0,40,0 300</storyText>
+	</story>
+	<story>
+		<id>11</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>12</id>
+		<storyText>MoveCamera 1 0.1,32.7,80,0 2,32.7,80,0 2000 20.35,6.925,30.9</storyText>
+	</story>
+	<story>
+		<id>13</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>14</id>
+		<storyText>ShakeCamera 0,0.1,0 0,40,0 300</storyText>
+	</story>
+	<story>
+		<id>15</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>16</id>
+		<storyText>MoveCamera 1 0.1,1.6,118,0 0.1,1.6,118,0 500 11.74,6.07,28.96</storyText>
+	</story>
+	<story>
+		<id>17</id>
+		<storyText>PlaySfx 1 200715</storyText>
+	</story>
+	<story>
+		<id>18</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>19</id>
+		<storyText>MoveCamera 1 0.1,1.6,118,0 6,1.6,118,0 110 11.74,6.07,28.96</storyText>
+	</story>
+	<story>
+		<id>20</id>
+		<storyText>ShakeCamera 0,0,0.5 0,0,16 500</storyText>
+	</story>
+	<story>
+		<id>21</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>22</id>
+		<storyText>MoveCamera 1 6,1.6,118,0 6,1.6,118,0 1000 11.74,6.07,28.96</storyText>
+	</story>
+	<story>
+		<id>23</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>24</id>
+		<storyText>MoveCamera 1 0.1,351,122,0 0.1,351,101,0 4000 7.77,6.191,29.89</storyText>
+	</story>
+	<story>
+		<id>25</id>
+		<storyText>PlaySfx 1 200716</storyText>
+	</story>
+	<story>
+		<id>26</id>
+		<storyText>CreateModel 1 2007 -2442 5638 0,208,0</storyText>
+	</story>
+	<story>
+		<id>27</id>
+		<storyText>Sleep 200</storyText>
+	</story>
+	<story>
+		<id>28</id>
+		<storyText>SetRotation 1 0,286.44,0</storyText>
+	</story>
+	<story>
+		<id>29</id>
+		<storyText>Sleep 3800</storyText>
+	</story>
+	<story>
+		<id>30</id>
+		<storyText>LockSight</storyText>
+	</story>
+	<story>
+		<id>31</id>
+		<storyText>End</storyText>
+	</story>
+</root>

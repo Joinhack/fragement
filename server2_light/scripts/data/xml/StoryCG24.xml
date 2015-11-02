@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<story>
+		<id>1</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>2</id>
+		<storyText>CreateModel 1 150010 19635 14616 0,0,0</storyText>
+	</story>
+	<story>
+		<id>3</id>
+		<storyText>CreateModel 2 150010 20775 15430 0,0,0</storyText>
+	</story>
+	<story>
+		<id>4</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>5</id>
+		<storyText>ZoomCamera 1 7 45,90 1000 1000</storyText>
+	</story>
+	<story>
+		<id>6</id>
+		<storyText>Sleep 2000</storyText>
+	</story>
+	<story>
+		<id>7</id>
+		<storyText>ZoomCamera 2 7 45,100 1000 1000</storyText>
+	</story>
+	<story>
+		<id>8</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>9</id>
+		<storyText>MoveCamera 2 7,45,100,0 8,45,100,0 4000</storyText>
+	</story>
+	<story>
+		<id>10</id>
+		<storyText>ShowDialog 150010 {0} 105171</storyText>
+	</story>
+	<story>
+		<id>11</id>
+		<storyText>OpenUI</storyText>
+	</story>
+	<story>
+		<id>12</id>
+		<storyText>Wait 6</storyText>
+	</story>
+	<story>
+		<id>13</id>
+		<storyText>CloseUI</storyText>
+	</story>
+	<story>
+		<id>14</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>15</id>
+		<storyText>DestroyModel 1</storyText>
+	</story>
+	<story>
+		<id>16</id>
+		<storyText>DestroyModel 2</storyText>
+	</story>
+	<story>
+		<id>17</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>18</id>
+		<storyText>ZoomCamera 0 8 45,100 1000 1000</storyText>
+	</story>
+	<story>
+		<id>19</id>
+		<storyText>Sleep 1500</storyText>
+	</story>
+	<story>
+		<id>20</id>
+		<storyText>LockSight</storyText>
+	</story>
+	<story>
+		<id>21</id>
+		<storyText>End</storyText>
+	</story>
+</root>

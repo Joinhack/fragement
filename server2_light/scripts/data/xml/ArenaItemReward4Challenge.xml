@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<reward>
+		<id_i>1</id_i>
+		<level_l>19,100</level_l>
+		<itemsWin_m>1100071:10</itemsWin_m>
+		<itemsLos_m>1100071:2</itemsLos_m>
+	</reward>
+</root>

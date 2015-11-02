@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<story>
+		<id>1</id>
+		<storyText>OpenUI</storyText>
+	</story>
+	<story>
+		<id>2</id>
+		<storyText>CloseUI CommunityBtn</storyText>
+	</story>
+	<story>
+		<id>3</id>
+		<storyText>CloseUI PlayerImage</storyText>
+	</story>
+	<story>
+		<id>4</id>
+		<storyText>CloseUI NormalAttackButton</storyText>
+	</story>
+	<story>
+		<id>5</id>
+		<storyText>CloseUI SkillButton 0</storyText>
+	</story>
+	<story>
+		<id>6</id>
+		<storyText>CloseUI SkillButton 1</storyText>
+	</story>
+	<story>
+		<id>7</id>
+		<storyText>CloseUI SkillButton 2</storyText>
+	</story>
+	<story>
+		<id>8</id>
+		<storyText>CloseUI Bottle</storyText>
+	</story>
+	<story>
+		<id>9</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>10</id>
+		<storyText>LockSight</storyText>
+	</story>
+	<story>
+		<id>11</id>
+		<storyText>UnlockQueue</storyText>
+	</story>
+	<story>
+		<id>12</id>
+		<storyText>End</storyText>
+	</story>
+</root>

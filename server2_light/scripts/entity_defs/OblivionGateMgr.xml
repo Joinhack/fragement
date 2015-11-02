@@ -1,0 +1,42 @@
+<root>
+	<Properties>
+		<mapGateInfo>
+        	<Type>LUA_TABLE</Type>
+        	<Flags>BASE</Flags>
+		</mapGateInfo>
+
+        <mapIdInfo>
+            <Type>LUA_TABLE</Type>
+            <Flags>BASE</Flags>
+        </mapIdInfo>
+
+        <nowMailBoxStr>
+            <Type>STRING</Type>
+            <Flags>BASE</Flags>
+        </nowMailBoxStr>
+	</Properties>
+
+	<ClientMethods>
+	</ClientMethods>
+	
+	<BaseMethods>
+		<OnRegistered>
+    	</OnRegistered>
+
+        <MgrEventDispatch>
+            <Arg>STRING</Arg>
+            <Arg>STRING</Arg>
+            <Arg>LUA_TABLE</Arg>
+            <Arg>STRING</Arg>
+            <Arg>STRING</Arg>
+            <Arg>LUA_TABLE</Arg>
+        </MgrEventDispatch>
+	</BaseMethods>
+</root>
+
+
+
+
+
+
+

@@ -1,0 +1,33 @@
+<root>
+
+<Properties>
+
+    <mgrs>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </mgrs>
+    <needInit>
+    	<Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </needInit>
+</Properties>
+
+<ClientMethods>
+
+</ClientMethods>
+
+<BaseMethods>
+
+    <OnMgrLoaded>
+        <Arg> STRING </Arg>
+    </OnMgrLoaded>
+    <onDestroy>
+    </onDestroy>
+
+    <OnInited>
+    	<Arg> STRING </Arg>
+    </OnInited>
+</BaseMethods>
+
+
+</root>

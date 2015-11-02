@@ -1,0 +1,56 @@
+<root>
+  <entities>
+    <entity>
+      <id>1</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>2995,1673,2778,889,3206,992,3387,1698,2723,1312,3495,1209</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>101031, 201031</levelID>
+      <triggeRangeX>0</triggeRangeX>
+      <triggeRangeY>0</triggeRangeY>
+      <triggeRangeLength>0</triggeRangeLength>
+      <triggeRangeWidth>0</triggeRangeWidth>
+      <homerangeX>3119</homerangeX>
+      <homerangeY>1321</homerangeY>
+      <homerangeLength>2437</homerangeLength>
+      <homerangeWidth>2529</homerangeWidth>
+    </entity>
+    <entity>
+      <id>99</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>3115,1474</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>101030, 201030</levelID>
+      <triggeRangeX>3139</triggeRangeX>
+      <triggeRangeY>1218</triggeRangeY>
+      <triggeRangeLength>2090</triggeRangeLength>
+      <triggeRangeWidth>2347</triggeRangeWidth>
+      <homerangeX>3119</homerangeX>
+      <homerangeY>1321</homerangeY>
+      <homerangeLength>2437</homerangeLength>
+      <homerangeWidth>2529</homerangeWidth>
+    </entity>
+    <entity>
+      <id>2</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>3032,1554,2815,770,3243,873,3424,1578,2761,1192,3533,1090,3019,1023,3265,1295,3627,1385</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>101032, 201032</levelID>
+      <triggeRangeX>3020</triggeRangeX>
+      <triggeRangeY>1224</triggeRangeY>
+      <triggeRangeLength>1380</triggeRangeLength>
+      <triggeRangeWidth>2347</triggeRangeWidth>
+      <homerangeX>3119</homerangeX>
+      <homerangeY>1321</homerangeY>
+      <homerangeLength>2437</homerangeLength>
+      <homerangeWidth>2529</homerangeWidth>
+    </entity>
+  </entities>
+  <mapname>10103_Centaur_s</mapname>
+</root>

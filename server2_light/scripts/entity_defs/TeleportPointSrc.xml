@@ -1,0 +1,46 @@
+<root>
+    <Properties>
+
+    <!--源传送点所在场景地图id-->
+    <map_id>
+        <Type> STRING </Type>
+        <Flags> BASE </Flags>
+    </map_id>
+
+    <!--x坐标,不需要标记client,引擎会自动同步坐标-->
+    <map_x>
+        <Type> INT16 </Type>
+        <Flags> BASE </Flags>
+    </map_x>
+
+    <!--y坐标,不需要标记client,引擎会自动同步坐标-->
+    <map_y>
+        <Type> INT16 </Type>
+        <Flags> BASE </Flags>
+    </map_y>
+
+    <targetSceneId>
+        <Type> UINT16 </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+        <BaseAndCell> true </BaseAndCell>
+    </targetSceneId>
+
+    <targetX>
+        <Type> INT16 </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+        <BaseAndCell> true </BaseAndCell>
+    </targetX>
+
+    <targetY>
+        <Type> INT16 </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+        <BaseAndCell> true </BaseAndCell>
+    </targetY>
+
+    <c_etype>
+        <Type> UINT8 </Type>
+        <Flags> CELL </Flags>
+    </c_etype>
+
+    </Properties>
+</root>

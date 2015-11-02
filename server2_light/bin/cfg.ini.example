@@ -1,0 +1,68 @@
+[server_all]
+server_count= 7
+[server_1]
+type = loginapp
+ip = 127.0.0.1
+port = 8001 
+[server_2]
+type = cwmd 
+ip = 127.0.0.1
+port = 8002 
+[server_3]
+type = dbmgr
+ip = 127.0.0.1
+port = 8003
+[server_4]
+type = timerd 
+ip = 127.0.0.1
+port = 8004 
+[server_5]
+type = logapp 
+ip = 127.0.0.1
+port = 8005 
+#baseapp and cellapp maybe have multi processes, 
+#the server_id must great above the minimum value(SERVER_MULTI_MIN_ID=6) 
+[server_6]
+type = baseapp 
+ip = 192.168.43.253
+port = 8005 
+[server_7]
+type = cellapp 
+ip = 127.0.0.1
+port = 8006 
+[clients]
+trusted=192.168.43.83,127.0.0.1,192.168.43.253
+can_accepted_clients=192.168.43.83,127.0.0.1,192.168.43.251
+[db]
+host = 127.0.0.1
+user=root
+port=3306
+db=mogo
+passwd=
+[init]
+def_path=../scripts/entity_defs
+log_path=./log
+lua_path=../scripts
+rpt_path=../scripts
+
+[log_db]
+host = 127.0.0.1
+user=root
+port=3306
+db=collector
+passwd=mogo4399
+
+[redis]
+#redis没有配置时默认端口
+port=6379
+#redis 库id同一台物理机各个服不一样
+database_id = 1
+
+[params]
+#服务器最大人数
+max_online_count = 2000
+
+#每个实体的最大关注数量
+max_observer_count = 30
+#每个实体的最大被关注数量 
+max_follower_count = 60

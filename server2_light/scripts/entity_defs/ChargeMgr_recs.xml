@@ -1,0 +1,92 @@
+<root>
+
+<Properties>
+
+    <!--充值订单号-->
+    <order_id>
+        <Type> STRING </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+        <UniqueIndex/>
+    </order_id>
+    <!--收件人dbid-->
+    <game_id>
+        <Type> STRING </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </game_id>
+    <!--收件人dbid-->
+    <server_id>
+        <Type> STRING </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </server_id>
+    <!--收件人dbid-->
+    <account>
+        <Type> STRING </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </account>
+
+    <!--收件人dbid-->
+    <pay_way>
+        <Type> STRING </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </pay_way>
+    
+    <!--收件人dbid-->
+    <avatar_dbid>
+        <Type> UINT64 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </avatar_dbid>
+
+    <order_status>
+        <Type> STRING </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </order_status>
+    <failed_desc>
+        <Type> STRING </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </failed_desc>
+    <sign>
+        <Type> STRING </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </sign>
+
+    <!--充值金额-->
+    <amount>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </amount>
+
+    <!--创建时间-->
+    <create_time>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </create_time>
+
+    <!--是否使用-->
+    <use>
+        <Type> UINT8 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </use>
+</Properties>
+
+<ClientMethods>
+
+</ClientMethods>
+
+<BaseMethods>
+
+</BaseMethods>
+
+
+</root>

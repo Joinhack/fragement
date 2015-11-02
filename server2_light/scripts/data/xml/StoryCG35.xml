@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<story>
+		<id>1</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>2</id>
+		<storyText>WhiteCamera 0,0 250</storyText>
+	</story>
+	<story>
+		<id>3</id>
+		<storyText>Sleep 250</storyText>
+	</story>
+	<story>
+		<id>4</id>
+		<storyText>RemoveEntities</storyText>
+	</story>
+	<story>
+		<id>5</id>
+		<storyText>SetPosition 0 49.27,-4.55,55.85</storyText>
+	</story>
+	<story>
+		<id>6</id>
+		<storyText>SetRotation 0 0,104,0</storyText>
+	</story>
+	<story>
+		<id>7</id>
+		<storyText>CreateModel 1 1072 5519 5320 0,0,0</storyText>
+	</story>
+	<story>
+		<id>8</id>
+		<storyText>NormalCamera 0,0 500</storyText>
+	</story>
+	<story>
+		<id>9</id>
+		<storyText>MoveCamera 1 4,20,70,0 4,22,70,0 4000</storyText>
+	</story>
+	<story>
+		<id>10</id>
+		<storyText>Sleep 250</storyText>
+	</story>
+	<story>
+		<id>11</id>
+		<storyText>PlayOneAction 1 17</storyText>
+	</story>
+	<story>
+		<id>12</id>
+		<storyText>PlaySfx 1 6019</storyText>
+	</story>
+	<story>
+		<id>13</id>
+		<storyText>Sleep 1500</storyText>
+	</story>
+	<story>
+		<id>14</id>
+		<storyText>ZoomCamera 0 4 22,70 500 500</storyText>
+	</story>
+	<story>
+		<id>15</id>
+		<storyText>PlaySfx 0 6030</storyText>
+	</story>
+	<story>
+		<id>16</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>17</id>
+		<storyText>DestroyModel 1</storyText>
+	</story>
+	<story>
+		<id>18</id>
+		<storyText>MoveCamera 0 4,22,70,0 4.5,22,70,0 4000</storyText>
+	</story>
+	<story>
+		<id>19</id>
+		<storyText>ShowDialog 150010 {0} 105081</storyText>
+	</story>
+	<story>
+		<id>20</id>
+		<storyText>OpenUI</storyText>
+	</story>
+	<story>
+		<id>21</id>
+		<storyText>Wait 6</storyText>
+	</story>
+	<story>
+		<id>22</id>
+		<storyText>CloseUI</storyText>
+	</story>
+	<story>
+		<id>23</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>24</id>
+		<storyText>LockSight</storyText>
+	</story>
+	<story>
+		<id>25</id>
+		<storyText>End</storyText>
+	</story>
+</root>

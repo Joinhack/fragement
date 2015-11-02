@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<instruction>
+		<name_s>addspiritbyid</name_s>
+		<usage_s>addspiritbyid %d %d</usage_s>
+		<dispatcher_s>UserMgr</dispatcher_s>
+	</instruction>
+	<instruction>
+		<name_s>add_gold</name_s>
+		<usage_s>add_gold %d</usage_s>
+		<dispatcher_s>UserMgr</dispatcher_s>
+	</instruction>
+	<instruction>
+		<name_s>add_item</name_s>
+		<usage_s>add_item %d %d</usage_s>
+		<dispatcher_s>UserMgr</dispatcher_s>
+	</instruction>
+	<instruction>
+		<name_s>del_item</name_s>
+		<usage_s>del_item %d %d</usage_s>
+		<dispatcher_s>UserMgr</dispatcher_s>
+	</instruction>
+	<instruction>
+		<name_s>add_diamond</name_s>
+		<usage_s>add_diamond %d</usage_s>
+		<dispatcher_s>UserMgr</dispatcher_s>
+	</instruction>
+	<instruction>
+		<name_s>set_mission_finished</name_s>
+		<usage_s>set_mission_finished %d %d %d</usage_s>
+		<dispatcher_s>UserMgr</dispatcher_s>
+	</instruction>
+	<instruction>
+		<name_s>reset_mission</name_s>
+		<usage_s>reset_mission</usage_s>
+		<dispatcher_s>UserMgr</dispatcher_s>
+	</instruction>
+
+    <instruction>
+        <name_s>set_mission_times</name_s>
+        <usage_s>set_mission_times %d %d %d</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>open_mission</name_s>
+        <usage_s>open_mission</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>gotomission</name_s>
+        <usage_s>gotomission %d %d</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>finishmission</name_s>
+        <usage_s>finishmission %d %d</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>trigger_mwsy</name_s>
+        <usage_s>trigger_mwsy</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+	<instruction>
+		<name_s>add_level</name_s>
+		<usage_s>add_level %d</usage_s>
+		<dispatcher_s>UserMgr</dispatcher_s>
+	</instruction>
+	<instruction>
+		<name_s>hot_update</name_s>
+		<usage_s>hot_update %s</usage_s>
+		<dispatcher_s>UserMgr</dispatcher_s>
+	</instruction>
+	<instruction>
+		<name_s>query_prop</name_s>
+		<usage_s>query_prop %s</usage_s>
+		<dispatcher_s>UserMgr</dispatcher_s>
+	</instruction>
+	<instruction>
+		<name_s>set_prop</name_s>
+		<usage_s>set_prop %s %d</usage_s>
+		<dispatcher_s>UserMgr</dispatcher_s>
+	</instruction>
+    <instruction>
+        <name_s>set_tower_current_level</name_s>
+        <usage_s>set_tower_current_level %d</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+    <instruction>
+        <name_s>set_tower_highest_level</name_s>
+        <usage_s>set_tower_highest_level %d</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+    <instruction>
+        <name_s>clear_sweep_cd</name_s>
+        <usage_s>clear_sweep_cd</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s> 
+    </instruction>
+    <instruction>
+        <name_s>start_tower_defence_match</name_s>
+        <usage_s>start_tower_defence_match</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+    <instruction>
+        <name_s>start_activity</name_s>
+        <usage_s>start_activity %d</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+    <instruction>
+        <name_s>stop_activity</name_s>
+        <usage_s>stop_activity %d</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+    <instruction>
+        <name_s>get_dbid</name_s>
+        <usage_s>get_dbid %s</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>get_info</name_s>
+        <usage_s>get_info %d</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+    
+    <instruction>
+        <name_s>gm_mail</name_s>
+        <usage_s>gm_mail %s %s %s %s %s</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+    <instruction>
+        <name_s>look_items</name_s>
+        <usage_s>look_items %d</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>forbid_login</name_s>
+        <usage_s>forbid_login %s %d</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>kick_out</name_s>
+        <usage_s>kick_out %s</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>get_item</name_s>
+        <usage_s>get_item</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>sd_open</name_s>
+        <usage_s>sd_open %d %d %d</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>open_event</name_s>
+        <usage_s>open_event %d</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>close_event</name_s>
+        <usage_s>close_event %d</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>add_exp</name_s>
+        <usage_s>add_exp %d</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>task_over</name_s>        
+        <usage_s>task_over</usage_s>      
+        <dispatcher_s>UserMgr</dispatcher_s> 
+    </instruction>
+
+    <instruction>
+        <name_s>open_gate</name_s>        
+        <usage_s>open_gate</usage_s>      
+        <dispatcher_s>UserMgr</dispatcher_s> 
+    </instruction>
+
+    <instruction>
+        <name_s>reset_gate</name_s>        
+        <usage_s>reset_gate</usage_s>      
+        <dispatcher_s>UserMgr</dispatcher_s> 
+    </instruction>
+
+    <instruction>
+        <name_s>reset_market</name_s>        
+        <usage_s>reset_market</usage_s>      
+        <dispatcher_s>UserMgr</dispatcher_s> 
+    </instruction>
+
+    <instruction>
+        <name_s>get_paras</name_s>        
+        <usage_s>get_paras</usage_s>      
+        <dispatcher_s>UserMgr</dispatcher_s> 
+    </instruction>
+
+    <instruction>
+        <name_s>add_buff</name_s>        
+        <usage_s>add_buff %d</usage_s>      
+        <dispatcher_s>UserMgr</dispatcher_s> 
+    </instruction>
+
+    <instruction>
+        <name_s>remove_buff</name_s>        
+        <usage_s>remove_buff %od</usage_s>      
+        <dispatcher_s>UserMgr</dispatcher_s> 
+    </instruction>
+    
+    
+    <instruction>
+        <name_s>send_sys_bulletin</name_s>        
+        <usage_s>send_sys_bulletin %d %s</usage_s>      
+        <dispatcher_s>UserMgr</dispatcher_s> 
+    </instruction>
+       
+    <instruction>
+        <name_s>add_arena_credit</name_s>
+        <usage_s>add_arena_credit %d</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+    <instruction>
+        <name_s>add_arena_score</name_s>
+        <usage_s>add_arena_score %d</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+    <instruction>
+        <name_s>foe</name_s>
+        <usage_s>foe %s</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+    <instruction>
+        <name_s>load_rank</name_s>
+        <usage_s>load_rank %d</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>gm_setting</name_s>
+        <usage_s>gm_setting %s %d</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>set_account</name_s>
+        <usage_s>set_account %s %d %d</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>reset_dragon</name_s>
+        <usage_s>reset_dragon</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>gm_compensate</name_s>
+        <usage_s>gm_compensate</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>gm_charge</name_s>
+        <usage_s>gm_charge %d %s</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+    
+    <instruction>
+        <name_s>gm_charge_ex</name_s>
+        <usage_s>gm_charge_ex %s %s %s</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>add_week_score</name_s>
+        <usage_s>add_week_score %d</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>open_pvp</name_s>
+        <usage_s>open_pvp</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>close_pvp</name_s>
+        <usage_s>close_pvp</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+
+    <instruction>
+        <name_s>elf_tear_prog</name_s>
+        <usage_s>elf_tear_prog %d %d</usage_s>
+        <dispatcher_s>UserMgr</dispatcher_s>
+    </instruction>
+</root>

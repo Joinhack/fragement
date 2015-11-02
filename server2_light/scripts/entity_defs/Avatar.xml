@@ -1,0 +1,4012 @@
+ <root>
+
+<Properties>
+  
+  
+<!--                       主属性(需要存DB)begin                           -->
+  <!--职业-->
+  <vocation>
+    <Type> UINT8 </Type>
+    <Flags> ALL_CLIENTS </Flags>
+    <BaseAndCell> true </BaseAndCell>
+    <Persistent> true </Persistent>
+  </vocation>
+  <!--角色等级-->
+  <level>
+    <Type> UINT8 </Type>
+    <Flags> ALL_CLIENTS </Flags>
+    <BaseAndCell> true </BaseAndCell>
+    <Persistent> true </Persistent>
+  </level>
+  <!--当前经验-->
+  <exp>
+    <Type> UINT32 </Type>
+    <Flags> BASE_AND_CLIENT </Flags>
+    <Persistent> true </Persistent>
+  </exp>
+  <!--当前体力-->
+  <energy>
+    <Type> UINT32 </Type>
+    <Flags> BASE_AND_CLIENT </Flags>
+    <Persistent> true </Persistent>
+  </energy> 
+
+  <!--体力时间戳记录-->
+  <energyCd>
+    <Type> UINT32 </Type>
+    <Flags> BASE </Flags>
+    <Persistent> true </Persistent>
+  </energyCd>
+
+  <!--普通道具-->
+  <generals>
+    <Type> LUA_TABLE </Type>
+    <Flags> BASE </Flags>
+    <Persistent> true </Persistent>
+  </generals>
+  
+  <!--宝石道具-->
+  <jewels>
+    <Type> LUA_TABLE </Type>
+    <Flags> BASE </Flags>
+    <Persistent> true </Persistent>
+  </jewels>
+  <!--材料道具-->
+  <materials>
+    <Type> LUA_TABLE </Type>
+    <Flags> BASE </Flags>
+    <Persistent> true </Persistent>
+  </materials>
+  <!--符文道具-->
+  <rune>
+    <Type> LUA_TABLE </Type>
+    <Flags> BASE </Flags>
+    <Persistent> true </Persistent>
+  </rune>
+  <!--角色装备的道具-->
+  <equipeds>
+    <Type> LUA_TABLE </Type>
+    <Flags> BASE </Flags>
+    <Persistent> true </Persistent>
+  </equipeds>
+
+  <!--角色翅膀-->
+  <wingBag>
+    <Type> LUA_TABLE </Type>
+    <Flags> BASE </Flags>
+    <Persistent> true </Persistent>
+  </wingBag>
+
+  <!--金币-->
+  <gold>
+    <Type> UINT32 </Type>
+    <Flags> BASE_AND_CLIENT </Flags>
+    <Persistent> true </Persistent>
+    <Default> 0 </Default>
+  </gold>
+  <!--钻石(RMB)-->
+  <diamond>
+    <Type> UINT32 </Type>
+    <Flags> BASE_AND_CLIENT </Flags>
+    <Persistent> true </Persistent>
+    <Default> 0 </Default>
+  </diamond>
+
+    <!--玩家购买登陆热销商品的最后时间标识-->
+    <buyHotSalesLastTime>
+        <Type> UINT32 </Type>                   <!--从1970年1月1日起（以服务器时区为准，预计-8小时）逝去的秒数-->
+        <Flags> BASE_AND_CLIENT </Flags> 
+        <Persistent> true </Persistent>
+        <Default> 0 </Default>
+    </buyHotSalesLastTime>
+
+  <!-- pvp credit --> 
+  <pvpCredit>
+    <Type> UINT32 </Type>
+    <Flags> BASE_AND_CLIENT </Flags>
+    <Persistent> true </Persistent>
+    <Default> 0 </Default>
+  </pvpCredit>
+
+  <!-- 竞技场相关数值 begin--> 
+  <arenicGrade> <!--竞技场等级，这个属性与战斗力计算相关-->
+    <Type> UINT16 </Type>
+    <Flags> BASE_AND_CLIENT </Flags>
+    <Persistent> true </Persistent>
+    <Default> 0 </Default>
+  </arenicGrade>
+  <arenicCredit> <!--竞技场声望，这个属性与竞技场等级计算相关-->
+    <Type> UINT32 </Type>
+    <Flags> BASE_AND_CLIENT </Flags>
+    <Persistent> true </Persistent>
+    <Default> 0 </Default>
+  </arenicCredit>
+  <!--竞技场数据:
+  挑战cd,额外可进次数，弱敌id，强敌id，鼓舞buf_id，弱敌范围，强敌范围，当天购买次数，当天购买次数置0时间
+  详细的key参考arenicDataKey-->
+  <arenicData> 
+    <Type> LUA_TABLE </Type>
+    <Flags> BASE </Flags>
+    <Persistent> true </Persistent>
+  </arenicData>
+
+  <!--记录玩家的偶像,每日偶像变更，fans福利发放等情况-->
+  <idol>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+  </idol>
+
+  <specEffects> <!--装备特效-->
+    <Type> LUA_TABLE </Type>
+    <Flags> BASE </Flags>
+    <Persistent> true </Persistent>
+  </specEffects>
+<!--                       主属性(需要存DB)end                           -->  
+  
+  
+<!--                       主属性(不需要存DB)begin                           -->
+    <!--当前生命-->
+    <curHp>
+        <Type> UINT32 </Type>
+        <Flags> ALL_CLIENTS </Flags>
+    </curHp>
+
+    <!--战斗力-->
+    <fightForce>
+        <Type> UINT32 </Type>
+        <Flags> BASE_AND_CLIENT </Flags>
+        <Persistent> true </Persistent>
+        <Default> 0 </Default>
+    </fightForce>
+    <!--最高战斗力,这个值保存在usermgr-->
+    <fightMax>
+        <Type> UINT32 </Type>
+        <Flags> BASE_AND_CLIENT </Flags>
+        <Default> 0 </Default>
+    </fightMax>
+<!--                       主属性(不需要存DB)end                           -->
+
+    <!--角色状态标识-->
+    <stateFlag>
+        <Type> UINT64 </Type>
+        <Flags> ALL_CLIENTS </Flags> 
+        <Default> 0 </Default>
+    </stateFlag>
+
+    <!--战斗阵营标识-->
+    <factionFlag>
+        <Type> UINT8 </Type>
+        <Flags> ALL_CLIENTS </Flags> 
+        <Default> 0 </Default>
+    </factionFlag>
+
+<!--                       第一页详细属性(不需要存DB)begin                           -->
+    <!--最终伤害-->
+    <atk>
+        <Type> UINT32 </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </atk>
+
+    <!--最终防御-->
+    <def>
+        <Type> UINT32 </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </def>
+
+    <!--最终生命-->
+    <hp>
+        <Type> UINT32 </Type>
+        <Flags> ALL_CLIENTS </Flags>
+    </hp>
+
+    <!--命中率-->
+    <hitRate>
+        <Type> FLOAT </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </hitRate>
+
+    <!--基础伤害-->
+    <attackBase>
+        <Type> UINT32 </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </attackBase>
+
+     <!--基础命中率-->
+    <baseHitRate>
+        <Type> FLOAT </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </baseHitRate>
+    <!--暴击-->
+    <crit>
+        <Type> UINT32 </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </crit>
+    
+    <!--暴击率-->
+    <critRate>
+        <Type> FLOAT </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </critRate>
+
+    <!--防御减伤率-->
+    <defenceRate>
+        <Type> FLOAT </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </defenceRate>
+
+    <!--抗暴击率-->
+    <antiCritRate>
+        <Type> FLOAT </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </antiCritRate>
+
+    <!--伤害减免率-->
+    <damageReduceRate>
+        <Type> FLOAT </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </damageReduceRate>
+    <!--破击-->
+    <trueStrike>
+        <Type> UINT32 </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </trueStrike>
+
+    <!--破击率-->
+    <trueStrikeRate>
+        <Type> FLOAT </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </trueStrikeRate>
+    <!--抗破击率-->
+    <antiTrueStrikeRate>
+        <Type> FLOAT </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </antiTrueStrikeRate>
+
+    <antiTrueStrike>
+        <Type> UINT32 </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </antiTrueStrike>
+
+    <antiCrit>
+        <Type> UINT32 </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </antiCrit>
+    <!--穿透-->
+    <antiDefense>
+        <Type> UINT32 </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </antiDefense>
+    
+    <!--穿透率-->
+    <antiDefenseRate>
+        <Type> FLOAT </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </antiDefenseRate>
+
+    <!--暴伤加成-->
+    <critExtraAttack>
+        <Type> UINT32 </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </critExtraAttack>
+    
+    <!--PVP强度-->
+    <pvpAddition>
+        <Type> UINT32 </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </pvpAddition>
+
+    <!--PVP增伤率-->
+    <pvpAdditionRate>
+        <Type> FLOAT </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </pvpAdditionRate>
+    <!--PVP抗性-->
+    <pvpAnti>
+        <Type> UINT32 </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </pvpAnti>
+    <!--PVP减伤率-->
+    <pvpAntiRate>
+        <Type> FLOAT </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </pvpAntiRate>
+
+    <!--闪避率率-->
+    <missRate>
+        <Type> FLOAT </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </missRate>
+<!--                        其他玩家能看到的属性枚举begin                          -->
+  <!--玩家穿在身上的武器-->
+  <loadedWeapon>
+    <Type> UINT32 </Type>
+    <Flags> OTHER_CLIENTS </Flags>
+  </loadedWeapon>
+  <!--玩家穿在身上的衣服,胸甲-->
+  <loadedCuirass>
+    <Type> UINT32 </Type>
+    <Flags> OTHER_CLIENTS </Flags>
+  </loadedCuirass>
+
+  <!--玩家穿在身上的护手-->
+  <loadedArmguard>
+    <Type> UINT32 </Type>
+    <Flags> OTHER_CLIENTS </Flags>
+  </loadedArmguard>
+
+  <!--玩家穿在身上的鞋子-->
+  <loadedLeg>
+    <Type> UINT32 </Type>
+    <Flags> OTHER_CLIENTS </Flags>
+  </loadedLeg>
+
+  <!--玩家穿在身上的翅膀ID-->
+  <loadedWingId>
+    <Type> UINT32 </Type>
+    <Flags> ALL_CLIENTS </Flags>
+  </loadedWingId>
+
+  <!--玩家宝石特效-->
+  <loadedJewelId>
+    <Type> UINT16 </Type>
+    <Flags> ALL_CLIENTS </Flags>
+  </loadedJewelId>
+  <!--玩家装备特效-->
+  <loadedEquipId>
+    <Type> UINT16 </Type>
+    <Flags> ALL_CLIENTS </Flags>
+  </loadedEquipId>
+  <!--玩家强化特效-->
+  <loadedStrengthenId>
+    <Type> UINT16 </Type>
+    <Flags> ALL_CLIENTS </Flags>
+  </loadedStrengthenId>
+<!--                        其他玩家能看到的属性枚举end                           -->
+  
+  <name>
+    <Type> STRING </Type>
+    <Flags> ALL_CLIENTS </Flags>
+    <BaseAndCell> true </BaseAndCell>
+    <Persistent> true </Persistent>
+    <UniqueIndex/>
+  </name>
+
+  <gender>
+    <Type> UINT8 </Type>
+    <Flags> ALL_CLIENTS </Flags>
+    <BaseAndCell> true </BaseAndCell>
+    <Persistent> true </Persistent>
+  </gender>
+
+  <!--缓存的dbid-->
+  <dbid>
+    <Type> UINT64 </Type>
+    <Flags> BASE </Flags>
+    <BaseAndCell> true </BaseAndCell>
+  </dbid>
+
+  <!--创建时间-->
+  <createTime>
+    <Type> UINT32 </Type>
+    <Flags> BASE </Flags>
+    <Persistent> true </Persistent>
+  </createTime>
+
+  <accountName>
+    <Type> STRING </Type>
+    <Flags> BASE </Flags>
+    <Persistent> true </Persistent>
+  </accountName>
+
+  <accountId>
+    <Type> UINT32 </Type>
+    <Flags> BASE </Flags>
+  </accountId>
+
+  <!--上次下线时间-->
+  <offlineTime>
+    <Type> UINT32 </Type>
+    <Flags> BASE </Flags>
+    <Persistent> true </Persistent>
+  </offlineTime>
+
+  <!--湮灭之门最后进入时间-->
+  <oblivionLastEnterTime>
+    <Type> UINT32 </Type>       <!--绝对时间，单位：秒-->
+    <Flags> BASE </Flags>
+    <Persistent> true </Persistent>
+    <Default> 0 </Default>
+  </oblivionLastEnterTime>
+
+  <!--湮灭之门最后创建时间-->
+  <oblivionLastCreateTime>
+    <Type> UINT32 </Type>       <!--绝对时间，单位：秒-->
+    <Flags> BASE </Flags>
+    <Persistent> true </Persistent>
+    <Default> 0 </Default>
+  </oblivionLastCreateTime>
+
+  <!--已领取礼包的存盘记录-->
+  <drawGiftRecord>
+    <Type> LUA_TABLE </Type>    <!--已领取记录（礼包栏位号的列表数据）-->
+    <Flags> BASE </Flags>
+    <Persistent> true </Persistent>
+  </drawGiftRecord>
+
+  <!--                        地图信息begin                           -->
+  <!--玩家所在场景地图id-->
+  <sceneId>
+    <Type> UINT16 </Type>
+    <Flags> BASE_AND_CLIENT </Flags>
+	<BaseAndCell> true </BaseAndCell>
+    <Persistent> true </Persistent>
+  </sceneId>
+
+  <!--x坐标,不需要标记client,引擎会自动同步坐标-->
+  <map_x>
+    <Type> INT16 </Type>
+    <Flags> BASE </Flags>
+    <Persistent> true </Persistent>
+  </map_x>
+
+  <!--y坐标,不需要标记client,引擎会自动同步坐标-->
+  <map_y>
+    <Type> INT16 </Type>
+    <Flags> BASE </Flags>
+    <Persistent> true </Persistent>
+  </map_y>
+
+  <!-- 玩家所在的地图分线id -->
+  <imap_id>
+    <Type> UINT16 </Type>
+    <BaseAndCell> true </BaseAndCell>
+    <Flags> BASE_AND_CLIENT </Flags>
+    <Persistent> true </Persistent>
+  </imap_id>
+  
+  <!-- 玩家所学技能背包 -->
+  <skillBag>
+    <Type> LUA_TABLE </Type>
+    <Flags> BASE_AND_CLIENT </Flags>
+    <BaseAndCell> true </BaseAndCell>
+    <Persistent> true </Persistent>
+  </skillBag>
+  
+  <!-- 玩家技能Buff存盘数据 -->
+  <skillBuffSave>
+    <Type> LUA_TABLE </Type>        <!--BuffID:{[1]=生成的绝对时间（单位：秒），[2]=已过时间（单位：毫秒）}-->
+    <Flags> BASE </Flags>
+    <BaseAndCell> true </BaseAndCell>
+    <Persistent> true </Persistent>
+  </skillBuffSave>
+
+  <!-- Buff信息 -->
+  <skillBuffClient>
+    <Type> LUA_TABLE </Type>        <!--BuffID:剩余时间（单位：毫秒），为零时代表永久-->
+    <Flags> ALL_CLIENTS </Flags> 
+  </skillBuffClient>
+
+  <!-- 玩家作弊次数 -->
+  <cheatCount>
+    <Type> UINT32 </Type>        <!--作弊次数记录-->
+    <Flags> BASE </Flags>
+    <Persistent> true </Persistent>
+  </cheatCount>
+
+  <!-- 玩家作弊被踢次数 -->
+  <cheatKickCount>
+    <Type> UINT32 </Type>        <!--作弊被踢次数记录-->
+    <Flags> BASE </Flags>
+    <Persistent> true </Persistent>
+  </cheatKickCount>
+
+  <!-- 玩家作弊次数（由服务器检测出） -->
+  <cheatServerCount>
+    <Type> UINT32 </Type>        <!--作弊次数记录-->
+    <Flags> BASE </Flags>
+    <BaseAndCell> true </BaseAndCell>
+    <Persistent> true </Persistent>
+  </cheatServerCount>
+
+  <!--                        地图信息end                           -->
+
+    <!--血瓶的数量-->
+    <hpCount>
+        <Type> UINT8 </Type>
+        <Flags> BASE_AND_CLIENT </Flags>
+    </hpCount>
+
+    <!--当前副本血瓶已购买数量-->
+    <buyCount>
+        <Type> UINT8 </Type>
+        <Flags> BASE_AND_CLIENT </Flags>
+    </buyCount>
+    <!--血瓶cd时间戳-->
+    <hpTStamp>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+    </hpTStamp>
+    
+    <!--频道中显示的发言人信息-->
+    <channel_str>
+        <Type> STRING </Type>
+        <Flags> BASE </Flags>
+    </channel_str>
+
+      <!--base mailbox str-->
+    <base_mbstr>
+        <Type> STRING </Type>
+        <Flags> BASE </Flags>
+    </base_mbstr>
+
+      <!--玩家临时数据-->
+    <tmp_data>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </tmp_data>
+
+    <!--玩家状态-->
+    <state>
+        <Type> BLOB </Type>
+        <Flags> BASE </Flags>
+    </state>
+
+    <!--角色类型-->
+    <c_etype>
+        <Type> UINT8 </Type>
+        <Flags> CELL </Flags>
+    </c_etype>
+
+    <!--移动速度-->
+    <c_speed>
+        <Type> UINT8 </Type>
+        <Flags> ALL_CLIENTS </Flags>
+    </c_speed>
+
+    <!--cell的SpaceLoader实体引用-->
+    <sp_ref>
+        <Type> LUA_OBJECT </Type>
+        <Flags> CELL </Flags>
+    </sp_ref>
+
+    <!--玩家身上已添加的timer-->
+    <hasTimer>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </hasTimer>
+
+    <monsterThinkTriggerCount>
+        <Type> UINT8 </Type>
+        <Flags> CELL </Flags>
+        <Default> 0 </Default>
+    </monsterThinkTriggerCount>
+
+    <!--                   子系统 begin                   -->
+
+    <!--                   任务系统 begin                 -->
+    <!--任务系统-->
+    <taskSystem>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </taskSystem>
+
+    <!--主线任务-->
+    <taskMain>
+        <Type> UINT32 </Type>
+        <Flags> BASE_AND_CLIENT </Flags>
+        <Default> 1 </Default>
+        <Persistent> true </Persistent>
+    </taskMain>
+
+    <!--                   任务系统 end                 -->
+
+    <!-- 雇佣兵系统 -->
+    <mercenarySystem>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </mercenarySystem>
+
+    <!-- 精灵系统  -->
+    <SpiritSystem>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </SpiritSystem>
+
+    <!--                   关卡系统 begin                   -->
+    <!-- 关卡系统  -->
+    <!--
+    <missionSystem>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </missionSystem>
+    -->
+
+    <!-- 已完成关卡，数据格式：{关卡ID={1=难度, ...}, ...}-->
+    <!--
+    <FinishedMissions>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </FinishedMissions>
+    -->
+
+    <!-- 已经复活的次数 -->
+    <ReviveTimes>
+        <Type> UINT8 </Type>
+        <Flags> BASE </Flags>
+        <BaseAndCell> true </BaseAndCell>
+        <Default> 0 </Default>
+    </ReviveTimes>
+
+    <!-- 关卡挑战次数 格式(每天0点，或用人民币重置)：{关卡ID={难度=挑战次数， 。。。}, ...}-->
+    <MissionTimes>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </MissionTimes>
+
+    <!-- 每个副本已重置次数 -->
+    <!--
+    <MissionResetTimes>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </MissionResetTimes>
+    -->
+
+    <!-- 所有副本的总重置次数 -->
+    <MissionResetSubTimes>
+        <Type> UINT8 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </MissionResetSubTimes>
+
+    <!-- 上一次重置副本挑战次数的时间戳 -->
+    <LastResetMissionTime>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </LastResetMissionTime>
+
+    <!-- 上一次完成关卡的时间戳  -->
+    <LastFinishedMissionTime>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </LastFinishedMissionTime>
+
+    <!-- 关卡的星级 格式：{关卡ID={难度=星级, 。。。}, ...} -->
+    <MissionStars>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+        <Default> {} </Default>
+    </MissionStars>
+
+    <!-- 评分为s的关卡总数 -->
+    <MissionSSum>
+        <Type> UINT8 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </MissionSSum>
+
+    <!-- 已获取的副本宝箱奖励 格式：{奖励ID=1, 奖励ID=1, ...}-->
+    <MissionTreasureRewards>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+        <Default> {} </Default>
+    </MissionTreasureRewards>
+
+    <!-- 已获取的boss宝箱奖励 -->
+    <MissionBossTreasure>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+        <Default> {} </Default>
+    </MissionBossTreasure>
+
+    <!-- 客户端关卡状态 -->
+    <ClientMissionInfo>
+        <Type> STRING </Type>
+        <Flags> BASE </Flags>
+        <Default> '' </Default>
+    </ClientMissionInfo>
+
+    <!--                   关卡系统end                   -->
+
+    <!--                   试炼之塔系统begin                   -->
+
+    <!-- 试炼之塔系统  -->
+    <!--
+    <towerSystem>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </towerSystem>
+    -->
+
+    <!-- 试炼之塔相关的数据 -->
+    <TowerInfo>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </TowerInfo>
+
+    <TowerHighestFloor>
+        <Type> UINT8 </Type>
+        <Flags> BASE </Flags>
+        <Default> 0 </Default>
+        <Persistent> true </Persistent>
+    </TowerHighestFloor>
+
+    <!--                   试炼之塔系统end                   -->
+
+    <!--                   公会系统begin                   -->
+
+    <!-- 公会子系统  -->
+    <!--
+    <guildSystem>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </guildSystem>
+    -->
+
+    <!--                   公会系统end                   -->
+
+    <!-- 活动系统  -->
+    <activitySystem>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </activitySystem>
+
+    <!-- 技能子系统 -->
+    <skillSystem>
+        <Type> LUA_TABLE </Type>
+        <Flags> CELL </Flags>
+    </skillSystem>
+
+    <!-- 好友子系统 -->
+    <friendSystem>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </friendSystem>
+
+    <!-- 好友数据 -->
+    <friends>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </friends>
+    <!--好友系统领取体力值总和-->
+    <friendsEnergy>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+        <Default> 0 </Default>
+    </friendsEnergy>
+    <friendsBleesEnergy>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+        <Default> 0 </Default>
+    </friendsBleesEnergy>
+    <!--好友系统下次刷新可领取体力值时间-->
+    <friendRefreshTime>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+        <Default> 0 </Default>
+    </friendRefreshTime>
+
+    <!-- 友情度 雇佣了对方，在副本成功结算的界面弹出时，点“赞一个”时加的值 delete by hwj
+    <FriendDegree>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+        <Default> 0 </Default>
+    </FriendDegree>
+    -->
+    <!--                   好友系统end                   -->
+
+    <!-- 身体强化子系统 -->
+    <bodyEnhanceSystem>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </bodyEnhanceSystem>
+    <!-- 身体 -->
+    <body>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE_AND_CLIENT </Flags>
+        <Persistent> true </Persistent>
+    </body>
+
+    <!--符文子系统-->
+    <runeSystem>
+        <Type>LUA_TABLE</Type>
+        <Flags>BASE</Flags>
+    </runeSystem>
+
+    <!-- 场景子系统 -->
+    <!--
+    <sceneSystem>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </sceneSystem>
+    -->
+
+     <!-- 背包子系统 -->
+    <inventorySystem>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </inventorySystem>
+    <!-- 宝石子系统 -->
+    <jewelSystem>
+        <Type>LUA_TABLE</Type>
+        <Flags>BASE</Flags>
+    </jewelSystem>
+    <!-- 邮件子系统 
+    <mailSystem>
+        <Type>LUA_TABLE</Type>
+        <Flags>BASE</Flags>
+    </mailSystem>
+    -->
+    <!-- 商城子系统 -->
+    <marketSystem>
+        <Type>LUA_TABLE</Type>
+        <Flags>BASE</Flags>
+    </marketSystem>
+    <!-- 热销商城子系统 -->
+    <hotSalesSystem>
+        <Type>LUA_TABLE</Type>
+        <Flags>BASE</Flags>
+    </hotSalesSystem>
+    <!-- 等级礼包子系统 -->
+    <levelGiftSystem>
+        <Type>LUA_TABLE</Type>
+        <Flags>BASE</Flags>
+    </levelGiftSystem>
+    <!-- 湮灭之门子系统 -->
+    <oblivionGateSystem>
+        <Type>LUA_TABLE</Type>
+        <Flags>BASE</Flags>
+    </oblivionGateSystem>
+    <!-- 守护PvP子系统 -->
+    <defensePvPSystem>
+        <Type>LUA_TABLE</Type>
+        <Flags>BASE</Flags>
+    </defensePvPSystem>
+
+	<!-- 触发器系统 -->
+    <triggerSystem>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </triggerSystem>
+    <!-- 竞技场系统 -->
+    <arenaSystem>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </arenaSystem>
+    <!-- 精灵系统 -->
+    <elfSystem>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </elfSystem>
+
+    <!--                   子系统 end                   -->
+
+    <!--玩家一级属性临时表-->
+    <baseProps>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </baseProps>
+    <!--玩家战斗属性临时表-->
+    <battleProps>
+        <Type> LUA_TABLE </Type>
+        <Flags> CELL </Flags>
+    </battleProps>
+
+  <!--                  精灵系统 begin                   -->
+  <!-- 精灵系统  -->
+
+
+    <!-- 契约之力，用于提升契约技能等级-->
+    <SpiritSkillLevel>
+        <Type> UINT32 </Type>
+        <Flags> BASE_AND_CLIENT </Flags>
+        <Persistent> true </Persistent>
+    </SpiritSkillLevel>
+
+    <!-- “刻印碎片”，提升刻印等级-->
+    <SpiritMarkLevel>
+        <Type> UINT32 </Type>
+        <Flags> BASE_AND_CLIENT </Flags>
+        <Persistent> true </Persistent>
+    </SpiritMarkLevel>
+
+    <!-- 技能契约等级-->
+    <SpiritSkillPoint>
+        <Type> UINT16 </Type>
+        <Flags> BASE_AND_CLIENT </Flags>
+        <Persistent> true </Persistent>
+    </SpiritSkillPoint>
+
+    <!-- 元素刻印等级-->
+    <SpiritMarkPoint>
+        <Type> UINT16 </Type>
+        <Flags> BASE_AND_CLIENT </Flags>
+        <Persistent> true </Persistent>
+    </SpiritMarkPoint>
+
+    <!-- 技能契约表，数据格式：{[技能ID]={是否解锁(开启), ...}, ...}-->
+    <SpiritSkill>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE_AND_CLIENT </Flags>
+        <Persistent> true </Persistent>
+    </SpiritSkill>
+
+    <!-- 元素刻印，数据格式：{[刻印ID]={是否解锁(开启), ...}, ...}-->
+    <SpiritMark>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE_AND_CLIENT </Flags>
+        <Persistent> true </Persistent>
+    </SpiritMark>
+
+    <!-- 已选择技能契约表，数据格式：{[序号]={技能ID}, ...}-->
+    <SelectedSpiritSkill>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE_AND_CLIENT </Flags>
+        <Persistent> true </Persistent>
+    </SelectedSpiritSkill>
+
+    <!-- 已选择印记表，数据格式：{[序号]={印记ID}, ...}-->
+    <SelectedSpiritMark>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE_AND_CLIENT </Flags>
+        <Persistent> true </Persistent>
+    </SelectedSpiritMark>
+
+    <!-- 道具使用的cd计算时间 -->
+    <ItemCdTime>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </ItemCdTime>
+    
+    <!-- VIP、月卡相关系统字段，开始 -->
+
+    <!-- vip等级 -->
+    <VipLevel>
+        <Type> UINT8 </Type>
+        <Flags> BASE_AND_CLIENT </Flags>
+        <Default> 0 </Default>
+    </VipLevel>
+
+    <!-- VIP、月卡相关系统字段，结束 -->
+
+    <!-- 运营活动_正在参加的活动 -->
+    <event_ing>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </event_ing>
+
+    <accepted_event>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </accepted_event>
+
+    <done_recharge>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </done_recharge>
+
+    <login_data>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </login_data>
+
+    <login_days>
+        <Type> UINT8 </Type>
+        <Flags> BASE_AND_CLIENT </Flags>
+        <Persistent> true </Persistent>
+    </login_days>
+
+    <login_is_reward>
+        <Type> UINT8 </Type>
+        <Flags> BASE_AND_CLIENT </Flags>
+        <Persistent> true </Persistent>
+    </login_is_reward>    
+
+    <achievement>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </achievement>
+
+    <monster_calc>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </monster_calc>
+
+    <!-- 触发器数据保存 -->
+    <trigger_save>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </trigger_save>
+
+    <!--累计充值金额-->
+    <chargeSum>
+        <Type> UINT32 </Type>
+        <Flags> BASE_AND_CLIENT </Flags>
+        <Persistent> true </Persistent>
+        <Default> 0 </Default>
+    </chargeSum>
+
+    <!--Vip限制状态-->
+    <VipRealState>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE_AND_CLIENT </Flags>
+        <Persistent> true </Persistent>
+    </VipRealState>
+
+    <!--玩家禁言状态-->
+    <bannedToPost>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </bannedToPost>
+
+    <!--玩家禁言结束时间，0 表示 非禁言，-1 表示永久禁言，其他值表示禁言结束时间戳-->
+    <noSpeakTime>
+        <Type> INT32 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </noSpeakTime>
+
+	<mercenaryDbid>
+		<Type> UINT64 </Type>
+	    <Flags> BASE </Flags>
+		<BaseAndCell> true </BaseAndCell>
+	</mercenaryDbid>
+	<pvpDbid>
+        <Type> UINT64 </Type>
+        <Flags> BASE </Flags>
+        <BaseAndCell> true </BaseAndCell>
+    <Default> 0 </Default>
+    </pvpDbid>
+	<!--可作为佣兵的信息列表-->
+	<mercenaryInfoList>
+		<Type> LUA_TABLE </Type>
+		<Flags> BASE </Flags>
+	</mercenaryInfoList>
+
+    <avatarMoveCDEndTime>
+        <Type> UINT64 </Type>
+        <Flags> CELL </Flags>
+        <Default> 0 </Default>
+    </avatarMoveCDEndTime>  
+
+<!--已经领取的补偿-->
+	<got_sorry>
+		<Type> LUA_TABLE </Type>
+		<Flags> BASE </Flags>
+		<Persistent> true </Persistent>
+	</got_sorry>
+
+    <!-- 玩家所在场景的mb -->
+    <SpaceLoaderMb>
+        <Type> LUA_OBJECT </Type>
+        <Flags> BASE </Flags>
+    </SpaceLoaderMb>
+
+      <!-- 该变量为临时变量，用来存储fd -->
+    <__tmp_client_fd>
+        <Type> INT32 </Type>
+        <Flags> BASE </Flags>
+    </__tmp_client_fd>
+
+    <!-- 玩家的工会职位 -->
+    <GuildName>
+        <Type> STRING </Type>
+        <Flags> ALL_CLIENTS </Flags>
+        <BaseAndCell> true </BaseAndCell>
+    </GuildName>
+
+    <!-- 玩家的工会信息 -->
+    <GuildInfo>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Default> {} </Default>
+    </GuildInfo>
+
+    <!-- 副本进度 -->
+    <FBProgress>                       
+        <Type> UINT8 </Type>           
+        <Flags> BASE_AND_CLIENT </Flags>
+        <BaseAndCell> true </BaseAndCell>
+        <Default> 1 </Default>         
+    </FBProgress>
+
+    <!--商城限购记录-->
+    <marketQuotaRecord>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Default> {} </Default>
+        <Persistent> true </Persistent>
+    </marketQuotaRecord>
+
+        <!-- 日常活动数据-->   
+     <day_task>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </day_task>
+
+    <last_daytask_date>                       
+        <Type> UINT32 </Type>           
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+        <Default> 0 </Default>         
+    </last_daytask_date>    
+     
+     <login_time>                       
+        <Type> UINT32 </Type>           
+        <Flags> BASE </Flags>   
+    </login_time>      
+    
+     <login_level>                       
+        <Type> UINT16 </Type>           
+        <Flags> BASE </Flags>    
+    </login_level>  
+    
+    <login_ip>                       
+        <Type> STRING </Type>           
+        <Flags> BASE </Flags>  
+        <Persistent> true </Persistent>  
+    </login_ip>  
+            
+            
+    <today_events>                       
+        <Type> LUA_TABLE </Type>           
+        <Flags> BASE </Flags>
+    </today_events>
+
+    <!--
+    <Anger>
+        <Type> UINT8 </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </Anger>
+
+    <AngerTimerId>
+        <Type> UINT32 </Type>
+        <Flags> CELL </Flags>
+        <Default> 0 </Default>
+    </AngerTimerId>
+    -->
+
+    <!-- 记录本方对其他人造成的伤害 -->
+    <!--
+    <harmInfo>
+        <Type> LUA_TABLE </Type>
+        <Flags> CELL </Flags>
+        <Default> {} </Default>
+    </harmInfo>
+    -->
+
+    <!-- 记录本方对其他人造成的伤害而产生的怒气增加进度 -->
+    <!--
+    <harmAngerTimesInfo>
+        <Type> LUA_TABLE </Type>
+        <Flags> CELL </Flags>
+        <Default> {} </Default>
+    </harmAngerTimesInfo>
+    -->
+
+    <!-- 记录对方对自己的伤害 -->
+    <!--
+    <harmedInfo>
+        <Type> LUA_TABLE </Type>
+        <Flags> CELL </Flags>
+        <Default> {} </Default>
+    </harmedInfo>
+    -->
+
+    <!-- 记录对方对自己造成的伤害而产生的怒气增加进度 -->
+    <!--
+    <harmedAngerTimesInfo>
+        <Type> LUA_TABLE </Type>
+        <Flags> CELL </Flags>
+        <Default> {} </Default>
+    </harmedAngerTimesInfo>
+    -->
+    
+    <mail_tag>
+        <Type> UINT32 </Type>           
+        <Flags> BASE </Flags>  
+        <Default>0</Default>
+        <Persistent> true </Persistent>
+    </mail_tag>
+
+
+    <received_bag>	<!-- 角色已经领取过的礼包 -->
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent> 
+        <Default> {} </Default>
+    </received_bag>
+
+    <!-- 上一次完成活动的时间 -->
+    <LastActivityTime>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Default>{}</Default>
+        <Persistent> true </Persistent>
+    </LastActivityTime>
+
+    <!-- 记录玩家的已参加活动次数 -->
+    <ActivityTimes>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+        <Default> {} </Default>
+    </ActivityTimes>
+
+    <!--gm配置,用来特殊处理某些角色在某个系统中的行为，暂时只做到base-->
+    <gm_setting>
+        <Type> UINT64 </Type>           
+        <Flags> BASE </Flags>  
+        <Default>0</Default>
+        <Persistent> true </Persistent>
+    </gm_setting>
+
+    <!--飞龙大赛存储字段-->
+    <DragonContest>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+        <Default> {} </Default>
+    </DragonContest>
+    
+      <!--人物身体附魔信息-->
+    <fumoinfo>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+        <Default> {} </Default>
+    </fumoinfo>
+
+
+    <!-- base上按位设置的标记位 -->
+    <baseflag>
+        <Type> UINT8 </Type>
+        <Flags> BASE_AND_CLIENT </Flags>
+        <Default>0</Default>
+        <Persistent> true </Persistent>
+    </baseflag>
+
+    <!-- 临时标记，下一个版本会删除 -->
+    <tmp_flag>
+        <Type> UINT8 </Type>
+        <Flags> BASE </Flags>
+        <Default>0</Default>
+        <Persistent> true </Persistent>
+    </tmp_flag>
+    
+    <elfAreaTearProg>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+        <Default> {} </Default>
+    </elfAreaTearProg>
+    <!-- 防外挂Tick记录 -->
+    <tickRecord>
+        <Type> LUA_TABLE </Type>
+        <Flags> CELL </Flags>
+    </tickRecord>
+
+    <!-- 迷雾深渊 -->
+    <MwsyInfo>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Default> {} </Default>
+        <Persistent> true </Persistent>
+    </MwsyInfo>
+
+    <!-- 开采精灵宝钻次数，累积花费，累积收获 -->
+    <diamond_mine_info>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </diamond_mine_info>
+
+    <!-- 已收集精灵技能点 -->
+    <ElfSkillPoint>
+        <Type> UINT16 </Type>
+        <Flags> BASE </Flags>
+        <Default>0</Default>
+        <Persistent> true </Persistent>
+    </ElfSkillPoint>
+
+
+    <!-- 已学习精灵技能 -->
+    <ElfLearnedSkillId>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Default> {} </Default>
+        <Persistent> true </Persistent>
+    </ElfLearnedSkillId>
+
+    <!-- 装备的精灵技能ID --> 
+    <ElfEquipSkillId>
+        <Type> UINT32 </Type>
+        <Flags> BASE_AND_CLIENT </Flags>            
+        <BaseAndCell> true </BaseAndCell>
+        <Default>0</Default>
+        <Persistent> true </Persistent> 
+    </ElfEquipSkillId>
+
+    <dailyRouletteTimes>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE_AND_CLIENT </Flags>            
+        <Persistent> true </Persistent>
+    </dailyRouletteTimes>
+    <extraDailyRouletteTimes>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE_AND_CLIENT </Flags>            
+        <Persistent> true </Persistent>
+    </extraDailyRouletteTimes>
+    
+    
+    <ResetElfSysDataFlag>
+        <Type> UINT8 </Type>
+        <Flags> BASE </Flags>            
+        <Default>0</Default>
+        <Persistent> true </Persistent>
+    </ResetElfSysDataFlag>
+
+    <ElfSysConsumeItemsRecord>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>            
+        <Persistent> true </Persistent>
+    </ElfSysConsumeItemsRecord>
+</Properties>
+
+<ClientMethods>
+
+    <!-- 登出->客户端的回应 -->
+    <OnLogoutResp>
+        <Arg> UINT8 </Arg>          <!-- msg_id 返回  -->
+    </OnLogoutResp>
+
+    <!-- 关卡副本系统服务器->客户端的回应 -->
+    <MissionResp>
+        <Arg> UINT8 </Arg>          <!-- msg_id 关卡系统的不同的返回  -->
+        <Arg> LUA_TABLE </Arg>
+    </MissionResp>
+
+    <!-- 试炼之塔系统服务器->客户端的回应 -->
+    <TowerResp>
+        <Arg> UINT8 </Arg>          <!-- msg_id 试炼之塔系统的不同的返回  -->
+        <Arg> LUA_TABLE </Arg>
+    </TowerResp>
+
+    <!-- 公会系统服务器->客户端的回应 -->
+    <GuildResp>
+        <Arg> UINT8 </Arg>          <!-- msg_id 关卡系统的不同的返回  -->
+        <Arg> UINT16 </Arg>         <!-- 错误码，0表示正常，非0表示有错误 -->
+        <Arg> LUA_TABLE </Arg>
+    </GuildResp>
+
+    <!-- 活动系统服务器->客户端的回应 -->
+    <CampaignResp>
+        <Arg> UINT16 </Arg>         <!-- msg_id 关卡系统的不同的返回  -->
+        <Arg> UINT16 </Arg>         <!-- 错误码，0表示正常，非0表示有错误 -->
+        <Arg> LUA_TABLE </Arg>
+    </CampaignResp>
+
+<!--                   子系统方法回调客户端 begin                   -->
+<!--身体强化子系统begin -->
+    <!-- 返回身体各个部位的level -->
+    <OnBodyEnhaLevResp>
+        <Arg> LUA_TABLE </Arg>  <!-- id -->
+        <Arg> UINT8 </Arg>  <!-- 错误id -->
+    </OnBodyEnhaLevResp>
+    <!-- 返回升级身体某个部位 -->
+    <OnBodyEnhaUpgResp>
+        <Arg> UINT8 </Arg>  <!-- 错误id -->
+        <Arg> LUA_TABLE </Arg>  <!-- 缺少的材料信息或者金币 -->
+    </OnBodyEnhaUpgResp>
+    <!-- 返回身体某个部位对应等级所有信息 -->
+    <OnBodyEnhaInfoResp>
+        <Arg> LUA_TABLE </Arg>  <!-- 所需物品id，num -->
+        <Arg> UINT8 </Arg>  <!-- 错误id -->
+    </OnBodyEnhaInfoResp>
+    <!-- 返回身体某个部位产生的属性影响 -->
+    <OnBodyEnhaPropResp>
+        <Arg> LUA_TABLE </Arg>  <!-- 身体属性name， val -->
+        <Arg> UINT8 </Arg>  <!-- 错误id -->
+    </OnBodyEnhaPropResp>
+<!--身体强化子系统end -->
+<!--好友系统begin -->
+    <!-- 被动的返回 -->
+    <OnFriendRecvBeAddResp>
+        <Arg> LUA_TABLE </Arg>  <!-- 好友信息 -->
+    </OnFriendRecvBeAddResp>
+    <OnFriendRecvNoteResp>
+        <Arg> LUA_TABLE </Arg>  <!-- 好友留言 -->
+    </OnFriendRecvNoteResp>
+    <!-- 被祝福 -->
+    <OnFriendBeBlessResp>
+        <Arg> LUA_TABLE </Arg>  <!-- 好友信息 -->
+    </OnFriendBeBlessResp>
+    <!-- 主动申请好友请求返回 -->
+    <OnFriendAddReqResp>
+        <Arg> UINT8 </Arg>  <!-- 错误码 -->
+    </OnFriendAddReqResp>
+    <OnFriendDelResp>
+        <Arg> UINT8 </Arg>  <!-- 错误码 -->
+    </OnFriendDelResp>
+    <OnFriendListResp>
+        <Arg> LUA_TABLE </Arg>  <!-- 好友列表 -->
+        <Arg> UINT8 </Arg>  <!-- 错误码 -->
+    </OnFriendListResp>
+    <OnFriendResearchReqResp>
+        <Arg> LUA_TABLE </Arg>  <!-- 该好友信息 -->
+        <Arg> UINT8 </Arg>  <!-- 错误码 -->
+    </OnFriendResearchReqResp>
+    <OnFriendReqListResp>
+        <Arg> LUA_TABLE </Arg>  <!-- 好友申请列表 -->
+        <Arg> UINT8 </Arg>  <!-- 错误码 -->
+    </OnFriendReqListResp>
+    <OnFriendAcceptResp>
+        <Arg> UINT8 </Arg>  <!-- 错误码 -->
+    </OnFriendAcceptResp>
+    <OnFriendRejectResp>
+        <Arg> UINT8 </Arg>  <!-- 错误码 -->
+    </OnFriendRejectResp>
+    <OnFriendSendNoteResp>
+        <Arg> UINT8 </Arg>  <!-- 错误码 -->
+    </OnFriendSendNoteResp>
+    <OnFriendReadNoteResp>
+        <Arg> LUA_TABLE </Arg>  <!-- 留言信息 -->
+        <Arg> UINT8 </Arg>  <!-- 错误码 -->
+    </OnFriendReadNoteResp>
+    <!-- 祝福别人成功回调 -->
+    <OnFriendBlessResp>
+        <Arg> UINT64 </Arg>  <!-- 好友id -->
+    </OnFriendBlessResp>
+    <!--领取单个好友祝福-->
+    <OnFriendRecvBlessResp>
+        <Arg> UINT8 </Arg>  <!-- 得到的体力 -->
+        <Arg> UINT64 </Arg>  <!-- 领取祝福的好友id -->
+        <Arg> UINT8 </Arg>  <!-- 错误码 -->
+    </OnFriendRecvBlessResp>
+    <!--领取所有好友祝福-->
+    <OnFriendRecvAllBlessResp>
+        <Arg> UINT8 </Arg>  <!-- 得到的体力 -->
+        <Arg> LUA_TABLE </Arg>  <!-- 领取祝福的好友id -->
+        <Arg> UINT8 </Arg>  <!-- 错误码 -->
+    </OnFriendRecvAllBlessResp>
+<!--好友系统end -->
+
+
+<!--宝石系统begin -->
+    <JewelCombineResp>
+        <Arg> UINT8 </Arg> <!-- 宝石子类型 -->
+        <Arg> UINT8 </Arg> <!-- 宝石等级 -->
+        <Arg> UINT8 </Arg>  <!-- 错误码 -->
+    </JewelCombineResp>
+    <JewelCombineInEquiResp>
+        <Arg> UINT8 </Arg>  <!-- 错误码 -->
+    </JewelCombineInEquiResp>
+    <JewelCombineAnywayMoneyResp>
+        <Arg> UINT32 </Arg>  <!-- diamond -->
+    </JewelCombineAnywayMoneyResp>
+    <JewelCombineAnywayResp>
+        <Arg> UINT8 </Arg>  <!-- 错误码 -->
+    </JewelCombineAnywayResp>
+    <JewelInlayIntoSlotResp>
+        <Arg> UINT8 </Arg>  <!-- 错误码 -->
+    </JewelInlayIntoSlotResp>
+    <JewelInlayResp>
+        <Arg> UINT8 </Arg>  <!-- 错误码 -->
+    </JewelInlayResp>
+    <JewelOutlayResp>
+        <Arg> UINT8 </Arg>  <!-- 错误码 -->
+    </JewelOutlayResp>
+    <JewelSellResp>
+        <Arg> UINT8 </Arg>  <!-- 错误码 -->
+    </JewelSellResp>
+<!--宝石系统end -->   
+
+<!--邮件系统 begin-->
+    <!--被动的接收到邮件通知-->
+    <OnReceiveMailResp>
+        <Arg> LUA_TABLE </Arg>  <!-- 邮件简单信息 -->
+    </OnReceiveMailResp>
+    <!--申请邮件信息-->
+    <OnMailInfoResp>
+        <Arg> LUA_TABLE </Arg>  <!-- 所有邮件简单信息 -->
+    </OnMailInfoResp>
+    <!--申请阅读邮件信息-->
+    <OnMailReadResp>
+        <Arg> LUA_TABLE </Arg>  <!-- 邮件具体信息 -->
+        <Arg> UINT8 </Arg>  <!-- 错误码 -->
+    </OnMailReadResp>
+    <!--申请删除邮件信息-->
+    <OnMailDelResp>
+        <Arg> UINT8 </Arg>  <!-- 错误码 -->
+    </OnMailDelResp>
+    <!--申请领取邮件附件-->
+    <OnMailAttachGetResp>
+        <Arg> UINT8 </Arg>  <!-- 错误码 -->
+    </OnMailAttachGetResp>
+    <!--宝石附件邮件信息返回-->
+    <JewlMailResp>
+        <Arg> UINT64 </Arg>  <!-- 邮件dbid -->
+    </JewlMailResp>
+<!--邮件系统 end-->
+
+<!--圣域守卫战系统 begin-->
+    <!--下次开启时间返回-->
+    <SanctuaryDefenseTimeResp>
+        <Arg> UINT32 </Arg>  <!-- 下次开始时间 -->
+        <Arg> UINT8 </Arg>  <!-- 可进入次数 -->
+        <Arg> UINT32 </Arg>  <!-- 下次结束时间 -->
+    </SanctuaryDefenseTimeResp>
+
+    <!--进入活动返回-->
+    <EnterSanctuaryDefenseResp>
+        <Arg> UINT8 </Arg>  <!-- err id -->
+    </EnterSanctuaryDefenseResp>
+
+    <!--我的信息返回-->
+    <SanctuaryDefenseMyInfoResp>
+        <Arg> UINT32 </Arg>  <!-- day contribution -->
+        <Arg> UINT32 </Arg>  <!-- week contribution -->
+        <Arg> UINT16 </Arg>  <!-- week level -->
+        <Arg> LUA_TABLE </Arg>  <!-- 我已领取奖励信息 -->
+    </SanctuaryDefenseMyInfoResp>
+
+    <!--申请排名相关数据返回-->
+    <SanctuaryDefenseRankResp>
+        <Arg> LUA_TABLE </Arg>  <!-- 周排名信息 -->
+        <Arg> LUA_TABLE </Arg>  <!-- 天排名信息 -->
+        <Arg> UINT32 </Arg>  <!-- 我周排名的信息 -->
+        <Arg> UINT32 </Arg>  <!-- 我天排名的信息 -->
+    </SanctuaryDefenseRankResp>
+
+    <!--可购买次数返回-->
+    <CanBuySanctuaryDefenseTimeResp>
+        <Arg> UINT8 </Arg>  <!-- error_id -->
+        <Arg> UINT16 </Arg> <!-- 本次购买价格钻石-->
+        <Arg> UINT32 </Arg>  <!-- 本次购买价格金币 -->
+    </CanBuySanctuaryDefenseTimeResp>
+
+    <OnRankingListUpdateResp>
+        <Arg> LUA_TABLE </Arg>  <!-- 正在战斗时排名信息 -->
+    </OnRankingListUpdateResp>
+
+    <OnSanctuaryDefenseRewardResp>
+        <Arg> LUA_TABLE </Arg>
+        <Arg> UINT32 </Arg>  <!-- 我周排名的信息 -->
+    </OnSanctuaryDefenseRewardResp>
+    <OnSanctuaryStartResp/>
+    <GetWeekCtrbuRewardResp>
+        <Arg> UINT32 </Arg>  <!-- id -->
+    </GetWeekCtrbuRewardResp>
+<!--圣域守卫战系统 end-->  
+<!--竞技场挑战系统 begin-->
+    <RefreshWeakResp>
+        <Arg> LUA_TABLE </Arg>  <!-- 弱对手数据 -->
+    </RefreshWeakResp>
+    <RefreshStrongResp>
+        <Arg> LUA_TABLE </Arg>  <!-- 强对手数据 -->
+    </RefreshStrongResp>
+    <RefreshRevengeResp>
+        <Arg> LUA_TABLE </Arg>  <!-- 仇敌数据 -->
+    </RefreshRevengeResp>
+    <RevengeBuffResp>
+        <Arg> LUA_TABLE </Arg>  <!-- 强化buf数据 -->
+    </RevengeBuffResp>
+    <RefreshArenaDataResp>
+        <Arg> LUA_TABLE </Arg>  <!-- 竞技场所有需要刷新的数据:积分，挑战cd，次数 -->
+    </RefreshArenaDataResp>
+    <GetArenaRewardInfoResp>
+        <Arg> LUA_TABLE </Arg>  <!-- 已领取的奖励idx -->
+        <Arg> LUA_TABLE </Arg>  <!-- 所有的积分奖励信息 -->
+    </GetArenaRewardInfoResp>
+    <GetArenaRewardResp>
+        <Arg> UINT8 </Arg>
+    </GetArenaRewardResp>
+    <CanGetScoreRewardsResp>
+        <Arg> UINT8 </Arg> <!-- 0代表无可领积分奖励，非0代表有可领积分奖励 -->
+    </CanGetScoreRewardsResp>
+    <CanGetExpResp>
+        <Arg> UINT32 </Arg> <!--经验-->
+    </CanGetExpResp>
+<!--竞技场挑战系统 end-->  
+<!--                   子系统方法回调客户端 end                     -->
+    <!--                   任务系统 begin                 -->
+    <TaskCompleteResp>
+        <Arg> UINT32 </Arg>
+    </TaskCompleteResp>
+
+    <TaskErrorResp>
+        <Arg> UINT8 </Arg>
+    </TaskErrorResp>
+    <!--                   任务系统 end                   -->
+
+    <!--增加一个符文到背包-->
+    <AddRuneToBagReq>
+        <Arg>STRING</Arg> <!--符文唯一ID-->
+        <Arg>UINT8</Arg> <!--背包索引-->
+        <Arg>UINT32</Arg> <!--符文配置ID-->
+        <Arg>UINT32</Arg> <!--符文当前经验-->
+    </AddRuneToBagReq>
+
+    <!--删除背包中的一个符文-->
+    <DelRuneFromBagReq>
+        <Arg>UINT8</Arg> <!--背包索引-->
+    </DelRuneFromBagReq>
+
+    <!--穿上符文返回-->
+    <PutOnRuneResp>
+        <Arg>UINT8</Arg> <!--背包索引-->
+        <Arg>UINT8</Arg> <!--身上位置-->
+    </PutOnRuneResp>
+
+    <!--卸下符文返回-->
+    <PutDownRuneResp>
+        <Arg>UINT8</Arg> <!--身上位置-->
+        <Arg>UINT8</Arg> <!--背包索引-->
+    </PutDownRuneResp>
+
+    <!--增加一个符文到身上-->
+    <AddRuneToBodyReq>
+        <Arg>STRING</Arg> <!--符文唯一ID-->
+        <Arg>UINT8</Arg> <!--身上位置-->
+        <Arg>UINT32</Arg> <!--符文配置ID-->
+        <Arg>UINT32</Arg> <!--符文当前经验-->
+    </AddRuneToBodyReq>
+
+    <!--删除身上符文-->
+    <DelRuneFromBodyReq>
+        <Arg>UINT8</Arg> <!--身上位置-->
+    </DelRuneFromBodyReq>
+
+    <!--更新身上符文位锁状态-->
+    <UpdatePosiLockedReq>
+        <Arg>UINT8</Arg> <!--身上位置-->
+        <Arg>INT8</Arg> <!--是否锁-->
+    </UpdatePosiLockedReq>
+
+    <!--更新刷新价钱-->
+    <UpdateRefreshPriceReq>
+        <Arg>UINT32</Arg> <!--游戏币-->
+        <Arg>UINT32</Arg> <!--人民币-->
+    </UpdateRefreshPriceReq>
+
+    <!--施放技能（广播），使用者自身不会收到此消息-->
+    <CastSkillResp>
+        <Arg>UINT32</Arg>       <!--施放者ID-->
+        <Arg>INT16</Arg>        <!--施放者坐标X-->
+        <Arg>INT16</Arg>        <!--施放者坐标Y-->
+        <Arg>UINT8</Arg>        <!--施放者朝向-->
+        <Arg>UINT16</Arg>       <!--技能ID-->
+    </CastSkillResp>
+
+    <!--
+        技能伤害通知，参数为：施放者ID，技能ID，动作序列（从0起），连击次数，伤害目标列表{目标ID = {伤害类型，伤害值}, x N个对象}，其中伤害类型为：0代表无伤害（仅用于播放动作），1代表Miss，2代表普通伤害，3代表破击伤害，4代表暴击伤害，5代表同时破击和暴击伤害
+    -->
+    <SkillHarmResp>
+        <Arg>UINT32</Arg>       <!--施放者ID-->
+        <Arg>UINT16</Arg>       <!--技能ID-->
+        <Arg>UINT16</Arg>       <!--动作序列-->
+        <Arg>UINT16</Arg>       <!--连击次数-->
+        <Arg>LUA_TABLE</Arg>
+    </SkillHarmResp>
+
+    <!--蓄力通知，参数为：施放者ID，开始（1）或取消（0）-->
+    <ChargeSkillResp>
+        <Arg>UINT32</Arg>
+        <Arg>UINT8</Arg>
+    </ChargeSkillResp>
+
+    <!--
+        显示文本信息，参数为：频道ID，文本内容，其中频道ID定义如下：
+        1代表对话框频道，消息将会显示成对话框形式
+        2代表提示频道，消息将会显示在屏幕中央
+    -->
+    <ShowText>
+        <Arg>UINT8</Arg>
+        <Arg>STRING</Arg>
+    </ShowText>
+
+    <!--
+        显示文本信息，参数为：频道ID，文本ID(对应chinese.xml表)，其中频道ID定义如下：
+        1代表对话框频道，消息将会显示成对话框形式
+        2代表提示频道，消息将会显示在屏幕中央
+    -->
+    <ShowTextID>
+        <Arg>UINT8</Arg>
+        <Arg>UINT32</Arg>
+    </ShowTextID>
+
+    <ShowTextIDWithArgs>
+        <Arg>UINT8</Arg>
+        <Arg>UINT32</Arg>
+		<Arg>LUA_TABLE</Arg>   <!--参数列表-->
+    </ShowTextIDWithArgs>
+    <!--
+        技能Buff通知，参数为：目标ID，Buff编号，增加（1）或移除（0），剩余持续毫秒时间（为0则代表永久），说明：第4个参数持续时间仅在增加时有效
+    -->
+    <SkillBuffResp>
+        <Arg>UINT32</Arg>
+        <Arg>UINT16</Arg>
+        <Arg>UINT8</Arg>
+        <Arg>UINT32</Arg>
+    </SkillBuffResp>
+
+    <!--商城版本号不一致，要求客户端更新-->
+    <MarketNeedUpdate>
+    </MarketNeedUpdate>
+
+    <!--热销商城版本号不一致，要求客户端更新-->
+    <HotSalesNeedUpdate>
+    </HotSalesNeedUpdate>
+    
+    <!--从商城购买物品结果-->
+    <HotSalesBuyResp>
+        <Arg>UINT8</Arg>      <!--0代表成功，1版本错误，2数据校验错误，3不在限购期内，4金钱不足，5钻石不足，6背包空间不足-->
+    </HotSalesBuyResp>
+
+    <!--商品栏有动态数据更新-->
+    <MarketGridDataResp>
+        <Arg>UINT16</Arg>     <!--栏位号-->
+        <Arg>UINT32</Arg>     <!--剩余数量-->
+    </MarketGridDataResp>
+    
+    <!--返回商城数据-->
+    <TransferMarketDataResp>
+        <Arg> UINT16 </Arg>    <!--版本号-->
+        <Arg> LUA_TABLE </Arg> <!--商城数据-->
+    </TransferMarketDataResp>
+
+    <!--湮灭之门已开启-->
+    <OblivionGateCreate>
+        <Arg>UINT32</Arg>     <!--副本号-->
+        <Arg>UINT8</Arg>      <!--开启来源，为0代表自己触发，为1代表是好友转播给自己的-->
+    </OblivionGateCreate>
+
+    <!--湮灭之门已传播给其他好友-->
+    <OblivionGateSpread>
+        <Arg>UINT32</Arg>     <!--副本号-->
+    </OblivionGateSpread>
+
+    <!--
+        湮灭之门列表刷新，参数为：剩余CD时间（秒），副本列表{副本编号={副本内容} x N个副本}，其中副本内容为：
+        剩余时间（秒），状态（0已开启，1完成，2超时），触发者名字，触发者职业，触发者触发时等级，bossMode(1恶魔，2邪神)，自己是否进入过(0否，1是)，BOSS剩余血量百分比浮点数[0,1]，击杀者的数据库ID
+    -->
+    <OblivionGateListResp>
+        <Arg>UINT32</Arg>     <!--剩余CD时间，单位：秒-->
+        <Arg>LUA_TABLE</Arg>  <!--副本列表-->
+    </OblivionGateListResp>
+
+    <!--查询湮灭之门状态-->
+    <OblivionQueryStateResp>
+        <Arg>UINT32</Arg>     <!--封印剩余CD时间，单位：秒-->
+        <Arg>UINT8</Arg>      <!--是否存在已开启的湮灭之门（0否，1是）-->
+    </OblivionQueryStateResp>
+
+    <!--湮灭之门奖励-->
+    <OblivionAwardResp>
+        <Arg>UINT32</Arg>     <!--总伤害值-->
+        <Arg>UINT32</Arg>     <!--奖励经验值-->
+        <Arg>UINT32</Arg>     <!--奖励金钱值值-->
+    </OblivionAwardResp>
+
+    <!--返回等级礼包已领取的记录信息-->
+    <LevelGiftRecordResp>
+        <Arg> LUA_TABLE </Arg> <!--已领取的栏位ID列表-->
+    </LevelGiftRecordResp>
+
+    <ChatResp>
+        <Arg> UINT8 </Arg>    <!-- 频道 -->
+        <Arg> UINT64 </Arg>   <!-- 发消息的人的dbid -->
+        <Arg> STRING </Arg>   <!-- 发消息的人的名字 -->
+        <Arg> UINT8 </Arg>    <!-- 消息发送者的等级 -->
+        <Arg> STRING </Arg>   <!-- 消息内容 -->
+    </ChatResp>
+    
+    <!--单条数据更新操作-->
+    <UpdateItem>
+        <Arg>UINT8</Arg>      <!--数据操作标示 -->
+        <Arg>LUA_TABLE</Arg> <!-- 增加道具对象数据 -->
+    </UpdateItem>
+
+    <!--批量数据更新操作-->
+    <UpdateArrayItem>
+        <Arg>LUA_TABLE</Arg> <!-- 增加道具对象数据 -->
+    </UpdateArrayItem>
+
+    <!--换装和卸装的返回码-->
+    <RespsForChgAndRmEquip>
+      <Arg> INT32 </Arg>    <!-- 装备id -->
+      <Arg> UINT8 </Arg>    <!-- 返回码 -->
+    </RespsForChgAndRmEquip>
+    
+    <!--分解装备返回信息-->
+    <DeEquipmentResp>
+        <Arg> UINT8 </Arg>   <!-- idx-->
+        <Arg> UINT8 </Arg>   <!-- 错误码-->
+        <Arg> UINT8 </Arg>   <!-- 标示是否分解出宝石0:没有宝石,1:有宝石-->
+    </DeEquipmentResp>
+
+    <!--出售返回信息-->
+    <SellForResp>
+        <Arg> UINT8 </Arg> <!--错误码-->
+    </SellForResp>
+
+    <!--拾取返回信息-->
+    <PickDropResp>
+        <Arg> UINT32 </Arg> <!--错误码， 正确的话就是要拾取的dropeid-->
+		<Arg> LUA_TABLE </Arg>
+    </PickDropResp>
+
+    <!--加锁返回信息-->
+    <ReqForLockResp>
+        <Arg> UINT8 </Arg> <!--idx-->
+        <Arg> UINT8 </Arg> <!--错误码-->
+     </ReqForLockResp>
+
+        <!--升级契约返回-->
+     <LevelUpSkillResp>
+        <Arg> UINT8 </Arg> <!--错误码-->
+    </LevelUpSkillResp>    
+        
+     <!--升级印记返回-->
+    <LevelUpMarkResp>
+        <Arg> UINT8 </Arg> <!--错误码-->
+    </LevelUpMarkResp>  
+
+    
+    
+       <!--拖拽契约技能返回-->
+     <ClientCastSkillResp>
+     		<Arg> UINT32 </Arg> <!--契约技能ID-->
+     		<Arg> UINT32 </Arg> <!--拖动位置-->
+        <Arg> UINT8 </Arg> <!--错误码-->
+    </ClientCastSkillResp>
+    
+    <!--拖拽印记返回-->
+     <ClientCastMarkResp>
+     	<Arg> UINT32 </Arg> <!--契约印记ID-->
+     	<Arg> UINT32 </Arg> <!--拖动位置-->
+        <Arg> UINT8 </Arg> <!--错误码-->
+    </ClientCastMarkResp>
+
+    <!--精灵系统Luatable属性同步-->
+     <SpiritPropRefreshResp>
+     	<Arg> UINT8 </Arg> <!--1:SpiritSkill 2：SpiritMark 3：SelectedSpiritSkill 4：SelectedSpiritMark-->
+     	<Arg>LUA_TABLE</Arg> <!--属性的值-->      
+    </SpiritPropRefreshResp>
+    
+    <NPCResp>
+        <Arg> UINT32 </Arg> <!--NPC调用返回码-->
+    </NPCResp>
+
+    <!--客户端怪物 -->
+    <CreateCliEntityResp>
+        <Arg> LUA_TABLE </Arg>
+    </CreateCliEntityResp>
+    
+    <!--技能升级-->
+    <SkillUpResp>
+       <Arg> UINT8 </Arg>
+    </SkillUpResp>
+    
+    
+    <!-- 获取服务器时间的回调接口 -->
+    <GetServerTimeResp>
+        <Arg> UINT8 </Arg>
+        <Arg> UINT32 </Arg>
+    </GetServerTimeResp>
+
+    <!-- 将技能背包中的数据同步给客服端 -->
+    <SkillSyncToClient>
+        <Arg> LUA_TABLE </Arg> <!--skill bag -->
+    </SkillSyncToClient>
+  
+	<!-- 活动开启通知 -->
+    <EventOpenResp>
+        <Arg> UINT16 </Arg> <!--活动ID -->
+    </EventOpenResp>
+
+    <!-- 活动开启列表(上线时通知) -->
+    <EventOpenListResp>
+        <Arg> LUA_TABLE </Arg> <!--活动开启列表 -->
+    </EventOpenListResp>
+
+	<!-- 限时活动奖励领取结果返回 -->
+	<get_reward_Resp>
+		<Arg> UINT16 </Arg> <!--活动id-->
+ 		<Arg> UINT32 </Arg> <!--错误码-->
+	</get_reward_Resp>
+
+	<!-- 充值奖励领取结果返回 -->
+	<get_reward_recharge_Resp>
+		<Arg> UINT16 </Arg> <!--活动id-->
+ 		<Arg> UINT32 </Arg> <!--错误码-->
+	</get_reward_recharge_Resp>
+
+	<!-- 请求已领取充值奖励返回 -->
+	<get_done_recharge_Resp>
+		<Arg> LUA_TABLE </Arg> <!--格式{[id]=1,...}-->
+	</get_done_recharge_Resp>
+
+	<!-- 成就奖励领取结果返回 -->
+	<get_reward_achievement_Resp>
+		<Arg> UINT16 </Arg> <!--成就ID-->
+ 		<Arg> UINT32 </Arg> <!--错误码-->
+	</get_reward_achievement_Resp>
+
+	<!--登陆领取结果返回 -->
+	<get_reward_login_Resp>
+ 		<Arg> UINT32 </Arg> <!--错误码-->
+	</get_reward_login_Resp>		
+	
+    
+    <!-- 使用道具的返回码 -->
+    <UseItemResp>
+        <Arg> UINT32 </Arg> <!--typeId-->
+        <Arg> UINT8 </Arg> <!--return code-->
+        <Arg> LUA_TABLE </Arg> <!--道具表-->
+    </UseItemResp>
+    
+    
+
+    <!-- 使用血瓶返回码 -->
+    <UseHpBottleResp>
+        <Arg> UINT8 </Arg> <!--return code-->
+    </UseHpBottleResp>
+    
+    <!-- 购买血瓶返回码
+    <BuyHpBottleResp>
+        <Arg> UINT8 </Arg>
+    </BuyHpBottleResp> -->
+    
+    <!--vip实时状态同步 -->
+    <VipRealStateResp>
+        <Arg> LUA_TABLE </Arg>
+     </VipRealStateResp>
+    
+    <get_achievement_Resp>
+    	 <Arg> UINT16 </Arg>
+    	 <Arg> LUA_TABLE </Arg>
+    </get_achievement_Resp>
+    
+     <join_event_Resp>
+    	 <Arg> UINT16 </Arg>
+    	 <Arg> UINT16 </Arg>
+    </join_event_Resp>
+    
+    <get_event_ing_Resp>
+			<Arg> LUA_TABLE </Arg>
+			<Arg> LUA_TABLE </Arg>
+    </get_event_ing_Resp>
+    
+    <!-- 完成成就 -->
+    <finish_achievement>
+			<Arg> UINT16 </Arg> <!-- 成就config_id -->
+    </finish_achievement>
+    
+
+      <!-- 完成任务 -->
+    <finish_task>
+			<Arg> UINT16 </Arg> <!-- 任务config_id -->
+    </finish_task>
+
+    <!-- 雇佣兵信息响应 -->
+    <MercenaryInfoResp>
+        <Arg> LUA_TABLE </Arg>
+    </MercenaryInfoResp>
+    
+     <!-- 公告牌 -->
+    <Billboard>
+        <Arg> LUA_TABLE </Arg>
+    </Billboard> 
+       
+    <!-- boss死了,客户端删除dummy等 -->  
+    <BossDieResp>
+    </BossDieResp> 
+
+    <!-- 客户端返回的错误码 -->
+    <err_resp>
+        <Arg> UINT32 </Arg>    <!-- 操作ID -->
+        <Arg> UINT32 </Arg>    <!-- 错误码 -->
+    </err_resp>
+
+	<!-- 完成日常任务 -->
+      <finish_day_task>
+        <Arg> UINT16 </Arg>  <!--id-->
+    </finish_day_task>
+
+	<!-- 领取日常任务奖励 返回-->
+    <get_reward_day_task_Resp>
+      <Arg> UINT16 </Arg> <!--活动id-->
+ 	  <Arg> UINT32 </Arg> <!--错误码-->
+    </get_reward_day_task_Resp>
+    
+	<!-- 日常任务数据变化 id为0则是发送整个luatable-->
+    <day_task_change>
+        <Arg> UINT16 </Arg>  <!--id-->
+        <Arg> LUA_TABLE </Arg>  <!--数据-->        
+    </day_task_change>
+
+    <!-- 服务器告诉客户端被顶号 -->
+    <OnMultiLogin/>
+
+    <!-- 服务器告诉客户端显示奖励框 -->
+    <ShowRewardForms>
+        <Arg> LUA_TABLE </Arg>  <!--items-->
+        <Arg> UINT16 </Arg>  <!--cd-->
+        <Arg> UINT32 </Arg>  <!--id-->
+        <Arg> UINT32 </Arg>  <!--id-->
+        <Arg> UINT8 </Arg>  <!--0:failed,1:win-->
+    </ShowRewardForms>
+    
+    <PurpleExchangeResp>
+        <Arg> UINT8 </Arg>  <!--ret code-->
+    </PurpleExchangeResp>
+    
+    <GoldMetallurgyResp>
+        <Arg> UINT8 </Arg>  <!--ret code-->
+    </GoldMetallurgyResp>
+
+    <RankListResp>
+        <Arg> UINT8  </Arg>    <!--返回类型码   1：需要更新数据，0：不需要更新数据--> 
+        <Arg> LUA_TABLE </Arg> <!--排行榜数据-->
+        <Arg> UINT32 </Arg>    <!--timestamp-->
+        <Arg> UINT8  </Arg>    <!--后续数据标记 1：还有后续数据，0：没有后续数据--> 
+    </RankListResp>
+	
+    <RankAvatarInfoResp>
+        <Arg> LUA_TABLE </Arg>   <!--角色基本信息-->
+        <Arg> UINT8  </Arg>      <!--性别标识信息1：男 0：女 -->
+        <Arg> UINT8  </Arg>      <!--偶像标识信息1：是 0：否 -->
+    </RankAvatarInfoResp>
+
+    <HasOnRankResp>
+        <Arg> UINT8  </Arg>  <!--角色等级level  -->
+    </HasOnRankResp>
+
+    <FansIdolResp>
+        <Arg> UINT8  </Arg>  <!--retcode  -->
+        <Arg> STRING  </Arg>     <!--名字标识信息-->
+    </FansIdolResp>
+    
+    <AddGiftBagResp>
+        <Arg> UINT32  </Arg>  <!--礼包id  -->
+        <Arg> UINT32  </Arg>  <!--领取返回值 0为成功  -->
+    </AddGiftBagResp>
+    
+    <!--事件列表回调  -->
+    <EventListAvatarNameResp>
+        <Arg> LUA_TABLE  </Arg>  <!--事件列表  -->
+    </EventListAvatarNameResp>
+
+    <!--购买相关回调接口  -->
+    <DragonRelatedResp>
+        <Arg> UINT8  </Arg>   <!--retcode  -->
+    </DragonRelatedResp>
+
+    <!--飞龙所有信息回调，包括角色上线和对手信息刷新  -->
+    <DragonInfoResp>
+        <Arg> LUA_TABLE </Arg> <!--1:飞龙信息,2:对手信息 -->
+    </DragonInfoResp>
+
+    <!--刷新飞龙品质信息回调  -->
+    <FreshDragonQualityResp>
+        <Arg> UINT8  </Arg>   <!--retcode-->
+        <Arg> UINT8  </Arg>   <!--品质   -->
+    </FreshDragonQualityResp>
+
+    <!--完成护送通知领奖励接口  -->
+    <DragonConvoyCompleteResp>
+        <Arg> UINT8  </Arg>      <!--返回码 1：完成，0：进行中  -->
+    </DragonConvoyCompleteResp>
+
+    <!--飞龙护送及缩短护送时间回调-->
+    <DragonConvoyResp>
+        <Arg> UINT8  </Arg>   <!--retcode 1：成功， 0：失败 -->
+        <Arg> UINT32 </Arg> <!-- 倒计时间-->
+    </DragonConvoyResp>
+
+    <!--复仇回调-->
+    <DragonRevengeResp>
+        <Arg> UINT8  </Arg> 
+    </DragonRevengeResp>
+    
+    <!--袭击回调-->
+    <DragonAttackResp>
+        <Arg> UINT8  </Arg>
+    </DragonAttackResp>
+    
+    
+    <GetFumoInfoResp>
+    		<Arg> UINT8  </Arg>    	
+        <Arg>LUA_TABLE</Arg>
+    </GetFumoInfoResp>
+    
+    
+    <fumoResp>
+    		<Arg>UINT8</Arg>    	
+        <Arg>UINT8</Arg> <!--附魔对应的返回结果代码-->
+    </fumoResp>
+    
+     <fumo_replaceResp>
+    		<Arg>UINT8</Arg>
+    		<Arg>UINT8</Arg>    	    	
+        <Arg>UINT8</Arg> <!--附魔对应的返回结果代码-->
+    </fumo_replaceResp>
+
+    <FreshConvoyRewardResp>
+        <Arg> UINT32 </Arg>  <!--经验 -->
+        <Arg> UINT32 </Arg>  <!--金币 -->
+    </FreshConvoyRewardResp>
+
+    <DragonCvyRewardResp>
+         <Arg> UINT8  </Arg> <!--领取奖励 0：领取成功， 1：已领取 -->
+    </DragonCvyRewardResp>
+
+    <BuyAtkTimesResp>
+        <Arg> UINT8 </Arg>
+    </BuyAtkTimesResp>
+
+    <ClearAtkCdResp>
+         <Arg> UINT8 </Arg>
+    </ClearAtkCdResp>
+
+    <RemainConvoyTimesResp>
+         <Arg> UINT8 </Arg>     <!-- remain times -->
+    </RemainConvoyTimesResp>
+
+    <!--探索事件回调 -->
+    <ExploreDragonEventResp>
+        <Arg> UINT8 </Arg>  <!--retcode -->
+        <Arg> UINT8 </Arg>  <!--expore event idx -->
+    </ExploreDragonEventResp>
+
+    <ActivedSuitEquipmentResp>
+         <Arg> UINT8 </Arg>  <!--retcode -->
+         <Arg> UINT32 </Arg>  <!--typeId -->
+         <Arg> UINT8 </Arg>  <!--bagType -->
+    </ActivedSuitEquipmentResp>
+
+    <SelfIdolResp>
+        <Arg> UINT64 </Arg>
+    </SelfIdolResp>
+
+    <DragonStatusResp>
+        <Arg> UINT8 </Arg>  <!--是否有奖励可以领取1：可以领取，0：没有奖励 -->
+        <Arg> UINT8 </Arg>  <!--是否在护送中1：在护送中，0：已完成护送 -->
+        <Arg> UINT8 </Arg>  <!--是否有剩余护送次数1：有剩余护送次数，0：没有剩余护送次数 -->
+    </DragonStatusResp>
+
+    <!--精灵系统各领域消耗女神之泪进度同步 -->
+    <ElfAreaTearProgResp>
+        <Arg> LUA_TABLE </Arg>
+    </ElfAreaTearProgResp>
+
+    <!--精灵系统消息相应码 -->
+    <ElfSysMsgResp>
+        <Arg> UINT8 </Arg>   <!--消息码 -->
+    </ElfSysMsgResp>
+
+    <!-- 获取客户端Tick时间（服务器->客户端） -->
+    <QueryClientTickReq>
+      <Arg> UINT32 </Arg>   <!-- 请求序号 -->
+    </QueryClientTickReq>
+
+    <TrainOrdinaryWingResp>
+        <Arg> UINT8 </Arg> <!--ret code -->
+    </TrainOrdinaryWingResp>
+    <MagicWingActiveResp>
+        <Arg> UINT8 </Arg> <!--ret code -->
+    </MagicWingActiveResp>
+    <WingBagSyncClientResp>
+      <Arg> LUA_TABLE </Arg>
+    </WingBagSyncClientResp>
+
+    <!-- 守护PvP申请成功 -->
+    <DefensePvPApplyResp>
+      <Arg> UINT16 </Arg>    <!--前面排队的玩家数量-->
+    </DefensePvPApplyResp>
+
+    <!-- 守护PvP进入成功 -->
+    <DefensePvpEnterResp>
+      <Arg> UINT32 </Arg>    <!--当前游戏已过秒数-->
+      <!--{{玩家1的dbid,玩家1名字,玩家1阵营(1或2)},{玩家2的dbid,玩家2名字,玩家2阵营(1或2),...}}-->
+      <Arg> LUA_TABLE </Arg>
+    </DefensePvpEnterResp>
+
+    <!-- 守护PvP积分刷新 -->
+    <DefensePvpPointRefresh>
+      <Arg> LUA_TABLE </Arg> <!--{玩家1(dbid)=积分,玩家2=积分,...}-->
+      <Arg> LUA_TABLE </Arg> <!--{阵营1={积分，剩余},阵营2={积分，剩余}}-->
+    </DefensePvpPointRefresh>
+
+    <!-- 守护PvP状态反馈 -->
+    <DefensePvPStateResp>
+      <Arg> INT32 </Arg>  <!--开启的剩余秒数，0为关闭，负1为永久-->
+      <Arg> UINT32 </Arg>  <!--个人积分-->
+    </DefensePvPStateResp>
+
+    <WingExchangeResp>
+        <Arg> UINT8 </Arg> <!--ret code -->
+    </WingExchangeResp>
+
+    <!-- 守护PvP已开放 -->
+    <DefensePvPOpened>
+    </DefensePvPOpened>
+
+    <!-- 守护PvP奖励结算 -->
+    <DefensePvpAward>
+      <Arg> UINT8 </Arg>  <!--胜利为1，失败为0-->
+      <Arg> UINT8 </Arg>  <!--排名-->
+    </DefensePvpAward>
+
+    <OnNotifyChargeResp>
+      <Arg> LUA_TABLE </Arg>
+    </OnNotifyChargeResp>
+
+    <OnChargeDiamondResp>
+        <Arg> UINT32 </Arg> <!--diamond-->
+    </OnChargeDiamondResp>
+    
+    <!-- 同步精灵技能点 -->
+    <UpdateElfSkillPoint>
+        <Arg> UINT16 </Arg> <!--精灵技能点数-->
+    </UpdateElfSkillPoint>
+
+    <!-- 同步精灵系统已学技能 -->
+    <UpdateElfLearnedSkillInfo>
+        <Arg> LUA_TABLE </Arg>  <!--ElfLearnedSkillId-->
+        <Arg> UINT32 </Arg>     <!--ElfEquipSkillId--> 
+    </UpdateElfLearnedSkillInfo>
+
+    <!-- 装备特效回调借口  -->
+    <ActiveSepciaclEffectsResp>
+    	<Arg> UINT8 </Arg> <!--id -->
+        <Arg> UINT8 </Arg> <!--ret code -->
+    </ActiveSepciaclEffectsResp>
+
+    <!-- 同步已激活特效 -->
+    <SyncSepcialEffectsResp>
+        <Arg> LUA_TABLE </Arg>  <!--special effects-->
+    </SyncSepcialEffectsResp>
+
+    <RouletteResp>
+        <Arg> UINT32 </Arg> <!--roule_id-->
+        <Arg> UINT32 </Arg> <!--rew_id-->
+        <Arg> LUA_TABLE </Arg> <!--rewards-->
+    </RouletteResp>
+    <!--精灵宝钻信息返回-->
+    <DiamondMineInfoResp>
+        <Arg> LUA_TABLE </Arg> <!--infos-->
+    </DiamondMineInfoResp>
+</ClientMethods>
+
+
+<BaseMethods>
+
+    <!--主动申请退出游戏或者返回角色选择面板接口-->
+    <Logout>
+        <Exposed/>
+        <Arg>UINT8</Arg> <!--0:退出游戏；1：返回角色选择界面-->
+    </Logout>
+
+    <!--              begin 传送点传送base              -->
+    <EnterTeleportpointReq>
+        <Exposed/>
+        <Arg> UINT16 </Arg>
+    </EnterTeleportpointReq>
+
+    <TeleportCell2Base>
+        <Arg> UINT16 </Arg>
+        <Arg> INT16 </Arg>
+        <Arg> INT16 </Arg>
+    </TeleportCell2Base>
+
+    <ChangeScene>
+        <Arg> UINT16 </Arg>    <!-- 地图ID -->
+        <Arg> UINT16 </Arg>    <!-- 分线 -->
+        <Arg> INT16 </Arg>     <!-- x坐标 -->
+        <Arg> INT16 </Arg>     <!-- y坐标 -->
+    </ChangeScene>
+
+    <SelectMapResp>
+        <Arg> UINT16 </Arg>    <!-- 玩家的实际地图ID -->
+        <Arg> UINT16 </Arg>    <!-- 玩家的实际地图分线ID -->
+        <Arg> LUA_TABLE </Arg> <!-- 选中的sp的base的mb -->
+        <Arg> LUA_TABLE </Arg> <!-- 选中的sp的cell的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> LUA_TABLE </Arg> <!-- 玩家选择分线时穿进来的参数，此时再返回给他 -->
+    </SelectMapResp>
+
+    <SelectMapFailResp>
+      <!-- 玩家的实际地图ID -->
+      <Arg> UINT16 </Arg>
+      <!-- 玩家的实际地图分线ID -->
+      <Arg> UINT32 </Arg>
+    </SelectMapFailResp>
+
+    <TeleportRemotely>
+        <Arg> UINT16 </Arg>    <!-- 目标场景号 -->
+        <Arg> UINT16 </Arg>    <!-- 目标场景分线号 -->
+        <Arg> INT16 </Arg>     <!-- 目标x坐标 -->
+        <Arg> INT16 </Arg>     <!-- 目标y坐标 -->
+    </TeleportRemotely>
+
+    <!--              end 传送点传送base              -->
+
+    <!-- 关卡副本客户端->服务器的请求入口 -->
+    <MissionReq>
+        <Exposed/>
+        <Arg> UINT16 </Arg>    <!-- msg_id 关卡系统的不同的请求  -->
+        <Arg> UINT16 </Arg>    <!-- arg1 备用参数 -->
+        <Arg> UINT16 </Arg>    <!-- arg2 备用参数 -->
+        <Arg> STRING </Arg>    <!-- arg3 备用参数 -->
+    </MissionReq>
+
+    <MissionExReq>
+        <Exposed/>
+        <Arg> UINT16 </Arg>    <!-- msg_id 关卡系统的不同的请求  -->
+        <Arg> UINT16 </Arg>    <!-- arg1 备用参数 -->
+        <Arg> UINT16 </Arg>    <!-- arg2 备用参数 -->
+        <Arg> UINT16 </Arg>    <!-- arg3 备用参数 -->
+        <Arg> STRING </Arg>    <!-- arg4 备用参数 -->
+    </MissionExReq>
+
+    <!-- 关卡副本Cell服务器->Base服务器的请求入口 -->
+    <MissionC2BReq>
+        <Arg> UINT16 </Arg>    <!-- msg_id 关卡系统的不同的请求  -->
+        <Arg> UINT16 </Arg>    <!-- arg1 备用参数 -->
+        <Arg> UINT16 </Arg>    <!-- arg2 备用参数 -->
+        <Arg> STRING </Arg>    <!-- arg3 备用参数 -->
+    </MissionC2BReq>
+
+    <!-- 活动系统客户端->服务器的请求入口 -->
+    <CampaignReq>
+        <Exposed/>
+        <Arg> UINT16 </Arg>    <!-- msg_id 活动系统的不同的请求  -->
+        <Arg> UINT16 </Arg>    <!-- arg1 备用参数 -->
+        <Arg> UINT16 </Arg>    <!-- arg2 备用参数 -->
+        <Arg> STRING </Arg>    <!-- arg3 备用参数 -->
+    </CampaignReq>
+
+    <!-- 活动系统Cell服务器->Base服务器的请求入口  -->
+    <CampaignC2BReq>
+        <Arg> UINT16 </Arg>    <!-- msg_id 活动系统的不同的请求  -->
+        <Arg> UINT64 </Arg>    <!-- arg1 备用参数 -->
+        <Arg> UINT64 </Arg>    <!-- arg2 备用参数 -->
+        <Arg> LUA_TABLE </Arg>    <!-- arg3 备用参数 -->
+    </CampaignC2BReq>
+
+    <!-- 试炼之塔客户端->服务器的请求入口 -->
+    <TowerReq>
+        <Exposed/>
+        <Arg> UINT16 </Arg>    <!-- msg_id 试炼之塔系统的不同的请求  -->
+        <Arg> UINT16 </Arg>    <!-- arg1 备用参数 -->
+        <Arg> UINT16 </Arg>    <!-- arg2 备用参数 -->
+        <Arg> STRING </Arg>    <!-- arg3 备用参数 -->
+    </TowerReq>
+
+    <!-- 试炼之塔Cell服务器->Base服务器的请求入口  -->
+    <TowerC2BReq>
+        <Arg> UINT16 </Arg>    <!-- msg_id 试炼之塔系统的不同的请求  -->
+        <Arg> UINT16 </Arg>    <!-- arg1 备用参数 -->
+        <Arg> UINT16 </Arg>    <!-- arg2 备用参数 -->
+        <Arg> STRING </Arg>    <!-- arg3 备用参数 -->
+    </TowerC2BReq>
+
+    <!-- 公会系统入口 -->
+    <GuildReq>
+        <Exposed/>
+        <Arg> UINT16 </Arg>    <!-- msg_id 关卡系统的不同的请求  -->
+        <Arg> UINT64 </Arg>    <!-- arg1 备用参数 -->
+        <Arg> UINT64 </Arg>    <!-- arg2 备用参数 -->
+        <Arg> STRING </Arg>    <!-- arg3 备用参数 -->
+    </GuildReq>
+
+    <!-- 公会系统服务器内部入口 -->
+    <GuildB2BReq>
+        <Arg> UINT16 </Arg>    <!-- msg_id 关卡系统的不同的请求  -->
+        <Arg> UINT64 </Arg>    <!-- arg1 备用参数 -->
+        <Arg> UINT64 </Arg>    <!-- arg2 备用参数 -->
+        <Arg> STRING </Arg>    <!-- arg3 备用参数 -->
+    </GuildB2BReq>
+
+    <!--                   任务系统 begin                 -->
+    <TaskCompleteReq>
+        <Exposed/>
+        <Arg> UINT32 </Arg>
+    </TaskCompleteReq>
+    <!--                   任务系统 end                   -->
+
+    <!--请求符文背包数据-->
+    <GetRuneBagReq>
+        <Exposed/>
+    </GetRuneBagReq>
+
+    <!--请求身上符文位数据-->
+    <GetBodyRunesReq>
+        <Exposed/>
+    </GetBodyRunesReq>
+
+    <!--游戏币刷新符文-->
+    <GameMoneyRefreshReq>
+        <Exposed/>
+    </GameMoneyRefreshReq>
+
+    <!--一键刷新符文-->
+    <FullRefreshReq>
+        <Exposed/>
+    </FullRefreshReq>
+
+    <!--人民币刷新符文-->
+    <RMBRefreshReq>
+        <Exposed/>
+    </RMBRefreshReq>
+
+    <!--一键合成符文-->
+    <AutoCombineReq>
+        <Exposed/>
+        <Arg>INT16</Arg> <!-- 1为许愿背包, -1为符文背包-->
+    </AutoCombineReq>
+
+    <!--一键拾取符文(经验,金钱)-->
+    <AutoPickUpReq>
+        <Exposed/>
+    </AutoPickUpReq>
+
+    <!--使用符文-->
+    <UseRuneReq>
+        <Exposed/>
+        <Arg>UINT8</Arg> <!--符文背包索引-->
+    </UseRuneReq>
+
+    <!--穿上符文-->
+    <PutOnRuneReq>
+        <Exposed/>
+        <Arg>UINT8</Arg> <!--符文背包索引-->
+        <Arg>INT16</Arg> <!--身上目标位置-->
+    </PutOnRuneReq>
+
+    <!--脱下符文-->
+    <PutDownRuneReq>
+        <Exposed/>
+        <Arg>UINT8</Arg> <!--符文身上位置-->
+        <Arg>INT16</Arg> <!--目标背包索引-->
+    </PutDownRuneReq>
+
+    <!--更换符文背包中位置-->
+    <ChangeRuneIndexReq>
+        <Exposed/>
+        <Arg>UINT8</Arg> <!--原索引-->
+        <Arg>UINT8</Arg> <!--目标索引-->
+    </ChangeRuneIndexReq>
+
+    <!--更换符文身上位置-->
+    <ChangeRunePosiReq>
+        <Exposed/>
+        <Arg>UINT8</Arg> <!--原位置-->
+        <Arg>UINT8</Arg> <!--目标位置-->
+    </ChangeRunePosiReq>
+
+    <!--请求符文效果ID-->
+    <GetRuneEffects/>
+<!--                   子系统方法调用 begin                   -->
+
+<!--身体强化子系统begin -->
+    <!-- 申请身体各个部位的level -->
+    <BodyEnhaLevReq>
+        <Exposed/>
+    </BodyEnhaLevReq>
+    <!-- 申请升级身体某个部位 -->
+    <BodyEnhaUpgReq>
+        <Exposed/>
+        <Arg> UINT8 </Arg>  <!-- 身体部位id -->
+    </BodyEnhaUpgReq>
+    <!-- 返回身体某个部位对应等级所有信息 -->
+    <BodyEnhaInfoReq>
+        <Exposed/>
+        <Arg> UINT8 </Arg>  <!-- 身体部位id -->
+        <Arg> UINT16 </Arg>  <!-- 身体部位level -->
+    </BodyEnhaInfoReq>
+    <!-- 申请身体某个部位产生的属性影响 -->
+    <BodyEnhaPropReq>
+        <Exposed/>
+        <Arg> UINT8 </Arg>  <!-- 身体部位id -->
+        <Arg> UINT16 </Arg>  <!-- 身体部位level -->
+    </BodyEnhaPropReq>
+<!--身体强化子系统end -->
+
+<!--宝石系统begin -->
+    <!-- 申请合成指定类型和等级的宝石 -->
+    <JewelCombineReq>
+        <Exposed/>
+        <Arg> UINT8 </Arg> <!-- 宝石子类型 -->
+        <Arg> UINT8 </Arg> <!-- 宝石等级 -->
+    </JewelCombineReq>    
+    <!-- 申请在装备上合成指定类型和等级的宝石 -->
+    <JewelCombineInEquiReq>
+        <Exposed/>
+        <Arg> UINT8 </Arg>  <!-- 武器格子索引 -->
+        <Arg> UINT8 </Arg> <!-- 插槽索引 -->
+    </JewelCombineInEquiReq>
+    <!-- 申请立即合成指定类型和等级的宝石所需的钻石 -->
+    <JewelCombineAnywayMoneyReq>
+        <Exposed/>
+        <Arg> UINT8 </Arg> <!-- 宝石子类型 -->
+        <Arg> UINT8 </Arg> <!-- 宝石等级 -->
+    </JewelCombineAnywayMoneyReq>
+    <!-- 申请立即合成指定类型和等级的宝石 -->
+    <JewelCombineAnywayReq>
+        <Exposed/>
+        <Arg> UINT8 </Arg> <!-- 宝石子类型 -->
+        <Arg> UINT8 </Arg> <!-- 宝石等级 -->
+    </JewelCombineAnywayReq> 
+    <!-- 申请把指定宝石镶嵌到指定装备的指定插槽上 -->
+    <JewelInlayIntoSlotReq>
+        <Exposed/>
+        <Arg> UINT8 </Arg>  <!-- 武器格子索引 -->
+        <Arg> UINT8 </Arg>  <!-- 武器插槽索引 -->
+        <Arg> UINT8 </Arg>  <!-- 宝石格子索引 -->
+    </JewelInlayIntoSlotReq>  
+    <!-- 申请把指定宝石镶嵌到指定装备上 -->
+    <JewelInlayReq>
+        <Exposed/>
+        <Arg> UINT8 </Arg>  <!-- 武器格子索引 -->
+        <Arg> UINT8 </Arg>  <!-- 宝石格子索引 -->
+    </JewelInlayReq>
+    <!-- 申请卸载指定装备上的指定宝石 -->
+    <JewelOutlayReq>
+        <Exposed/>
+        <Arg> UINT8 </Arg>  <!-- 武器格子索引 -->
+        <Arg> UINT8 </Arg>  <!-- 宝石插槽索引 -->
+    </JewelOutlayReq>
+    <!--
+    <JewelCanCombineReq>
+        <Exposed/>
+    </JewelCanCombineReq>
+    -->
+
+<!--宝石系统end -->
+
+<!--好友系统begin -->
+    <FriendAddReq>
+        <Exposed/>
+        <Arg> UINT64 </Arg> 
+    </FriendAddReq>
+    <FriendDelReq>
+        <Exposed/>
+        <Arg> UINT64 </Arg>  <!--  -->
+    </FriendDelReq>
+    <FriendListReq>
+        <Exposed/>
+    </FriendListReq>
+    <FriendResearchReq>
+        <Exposed/>
+        <Arg> STRING </Arg>  <!--  -->
+    </FriendResearchReq>
+    <!-- -->
+    <FriendReqListReq>
+        <Exposed/>
+    </FriendReqListReq>
+
+    <FriendAcceptReq>
+        <Exposed/>
+        <Arg> UINT64 </Arg>  <!--  -->
+    </FriendAcceptReq>
+    <FriendRejectReq>
+        <Exposed/>
+        <Arg> UINT64 </Arg>  <!--  -->
+    </FriendRejectReq>
+    <FriendSendNoteReq>
+        <Exposed/>
+        <Arg> UINT64 </Arg>  <!--  -->
+        <Arg> STRING </Arg>  <!--  -->
+    </FriendSendNoteReq>
+    <FriendReadNoteReq>
+        <Exposed/>
+        <Arg> UINT64 </Arg>  <!--  -->
+    </FriendReadNoteReq>
+    <!--好友祝福-->
+    <FriendBlessReq>
+        <Exposed/>
+        <Arg> UINT64 </Arg>  <!-- friend dbid -->
+    </FriendBlessReq>
+    <!--领取单个好友祝福-->
+    <FriendRecvBlessReq>
+        <Exposed/>
+        <Arg> UINT64 </Arg>  <!--  -->
+    </FriendRecvBlessReq>
+    <!--领取所有好友祝福-->
+    <FriendRecvAllBlessReq>
+        <Exposed/>
+    </FriendRecvAllBlessReq>
+<!--好友系统end -->
+
+<!--邮件系统 begin-->
+    <!--申请邮件信息-->
+    <MailInfoReq>
+        <Exposed/>
+    </MailInfoReq>
+    <!--申请阅读邮件信息-->
+    <MailReadReq>
+        <Exposed/>
+        <Arg> UINT64 </Arg>  <!-- mail id -->
+    </MailReadReq>
+    <!--申请删除邮件信息-->
+    <MailDelReq>
+        <Exposed/>
+        <Arg> UINT64 </Arg>  <!-- mail id -->
+    </MailDelReq>
+    <!--申请删除所有可邮件信息-->
+    <MailDelAllReq>
+        <Exposed/>
+    </MailDelAllReq>
+    <!--申请领取邮件附件-->
+    <MailAttachGetReq>
+        <Exposed/>
+        <Arg> UINT64 </Arg>  <!-- mail id -->
+    </MailAttachGetReq>
+
+    <OnMailInfoReq>
+        <Arg> LUA_TABLE </Arg>  <!-- mail simple info -->
+    </OnMailInfoReq>
+    <OnMailReadReq>
+        <Arg> LUA_TABLE </Arg>  <!-- mail detail info -->
+        <Arg> UINT8 </Arg>      <!-- error id -->
+    </OnMailReadReq>
+    <OnMailDelReq>
+    </OnMailDelReq>
+    <OnGetAttachInfo>
+        <Arg> LUA_TABLE </Arg>  <!-- mail attach info -->
+    </OnGetAttachInfo>
+    <OnMailAttachGetReq>
+        <Arg> LUA_TABLE </Arg>  <!-- mail detail info -->
+    </OnMailAttachGetReq>
+    <OnRecvMail>
+        <Arg> LUA_TABLE </Arg>  <!-- mail simple info -->
+    </OnRecvMail>
+    <OnMailMgrCB>
+        <Arg> UINT32 </Arg>  <!-- 中文字符id -->
+    </OnMailMgrCB>
+    <!--带宝石附件邮件查看-->
+    <JewlMailReq>
+        <Exposed/>
+    </JewlMailReq>
+<!--邮件系统 end-->
+
+<!--圣域守卫战 RPC后端接口 begin-->
+    <!--下次开启时间，正在开启，返回0-->
+    <SanctuaryDefenseTimeReq>
+        <Exposed/>
+    </SanctuaryDefenseTimeReq>
+
+    <!--进入活动-->
+    <EnterSanctuaryDefenseReq>
+        <Exposed/>
+    </EnterSanctuaryDefenseReq>
+
+    <!--我的数据-->
+    <SantuaryDefenseMyInfoReq>
+        <Exposed/>
+    </SantuaryDefenseMyInfoReq>
+
+    <!--申请排名相关数据-->
+    <SanctuaryDefenseRankReq>
+        <Exposed/>
+    </SanctuaryDefenseRankReq>
+    
+    <!--buyEnterTime-->
+    <BuySanctuaryDefenseTimeReq>
+        <Exposed/>
+    </BuySanctuaryDefenseTimeReq>
+
+    <!--canBuyEnterTime-->
+    <CanBuySanctuaryDefenseTimeReq>
+        <Exposed/>
+    </CanBuySanctuaryDefenseTimeReq>
+
+    <OnSanctuaryDefenseReward>
+        <Arg> LUA_TABLE </Arg>
+        <Arg> UINT32 </Arg>  <!--  -->
+    </OnSanctuaryDefenseReward>
+
+    <OnSanctuaryDefenseBuy>
+        <Arg> UINT8 </Arg>  <!--  -->
+        <Arg> UINT32 </Arg>  <!--  -->
+        <Arg> UINT32 </Arg>  <!--  -->
+    </OnSanctuaryDefenseBuy>
+    <!--gm open-->
+    <sd_open>
+        <Arg> UINT32 </Arg>  <!-- openTime -->
+        <Arg> UINT32 </Arg>  <!-- startTime -->
+        <Arg> UINT32 </Arg>  <!-- lastTime -->
+    </sd_open>
+    <SanctuaryNotice>
+        <Arg> UINT8 </Arg>  <!-- msgid -->
+    </SanctuaryNotice>
+    <GetWeekCtrbuRewardReq>
+        <Exposed/>
+        <Arg> UINT32 </Arg>    <!-- 奖励id -->
+    </GetWeekCtrbuRewardReq>
+    <OnWorldBossWeekCtrbuRewardResp>
+        <Arg> UINT32 </Arg>  <!-- id -->
+        <Arg> LUA_TABLE </Arg> <!-- 奖励内容 -->
+    </OnWorldBossWeekCtrbuRewardResp>
+<!--圣域守卫战 RPC后端接口 end-->
+
+<!--竞技场挑战系统 begin-->
+    <RefreshWeakReq> <!--interface:刷新弱对手-->
+        <Exposed/>
+    </RefreshWeakReq>
+    <RefreshStrongReq> <!--interface:刷新强对手-->
+        <Exposed/>
+    </RefreshStrongReq>
+    <RevengeBuffReq> <!--interface:购买挑战仇敌的强化buf-->
+        <Exposed/>
+    </RevengeBuffReq>
+    <RefreshArenaDataReq> <!--interface:刷新竞技场所有不走属性同步的数据:积分，挑战cd，次数-->
+        <Exposed/>
+    </RefreshArenaDataReq>
+    <EnterArenaReq> <!--interface:进入UI界面-->
+        <Exposed/>
+    </EnterArenaReq>
+    <ClearArenaCDReq> <!--interface:清除挑战CD-->
+        <Exposed/>
+    </ClearArenaCDReq>
+    <AddArenaTimesReq> <!--interface:购买可挑战次数-->
+        <Exposed/>
+    </AddArenaTimesReq>
+    <GetArenaRewardInfoReq>
+        <Exposed/>
+    </GetArenaRewardInfoReq>
+    <GetArenaRewardReq> <!--interface:领取积分奖励-->
+        <Exposed/>
+        <Arg> UINT8 </Arg>  <!-- 奖励id -->
+    </GetArenaRewardReq>
+    <ChallengeReq> <!--interface:挑战-->
+        <Exposed/>
+        <Arg> UINT8 </Arg>  <!-- 挑战类型：1：弱对手，2：强对手，3：仇敌 -->
+    </ChallengeReq>
+    <CanGetScoreRewardsReq>
+        <Exposed/>
+    </CanGetScoreRewardsReq>
+    <CanGetExpReq>
+        <Exposed/>
+    </CanGetExpReq>
+<!--竞技场挑战系统 end-->
+
+<!-- 全局管理器回调 begin-->
+<!--usermgr begin-->
+    <LoginUserMgr>
+        <Arg> LUA_TABLE </Arg>
+    </LoginUserMgr>
+    <QueryInfoByPlayerNameResp>
+        <Arg> UINT32 </Arg>  <!--  -->
+        <Arg> STRING </Arg>  <!--  -->
+        <Arg> LUA_TABLE </Arg>
+    </QueryInfoByPlayerNameResp>
+    <QueryInfoByPlayerDbidResp>
+        <Arg> UINT32 </Arg>  <!--  -->
+        <Arg> UINT64 </Arg>  <!--  -->
+        <Arg> LUA_TABLE </Arg>
+    </QueryInfoByPlayerDbidResp>
+    <RpcRelayCallback>
+        <Arg> UINT8 </Arg>  <!-- msg -->
+        <Arg> UINT64 </Arg>  <!-- dbid -->
+        <Arg> LUA_TABLE </Arg> <!-- otherInfo -->
+        <Arg> UINT8 </Arg>  <!-- error code -->
+    </RpcRelayCallback>
+    <BeRpcRelayCall>
+        <Arg> UINT8 </Arg>  <!-- msg -->
+        <Arg> LUA_TABLE </Arg>
+    </BeRpcRelayCall>
+<!-- usermgr end -->
+    <OfflineMgrCallback>
+        <Arg> UINT8 </Arg>  <!-- msg -->
+        <Arg> UINT64 </Arg>  <!-- dbid -->
+        <Arg> LUA_TABLE </Arg> <!-- otherInfo -->
+        <Arg> UINT8 </Arg>  <!-- error code -->
+    </OfflineMgrCallback>
+    <!--上线处理离线消息-->
+    <OnGetAllOfflineItem>
+        <Arg> LUA_TABLE </Arg>
+    </OnGetAllOfflineItem>
+    <!--
+    <MailMgrCallback>
+        <Arg> UINT8 </Arg>  
+        <Arg> LUA_TABLE </Arg> 
+        <Arg> UINT64 </Arg>  
+        <Arg> UINT8 </Arg>  
+    </MailMgrCallback>
+    -->
+<!-- 全局管理器回调 end -->
+
+<!--世界boss参与
+    <EnterWorldBossMap>
+    </EnterWorldBossMap> -->
+<!--                   子系统方法调用 end                     -->
+
+    <!--施放技能-->
+    <UseSkillReq>
+        <Exposed/>
+        <Arg> UINT64 </Arg>       <!--客户端TickCount-->
+        <Arg> INT16 </Arg>        <!--玩家坐标X-->
+        <Arg> INT16 </Arg>        <!--玩家坐标Y-->
+        <Arg> UINT8 </Arg>        <!--玩家朝向-->
+        <Arg> UINT16 </Arg>       <!--技能ID-->
+        <Arg> LUA_TABLE </Arg>    <!--施放目标对象的ID表-->
+    </UseSkillReq>
+
+    <!--佣兵施放技能-->
+    <MercenaryUseSkillReq>
+        <Exposed/>
+        <Arg> UINT64 </Arg>       <!--客户端TickCount-->
+        <Arg> UINT32 </Arg>       <!--佣兵ID-->
+        <Arg> INT16 </Arg>        <!--佣兵坐标X-->
+        <Arg> INT16 </Arg>        <!--佣兵坐标Y-->
+        <Arg> UINT8 </Arg>        <!--佣兵朝向-->
+        <Arg> UINT16 </Arg>       <!--技能ID-->
+        <Arg> LUA_TABLE </Arg>    <!--施放目标对象的ID表-->
+    </MercenaryUseSkillReq>
+
+    <!--畜力技能，开始畜力，参数1为客户端TickCount-->
+    <ChargeSkillReq>
+        <Exposed/>
+        <Arg> UINT64 </Arg>
+    </ChargeSkillReq>
+
+    <!--畜力技能，取消畜力-->
+    <CancelChargeSkillReq>
+        <Exposed/>
+    </CancelChargeSkillReq>
+
+    <!--从商城购买物品-->
+    <MarketBuy>
+        <Exposed/>
+        <Arg>UINT16</Arg>     <!--商城版本号-->
+        <Arg>UINT16</Arg>     <!--栏位号-->
+        <Arg>UINT32</Arg>     <!--道具ID-->
+        <Arg>UINT8</Arg>      <!--道具数量-->
+        <Arg>UINT32</Arg>     <!--当前价格（实际价格）-->
+        <Arg>UINT8</Arg>      <!--购买组数量-->
+    </MarketBuy>
+
+    <!--商品栏有动态数据时（限购，限时），请求服务器更新数据-->
+    <MarketGridDataReq>
+        <Exposed/>
+        <Arg>UINT16</Arg>     <!--商城版本号-->
+        <Arg>UINT16</Arg>     <!--栏位号-->
+    </MarketGridDataReq>
+
+    <!--商城版本检查，若版本不一致则服务器会返回更新请求，若一致则不作任何处理-->
+    <MarketVersionCheck>
+        <Arg>UINT16</Arg>     <!--商城版本号-->
+    </MarketVersionCheck>
+
+    <!--从商城购买物品-->
+    <HotSalesBuy>
+        <Exposed/>
+        <Arg>UINT16</Arg>     <!--热销商城版本号-->
+        <Arg>UINT32</Arg>     <!--道具ID-->
+        <Arg>UINT8</Arg>      <!--购买类型-->
+        <Arg>UINT32</Arg>     <!--当前价格（实际价格）-->
+    </HotSalesBuy>
+
+    <!--热销商城版本检查，若版本不一致则服务器会返回更新请求，若一致则不作任何处理-->
+    <HotSalesVersionCheck>
+        <Arg>UINT16</Arg>     <!--热销商城版本号-->
+    </HotSalesVersionCheck>
+
+    <!--查询商城数据-->
+    <TransferMarketDataReq>
+        <Exposed/>
+    </TransferMarketDataReq>
+    
+    <!--领取等级礼包-->
+    <DrawGift>
+        <Exposed/>
+        <Arg>UINT16</Arg>     <!--栏位ID-->
+    </DrawGift>
+
+    <!--查询等级礼包已领取的记录信息-->
+    <LevelGiftRecordReq>
+        <Exposed/>
+    </LevelGiftRecordReq>
+
+    <!--湮灭之门副本消息请求入口-->
+    <OblivionGateReq>
+        <Exposed/>
+        <Arg> UINT8 </Arg>     <!--msg_id 湮灭之门系统的不同的请求-->
+        <Arg> UINT32 </Arg>    <!--arg1 备用参数-->
+        <Arg> UINT32 </Arg>    <!--arg2 备用参数-->
+    </OblivionGateReq>
+
+    <!--守护PvP消息请求入口-->
+    <DefensePvPReq>
+        <Exposed/>
+        <Arg> UINT8 </Arg>     <!--msg_id 守护PvP系统的不同的请求-->
+        <Arg> UINT32 </Arg>    <!--arg1 备用参数-->
+        <Arg> UINT32 </Arg>    <!--arg2 备用参数-->
+    </DefensePvPReq>
+
+    <!--玩家作弊记录-->
+    <MarkCheat>
+        <Exposed/>
+        <Arg> UINT8 </Arg>     <!-- 非零时，代表已被客户端断开-->
+    </MarkCheat>
+
+    <!--事件回调分派接口-->
+    <EventDispatch>
+        <Arg>STRING</Arg>       <!--子系统名称，为空则代表"Avatar"，为client则代表调用客户端接口-->
+        <Arg>STRING</Arg>       <!--子系统成员函数名，或客户端RPC函数名-->
+        <Arg>LUA_TABLE</Arg>    <!--函数的参数列表-->
+    </EventDispatch>
+
+    <!-- 聊天系统客户端入口 -->
+    <Chat>
+      <Exposed/>
+      <Arg> UINT8 </Arg>    <!-- 频道 -->
+      <Arg> UINT64 </Arg>   <!-- 对方的dbid -->
+      <Arg> STRING </Arg>   <!-- 内容 -->
+    </Chat>
+    <!-- 客服端背包数据请求接口 -->
+  
+    <ChatResp>
+        <Arg> UINT8 </Arg>    <!-- 频道 -->
+        <Arg> UINT64 </Arg>   <!-- 发消息的人的dbid -->
+        <Arg> STRING </Arg>   <!-- 发消息的人的名字 -->
+        <Arg> UINT8 </Arg>    <!-- 消息发送者的等级 -->
+        <Arg> STRING </Arg>   <!-- 消息内容 -->
+    </ChatResp>
+
+
+    <!--整理背包请求-->
+    <TidyInventory>
+        <Exposed/>
+    </TidyInventory>
+
+    <!--背包数据批量请求-->
+    <InventoryReq>
+        <Exposed/>
+    </InventoryReq>
+      
+    <DecomposeEquipment>
+        <Exposed/>
+        <Arg> UINT32 </Arg> <!-- 装备id      -->
+        <Arg> UINT8 </Arg>  <!-- 装备背包索引-->
+    </DecomposeEquipment>
+
+    <!--换装-->
+    <ExchangeEquipment>
+        <Exposed/>
+        <Arg> UINT32 </Arg> <!-- 装备id-->
+        <Arg> UINT8 </Arg> <!-- 装备背包索引-->
+    </ExchangeEquipment>
+    
+    
+    <SellForItems>
+        <Exposed/>
+        <Arg> UINT32 </Arg> <!-- 背包格子id-->
+        <Arg> UINT8  </Arg> <!-- 背包格子idx-->
+        <Arg> UINT32 </Arg> <!-- 道具typeId-->
+        <Arg> UINT16 </Arg> <!-- 数量count -->
+    </SellForItems>
+    <!--装备一级属性值计算-->
+    <GetEquipEffects/>
+
+    <add_item>
+        <Arg> UINT32 </Arg> <!-- 增加道具typeid -->
+        <Arg> UINT8 </Arg>  <!-- 增加道具count -->
+    </add_item>
+    
+    <del_item>
+        <Arg> UINT32 </Arg>  <!-- 删除typeid -->
+        <Arg> UINT8 </Arg>   <!-- 删除count -->
+    </del_item>
+
+    <del_equip>
+        <Arg> UINT32 </Arg>  <!-- 删除id -->
+        <Arg> UINT8 </Arg>   <!-- 删除idx -->
+    </del_equip>
+
+    <ReqForLock>
+        <Exposed/>
+        <Arg> UINT32 </Arg> <!-- 装备id -->
+        <Arg> UINT8 </Arg> <!-- idx -->
+    </ReqForLock>
+
+        <!--装备技能契约-->
+	<ClientCastSkill>
+		<Exposed/>
+		<Arg> UINT8 </Arg>    <!-- 技能ID -->
+      		<Arg> UINT32 </Arg>   <!-- 装备槽位，序号从1开始 -->
+	</ClientCastSkill>
+
+      <!--装备印记-->
+	<ClientCastMark>
+		<Exposed/>
+		<Arg> UINT8 </Arg>    <!-- 印记ID -->
+		<Arg> UINT32 </Arg>   <!-- 装备槽位，序号从1开始 -->
+	</ClientCastMark>
+
+
+	<TriggerEvent>
+		<Exposed/>
+		<Arg> UINT32 </Arg> 
+		<Arg> UINT32 </Arg>
+		<Arg> UINT32 </Arg>   
+    	 </TriggerEvent>
+
+	<get_reward>
+			<Exposed/>
+		<Arg> UINT16 </Arg>    <!-- 活动ID -->
+ 
+	</get_reward>
+
+
+	<EnterEvents>		
+		<Arg> LUA_TABLE </Arg>    <!-- 活动列表 --> 
+	</EnterEvents>
+	
+		<RefreshTask>		
+		<Arg> LUA_TABLE </Arg>    <!-- 活动列表 --> 
+	</RefreshTask>
+
+	<get_reward_login>		
+		<Exposed/>
+	</get_reward_login>
+
+	<get_reward_recharge>		
+		<Exposed/>
+		<Arg> UINT16 </Arg> 
+	</get_reward_recharge>
+
+	<!-- 请求已领取充值奖励 -->
+	<get_done_recharge>
+		<Exposed/>
+	</get_done_recharge>
+
+	<get_reward_achievement>		
+		<Exposed/>
+		<Arg> UINT16 </Arg> 
+	</get_reward_achievement>
+
+	<join_event>
+		<Arg> UINT16 </Arg> 
+	</join_event>
+
+	<leave_event>
+		<Arg> UINT16 </Arg> 
+	</leave_event>
+
+
+	<join_event_from_eventmgr>
+		<Arg> LUA_TABLE </Arg> 
+		<Arg> UINT16 </Arg> 
+	</join_event_from_eventmgr>
+
+
+      <!--升级技能契约-->
+	<LevelUpSpiritSkill>
+		<Exposed/>
+	</LevelUpSpiritSkill>
+
+
+      <!--升级印记-->
+	<LevelUpMark>
+	<Exposed/>
+	</LevelUpMark>
+
+	<addspiritbyid>
+		<Arg> UINT32 </Arg>  
+		<Arg> UINT32 </Arg>  
+	</addspiritbyid>
+
+    <add_gold>
+        <Arg> UINT32 </Arg>
+    </add_gold>
+
+    <add_diamond>
+        <Arg> UINT32 </Arg>
+    </add_diamond>
+    <add_level>
+        <Arg> UINT32 </Arg>
+    </add_level>
+
+
+    <query_prop>
+        <Arg> STRING </Arg>
+    </query_prop>
+
+    <set_prop>
+        <Arg> STRING </Arg>
+        <Arg> UINT32 </Arg>
+    </set_prop>
+
+    <!--GM热更新命令-->
+    <hot_update>
+    </hot_update>
+
+    <query_prop>
+        <Arg> STRING </Arg>
+    </query_prop>
+
+    <forbid_login>
+        <Arg> STRING </Arg>
+        <Arg> UINT32 </Arg>
+    </forbid_login>
+
+    <kick_out>
+        <Arg> STRING </Arg>
+    </kick_out>
+
+    <KickedOut/>
+
+  <!--              begin 属性变化base              -->
+    <AddExp>
+        <Arg> UINT32 </Arg> <!--增加的经验-->
+        <Arg> UINT8 </Arg> <!--途径方式-->
+    </AddExp>
+    <!--              end 属性变化base              -->
+
+    <!--拾取掉落物品-->
+    <PickDropReq>
+        <Exposed/>
+        <Arg> UINT32 </Arg> <!--Drop的eid-->
+    </PickDropReq>
+
+    <NPCReq>
+        <Exposed/>
+        <Arg>UINT32 </Arg> <!--npc  id-->
+        <Arg>UINT32 </Arg> <!--task id-->
+        <Arg>INT32  </Arg> <!--func id-->
+    </NPCReq>
+
+    <GetServerTimeReq>
+        <Exposed/>
+        <Arg> UINT8 </Arg>    <!-- 1、 获取服务器当前事件戳；2、获取服务器启动到现在流逝的时间-->
+    </GetServerTimeReq>
+
+    <!-- cell技能背包同步到base-->
+    <SkillBagSyncToBase>
+        <Arg> LUA_TABLE </Arg> <!--skill bag-->
+    </SkillBagSyncToBase>
+
+    <!-- cell技能Buff同步到base-->
+    <SkillBuffSyncToBase>
+        <Arg> LUA_TABLE </Arg> <!--skill buff-->
+    </SkillBuffSyncToBase>
+    
+    <SkillUpgradeReq>
+        <Exposed/>
+        <Arg> UINT32 </Arg> <!--skill id-->
+        <Arg> UINT32 </Arg> <!--next skill id-->
+    </SkillUpgradeReq>
+    
+
+    <!-- 客服端请求背包数据 -->
+    <SkillBagReq>
+        <Exposed/>
+    </SkillBagReq>
+    
+    <!-- 使用道具接口 -->
+    <UseItemReq>
+        <Exposed/>
+        <Arg> UINT32 </Arg> <!--instance id-->
+        <Arg> UINT8 </Arg>  <!--grid index-->
+        <Arg> UINT8 </Arg>  <!--count-->
+    </UseItemReq>
+    
+    
+   <!-- 购买体力接口 -->
+   <BuyEnergyReq>
+       <Exposed/>
+       <Arg> UINT8  </Arg> <!--识别码-->
+       <Arg> UINT8  </Arg> <!--个数-->
+   </BuyEnergyReq>
+
+   <!-- gm查询角色dbid接口 -->
+   <get_dbid>
+        <Exposed/>
+        <Arg>STRING</Arg>
+   </get_dbid>
+   <!-- gm查询角色info接口 -->
+   <get_info>
+        <Exposed/>
+        <Arg>UINT32</Arg>
+   </get_info>
+   
+   <get_item>
+        <Exposed/>
+   </get_item>
+   <!-- gm发送邮件接口 -->
+   <send_mail>
+        <Exposed/>
+        <Arg>STRING</Arg> <!--to-->
+        <Arg>STRING</Arg> <!--title-->
+        <Arg>STRING</Arg> <!--text-->
+        <Arg>STRING</Arg> <!--attachment-->
+        <Arg>STRING</Arg> <!--dbid-->
+   </send_mail>
+
+	<!-- 人物加金钱 -->
+    <AddGold>
+       <Arg> INT32 </Arg> <!--gold-->
+       <Arg> UINT8 </Arg> <!--reason-->
+    </AddGold>
+
+    <!-- 人物加钻石 -->    
+   <AddDiamond>
+       <Arg> INT32 </Arg> <!--diamond-->
+       <Arg> UINT8 </Arg> <!--reason-->
+   </AddDiamond>   
+   
+    <!-- 人物加道具 -->
+    <AddItem>
+       <Arg> UINT32 </Arg> <!--id-->
+       <Arg> UINT32 </Arg> <!--num-->
+       <Arg> UINT8 </Arg> <!--reason-->
+   </AddItem>   
+   
+    <!-- 人物删除道具 -->
+   <DelItem>
+       <Arg> UINT32 </Arg> <!--id-->
+       <Arg> UINT32 </Arg> <!--num-->
+       <Arg> UINT32 </Arg> <!--reason-->
+   </DelItem>
+
+   <!-- 客户端生物申请执行行为-->
+   <CliEntityActionReq>
+	   <Exposed/>
+       <Arg> UINT32 </Arg> <!--eid-->
+       <Arg> UINT32 </Arg> <!--actionId-->
+       <Arg> UINT32 </Arg> <!--param1-->
+       <Arg> UINT32 </Arg> <!--param2-->
+   </CliEntityActionReq>
+
+    <!--同一个cell的跨场景传送,参数:spaceloader_id, 地图id, 分线号, x, y-->
+    <TelportSameCell>
+        <Arg> UINT32 </Arg>
+        <Arg> UINT16 </Arg>    <!-- 目标场景号 -->
+        <Arg> UINT16 </Arg>    <!-- 目标场景分线号 -->
+        <Arg> INT16 </Arg>
+        <Arg> INT16 </Arg>
+    </TelportSameCell>
+
+	  <!-- 新的一天客户端刷新登陆天数-->
+	<refresh_login_days>
+	   <Exposed/> 
+   	</refresh_login_days> 
+
+
+   <!--得到成就表-->
+   <get_achievement>
+	   <Exposed/>
+       <Arg> INT16 </Arg>  <!-- 获取某一行，若为0则获取整张表-->    
+   </get_achievement>   
+
+	<!--活动已开启列表-->
+   <EventOpenList>
+	   <Exposed/>     
+   </EventOpenList>   
+   
+   
+   <!--得到正在做的活动列表-->   
+      <get_event_ing>
+	   <Exposed/>     
+   </get_event_ing>   
+   
+    <!-- 雇佣兵信息请求 -->
+    <MercenaryInfoReq>
+        <Exposed/>
+    </MercenaryInfoReq>
+
+	<MercenaryInfoCallBack>
+		<Arg> LUA_TABLE </Arg>
+    </MercenaryInfoCallBack>
+
+    <CreateMercenaryReq>
+        <Arg> INT8 </Arg>  <!-- isPvp-->
+    </CreateMercenaryReq>
+
+    
+    
+      <!-- 任务时间到 可以删除了，客户端的定时器-->
+    <event_timeout>
+	   <Arg> INT16 </Arg>   <!-- 活动id-->
+   </event_timeout> 
+
+
+    <MercenaryBattlePropertiesCallBack>
+        <Arg> LUA_TABLE </Arg>
+        <Arg> LUA_TABLE </Arg>
+        <Arg> LUA_TABLE </Arg>
+        <Arg> LUA_TABLE </Arg>  <!-- other_info-->
+        <Arg> INT8 </Arg>  <!-- isPvp-->
+    </MercenaryBattlePropertiesCallBack>
+
+    <get_sorry_gift>
+        <Arg> LUA_TABLE </Arg>   <!-- 领奖包-->
+    </get_sorry_gift> 
+
+    <!--
+    <GetSpaceLoaderMbResp>
+        <Arg> STRING </Arg>
+    </GetSpaceLoaderMbResp>
+    -->
+
+    <!--
+    <SetSpaceLoaderMb>
+        <Arg> STRING </Arg>
+    </SetSpaceLoaderMb>
+    -->
+
+    <UpdateMercenaryCoord>
+        <Exposed/>
+        <Arg> UINT32 </Arg>       <!--佣兵ID-->    
+        <Arg> INT16 </Arg>        <!--佣兵坐标X--> 
+        <Arg> INT16 </Arg>        <!--佣兵坐标Y--> 
+        <Arg> UINT8 </Arg>        <!--佣兵朝向-->          
+        <Arg> UINT32 </Arg>       <!--curhp-->
+    </UpdateMercenaryCoord>
+
+    <GuildProcessBasePropertiesResp>
+        <Arg> LUA_TABLE </Arg>   <!-- 公会系统加成后的属性-->
+    </GuildProcessBasePropertiesResp>
+
+    <ban_chat>
+        <Arg> UINT8 </Arg>   <!-- 是否禁言-->
+        <Arg> UINT32 </Arg>   <!-- 禁言结束时间-->
+        <Arg> STRING </Arg>   <!-- 原因-->
+    </ban_chat>
+
+    <!-- 使用血瓶接口 -->
+    <UseHpBottleReq>
+       <Exposed/>
+       <Arg> UINT8 </Arg>  <!--count-->
+   </UseHpBottleReq>  
+
+   <!-- 购买血瓶接口 -->
+   <BuyHpBottleReq>
+       <Exposed/>
+       <Arg> UINT8 </Arg> <!--count-->
+   </BuyHpBottleReq>
+
+    <UseHpBottleVerifyResp>
+        <Arg> UINT16 </Arg>  <!--return code-->
+    </UseHpBottleVerifyResp>
+    
+    <ResetHpCount/>   <!--重置系统hpcount和buyCount-->
+
+    <UpdateAutoFightProgress>
+        <Exposed/>
+        <Arg> UINT8 </Arg>
+    </UpdateAutoFightProgress>
+
+    <SetStateToBase>
+        <Arg> UINT16 </Arg>
+    </SetStateToBase>
+
+    <UnsetStateToBase>
+        <Arg> UINT16 </Arg>
+    </UnsetStateToBase>
+
+   <!-- 领取日常活动奖励 -->
+   <get_reward_day_task>
+       <Exposed/>
+       <Arg> UINT8 </Arg> <!--count-->
+   </get_reward_day_task>
+   
+   <refresh_day_task>
+   </refresh_day_task>
+   
+   <!-- 请求日常任务的数据 -->
+   <get_day_task>
+      	 <Exposed/>
+   </get_day_task>
+
+   <!--领取奖励-->
+   <get_rewards>
+        <Arg> LUA_TABLE </Arg> <!--奖励-->
+        <Arg> UINT8 </Arg> <!--reason-->
+   </get_rewards>
+  
+   <!--炼金请求-->
+   <GoldMetallurgyReq>
+        <Exposed/>
+        <Arg> UINT16 </Arg> <!--数量-->
+   </GoldMetallurgyReq>
+
+   <!--紫装兑换请求-->
+   <PurpleExchangeReq>
+        <Exposed/>
+        <Arg> UINT32 </Arg> <!--兑换id-->
+   </PurpleExchangeReq>
+
+   <VipBuffNoitfy>
+        <Arg> UINT8 </Arg>  <!--0代表开始，1代表结束-->
+        <Arg> UINT8 </Arg>  <!--Vip等级, 没有buff用0表示-->
+   </VipBuffNoitfy>
+
+   <UpdateUserMgrAboutFight/>
+
+    <add_arena_credit>
+        <Arg> UINT32 </Arg> <!--增加的竞技场荣誉-->
+        <Arg> UINT8 </Arg> <!--途径方式-->
+    </add_arena_credit>
+    <add_arena_score>
+        <Arg> UINT32 </Arg> <!--增加的竞技场积分-->
+        <Arg> UINT8 </Arg>  <!--途径方式-->
+    </add_arena_score>
+    
+    <bug_report>
+    	 	<Exposed/>
+        <Arg> UINT8 </Arg> <!--投诉类型('全部',11='bug',12='投诉',13='建议',10='其他')-->
+        <Arg> STRING </Arg><!--投诉的标题--> 
+        <Arg> STRING </Arg><!--投诉的正文--> 
+    </bug_report>
+
+    <RankListReq>
+        <Exposed/>
+        <Arg> UINT8  </Arg>  <!--排行榜类型  -->
+        <Arg> UINT16  </Arg> <!--起始数据索引-->  
+        <Arg> UINT32 </Arg>  <!--时间戳-->
+    </RankListReq>
+        
+    <BaseRankListResp>
+        <Arg> UINT8  </Arg>    <!--返回类型码 1：需要更新数据，0：不需要更新数据--> 
+        <Arg> LUA_TABLE </Arg> <!--排行榜数据-->
+        <Arg> UINT32 </Arg>    <!--时间戳-->
+        <Arg> UINT8  </Arg>    <!--后续数据标记 1：还有后续数据，0：没有后续数据--> 
+    </BaseRankListResp>
+
+    <HasOnRankReq>
+        <Exposed/>
+        <Arg> UINT8  </Arg>  <!--排行榜类型  -->
+    </HasOnRankReq>
+
+    <BaseHasOnRankResp>
+        <Arg> UINT8  </Arg>  <!--角色等级level  -->
+    </BaseHasOnRankResp>
+
+    <RankAvatarInfoReq>
+        <Exposed/>
+        <Arg> UINT64 </Arg>   <!--dbid     -->
+    </RankAvatarInfoReq>
+
+    <BaseRankAvatarInfoResp>
+        <Arg> LUA_TABLE </Arg>   <!--角色基本信息-->
+        <Arg> UINT8 </Arg>       <!--性别标识信息1：男 0：女 -->
+        <Arg> UINT8 </Arg>       <!--偶像标识信息1：是 0：否 -->
+    </BaseRankAvatarInfoResp>
+
+    <!--修改角色偶像-->
+    <ChangeIdolReq>
+        <Exposed/>
+        <Arg> UINT64 </Arg>   <!--dbid     -->
+    </ChangeIdolReq>
+
+    <!--角色偶像请求-->
+    <SelfIdolReq>
+        <Exposed/>
+    </SelfIdolReq>
+
+    <FansRewardOnlineResp>
+        <Arg> LUA_TABLE </Arg>   <!--偶像在所有排行榜上的信息-->
+    </FansRewardOnlineResp>
+
+    <AddGiftBag>
+       <Arg> UINT32 </Arg>   <!--礼包id-->
+       <Arg> UINT32 </Arg>   <!--礼包数量-->
+    </AddGiftBag>
+    
+    <IsIdolChangedTodayReq>
+        <Exposed/>
+        <Arg> UINT64 </Arg>   <!--dbid     -->
+    </IsIdolChangedTodayReq>
+
+    <BaseAvatarIdolNameResp>
+        <Arg> STRING </Arg>   <!--name     --> 
+    </BaseAvatarIdolNameResp>
+
+    <!--角色上线数据请求    --> 
+    <OnlineDragonInfoReq>
+        <Exposed/>
+    </OnlineDragonInfoReq>
+
+    <!--袭击请求    --> 
+    <DragonAttackReq>
+        <Exposed/>
+        <Arg> UINT64 </Arg> <!--袭击对象-->
+    </DragonAttackReq>
+
+    <!--复仇请求    --> 
+    <DragonRevengeReq>
+        <Exposed/>
+        <Arg> UINT64 </Arg> <!--复仇对象-->
+    </DragonRevengeReq>
+
+    <!--开始护送请求    --> 
+    <StartDragonConvoyReq>
+        <Exposed/>
+        <Arg> UINT8 </Arg>  <!--渠道标记 0直接开始，1探索 -->
+    </StartDragonConvoyReq>
+
+    <!--刷新飞龙品质请求    --> 
+    <FreshDragonQualityReq>
+        <Exposed/>
+    </FreshDragonQualityReq>
+
+    <!--刷新飞龙对手请求    --> 
+    <FreshAdversaryReq>
+        <Exposed/>
+    </FreshAdversaryReq>
+
+    <!--购买金色飞龙    --> 
+    <BuyGoldDragonReq>
+        <Exposed/>
+    </BuyGoldDragonReq>
+
+    <!--清楚袭击cd    --> 
+    <ClearAttackCDReq>
+        <Exposed/>
+    </ClearAttackCDReq>
+
+    <BuyAtkTimesReq>
+        <Exposed/>
+    </BuyAtkTimesReq>
+    <!--减少护送时间请求    --> 
+    <ReduceConvoyTimeReq>
+        <Exposed/>
+    </ReduceConvoyTimeReq>
+
+    <!--立即完成请求    --> 
+    <ImmediateCompleteConvoyReq>
+        <Exposed/>
+    </ImmediateCompleteConvoyReq>
+
+    <!--购买护送次数请求    --> 
+    <BuyConvoyTimesReq>
+        <Exposed/>
+    </BuyConvoyTimesReq>
+
+    <!--领取护送奖励请求    --> 
+    <DragonCvyRewardReq>
+        <Exposed/>
+    </DragonCvyRewardReq>
+
+    <!--所有飞龙事件请求    --> 
+    <AllDragonEventListReq>
+        <Exposed/>
+    </AllDragonEventListReq>
+    <!-- 结算回调 -->
+    <BaseDragonContestSettleResp>
+        <Arg> UINT8 </Arg>   <!--成功袭击此处 -->
+        <Arg> UINT8 </Arg>   <!--开始等级     -->
+        <Arg> UINT8  </Arg>   <!--当前环数     -->
+    </BaseDragonContestSettleResp>
+
+    <BaseDragonAdversariesResp>
+        <Arg> LUA_TABLE </Arg>
+    </BaseDragonAdversariesResp>
+
+    <BaseDragonRevengeCheckResp>
+        <Arg> UINT8 </Arg> <!-- retcode-->
+        <Arg> UINT64 </Arg> <!--袭击对象-->
+    </BaseDragonRevengeCheckResp>
+
+    <BaseStartDragonConvoyResp>
+        <Arg> UINT8 </Arg> <!-- retcode 1:成功， 0失败-->
+        <Arg> UINT32 </Arg> <!-- 开始时间-->
+    </BaseStartDragonConvoyResp>
+
+    <BaseDragonAttackResp>
+        <Arg> UINT8 </Arg> <!-- retcode-->
+    </BaseDragonAttackResp>
+
+    <DragonBattleCallback>
+        <Arg> UINT8 </Arg>     <!-- mark:win or lose-->
+        <Arg> LUA_TABLE </Arg> <!-- rewards-->
+        <Arg> UINT64 </Arg>    <!--袭击对象-->
+        <Arg> UINT8 </Arg>     <!-- 飞龙的品质-->
+    </DragonBattleCallback>
+
+    <InitBasePvpBattle>
+        <Arg> LUA_TABLE </Arg> <!-- pvp Info-->
+    </InitBasePvpBattle>
+    <run_func>
+        <Arg> STRING </Arg> <!-- func名字-->
+        <Arg> LUA_TABLE </Arg> <!--参数列表-->
+    </run_func>
+    
+    <onEnterGame/>  
+
+
+    
+   <GetFumoInfo>
+   		<Exposed/>
+  		<Arg> UINT8  </Arg>  	 <!--单个身体位置附魔信息，若为0 则是获取所有附魔信息-->
+  	</GetFumoInfo>    	
+    	    
+   <fumo>
+   		<Exposed/>
+  		<Arg> UINT8  </Arg>  	 <!--附魔部位index-->
+  	</fumo>
+  	
+  	 <fumo_replace> <!--附魔替换-->
+  	 		<Exposed/>
+    		<Arg>UINT8</Arg>  <!--身体部位-->
+    		<Arg>UINT8</Arg>   <!--部位上附魔序号，该部位为0则是取消替换-->
+    </fumo_replace>
+
+
+    <BaseUpdateRelateTimes>
+        <Arg> UINT8 </Arg>     <!-- update type -->
+    </BaseUpdateRelateTimes>
+
+    <FreshConvoyReward>
+        <Exposed/>            <!-- fresh real time rewards -->
+    </FreshConvoyReward>
+
+    <BaseFreshConvoyRewardResp>
+        <Arg> UINT8 </Arg>     <!-- times -->
+        <Arg> UINT8 </Arg>     <!-- level -->
+        <Arg> UINT8 </Arg>     <!-- curRng -->
+    </BaseFreshConvoyRewardResp>
+
+    <RemainConvoyTimesReq>
+         <Exposed/>
+    </RemainConvoyTimesReq>
+
+    <DragonShowText>
+        <Arg> UINT8 </Arg>      <!-- channel -->
+        <Arg> UINT32 </Arg>     <!--  id-->
+    </DragonShowText>
+
+    <BaseReduceConvoyTimeResp>
+        <Arg> UINT8 </Arg>      <!-- retcode -->
+        <Arg> UINT32 </Arg>     <!--  stime-->
+    </BaseReduceConvoyTimeResp>
+
+    <!-- 客户端发上来，记录进度 -->
+    <SetProgress>
+        <Exposed/>
+        <Arg> UINT16 </Arg>
+    </SetProgress>
+
+    <!-- 探索事件请求 -->
+    <ExploreDragonEventReq>
+        <Exposed/>
+    </ExploreDragonEventReq>
+
+    <!-- 套装激活请求 -->
+    <ActivedSuitEquipmentReq>
+        <Exposed/>
+        <Arg> UINT32 </Arg> <!--装备 id -->
+    </ActivedSuitEquipmentReq>
+
+    <BaseUpdateGmSetting>
+        <Arg> UINT64 </Arg>    <!-- gm-->
+        <Arg> UINT64 </Arg>    <!-- gm id -->
+        <Arg> STRING </Arg>    <!-- gm name-->
+    </BaseUpdateGmSetting>
+    <OnCompensate>
+    	<Arg> STRING </Arg>    <!-- vt-->
+    </OnCompensate>
+
+    <DragonStatusReq>
+        <Exposed/>
+    </DragonStatusReq>
+
+    <!-- 精灵系统各领域使用女神之泪进度请求 -->
+    <ElfUseTearProgReq>  
+        <Exposed/>
+    </ElfUseTearProgReq>
+
+    <!-- 精灵系统某领域申请使用女神之泪请求 -->
+    <ElfUseTearReq>                      
+        <Exposed/>                      
+        <Arg> UINT8 </Arg>     <!-- areaid -->
+        <Arg> UINT32 </Arg>    <!-- useNum --> 
+    </ElfUseTearReq>        
+
+    
+    <WithdrawReq>
+      <Exposed/>
+      <Arg> UINT64 </Arg>    <!-- ord_dbid -->
+    </WithdrawReq>
+
+    <CheckChargeReq>
+      <Exposed/>
+    </CheckChargeReq>
+
+    <OnWithdrawResp>
+      <Arg> UINT32 </Arg> <!--rmb -->
+      <Arg> UINT32 </Arg> <!--充值金额 -->
+    </OnWithdrawResp>
+    <OnNotifyCharge>
+      <Arg> LUA_TABLE </Arg> <!--订单dbid -->
+    </OnNotifyCharge>
+
+    <!--精灵宝钻,开采请求-->
+    <DiamondMineReq>
+        <Exposed/>
+    </DiamondMineReq>
+    <!--精灵宝钻信息请求-->
+    <DiamondMineInfoReq>
+        <Exposed/>
+    </DiamondMineInfoReq>
+
+    <TrainWingReq>
+        <Exposed/>
+        <Arg> UINT32 </Arg> <!--翅膀id -->
+    </TrainWingReq>
+
+    <MagicWingActiveReq>
+        <Exposed/>
+        <Arg> UINT32 </Arg> <!--翅膀id -->
+    </MagicWingActiveReq>
+
+    <WingExchangeReq>
+        <Exposed/>
+        <Arg> UINT32 </Arg> <!--翅膀id -->
+    </WingExchangeReq>
+
+    <SyncWingBagReq>
+        <Exposed/>  <!--同步翅膀背包数据 -->   
+    </SyncWingBagReq>
+    
+    <!--申请随机学习一个精灵技能-->
+    <LearnElfSkillReq>
+        <Exposed/>
+    </LearnElfSkillReq>
+
+    <!--申请重置精灵技能点-->
+    <ResetElfSkillReq>
+        <Exposed/>
+    </ResetElfSkillReq>
+
+    <!--申请升级某技能-->
+    <ElfSkillUpgradeReq>
+        <Exposed/>
+        <Arg> UINT32 </Arg> <!--欲学的精灵技能id -->
+    </ElfSkillUpgradeReq>
+
+    <!--申请装备精灵技能-->
+    <ElfEquipSkillReq>
+        <Exposed/> 
+        <Arg> UINT32 </Arg> <!--欲装备的精灵技能id -->
+    </ElfEquipSkillReq>
+
+    <!--申请技能技能领悟信息-->
+    <ElfSkillInfoReq>
+        <Exposed/>
+    </ElfSkillInfoReq>
+    <!---->
+    <ActiveSepciaclEffectsReq>
+        <Exposed/>
+        <Arg> UINT32 </Arg> <!-- 激活特效ID -->
+    </ActiveSepciaclEffectsReq>
+
+    <!--装备特效请求-->
+    <SyncSepcialEffectsReq>
+        <Exposed/>
+    </SyncSepcialEffectsReq>
+
+    <OpenUIReq>
+        <Exposed/>
+    </OpenUIReq>
+    <RouletteReq>
+        <Exposed/>
+        <Arg> UINT32 </Arg> <!--roule_id-->
+    </RouletteReq>
+    <OnRoulette>
+        <Arg> UINT32 </Arg> <!--roule_id-->
+        <Arg> UINT32 </Arg> <!--rew_id-->
+        <Arg> LUA_TABLE </Arg> <!--rewards-->
+    </OnRoulette>
+
+    <gm_charge>
+        <Arg> UINT32 </Arg> <!--充值方式，0：冲到帐号，1：冲到角色-->
+        <Arg> STRING </Arg> <!--rmb-->
+    </gm_charge>
+    <gm_charge_ex>
+        <Arg> STRING </Arg>  <!--acc name-->
+        <Arg> STRING </Arg>  <!--dbid-->
+        <Arg> STRING </Arg>  <!--rmb-->
+    </gm_charge_ex>
+    <add_week_score>
+        <Arg> UINT32 </Arg> <!--score-->
+    </add_week_score>
+</BaseMethods>
+
+<CellMethods>
+
+    <!--              传送点传送cell              -->
+    <EnterTeleportpointReq>
+        <Arg> UINT32 </Arg>
+    </EnterTeleportpointReq>
+    <!--              传送点传送cell              -->
+
+    <!--施放技能-->
+    <UseSkillReq>
+        <Arg> UINT64 </Arg>       <!--客户端TickCount-->
+        <Arg> INT16 </Arg>        <!--玩家坐标X-->
+        <Arg> INT16 </Arg>        <!--玩家坐标Y-->
+        <Arg> UINT8 </Arg>        <!--玩家朝向-->
+        <Arg> UINT16 </Arg>       <!--技能ID-->
+        <Arg> LUA_TABLE </Arg>    <!--施放目标对象的ID表-->
+    </UseSkillReq>
+
+    <!--佣兵施放技能-->
+    <MercenaryUseSkillReq>
+        <Exposed/>
+        <Arg> UINT64 </Arg>       <!--客户端TickCount-->
+        <Arg> UINT32 </Arg>       <!--佣兵ID-->
+        <Arg> INT16 </Arg>        <!--佣兵坐标X-->
+        <Arg> INT16 </Arg>        <!--佣兵坐标Y-->
+        <Arg> UINT8 </Arg>        <!--佣兵朝向-->
+        <Arg> UINT16 </Arg>       <!--技能ID-->
+        <Arg> LUA_TABLE </Arg>    <!--施放目标对象的ID表-->
+    </MercenaryUseSkillReq>
+
+    <!--畜力技能，开始畜力，参数1为客户端TickCount-->
+    <ChargeSkillReq>
+        <Arg> UINT64 </Arg>
+    </ChargeSkillReq>
+
+    <!--畜力技能，取消畜力-->
+    <CancelChargeSkillReq/>
+
+    <!--######################### 以下为服务器内部方法 #########################-->
+
+    <!--同场景传送,参数:x,y-->
+    <TelportLocally>
+        <Arg> INT16 </Arg>
+        <Arg> INT16 </Arg>
+    </TelportLocally>
+
+    <!--同一个cell的跨场景传送,参数:spaceloader_id, x,y-->
+    <TelportSameCell>
+        <Arg> UINT32 </Arg>
+        <Arg> INT16 </Arg>
+        <Arg> INT16 </Arg>
+    </TelportSameCell>
+
+    <!--玩家隐身,从aoi管理器删除,但是不离开space-->
+    <set_invisiable/>
+
+    <!--现身-->
+    <set_visiable/>
+
+    <!--base通知cell缓存一级属性并更新战斗属性-->
+    <ProcessBattleProperties>
+      <Arg> LUA_TABLE </Arg>
+    </ProcessBattleProperties>
+
+    <!--符文效果ID列表-->
+    <RuneEffects>
+        <Arg>LUA_TABLE</Arg>
+    </RuneEffects>
+
+    <!-- 在本地创建被雇佣的人 -->
+    <CreateEmployee>
+        <Arg> LUA_TABLE </Arg>
+    </CreateEmployee>
+    
+    <!-- 道具使用返回参数 -->
+    <ItemEffects>
+      <Arg>LUA_TABLE</Arg>
+    </ItemEffects>
+
+    <!--拾取掉落物品-->
+    <PickDropReq>
+        <Arg> UINT32 </Arg> <!--Drop的eid-->
+    </PickDropReq>
+
+    <!-- 由base通知cell客户端二次登陆 -->
+    <onMultiLogin/>
+
+    <SyncEquipMode>
+        <Arg> UINT8 </Arg> <!--gridIndex -->
+        <Arg> UINT32 </Arg> <!--item type id-->
+    </SyncEquipMode>
+    
+    
+    
+   <set_prop>
+ 	    <Arg> STRING </Arg>
+        <Arg> UINT32 </Arg>
+   </set_prop>
+   
+   <!--道具使用buff调用-->
+   <AddBuffId>
+ 	    <Arg> UINT32 </Arg>
+   </AddBuffId>
+   
+   <!--最大体力同步到cell-->
+   <SyncMaxEnergy>
+ 	    <Arg> UINT32 </Arg> <!--最大体力值-->
+    </SyncMaxEnergy>
+
+    <CliEntityActionReq>
+ 	    <Arg> UINT32 </Arg> <!--eid-->
+        <Arg> UINT32 </Arg> <!--actionId-->
+        <Arg> LUA_TABLE </Arg><!--param table-->
+    </CliEntityActionReq>
+
+    <MercenaryBattleProperties>
+        <Arg> LUA_TABLE </Arg><!--param table attri -->
+        <Arg> LUA_TABLE </Arg><!--param table modes-->
+        <Arg> LUA_TABLE </Arg><!--param table skills-->
+        <Arg> LUA_TABLE </Arg> <!--other_info-->
+        <Arg> INT8 </Arg>        <!--isPvp-->
+    </MercenaryBattleProperties>
+
+    <UpdateMercenaryCoord>
+        <Arg> UINT32 </Arg>       <!--佣兵ID-->    
+        <Arg> INT16 </Arg>        <!--佣兵坐标X--> 
+        <Arg> INT16 </Arg>        <!--佣兵坐标Y--> 
+        <Arg> UINT8 </Arg>        <!--佣兵朝向-->          
+        <Arg> UINT32 </Arg>        <!--curhp--> 
+    </UpdateMercenaryCoord>
+
+    <ReviveReq/>
+
+    <!-- 血瓶使用 -->
+    <UseHpBottleVerifyReq/>
+
+    <!--增加身上Buff-->
+    <AddBuff>
+        <Arg>UINT16</Arg>             <!--BuffID，若为零则移除身上所有Buff-->
+    </AddBuff>
+    <!--移除身上Buff-->
+    <RemoveBuff>
+        <Arg>UINT16</Arg>             <!--BuffID，若为零则移除身上所有Buff-->
+    </RemoveBuff>
+
+    <StartUseAnger>
+        <Exposed/>
+    </StartUseAnger>
+  
+    <!-- 获取客户端Tick时间（客户端->服务器） -->
+    <QueryClientTickResp>
+        <Exposed/>
+        <Arg> UINT32 </Arg>   <!-- 请求序号 -->
+        <Arg> UINT64 </Arg>   <!-- TICK -->
+    </QueryClientTickResp>
+
+    <LearnReq>
+        <Arg> UINT32 </Arg>
+    </LearnReq>
+
+    <UnlearnReq>
+        <Arg> UINT32 </Arg>
+    </UnlearnReq>
+
+</CellMethods>
+
+
+</root>

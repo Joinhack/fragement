@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<story>
+		<id>1</id>
+		<storyText>OpenUI</storyText>
+	</story>
+	<story>
+		<id>2</id>
+		<storyText>OpenUI SkillButton 2</storyText>
+	</story>
+	<story>
+		<id>3</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>4</id>
+		<storyText>SetNonFocus 195 9902 0 0</storyText>
+	</story>
+	<story>
+		<id>5</id>
+		<storyText>Wait 2</storyText>
+	</story>
+	<story>
+		<id>6</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>7</id>
+		<storyText>LockSight</storyText>
+	</story>
+	<story>
+		<id>8</id>
+		<storyText>UnlockQueue</storyText>
+	</story>
+	<story>
+		<id>9</id>
+		<storyText>End</storyText>
+	</story>
+</root>

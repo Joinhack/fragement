@@ -1,0 +1,20 @@
+﻿<root>
+	<admin>
+		<name_s>admin</name_s>
+		<instruction>*</instruction>  <!--- 该行代表具有所有权限-->
+	</admin>
+	
+	
+	<arch>
+		<name_s>arch</name_s>
+		<instruction>*</instruction>  <!--- 该行代表具有所有权限-->
+	</arch>
+
+	<user>
+		<name_s>user</name_s>		
+		<add_gold />
+		<add_diamond />
+   	    <addspiritbyid />
+   	    <add_level />   	    
+  	</user>
+</root>

@@ -1,0 +1,142 @@
+<root>
+
+<Properties>
+  
+    <funcTable>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </funcTable>
+
+<eventTable>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </eventTable>
+
+<dateRec>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </dateRec>
+
+<lastCheckDay>
+        <Type> UINT16 </Type>
+        <Flags> BASE </Flags>
+    </lastCheckDay>
+
+<lastCheckWeek>
+        <Type> UINT16 </Type>
+        <Flags> BASE </Flags>
+</lastCheckWeek>
+
+<lastCheckMonth>
+        <Type> UINT16 </Type>
+        <Flags> BASE </Flags>
+</lastCheckMonth>
+
+<lastCheckYear>
+        <Type> UINT16 </Type>
+        <Flags> BASE </Flags>
+</lastCheckYear>
+
+
+	<!--公告牌-->
+<data_billboard>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+</data_billboard>
+
+
+	<!--补偿-->
+<data_sorry>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+</data_sorry>
+
+
+<!--玩家为key 发送给玩家-->
+<to_one>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+        <Default> {} </Default>
+</to_one>
+
+<!--发送给所有玩家-->
+<to_all>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+        <Default> {} </Default>
+</to_all>
+</Properties>
+
+<ClientMethods>
+
+</ClientMethods>
+
+<BaseMethods>
+
+    <OnMgrLoaded>
+        <Arg> STRING </Arg>
+    </OnMgrLoaded>
+    
+    <onDestroy>
+    </onDestroy>
+	
+   <EnterEvents>
+ 			<Arg> STRING </Arg>
+   </EnterEvents>
+   
+   <OnLevelUp>
+ 			<Arg> STRING </Arg>
+   </OnLevelUp>
+   
+    
+   <EventOpenList>
+ 			<Arg> STRING </Arg>
+   </EventOpenList>
+    
+
+
+	<ReFresh>
+	</ReFresh>
+	
+  <join_event>
+ 		<Arg> UINT16  </Arg>
+		<Arg> STRING  </Arg>
+	</join_event>
+	
+	
+	 <open_event>
+ 		<Arg> UINT16  </Arg>
+	</open_event>
+	
+	<close_event>
+ 		<Arg> UINT16  </Arg>
+	</close_event>
+	
+	
+		<OnPlayerEnterGame>
+ 		<Arg> STRING  </Arg>
+	</OnPlayerEnterGame>
+	
+	
+	<add_online_action_to_one>
+	       <Arg> STRING  </Arg>
+	       <Arg> STRING  </Arg>
+	       <Arg> LUA_TABLE  </Arg>
+	</add_online_action_to_one>
+	
+	<add_online_action_to_all>
+				<Arg> STRING  </Arg>
+				<Arg> LUA_TABLE  </Arg>
+	</add_online_action_to_all>
+	
+	<online_action>
+				<Arg> STRING  </Arg>
+	</online_action>
+		
+
+</BaseMethods>
+
+
+</root>

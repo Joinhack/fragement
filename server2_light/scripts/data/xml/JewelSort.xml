@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<type>
+		<id_i>1</id_i>
+		<jewel_i>1</jewel_i>
+	</type>
+	<type>
+		<id_i>2</id_i>
+		<jewel_i>2</jewel_i>
+	</type>
+	<type>
+		<id_i>3</id_i>
+		<jewel_i>3</jewel_i>
+	</type>
+	<type>
+		<id_i>4</id_i>
+		<jewel_i>4</jewel_i>
+	</type>
+	<type>
+		<id_i>5</id_i>
+		<jewel_i>5</jewel_i>
+	</type>
+	<type>
+		<id_i>6</id_i>
+		<jewel_i>6</jewel_i>
+	</type>
+	<type>
+		<id_i>7</id_i>
+		<jewel_i>7</jewel_i>
+	</type>
+</root>

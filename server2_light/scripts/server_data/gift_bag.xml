@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<number>
+		<id_i>1</id_i>
+		<type_i>1</type_i>
+		<items_m>1100032:1,1100070:1,1100071:100</items_m>
+	</number>
+	<number>
+		<id_i>2</id_i>
+		<items_m>1100032:2,1100070:2,1100071:100</items_m>
+	</number>
+	<number>
+		<id_i>3</id_i>
+		<type_i>1</type_i>
+		<items_m>1100032:3,1100070:3,1100071:100</items_m>
+	</number>
+	<number>
+		<id_i>4</id_i>
+		<type_i>2</type_i>
+		<items_m>1100032:3,1100070:3,1100071:101</items_m>
+	</number>
+	<number>
+		<id_i>5</id_i>
+		<type_i>3</type_i>
+		<items_m>1100032:3,1100070:3,1100071:102</items_m>
+	</number>
+</root>

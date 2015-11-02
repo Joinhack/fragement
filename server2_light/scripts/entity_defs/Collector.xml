@@ -1,0 +1,212 @@
+<root>
+
+<Properties>
+  
+	<logic_data>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+	</logic_data>
+
+	<!--记录哪些玩家充值了，冲的是多少 {name = money, ...}-->
+	<recharge_player>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+	</recharge_player>
+	
+	<!--充值总数-->
+	<recharge_sum>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+	</recharge_sum>
+	
+
+	<account_tab>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+	</account_tab>
+
+
+	<login_player_num>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+	</login_player_num>
+
+	<record_day>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+	</record_day>
+
+
+</Properties>
+
+<ClientMethods>
+
+</ClientMethods>
+
+<BaseMethods>
+
+    <OnMgrLoaded>
+        <Arg> STRING </Arg>
+    </OnMgrLoaded>
+    <onDestroy>
+    </onDestroy>
+	
+   <EnterEvents>
+ 	<Arg> STRING </Arg>
+    </EnterEvents>
+
+
+
+    <ReFresh>
+	<Exposed/>
+    </ReFresh>
+  <SetOnlineCount>
+ 	<Arg> UINT32  </Arg>
+    </SetOnlineCount>
+
+	<important_drop>
+		<Arg> UINT32  </Arg> <!--item_id-->
+		<Arg> UINT32  </Arg> <!--item_num-->
+		<Arg> STRING </Arg>  <!--owner-->
+		<Arg> UINT32  </Arg> <!--from-->
+	</important_drop>
+
+
+	<important_item_consume>
+		<Arg> UINT32 </Arg> 	<!--item_id-->
+		<Arg> UINT32 </Arg> 	<!--item_num-->
+		<Arg> STRING</Arg>  	<!--owner-->
+		<Arg> UINT32 </Arg> 	<!--from-->
+	</important_item_consume>
+
+	<shop>
+		<Arg> UINT32 </Arg> 	<!--item_id-->
+		<Arg> UINT32 </Arg> 	<!--item_num-->
+		<Arg> STRING</Arg>  	<!--player-->
+		<Arg> UINT32 </Arg> 	<!--diamond-->
+	</shop>
+
+	<miss>
+		<Arg> STRING</Arg>  	<!--player-->
+		<Arg> UINT32 </Arg> 	<!--second-->
+	</miss>
+
+	<player_gold>
+		<Arg> STRING</Arg>  	<!--owner-->
+		<Arg> UINT32 </Arg> 	<!--num-->
+		<Arg> UINT32 </Arg> 	<!--to-->
+
+	</player_gold>
+
+	<player_diamond>
+		<Arg> STRING</Arg>  	<!--owner-->
+		<Arg> UINT32 </Arg> 	<!--num-->
+		<Arg> UINT32 </Arg> 	<!--to-->
+	</player_diamond>
+	<PhoneInfo>
+		<Arg> STRING</Arg>  	<!--guid-->
+		<Arg> STRING </Arg> 	<!--account-->
+		<Arg> STRING </Arg> 	<!--info-->
+	</PhoneInfo>
+	
+	<API>
+		<Arg> UINT32</Arg>  	<!--client_fd-->
+		<Arg> STRING</Arg>  	<!--method-->
+		<Arg> STRING</Arg>  	<!--URL-->
+	</API>
+	
+<tbllog_role>
+	<Arg>UINT32</Arg> <!--角色id-->
+	<Arg>STRING</Arg> <!--平台账户-->
+	<Arg>UINT32</Arg> <!--职业id-->
+	<Arg>UINT32</Arg> <!--事件发生时间-->
+</tbllog_role>
+
+
+<tbllog_login>
+	<Arg>UINT32</Arg> <!--角色id-->
+	<Arg>STRING</Arg> <!--平台账户-->
+	<Arg>UINT32</Arg> <!--等级-->
+	<Arg>STRING</Arg> <!--登陆IP-->
+	<Arg>UINT32</Arg> <!--写日志时间，索引字段-->
+</tbllog_login>
+
+
+<tbllog_shop>
+	<Arg>	UINT32	</Arg> 	<!--	角色id	-->
+	<Arg>	STRING	</Arg> 	<!--	平台账户	-->
+	<Arg>	UINT32	</Arg> 	<!--	等级	-->
+	<Arg>	UINT32	</Arg> 	<!--	职业id	-->
+	<Arg>	UINT32	</Arg> 	<!--	货币类型	-->
+	<Arg>	UINT32	</Arg> 	<!--	货币数量	-->
+	<Arg>	UINT32	</Arg> 	<!--	物品分类1	-->
+	<Arg>	UINT32	</Arg> 	<!--	物品分类2	-->
+	<Arg>	UINT32	</Arg> 	<!--	物品id	-->
+	<Arg>	UINT32	</Arg> 	<!--	物品数量	-->
+	<Arg>	UINT32	</Arg> 	<!--	事件发生时间	-->
+</tbllog_shop>
+
+<tbllog_items>
+	<Arg>UINT32</Arg> <!--角色id-->
+	<Arg>STRING</Arg> <!--平台账户-->
+	<Arg>UINT32</Arg> <!--操作类型-->
+	<Arg>UINT32</Arg> <!--物品类型-->
+	<Arg>UINT32</Arg> <!--物品id-->
+	<Arg>UINT32</Arg> <!--物品数量-->
+	<Arg>UINT32</Arg> <!--事件发生时间-->
+</tbllog_items>
+
+<tbllog_gold>
+	<Arg>	UINT32	</Arg> 	<!--	角色id	-->
+	<Arg>	STRING	</Arg> 	<!--	平台账户	-->
+	<Arg>	UINT32	</Arg> 	<!--	等级	-->
+	<Arg>	UINT32	</Arg> 	<!--	职业id	-->
+	<Arg>	UINT32	</Arg> 	<!--	货币类型（1=金币，2=绑定金币，3=铜币，4=绑定铜币，5=礼券，6=积分/荣誉, 7=兑换）	-->
+	<Arg>	UINT32	</Arg> 	<!--	value	-->
+	<Arg>	UINT32	</Arg> 	<!--	货币加减（1=增加，2=减少）-->
+	<Arg>	UINT32	</Arg> 	<!--	reason	-->
+	<Arg>	UINT32	</Arg> 	<!--	os.time	-->
+</tbllog_gold>
+
+
+<tbllog_player>
+	<Arg>INT32</Arg>     <!--角色ID-->
+<Arg>STRING</Arg>     <!--角色名-->
+<Arg>INT32</Arg>     <!--用户账号ID-->
+<Arg>STRING</Arg>     <!--用户账号名-->
+<Arg>INT32</Arg>     <!--阵营-->
+<Arg>INT32</Arg>     <!--职业-->
+<Arg>INT32</Arg>     <!--性别-->
+<Arg>INT32</Arg>     <!--注册时间-->
+<Arg>INT32</Arg>     <!--用户等级-->
+<Arg>INT32</Arg>     <!--VIP等级-->
+<Arg>INT32</Arg>     <!--当前经验-->
+<Arg>STRING</Arg>     <!--帮派名称-->
+<Arg>INT32</Arg>     <!--战斗力-->
+<Arg>INT32</Arg>     <!--元宝数-->
+<Arg>INT32</Arg>     <!--首充时间-->
+<Arg>INT32</Arg>     <!--最后充值时间-->
+<Arg>INT32</Arg>     <!--最后登录时间-->
+
+</tbllog_player>
+<user_info_detail>
+	<Arg>	INT32	</Arg> 	
+	<Arg>	INT32	</Arg> 	
+	<Arg>	STRING	</Arg> 	
+	<Arg>	STRING	</Arg> 	
+</user_info_detail>
+
+
+<table_insert>
+	<Arg>	STRING	</Arg> 	<!--表名-->
+	<Arg>	LUA_TABLE	</Arg> 	
+</table_insert>
+
+
+
+</BaseMethods>
+
+
+</root>

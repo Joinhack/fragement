@@ -1,0 +1,21 @@
+<root>
+  <entities>
+    <entity>
+      <id>1</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>461,1115,1899,1244,2054,1092,1024,1292,1216,1098,1473,1037,642,1318,688,1017,689,1624,1669,772,1351,1388,1196,1609,1961,1627,1454,1701,1211,816,948,1587,1581,1226,1579,1442,940,1098</monsterSpawntPoint>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010</levelID>
+      <triggeRangeX>1267</triggeRangeX>
+      <triggeRangeY>1253</triggeRangeY>
+      <triggeRangeLength>1335</triggeRangeLength>
+      <triggeRangeWidth>1372</triggeRangeWidth>
+      <homerangeX>1307</homerangeX>
+      <homerangeY>1398</homerangeY>
+      <homerangeLength>2800</homerangeLength>
+      <homerangeWidth>2800</homerangeWidth>
+    </entity>
+  </entities>
+  <mapname>20007_Trials_s</mapname>
+</root>

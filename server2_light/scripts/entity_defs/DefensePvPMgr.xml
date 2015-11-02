@@ -1,0 +1,46 @@
+<root>
+	<Properties>
+        <mapPlayerInfo>
+            <Type>LUA_TABLE</Type>
+            <Flags>BASE</Flags>
+        </mapPlayerInfo>
+
+        <mapPlayerPoint>
+            <Type>LUA_TABLE</Type>
+            <Flags>BASE</Flags>
+        </mapPlayerPoint>
+
+        <mapGameInfo>
+            <Type>LUA_TABLE</Type>
+            <Flags>BASE</Flags>
+        </mapGameInfo>
+
+        <!-- 等待队列 -->
+        <queWaitting>
+            <Type>LUA_TABLE</Type>
+            <Flags>BASE</Flags>
+        </queWaitting>
+
+        <nowMailBoxStr>
+            <Type>STRING</Type>
+            <Flags>BASE</Flags>
+        </nowMailBoxStr>
+	</Properties>
+
+	<ClientMethods>
+	</ClientMethods>
+	
+	<BaseMethods>
+		<OnRegistered>
+    	</OnRegistered>
+
+        <MgrEventDispatch>
+            <Arg>STRING</Arg>
+            <Arg>STRING</Arg>
+            <Arg>LUA_TABLE</Arg>
+            <Arg>STRING</Arg>
+            <Arg>STRING</Arg>
+            <Arg>LUA_TABLE</Arg>
+        </MgrEventDispatch>
+	</BaseMethods>
+</root>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<node>
+		<id_i>1</id_i>
+		<star_i>1</star_i>
+		<range_l>0.1,0.1,0.1,0.1,0.1</range_l>
+	</node>
+	<node>
+		<id_i>2</id_i>
+		<star_i>2</star_i>
+		<range_l>0.5,0.5,0.5,0.5,0.5</range_l>
+	</node>
+	<node>
+		<id_i>3</id_i>
+		<star_i>3</star_i>
+		<range_l>1,1,1,1,1</range_l>
+	</node>
+</root>

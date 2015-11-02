@@ -1,0 +1,163 @@
+<root>
+    <Properties>
+
+    <spawnPointCfgId>                        
+        <Type> UINT32 </Type>   
+        <Flags> CELL </Flags>       
+    </spawnPointCfgId> 
+    <!--cell的SpaceLoader实体引用-->
+    <sp_ref>                        
+        <Type> LUA_OBJECT </Type>   
+        <Flags> CELL </Flags>       
+    </sp_ref>                       
+
+	<!--玩家所在场景地图id-->
+    <map_id>
+        <Type> UINT16 </Type>
+        <Flags> CELL </Flags>
+    </map_id>
+	
+    <homerangeX>
+        <Type> INT16 </Type>
+        <Flags> CELL </Flags>
+    </homerangeX>
+    
+    <homerangeY>
+        <Type> INT16 </Type>
+        <Flags> CELL </Flags>
+    </homerangeY>
+    
+    <homerangeLength>
+        <Type> INT16 </Type>
+        <Flags> CELL </Flags>
+    </homerangeLength>
+    
+    <homerangeWidth>
+        <Type> INT16 </Type>
+        <Flags> CELL </Flags>
+    </homerangeWidth>
+    
+    <enterX>
+        <Type> INT16 </Type>
+        <Flags> CELL </Flags>
+    </enterX>
+        
+    <enterY>
+        <Type> INT16 </Type>
+        <Flags> CELL </Flags>
+    </enterY>
+    
+    <c_etype>
+        <Type> UINT8 </Type>
+        <Flags> CELL </Flags>
+    </c_etype>
+     
+    <monsterId>
+        <Type> UINT32 </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+    </monsterId>
+
+	<model>
+        <Type> INT32 </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+    </model>
+	
+    <!--给AI用的共享内存-->
+    <blackBoard>
+        <Type> LUA_TABLE </Type>
+        <Flags> CELL </Flags>
+    </blackBoard>
+
+    <skillSystem>
+        <Type> LUA_TABLE </Type>
+        <Flags> CELL </Flags>
+    </skillSystem>
+
+    <curHp>
+        <Type> UINT32 </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+    </curHp>
+
+    <!--玩家战斗属性临时表-->
+    <battleProps>
+        <Type> LUA_TABLE </Type>
+        <Flags> CELL </Flags>
+    </battleProps>
+
+    <!--速度-->
+    <speed>
+        <Type> UINT16 </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+    </speed>
+
+    <!--
+    <deathFlag>
+        <Type> UINT8 </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+        <Default> 0 </Default>
+    </deathFlag>
+    -->
+
+    <!--角色状态标志位-->
+    <stateFlag>     
+        <Type> UINT64 </Type>           
+        <Flags> OTHER_CLIENTS </Flags> 
+        <Default> 0 </Default>         
+    </stateFlag>
+
+    <!--战斗阵营标识-->
+    <factionFlag>
+        <Type> UINT8 </Type>
+        <Flags> OTHER_CLIENTS </Flags> 
+        <Default> 0 </Default>
+    </factionFlag>
+
+     <clientTrapId>
+         <Type> UINT8 </Type> 
+         <Flags> OTHER_CLIENTS </Flags>
+         <Default> 0 </Default>
+     </clientTrapId>
+
+     <ai>
+         <Type> UINT16 </Type>
+         <Flags> CELL </Flags>
+         <Default> 0 </Default>
+     </ai>
+
+     <canThink>
+         <Type> UINT8 </Type>
+         <Flags> CELL </Flags>
+         <Default> 0 </Default>
+     </canThink>
+
+     <borned>
+         <Type> UINT8 </Type>
+         <Flags> CELL </Flags>
+         <Default> 0 </Default>
+     </borned>
+     <!--血量是否受血量管理器控制-->
+     <ctrlByBossHpMgr>
+        <Type> UINT8 </Type>
+         <Flags> CELL </Flags>
+         <Default> 0 </Default>
+     </ctrlByBossHpMgr>
+
+    <notTurn>
+         <Type> UINT8 </Type>
+         <Flags> OTHER_CLIENTS </Flags>
+         <Default> 0 </Default>
+    </notTurn>
+
+    <level>
+        <Type> UINT8 </Type>
+        <Flags> CELL </Flags>
+        <Default> 0 </Default> 
+    </level>
+
+    <difficulty>                         
+        <Type> UINT32 </Type>            
+        <Flags> OTHER_CLIENTS </Flags> 
+    </difficulty>                        
+    </Properties>
+
+</root>

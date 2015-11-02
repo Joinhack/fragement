@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<FFFItem>
+		<id_i>1</id_i>
+		<hpBase_i>1</hpBase_i>
+		<attackBase_i>15</attackBase_i>
+		<defenseBase_i>15</defenseBase_i>
+		<crit_i>30</crit_i>
+		<trueStrike_i>30</trueStrike_i>
+		<critExtraAttack_i>30</critExtraAttack_i>
+		<antiDefense_i>30</antiDefense_i>
+		<antiCrit_i>30</antiCrit_i>
+		<antiTrueStrike_i>30</antiTrueStrike_i>
+		<damageReduceRate_i>3000</damageReduceRate_i>
+		<extraCritRate_i>3000</extraCritRate_i>
+		<extraTrueStrikeRate_i>3000</extraTrueStrikeRate_i>
+		<extraAntiDefenceRate_i>3000</extraAntiDefenceRate_i>
+		<extraAntiCritRate_i>3000</extraAntiCritRate_i>
+		<extraAntiTrueStrikeRate_i>3000</extraAntiTrueStrikeRate_i>
+		<extraDefenceRate_i>3000</extraDefenceRate_i>
+		<pvpAddition_i>30</pvpAddition_i>
+		<pvpAnti_i>30</pvpAnti_i>
+	</FFFItem>
+</root>

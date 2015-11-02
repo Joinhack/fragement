@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<story>
+		<id>1</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>2</id>
+		<storyText>WhiteCamera 0,0 250</storyText>
+	</story>
+	<story>
+		<id>3</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>4</id>
+		<storyText>RemoveEntities</storyText>
+	</story>
+	<story>
+		<id>5</id>
+		<storyText>CreateModel 1 150005 6959 2964 0,209,0</storyText>
+	</story>
+	<story>
+		<id>6</id>
+		<storyText>SetPosition 0 65.13,4.14,24.21</storyText>
+	</story>
+	<story>
+		<id>7</id>
+		<storyText>SetRotation 0 0,44,0</storyText>
+	</story>
+	<story>
+		<id>8</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>9</id>
+		<storyText>MoveTo 1 67.83,4.29,26.455 500</storyText>
+	</story>
+	<story>
+		<id>10</id>
+		<storyText>MoveCamera 0 0.1,15,228,0 0.5,15,228,0 5000 70.24,6.881,28.81</storyText>
+	</story>
+	<story>
+		<id>11</id>
+		<storyText>NormalCamera 0,0 500</storyText>
+	</story>
+	<story>
+		<id>12</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>13</id>
+		<storyText>ShowDialog 150005,150005 304,304 105162,105163</storyText>
+	</story>
+	<story>
+		<id>14</id>
+		<storyText>OpenUI</storyText>
+	</story>
+	<story>
+		<id>15</id>
+		<storyText>Wait 6</storyText>
+	</story>
+	<story>
+		<id>16</id>
+		<storyText>CloseUI</storyText>
+	</story>
+	<story>
+		<id>17</id>
+		<storyText>Sleep 1500</storyText>
+	</story>
+	<story>
+		<id>18</id>
+		<storyText>LockSight</storyText>
+	</story>
+	<story>
+		<id>19</id>
+		<storyText>DestroyModel 1</storyText>
+	</story>
+	<story>
+		<id>20</id>
+		<storyText>End</storyText>
+	</story>
+</root>

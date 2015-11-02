@@ -1,0 +1,20 @@
+[default]
+login_log = /data/server/cgi-bin/log/cgi
+center_log = /data/server/cgi-bin/log/center
+plat_log = /data/server/cgi-bin/log/plat
+gift_log=/data/server/cgi-bin/log/gift_sender
+
+login_key = 5a9513158a0254f81951236449190bfb
+login_verify = https://api.4399sy.com/service/verify?verifyToken=
+center_key = aiyou123456
+plat_key = 5a9513158a0254f81951236449190bfb
+card_key = aiyou123456
+
+loginapp_port = 3001
+logapp_port = 3005
+
+;trust_ip was add_gift trust ips
+trust_ip=127.0.0.1 172.16.10.88 172.16.203.53
+
+[qurong]
+logapp_port =5025 

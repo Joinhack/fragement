@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<story>
+		<id>1</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>2</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>3</id>
+		<storyText>SetPosition 0 55.6,25.72,35.91</storyText>
+	</story>
+	<story>
+		<id>4</id>
+		<storyText>Sleep 100</storyText>
+	</story>
+	<story>
+		<id>5</id>
+		<storyText>MoveTo 0 50.44,25.73,35.86 1700</storyText>
+	</story>
+	<story>
+		<id>6</id>
+		<storyText>Sleep 1700</storyText>
+	</story>
+	<story>
+		<id>7</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>8</id>
+		<storyText>SetPosition 0 50.44,25.73,35.86</storyText>
+	</story>
+	<story>
+		<id>9</id>
+		<storyText>Sleep 4000</storyText>
+	</story>
+	<story>
+		<id>10</id>
+		<storyText>MoveTo 0 50.47,25.71,42.26 1500</storyText>
+	</story>
+	<story>
+		<id>11</id>
+		<storyText>Sleep 1500</storyText>
+	</story>
+	<story>
+		<id>12</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>13</id>
+		<storyText>SetPosition 0 50.47,25.71,42.26</storyText>
+	</story>
+	<story>
+		<id>14</id>
+		<storyText>Sleep 2000</storyText>
+	</story>
+	<story>
+		<id>15</id>
+		<storyText>MoveTo 0 49.28,25.7,49.4 1000</storyText>
+	</story>
+	<story>
+		<id>16</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>17</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>18</id>
+		<storyText>SetPosition 0 49.28,25.7,49.4</storyText>
+	</story>
+	<story>
+		<id>19</id>
+		<storyText>MoveTo 0 46.5,25.71,49.56 500</storyText>
+	</story>
+	<story>
+		<id>20</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>21</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>22</id>
+		<storyText>SetPosition 0 46.5,25.71,49.56</storyText>
+	</story>
+	<story>
+		<id>23</id>
+		<storyText>LockSight</storyText>
+	</story>
+	<story>
+		<id>24</id>
+		<storyText>End</storyText>
+	</story>
+</root>

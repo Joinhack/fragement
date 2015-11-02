@@ -1,0 +1,296 @@
+<root>
+
+<Properties>
+
+    <!-- 服务器的所有公会 -->
+    <guilds>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Default> {} </Default>
+    </guilds>
+
+    <!-- 工会名字列表 -->
+    <guildNames>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Default> {} </Default>
+    </guildNames>
+
+    <!-- 服务器所有的公会消息 -->
+    <guildMessages>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Default> {} </Default>
+    </guildMessages>
+
+    <!-- 排好序的公会DBID队列 -->
+    <guildDbids>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Default> {} </Default>
+    </guildDbids>
+
+    <AllGuildsCount>
+        <Type> UINT64 </Type>
+        <Flags> BASE </Flags>
+        <Default> 0 </Default>
+    </AllGuildsCount>
+
+    <AllLoadedGuildsCount>
+        <Type> UINT64 </Type>
+        <Flags> BASE </Flags>
+        <Default> 0 </Default>
+    </AllLoadedGuildsCount>
+
+    <AllGuildMessagesCount>
+        <Type> UINT64 </Type>
+        <Flags> BASE </Flags>
+        <Default> 0 </Default>
+    </AllGuildMessagesCount>
+
+    <!-- 从UserMgr查回来的所有公会成员 -->
+    <PlayerInfo>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Default> {} </Default>
+    </PlayerInfo>
+
+    <!-- 每次邀请自增1，表示邀请的流水号 -->
+    <InviteCode>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+        <Default> 0 </Default>
+    </InviteCode>
+
+    <!-- 记录玩家的邀请信息 -->
+    <InviteInfo>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Default> {} </Default>
+    </InviteInfo>
+
+    <!-- 记录脏数据 -->
+    <DirtyGuildIds>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Default> {} </Default>
+    </DirtyGuildIds>
+
+    <!-- 玩家的dbid到公会的dbid的关系 -->
+    <PlayerDbid2GuildDbid>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Default> {} </Default>
+    </PlayerDbid2GuildDbid>
+
+</Properties>
+
+<ClientMethods>
+
+</ClientMethods>
+
+<BaseMethods>
+
+    <!-- 当所有公会从数据库加载回来时回调 -->
+    <OnGuildsLoaded>
+        <Arg> UINT32 </Arg>     <!-- 个数 -->
+    </OnGuildsLoaded>
+
+    <GetGuilds>
+        <Arg> STRING </Arg>
+        <Arg> UINT32 </Arg>    <!-- 开始序号 -->
+        <Arg> UINT32 </Arg>     <!-- 个数 -->
+    </GetGuilds>
+
+    <GetGuildsCount>
+        <Arg> STRING </Arg>
+    </GetGuildsCount>
+
+    <GetGuildMessagesCount>
+        <Arg> STRING </Arg>
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> UINT8 </Arg>
+    </GetGuildMessagesCount>
+
+    <GetGuildMessages>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> UINT32 </Arg>
+        <Arg> UINT32 </Arg>
+        <Arg> UINT8 </Arg>
+    </GetGuildMessages>
+
+    <CreateGuild>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> STRING </Arg>    <!-- 公会的名字 -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> STRING </Arg>    <!-- 玩家的名字 -->
+        <Arg> UINT8 </Arg>     <!-- 玩家的等级 -->
+        <Arg> UINT32 </Arg>    <!-- 玩家的战斗力 -->
+    </CreateGuild>
+
+    <Register>
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> STRING </Arg>    <!-- 玩家的名字 -->
+        <Arg> UINT8 </Arg>     <!-- 玩家的等级 -->
+        <Arg> UINT32 </Arg>    <!-- 玩家的战斗力 -->
+    </Register>
+
+    <DisRegister>
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </DisRegister>
+
+    <Init/>
+
+    <QueryInfoByPlayerDbidResp>
+        <Arg> UINT32 </Arg>  <!--  -->
+        <Arg> UINT64 </Arg>  <!--  -->
+        <Arg> LUA_TABLE </Arg>
+    </QueryInfoByPlayerDbidResp>
+
+    <SetGuildAnnouncement>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> STRING </Arg>    <!-- 公告 -->
+    </SetGuildAnnouncement>
+
+    <GetGuildAnnouncement>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </GetGuildAnnouncement>
+
+    <ApplyToJoin>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> STRING </Arg>    <!-- 玩家的名字 -->
+        <Arg> UINT8 </Arg>     <!-- 玩家职业 -->
+        <Arg> UINT64 </Arg>    <!-- 公会的dbid -->
+        <Arg> UINT8 </Arg>     <!-- 玩家的等级 -->
+        <Arg> UINT32 </Arg>    <!-- 战斗力 -->
+    </ApplyToJoin>
+
+    <AnswerApply>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> UINT8 </Arg>     <!-- 操作 -->
+        <Arg> UINT64 </Arg>    <!-- 请求的dbid -->
+    </AnswerApply>
+
+    <Invite>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+    </Invite>
+
+    <AnswerInvite>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> UINT32 </Arg>    <!-- 邀请ID -->
+        <Arg> UINT8 </Arg>    <!-- 操作ID -->
+    </AnswerInvite>
+
+    <Quit>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </Quit>
+
+    <Promote>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </Promote>
+
+    <Demote>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </Demote>
+
+    <Expel>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </Expel>
+
+    <Demise>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </Demise>
+
+    <Dismiss>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </Dismiss>
+
+    <Thaw>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </Thaw>
+
+    <Chat>
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> STRING </Arg>    <!-- 玩家的名字 -->
+        <Arg> UINT8 </Arg>    <!-- 玩家的等级 -->
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> STRING </Arg>    <!-- 玩家发送的内容 -->
+    </Chat>
+
+    <Recharge>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> STRING </Arg>    <!-- 玩家的名字 -->
+        <Arg> UINT32 </Arg>    <!-- 玩家的货币 -->
+        <Arg> UINT8 </Arg>     <!-- 玩家的等级 -->
+        <Arg> UINT8 </Arg>     <!-- 注魔类型 -->
+        <Arg> UINT32 </Arg>    <!-- 注魔值 -->
+    </Recharge>
+
+    <GetGuildMembers>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> UINT32 </Arg>    <!-- 开始序号 -->
+        <Arg> UINT32 </Arg>     <!-- 个数 -->
+    </GetGuildMembers>
+
+    <GetDragon>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> STRING </Arg>    <!-- 玩家的名字 -->
+        <Arg> UINT8 </Arg>     <!-- 玩家的等级 -->
+    </GetDragon>
+
+    <UpgradeGuildSkill>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> STRING </Arg>    <!-- 玩家的名字 -->
+        <Arg> UINT8 </Arg>     <!-- 公会技能类型-->
+    </UpgradeGuildSkill>
+
+    <GetGuildDetailedInfo>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </GetGuildDetailedInfo>
+
+    <GuildProcessBasePropertiesReq>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> LUA_TABLE </Arg>    <!-- 玩家的dbid -->
+    </GuildProcessBasePropertiesReq>
+
+    <GetRecommedList>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </GetRecommedList>
+
+    <GetDragonInfo>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </GetDragonInfo>
+
+</BaseMethods>
+
+
+</root>

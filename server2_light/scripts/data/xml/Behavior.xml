@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<item>
+		<id_i>1</id_i>
+		<typeId_i>1</typeId_i>
+		<params_s>name,kevin,pro,5</params_s>
+	</item>
+	<item>
+		<id_i>2</id_i>
+		<typeId_i>1</typeId_i>
+		<params_s>509</params_s>
+	</item>
+	<item>
+		<id_i>3</id_i>
+		<typeId_i>1</typeId_i>
+		<params_s>506</params_s>
+	</item>
+	<item>
+		<id_i>4</id_i>
+		<typeId_i>1</typeId_i>
+		<params_s>502</params_s>
+	</item>
+	<item>
+		<id_i>5</id_i>
+		<typeId_i>1</typeId_i>
+		<params_s>503</params_s>
+	</item>
+	<item>
+		<id_i>6</id_i>
+		<typeId_i>2</typeId_i>
+		<params_s>5004</params_s>
+	</item>
+</root>

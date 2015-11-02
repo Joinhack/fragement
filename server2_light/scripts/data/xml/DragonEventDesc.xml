@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<EventName>
+		<id_i>1</id_i>
+		<desc_i>26200</desc_i>
+	</EventName>
+	<EventName>
+		<id_i>2</id_i>
+		<desc_i>26201</desc_i>
+	</EventName>
+	<EventName>
+		<id_i>3</id_i>
+		<desc_i>26202</desc_i>
+	</EventName>
+	<EventName>
+		<id_i>4</id_i>
+		<desc_i>26203</desc_i>
+	</EventName>
+	<EventName>
+		<id_i>5</id_i>
+		<desc_i>26204</desc_i>
+	</EventName>
+</root>

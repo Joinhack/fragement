@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<item>
+		<id_i>1</id_i>
+		<skillId_i>30101</skillId_i>
+		<nameCode_i>0</nameCode_i>
+		<weight_i>3000</weight_i>
+	</item>
+	<item>
+		<id_i>2</id_i>
+		<skillId_i>30201</skillId_i>
+		<nameCode_i>0</nameCode_i>
+		<weight_i>3000</weight_i>
+	</item>
+	<item>
+		<id_i>3</id_i>
+		<skillId_i>30301</skillId_i>
+		<nameCode_i>0</nameCode_i>
+		<weight_i>3000</weight_i>
+	</item>
+	<item>
+		<id_i>4</id_i>
+		<skillId_i>30401</skillId_i>
+		<nameCode_i>0</nameCode_i>
+		<weight_i>500</weight_i>
+	</item>
+	<item>
+		<id_i>5</id_i>
+		<skillId_i>30501</skillId_i>
+		<nameCode_i>0</nameCode_i>
+		<weight_i>500</weight_i>
+	</item>
+</root>

@@ -1,0 +1,137 @@
+<root>
+
+<Properties>
+    <!--map mail_dbid:mail-->
+    <private_mails>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </private_mails>
+    <!--list index:mail-->
+    <public_mails>
+    	<Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </public_mails>
+
+    <hasTimer>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </hasTimer>
+
+    <!--获取邮件的队列-->
+    <geting_list>
+    	<Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </geting_list>
+
+    <del_list>
+    	<Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </del_list>
+
+    <recv_list>
+    	<Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </recv_list>
+
+    <compensate_list>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </compensate_list>
+</Properties>
+
+<ClientMethods>
+
+</ClientMethods>
+
+<BaseMethods>
+    <OnRegistered>
+    </OnRegistered>
+
+    <Login>
+    	<Arg> STRING </Arg>  <!-- mailbox string -->
+        <Arg> UINT64 </Arg>  <!-- dbid -->
+        <Arg> UINT32 </Arg>  <!-- last time -->
+    </Login>
+
+    <MailInfoReq>
+    	<Arg> STRING </Arg>  <!-- mailbox string -->
+        <Arg> UINT64 </Arg>  <!-- dbid -->
+        <Arg> UINT32 </Arg>  <!-- last time -->
+    </MailInfoReq>
+
+    <Read>
+    	<Arg> STRING </Arg>  <!-- mailbox string -->
+        <Arg> UINT64 </Arg>  <!-- dbid -->
+        <Arg> UINT64 </Arg>  <!-- mail dbid -->
+    </Read>
+
+    <Del>
+    	<Arg> STRING </Arg>  <!-- mailbox string -->
+        <Arg> UINT64 </Arg>  <!-- dbid -->
+        <Arg> UINT64 </Arg>  <!-- mail dbid -->
+    </Del>
+
+    <DelAll>
+    	<Arg> STRING </Arg>  <!-- mailbox string -->
+        <Arg> UINT64 </Arg>  <!-- dbid -->
+    </DelAll>
+
+    <GetAttachInfo>
+		<Arg> STRING </Arg>  <!-- mailbox string -->
+        <Arg> UINT64 </Arg>  <!-- dbid -->
+        <Arg> UINT64 </Arg>  <!-- mail dbid -->
+    </GetAttachInfo>
+
+    <RecvAttach>
+    	<Arg> STRING </Arg>  <!-- mailbox string -->
+        <Arg> UINT64 </Arg>  <!-- dbid -->
+        <Arg> UINT64 </Arg>  <!-- mail dbid -->
+    </RecvAttach>
+
+    <SendEx>
+        <Arg> STRING </Arg>
+        <Arg> STRING </Arg>
+        <Arg> STRING </Arg>
+        <Arg> STRING </Arg>
+        <Arg> UINT32 </Arg>
+        <Arg> LUA_TABLE </Arg>
+        <Arg> LUA_TABLE </Arg>
+        <Arg> UINT8 </Arg>
+    </SendEx>
+    
+
+    <SendIdEx>
+        <Arg> UINT32 </Arg>
+        <Arg> STRING </Arg>
+        <Arg> UINT32 </Arg>
+        <Arg> UINT32 </Arg>
+        <Arg> UINT32 </Arg>
+        <Arg> LUA_TABLE </Arg>
+        <Arg> LUA_TABLE </Arg>
+        <Arg> LUA_TABLE </Arg>
+        <Arg> UINT8 </Arg>
+    </SendIdEx>
+
+    <SendAllEx>
+        <Arg> STRING </Arg>
+        <Arg> STRING </Arg>
+        <Arg> STRING </Arg>
+        <Arg> STRING </Arg>
+        <Arg> UINT32 </Arg>
+        <Arg> LUA_TABLE </Arg>
+        <Arg> UINT8 </Arg>
+    </SendAllEx>
+
+    <OnSendAll>
+        <Arg> UINT64 </Arg>  <!-- dbid -->
+        <Arg> LUA_TABLE </Arg>
+    </OnSendAll>
+
+    <JewlMailReq>
+        <Arg> STRING </Arg>  <!-- mailbox string -->
+        <Arg> UINT64 </Arg>  <!-- dbid -->
+    </JewlMailReq>
+</BaseMethods>
+
+
+</root>

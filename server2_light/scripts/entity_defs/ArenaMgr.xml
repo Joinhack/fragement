@@ -1,0 +1,125 @@
+<root>
+
+<Properties>
+    <name>
+        <Type> STRING </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+        <UniqueIndex/>
+    </name>
+ 
+    <!--竞技场数据, 按战斗力排序-->
+    <m_arenicData>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </m_arenicData>
+    <!---->
+    <m_Save>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </m_Save>
+
+    <m_timers>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </m_timers>
+
+    <m_arena_count>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+    </m_arena_count>
+
+    <m_arena_loaded_count>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+    </m_arena_loaded_count>
+
+    <nextDayReTime> 
+       <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </nextDayReTime>
+
+    <nextWeekReTime> 
+       <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </nextWeekReTime>
+
+</Properties>
+
+<BaseMethods>
+    
+    <Init/>
+    <!--
+    <Inited/>
+
+    <InitData>
+         <Arg> LUA_TABLE </Arg> 
+    </InitData>
+    -->
+    <Login>
+        <Arg> STRING </Arg>       <!-- mbstr -->
+        <Arg> UINT64 </Arg>       <!-- 玩家的dbid -->
+        <Arg> UINT32 </Arg>       <!-- 玩家的fight -->
+        <Arg> UINT8 </Arg>        <!-- 玩家的level -->
+    </Login>
+    <GetWeakFoes>
+        <Arg> UINT64 </Arg>       <!-- 玩家的dbid -->
+    </GetWeakFoes>
+    <GetStrongFoes>
+        <Arg> UINT64 </Arg>       <!-- 玩家的dbid -->
+    </GetStrongFoes>
+    <AddNewPlayer>
+        <Arg> UINT64 </Arg>       <!-- 玩家的dbid -->
+        <Arg> UINT32 </Arg>       <!-- 玩家的fight -->
+        <Arg> UINT8 </Arg>       <!-- 玩家的level -->
+    </AddNewPlayer>
+    <UpdateEnemy>
+        <Arg> UINT64 </Arg>       <!-- 玩家的dbid -->
+        <Arg> LUA_TABLE </Arg>       <!-- 玩家的dbid -->
+    </UpdateEnemy>
+    <RefreshRefFightResp>
+         <Arg> LUA_TABLE </Arg>       <!-- id2fight -->
+    </RefreshRefFightResp>
+    <AddScore>
+        <Arg> UINT64 </Arg>       <!-- 玩家的dbid -->
+        <Arg> UINT32 </Arg>       <!-- score -->
+    </AddScore>
+    <AddChallengeTime>
+        <Arg> UINT64 </Arg>       <!-- 玩家的dbid -->
+        <Arg> UINT32 </Arg>       <!-- count -->
+        <Arg> UINT8 </Arg>       <!-- 玩家的level -->
+    </AddChallengeTime>
+    <UpdateCandidateEnemy>
+        <Arg> UINT64 </Arg>       <!-- 挑战者的dbid -->
+        <Arg> UINT64 </Arg>       <!-- 被挑战者的dbid -->
+        <Arg> UINT32 </Arg>       <!-- 挑战者的fight -->
+    </UpdateCandidateEnemy>
+
+    <!--设置arenadata的数目-->
+    <SetArenaDataCount>
+        <Arg> UINT32 </Arg>     <!--count-->
+    </SetArenaDataCount>
+
+    <!--设置一个arenadata-->
+    <SetArenaData>
+        <Arg> UINT32 </Arg>     <!--entity_id-->
+    </SetArenaData>
+    <MarkBeatEnemy>
+        <Arg> UINT64 </Arg>       <!-- 挑战者的dbid -->
+    </MarkBeatEnemy>
+    <RecvDayRewards>
+        <Arg> UINT64 </Arg>       <!-- 挑战者的dbid -->
+        <Arg> STRING </Arg>       <!-- mbstr -->
+        <Arg> UINT32 </Arg>     <!--idx-->
+    </RecvDayRewards>
+    <RecvWeekRewards>
+        <Arg> UINT64 </Arg>       <!-- 挑战者的dbid -->
+        <Arg> STRING </Arg>       <!-- mbstr -->
+        <Arg> UINT32 </Arg>     <!--idx-->
+    </RecvWeekRewards>
+</BaseMethods>
+
+
+</root>

@@ -1,0 +1,39 @@
+<root>
+  <entities>
+    <entity>
+      <id>99</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>2532,2315</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>103060, 203060</levelID>
+      <triggeRangeX>0</triggeRangeX>
+      <triggeRangeY>0</triggeRangeY>
+      <triggeRangeLength>0</triggeRangeLength>
+      <triggeRangeWidth>0</triggeRangeWidth>
+      <homerangeX>2608</homerangeX>
+      <homerangeY>2513</homerangeY>
+      <homerangeLength>3838</homerangeLength>
+      <homerangeWidth>3859</homerangeWidth>
+    </entity>
+    <entity>
+      <id>3</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>2532,2315,3163,2047,2099,2309,2786,2946,2514,1807,3158,2370,1969,2810,2786,2036,2161,2061,2798,2600,2297,2544</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>103061, 203061</levelID>
+      <triggeRangeX>2548</triggeRangeX>
+      <triggeRangeY>2305</triggeRangeY>
+      <triggeRangeLength>1500</triggeRangeLength>
+      <triggeRangeWidth>1500</triggeRangeWidth>
+      <homerangeX>2608</homerangeX>
+      <homerangeY>2513</homerangeY>
+      <homerangeLength>3838</homerangeLength>
+      <homerangeWidth>3859</homerangeWidth>
+    </entity>
+  </entities>
+  <mapname>10206_EarthLord_s</mapname>
+</root>

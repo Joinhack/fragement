@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<DCItem>
+		<id_i>1</id_i>
+		<dailyConvoyTimes_i>10</dailyConvoyTimes_i>
+		<dailyAttackTimes_i>10</dailyAttackTimes_i>
+		<convoyAttackedTimes_i>3</convoyAttackedTimes_i>
+		<attackCD_i>600</attackCD_i>
+		<upgradeQualityCost_i>13</upgradeQualityCost_i>
+		<goldDragonPrice_i>14</goldDragonPrice_i>
+		<attackTimesPrice_i>15</attackTimesPrice_i>
+		<attackPercent_m>1:500,2:500</attackPercent_m>
+		<attackUpLimit_m>1:3</attackUpLimit_m>
+		<revengeTimes_i>3</revengeTimes_i>
+		<clearAttackCDPrice_i>17</clearAttackCDPrice_i>
+		<cutCompleteTimeFiveMinPrice_i>18</cutCompleteTimeFiveMinPrice_i>
+		<immediateCompleteConvoyPrice_i>19</immediateCompleteConvoyPrice_i>
+		<convoyTimesPrice_i>16</convoyTimesPrice_i>
+		<upQualityitemCost_m>1100075:1</upQualityitemCost_m>
+		<freshAdversaryPrice_i>21</freshAdversaryPrice_i>
+		<levelNeed_i>15</levelNeed_i>
+	</DCItem>
+</root>

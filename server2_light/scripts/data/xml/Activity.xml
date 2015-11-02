@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Activity>
+		<id_i>1</id_i>
+		<name>26050</name>
+		<descrip>26051</descrip>
+		<notice_i>26052</notice_i>
+		<icon_i>1</icon_i>
+		<queue_i>1</queue_i>
+		<lastTime_i>1800</lastTime_i>
+		<level_l>20,100</level_l>
+		<times_i>100</times_i>
+		<param1_i>60</param1_i>
+	</Activity>
+	<Activity>
+		<id_i>2</id_i>
+		<name>1</name>
+		<descrip>1</descrip>
+		<notice_i>1</notice_i>
+		<icon_i>1</icon_i>
+		<queue_i>1</queue_i>
+		<lastTime_i>1</lastTime_i>
+		<level_l>99,99</level_l>
+		<times_i>10</times_i>
+		<param1_i>10</param1_i>
+	</Activity>
+</root>

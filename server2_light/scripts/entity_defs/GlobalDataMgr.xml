@@ -1,0 +1,65 @@
+<root>
+	<Properties>
+        <name>
+            <Type> STRING </Type>
+            <Flags> BASE </Flags>
+            <Persistent> true </Persistent>
+            <UniqueIndex/>
+        </name>
+
+		<marketSharedQuota>
+        	<Type>LUA_TABLE</Type>
+        	<Flags>BASE</Flags>
+            <Persistent>true</Persistent>
+		</marketSharedQuota>
+
+        <nowMailBoxStr>
+            <Type>STRING</Type>
+            <Flags>BASE</Flags>
+        </nowMailBoxStr>
+        
+		 <forbidden_ips>
+        	<Type>LUA_TABLE</Type>
+        	<Flags>BASE</Flags>
+            <Persistent>true</Persistent>
+		</forbidden_ips>
+		
+		 <forbidden_accounts>
+        	<Type>LUA_TABLE</Type>
+        	<Flags>BASE</Flags>
+            <Persistent>true</Persistent>
+		</forbidden_accounts>
+		
+	</Properties>
+
+	<ClientMethods>
+	</ClientMethods>
+	
+	<BaseMethods>
+		<OnRegistered>
+    	</OnRegistered>
+
+        <MgrEventDispatch>
+            <Arg>STRING</Arg>
+            <Arg>STRING</Arg>
+            <Arg>LUA_TABLE</Arg>
+            <Arg>STRING</Arg>
+            <Arg>STRING</Arg>
+            <Arg>LUA_TABLE</Arg>
+        </MgrEventDispatch>
+        
+          <forbid_login>
+            <Arg>STRING</Arg>
+            <Arg>INT8</Arg>
+            <Arg>INT32</Arg>
+        </forbid_login>
+        
+        <ip_ban>
+            <Arg>STRING</Arg>
+            <Arg>INT8</Arg>
+            <Arg>INT32</Arg>
+        </ip_ban>
+        
+
+	</BaseMethods>
+</root>

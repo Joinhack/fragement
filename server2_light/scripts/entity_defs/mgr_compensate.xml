@@ -1,0 +1,24 @@
+<root>
+  <Properties>
+  	<!--上个服务帐号信息-->
+    <m_lastDate>
+      <Type> LUA_TABLE </Type>
+      <Flags> BASE_AND_CLIENT </Flags>
+      <Persistent> TRUE </Persistent>
+    </m_lastDate>
+  </Properties>
+
+  <BaseMethods>
+
+  	<Compensate>
+  		<Arg> STRING </Arg>  <!-- mb string -->
+        <Arg> STRING </Arg>  <!-- account string -->
+        <Arg> UINT64 </Arg>  <!-- dbid -->
+        <Arg> UINT8 </Arg>  <!-- vocation -->
+        <Arg> STRING </Arg>  <!-- vt string -->
+    </Compensate>
+    
+    <Reload>
+    </Reload>
+  </BaseMethods>
+</root>

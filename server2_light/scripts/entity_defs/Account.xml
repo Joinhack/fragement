@@ -1,0 +1,240 @@
+<root>
+
+  <Properties>
+
+    <!--帐户名 唯一索引-->
+    <name>
+      <Type> STRING </Type>
+      <Flags> BASE_AND_CLIENT </Flags>
+      <Persistent> TRUE </Persistent>
+      <UniqueIndex/>
+    </name>
+    <!--平台帐号-->
+    <platAccount>
+      <Type> STRING </Type>
+      <Flags> BASE </Flags>
+      <Persistent> TRUE </Persistent>
+    </platAccount>
+    <!--帐户在本游戏服务器创建时间-->
+    <createTime>
+      <Type> UINT32 </Type>
+      <Flags> BASE </Flags>
+      <Persistent> TRUE </Persistent>
+    </createTime>
+
+    <activeAvatarId>
+      <Type> UINT32 </Type>
+      <Flags> BASE_AND_CLIENT </Flags>
+      <Default> 0 </Default>
+    </activeAvatarId>
+
+    <!--avatar退出标记-->
+    <avatarQuitFlag>
+      <Type> UINT8 </Type>
+      <Flags> BASE </Flags>
+      <Default> 0 </Default>
+    </avatarQuitFlag>
+
+    <!-- base的mailbox字符串 -->
+    <mailBoxStr>
+      <Type> STRING </Type>
+      <Flags> BASE </Flags>
+      <Default> 0 </Default>
+    </mailBoxStr>
+
+    <!--角色信息-->
+    <avatarsInfo>
+      <Type> LUA_TABLE </Type>
+      <Flags> BASE_AND_CLIENT </Flags>
+      <Persistent> TRUE </Persistent>
+    </avatarsInfo>
+
+    <!--account销毁标记-->
+    <accountDestroyFlag>
+      <Type> UINT8 </Type>
+      <Flags> BASE </Flags>
+      <Default> 0 </Default>
+    </accountDestroyFlag>
+
+    <!-- 标记是否拥有avatar (客户端用，判断是否断线重连登录)-->
+    <!--
+    <hasActiveAvatar>
+      <Type> UINT8 </Type>
+      <Flags> BASE_AND_CLIENT </Flags>
+      <Default> 0 </Default>
+    </hasActiveAvatar>
+    -->
+
+    <avatarState>
+      <Type> UINT8 </Type>
+      <Flags> BASE </Flags>
+    </avatarState>
+
+    <!-- 需要进入新手关卡的角色 -->
+    <!--
+    <NeedToNewbieMission>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </NeedToNewbieMission>
+    -->
+
+    <!-- 帐号状态 -->
+    <state>
+      <Type> UINT8 </Type>
+      <Flags> BASE </Flags>
+      <Default> 0 </Default>
+    </state>
+    
+     <!--手机登陆信息-->
+    <cellphone>
+      <Type> STRING </Type>
+      <Flags> BASE </Flags>
+      <Persistent> TRUE </Persistent>
+    </cellphone>
+
+    <!-- 记录帐号的进度 -->
+    <progress>
+        <Type> UINT16 </Type>
+        <Flags> BASE </Flags>
+        <Default> 0 </Default>
+        <Persistent> TRUE </Persistent>
+    </progress>
+
+</Properties>
+
+  <ClientMethods>
+    
+    <!-- 登出->客户端的回应 -->
+    <OnLogoutResp>
+        <Arg> UINT8 </Arg>          <!-- msg_id 返回  -->
+    </OnLogoutResp>
+    <!--随机取名-->
+    <RandomNameResp>
+      <Arg> STRING </Arg>          <!-- 随机名字 返回  -->
+    </RandomNameResp>
+
+    <OnCreateCharacterResp>
+      <Arg>  UINT8 </Arg>
+      <!-- error id -->
+      <Arg>  UINT64 </Arg>
+      <!-- character id -->
+    </OnCreateCharacterResp>
+
+    <OnDelCharacterResp>
+      <Arg>  UINT8 </Arg>
+      <!-- error id -->
+      <Arg>  UINT64 </Arg>
+      <!-- character id -->
+    </OnDelCharacterResp>
+
+    <OnCharaterInfoResp>
+      <Arg>  LUA_TABLE </Arg>
+      <!--lua table-->
+    </OnCharaterInfoResp>
+
+    <OnLoginResp>
+      <Arg>  UINT8 </Arg>
+      <!-- error id -->
+    </OnLoginResp>
+
+    <OnCheckVersionResp>
+      <Arg>  UINT8 </Arg>
+      <!-- error id -->
+    </OnCheckVersionResp>
+
+    <!-- 服务器告诉客户端被顶号 -->
+    <OnMultiLogin/>
+
+  </ClientMethods>
+
+  <BaseMethods>
+
+    <!--
+    <Logout>
+      <Exposed/>
+    </Logout>
+    -->
+
+    <!--随机取名-->
+    <RandomNameReq>
+      <Exposed/>
+      <Arg>UINT8</Arg>
+    </RandomNameReq>
+
+    <CreateCharacterReq>
+      <Exposed/>
+      <Arg>  STRING </Arg>
+      <!--name-->
+      <Arg>  UINT8 </Arg>
+      <!--gender-->
+      <Arg>  UINT8 </Arg>
+      <!--vocation-->
+    </CreateCharacterReq>
+
+    <DelCharacterReq>
+      <Exposed/>
+      <Arg>  UINT64 </Arg>
+      <!-- id -->
+    </DelCharacterReq>
+
+    <CharaterInfoReq>
+      <Exposed/>
+      <Arg>  STRING </Arg>
+      <!--account name-->
+    </CharaterInfoReq>
+
+    <StartGameReq>
+      <Exposed/>
+      <Arg>  UINT64 </Arg>
+    </StartGameReq>
+
+    <SelectMapResp>
+      <Arg> UINT16 </Arg>    <!-- 玩家的实际地图ID -->
+      <Arg> UINT16 </Arg>    <!-- 玩家的实际地图分线ID -->
+      <Arg> LUA_TABLE </Arg> <!-- 选中的sp的base的mb -->
+      <Arg> LUA_TABLE </Arg> <!-- 选中的sp的cell的mb -->
+      <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+      <Arg> LUA_TABLE </Arg> <!-- 玩家选择分线时穿进来的参数，此时再返回给他 -->
+    </SelectMapResp>
+
+    <SelectMapFailResp>
+      <!-- 玩家的实际地图ID -->
+      <Arg> UINT16 </Arg>
+      <!-- 玩家的实际地图分线ID -->
+      <Arg> UINT32 </Arg>
+    </SelectMapFailResp>
+    
+    <CheckVersionReq>
+      <Exposed/>
+      <!--版本号-->
+      <Arg>  STRING </Arg>
+    </CheckVersionReq>
+
+    <!--CreateCharacter(tabInfo, ret)-->
+    <CreateCharacter>
+      <Arg> LUA_TABLE </Arg>
+      <Arg> UINT8 </Arg>
+    </CreateCharacter>
+    
+    <PhoneInfo>
+        <Exposed/>
+        <Arg> STRING </Arg> <!--手机guid-->
+        <Arg> STRING </Arg>	<!--其他信息-->
+    </PhoneInfo>
+    
+    <!--保存平台帐号-->
+    <SetPlatAccountReq>
+      <Exposed/>
+        <Arg> STRING </Arg> <!--PlatAccount-->
+    </SetPlatAccountReq>
+
+    <!-- 客户端发上来，记录进度 -->
+    <SetProgress>
+        <Exposed/>
+        <Arg> UINT16 </Arg>
+    </SetProgress>
+
+  </BaseMethods>
+
+
+</root>

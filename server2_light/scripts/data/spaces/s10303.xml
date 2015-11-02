@@ -1,0 +1,69 @@
+<root>
+  <entities>
+    <entity>
+      <id>3</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>5200,2049,5850,1430,4989,1918,5093,1143,5653,863,5328,1065,5139,1784,5602,1298,5535,2020,5651,1640</monsterSpawntPoint>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>103031, 203031</levelID>
+      <triggeRangeX>5564</triggeRangeX>
+      <triggeRangeY>1579</triggeRangeY>
+      <triggeRangeLength>2910</triggeRangeLength>
+      <triggeRangeWidth>999</triggeRangeWidth>
+      <homerangeX>5637</homerangeX>
+      <homerangeY>1612</homerangeY>
+      <homerangeLength>2689</homerangeLength>
+      <homerangeWidth>3039</homerangeWidth>
+    </entity>
+    <entity>
+      <id>4</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>1474,917,1693,842,2294,1277,2130,1359,1601,1643,1716,1854,1935,892,2275,1478,2258,904,1991,1562</monsterSpawntPoint>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>103032, 203032</levelID>
+      <triggeRangeX>2228</triggeRangeX>
+      <triggeRangeY>1108</triggeRangeY>
+      <triggeRangeLength>3146</triggeRangeLength>
+      <triggeRangeWidth>1000</triggeRangeWidth>
+      <homerangeX>1888</homerangeX>
+      <homerangeY>1614</homerangeY>
+      <homerangeLength>3450</homerangeLength>
+      <homerangeWidth>3200</homerangeWidth>
+    </entity>
+    <entity>
+      <id>99</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>1503,1844</monsterSpawntPoint>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>103030, 203030</levelID>
+      <triggeRangeX>0</triggeRangeX>
+      <triggeRangeY>0</triggeRangeY>
+      <triggeRangeLength>0</triggeRangeLength>
+      <triggeRangeWidth>0</triggeRangeWidth>
+      <homerangeX>1888</homerangeX>
+      <homerangeY>1614</homerangeY>
+      <homerangeLength>3450</homerangeLength>
+      <homerangeWidth>3200</homerangeWidth>
+    </entity>
+    <entity>
+      <id>1</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>1474,917,1693,842,2294,1277,2130,1359,1601,1643,1716,1854,1935,892,2275,1478,2258,904,1991,1562</monsterSpawntPoint>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>103033, 203033</levelID>
+      <triggeRangeX>0</triggeRangeX>
+      <triggeRangeY>0</triggeRangeY>
+      <triggeRangeLength>0</triggeRangeLength>
+      <triggeRangeWidth>0</triggeRangeWidth>
+      <homerangeX>1888</homerangeX>
+      <homerangeY>1614</homerangeY>
+      <homerangeLength>3450</homerangeLength>
+      <homerangeWidth>3200</homerangeWidth>
+    </entity>
+  </entities>
+  <mapname>10209_Dryad_s</mapname>
+</root>

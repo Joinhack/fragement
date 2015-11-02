@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<item>
+		<id>1</id>
+		<color>dfd0e7</color>
+	</item>
+	<item>
+		<id>2</id>
+		<color>84ff00</color>
+	</item>
+	<item>
+		<id>3</id>
+		<color>00d2ff</color>
+	</item>
+	<item>
+		<id>4</id>
+		<color>ac0dff</color>
+	</item>
+	<item>
+		<id>5</id>
+		<color>ff7e00</color>
+	</item>
+	<item>
+		<id>6</id>
+		<color>ffd200</color>
+	</item>
+</root>

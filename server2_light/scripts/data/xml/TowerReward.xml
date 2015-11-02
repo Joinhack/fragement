@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<reward>
+		<id_i>10</id_i>
+		<item_m>2:80000,1100071:10,1100072:1</item_m>
+		<icon_i>14005</icon_i>
+	</reward>
+	<reward>
+		<id_i>20</id_i>
+		<item_m>2:120000,1922030:10,1100071:20,1100072:2</item_m>
+		<icon_i>14005</icon_i>
+	</reward>
+	<reward>
+		<id_i>30</id_i>
+		<item_m>2:180000,1922040:10,1100071:30,1100072:3</item_m>
+		<icon_i>14005</icon_i>
+	</reward>
+	<reward>
+		<id_i>40</id_i>
+		<item_m>2:220000,1922050:10,1100071:40,1100072:4</item_m>
+		<icon_i>14005</icon_i>
+	</reward>
+	<reward>
+		<id_i>50</id_i>
+		<item_m>2:260000,1922060:10,1100071:50,1100072:5</item_m>
+		<icon_i>14006</icon_i>
+	</reward>
+	<reward>
+		<id_i>60</id_i>
+		<item_m>2:260000,1922060:20,1100071:60,1100073:1</item_m>
+		<icon_i>14006</icon_i>
+	</reward>
+</root>

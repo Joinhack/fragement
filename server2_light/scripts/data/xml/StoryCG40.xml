@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<story>
+		<id>1</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>2</id>
+		<storyText>CreateModel 1 150005 1848 10659 0,76,0</storyText>
+	</story>
+	<story>
+		<id>3</id>
+		<storyText>CreateModel 2 1040 3097 10471 0,282,0</storyText>
+	</story>
+	<story>
+		<id>4</id>
+		<storyText>CreateModel 3 1040 3581 11283 0,230,0</storyText>
+	</story>
+	<story>
+		<id>5</id>
+		<storyText>CreateModel 4 1098 4335 11176 0,251,0</storyText>
+	</story>
+	<story>
+		<id>6</id>
+		<storyText>CreateModel 5 1098 4698 10096 0,276,0</storyText>
+	</story>
+	<story>
+		<id>7</id>
+		<storyText>RemoveEntities</storyText>
+	</story>
+	<story>
+		<id>8</id>
+		<storyText>Sleep 1500</storyText>
+	</story>
+	<story>
+		<id>9</id>
+		<storyText>MoveCamera 1 4,10,76,0 4,10,76,0 4000</storyText>
+	</story>
+	<story>
+		<id>10</id>
+		<storyText>Sleep 200</storyText>
+	</story>
+	<story>
+		<id>11</id>
+		<storyText>MoveTo 1 22.76,4.63,106.37 800</storyText>
+	</story>
+	<story>
+		<id>12</id>
+		<storyText>MoveTo 2 24.55,4.55,106.12 800</storyText>
+	</story>
+	<story>
+		<id>13</id>
+		<storyText>Sleep 400</storyText>
+	</story>
+	<story>
+		<id>14</id>
+		<storyText>SetRotation 1 0,50,0</storyText>
+	</story>
+	<story>
+		<id>15</id>
+		<storyText>MoveTo 3 27.51,4.43,106.17 1200</storyText>
+	</story>
+	<story>
+		<id>16</id>
+		<storyText>Sleep 700</storyText>
+	</story>
+	<story>
+		<id>17</id>
+		<storyText>PlaySfx 1 6030</storyText>
+	</story>
+	<story>
+		<id>18</id>
+		<storyText>PlayOneAction 2 17</storyText>
+	</story>
+	<story>
+		<id>19</id>
+		<storyText>Sleep 200</storyText>
+	</story>
+	<story>
+		<id>20</id>
+		<storyText>ZoomCamera 3 4 0,50 200 200</storyText>
+	</story>
+	<story>
+		<id>21</id>
+		<storyText>Sleep 300</storyText>
+	</story>
+	<story>
+		<id>22</id>
+		<storyText>PlayOneAction 3 17</storyText>
+	</story>
+	<story>
+		<id>23</id>
+		<storyText>MoveTo 5 26.32,4.63,103.49 2500</storyText>
+	</story>
+	<story>
+		<id>24</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>25</id>
+		<storyText>MoveTo 4 25.53,4.63,105.89 2000</storyText>
+	</story>
+	<story>
+		<id>26</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>27</id>
+		<storyText>MoveCamera 1 4,0,76,0 4.5,0,76,0 1300</storyText>
+	</story>
+	<story>
+		<id>28</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>29</id>
+		<storyText>DestroyModel 2</storyText>
+	</story>
+	<story>
+		<id>30</id>
+		<storyText>DestroyModel 3</storyText>
+	</story>
+	<story>
+		<id>31</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>32</id>
+		<storyText>MoveCamera 0 0.1,16.9,150.84,0 0.5,16.9,150.84,0 5000 24.375,9.991,115.01</storyText>
+	</story>
+	<story>
+		<id>33</id>
+		<storyText>Sleep 200</storyText>
+	</story>
+	<story>
+		<id>34</id>
+		<storyText>PlayOneAction 1 26</storyText>
+	</story>
+	<story>
+		<id>35</id>
+		<storyText>PlaySfx 1 200901</storyText>
+	</story>
+	<story>
+		<id>36</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>37</id>
+		<storyText>PlayOneAction 1 100</storyText>
+	</story>
+	<story>
+		<id>38</id>
+		<storyText>PlayOneAction 4 17</storyText>
+	</story>
+	<story>
+		<id>39</id>
+		<storyText>PlayOneAction 5 17</storyText>
+	</story>
+	<story>
+		<id>40</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>41</id>
+		<storyText>DestroyModel 4</storyText>
+	</story>
+	<story>
+		<id>42</id>
+		<storyText>DestroyModel 5</storyText>
+	</story>
+	<story>
+		<id>43</id>
+		<storyText>DestroyModel 1</storyText>
+	</story>
+	<story>
+		<id>44</id>
+		<storyText>SetPosition 0 28.74,6.489,45.823</storyText>
+	</story>
+	<story>
+		<id>45</id>
+		<storyText>SetRotation 0 0,170,0</storyText>
+	</story>
+	<story>
+		<id>46</id>
+		<storyText>CreateModel 6 1082 2872 3814 0,343,0</storyText>
+	</story>
+	<story>
+		<id>47</id>
+		<storyText>Sleep 200</storyText>
+	</story>
+	<story>
+		<id>48</id>
+		<storyText>MoveCamera 6 4,10,163,0 4.5,10,163,0 4000</storyText>
+	</story>
+	<story>
+		<id>49</id>
+		<storyText>ShowDialog 150021 399 105106</storyText>
+	</story>
+	<story>
+		<id>50</id>
+		<storyText>OpenUI</storyText>
+	</story>
+	<story>
+		<id>51</id>
+		<storyText>Wait 6</storyText>
+	</story>
+	<story>
+		<id>52</id>
+		<storyText>CloseUI</storyText>
+	</story>
+	<story>
+		<id>53</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>54</id>
+		<storyText>PlayOneAction 6 17</storyText>
+	</story>
+	<story>
+		<id>55</id>
+		<storyText>PlaySfx 6 6018</storyText>
+	</story>
+	<story>
+		<id>56</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>57</id>
+		<storyText>MoveCamera 0 0.1,15.7,106.7,0 0.5,15.7,106.7,0 4000 20.025,11.196,46.047</storyText>
+	</story>
+	<story>
+		<id>58</id>
+		<storyText>MoveTo 0 29.03,6.471,41.15 500</storyText>
+	</story>
+	<story>
+		<id>59</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>60</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>61</id>
+		<storyText>Sleep 100</storyText>
+	</story>
+	<story>
+		<id>62</id>
+		<storyText>PlaySfx 6 6017</storyText>
+	</story>
+	<story>
+		<id>63</id>
+		<storyText>PlaySfx 0 6001</storyText>
+	</story>
+	<story>
+		<id>64</id>
+		<storyText>PlayOneAction 0 14</storyText>
+	</story>
+	<story>
+		<id>65</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>66</id>
+		<storyText>MoveCamera 0 4,10,280,0 4.5,10,280,0 4000</storyText>
+	</story>
+	<story>
+		<id>67</id>
+		<storyText>ShowDialog 150000,150010 305,{0} 105107,105108</storyText>
+	</story>
+	<story>
+		<id>68</id>
+		<storyText>OpenUI</storyText>
+	</story>
+	<story>
+		<id>69</id>
+		<storyText>Wait 6</storyText>
+	</story>
+	<story>
+		<id>70</id>
+		<storyText>CloseUI</storyText>
+	</story>
+	<story>
+		<id>71</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>72</id>
+		<storyText>DestroyModel 6</storyText>
+	</story>
+	<story>
+		<id>73</id>
+		<storyText>LockSight</storyText>
+	</story>
+	<story>
+		<id>74</id>
+		<storyText>End</storyText>
+	</story>
+</root>

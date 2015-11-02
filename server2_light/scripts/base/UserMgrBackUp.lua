@@ -1,0 +1,322 @@
+--author:hwj
+--date:2013-09-03
+--此为usermgr扩展以前保留的脚本,只能由UserMgr require使用
+--避免UserMgr.lua文件过长
+
+----注册玩家信息,参数:id,base的mailbox,国籍
+--function UserMgr:register_user(mb_str, dbid)
+--    local info = self.dbid_users[dbid]
+--    if info then
+--        info[_USERINFO_KEY_MAILBOX] = mogo.unpickle_base_mailbox(mb_str)
+--
+--        self.online_count = self.online_count + 1
+--        self.online_users[dbid] = info
+--    end
+--
+--    log_game_info("UserMgr:register_user", "dbid=%q", dbid)
+--end
+--
+----注册新玩家
+--function UserMgr:register_new_user(mb_str, dbid, name, gender, voc, level, vip)
+--    local info = {
+--        --[_USERINFO_KEY_MAILBOX] = nil,
+--        [_USERINFO_KEY_DBID] = dbid,
+--        [_USERINFO_KEY_NAME] = name,
+--        [_USERINFO_KEY_GENDER] = gender,
+--        [_USERINFO_KEY_VOCATION] = voc,
+--        [_USERINFO_KEY_LEVEL] = level,
+--        [_USERINFO_KEY_VIP] = vip,
+--        [_USERINFO_KEY_COMBAT_VALUE] = 1,   --临时值,由竞技场的备份数据来更新战斗力
+--    }
+--
+--    self.name_users[name] = info
+--    self.dbid_users[dbid] = info
+--
+--    self.online_count = self.online_count + 1
+--    self.online_users[dbid] = info
+--
+--    log_game_info("UserMgr:register_new_user", "dbid=%q", dbid)
+--end
+--
+----玩家下线注销
+--function UserMgr:deregister_user(dbid)
+--    local info = self.dbid_users[dbid]
+--    if info then
+--        info[_USERINFO_KEY_MAILBOX] = nil
+--
+--        local online_count = self.online_count - 1
+--        if online_count < 0 then
+--            online_count = 0
+--        end
+--        self.online_count = online_count
+--        self.online_users[dbid] = nil
+--    end
+--
+--    log_game_info("UserMgr:deregister_user", "dbid=%q", dbid)
+--end
+--
+----更新一个玩家的数据,value为int
+--function UserMgr:update_user_info(dbid, key, value)
+--    log_game_debug("update_user_info", "dbid=%q;key=%d;value=%d", dbid, key, value)
+--    local user = self.dbid_users[dbid]
+--    if user then
+--        user[key] = value
+--    end
+--end
+--
+----更新一个玩家的数据,value为string
+--function UserMgr:update_user_info_str(dbid, key, value)
+--    log_game_debug("update_user_info_str", "dbid=%q;key=%d;value=%s", dbid, key, value)
+--    local user = self.dbid_users[dbid]
+--    if user then
+--        user[key] = value
+--    end
+--end
+--
+----频道发言
+--local _DEFAULT_ITEM_SEQ_DATA = ''
+--function UserMgr:channel_req(ch_id, from_name, to_name, text, item_data)
+--    --print('channel_req', ch_id, from_name, to_name, text)
+--
+--    local item11
+--    if next(item_data) then
+--        local item111,item222 = channel_mgr:make_item_seq_data(item_data, self)
+--        item11 = mogo.cpickle(item111)
+--
+--        --发给UserMgr保存道具信息,以备客户端查看
+--        self:send_item_seq_data(item222)
+--    else
+--        item11 = _DEFAULT_ITEM_SEQ_DATA
+--    end
+--
+--    if ch_id == public_config.CHANNEL_PRIVATE then
+--        self:channel_private(ch_id, from_name, to_name, text, item11)
+--    elseif ch_id == public_config.CHANNEL_WORLD then
+--        self:channel_world(ch_id, from_name, text, item11)
+--    end
+--end
+--
+----世界频道发言
+--function UserMgr:channel_world(ch_id, from_name, text, item_list)
+--    --print("channel_world", ch_id, from_name, text)
+--    for _, info in pairs(self.online_users) do
+--        --在线的玩家
+--        --print(mogos.cpickle(info))
+--        local mb = info[_USERINFO_KEY_MAILBOX]
+--        if mb then
+--            mb.client.channel_resp(ch_id, from_name, text, item_list)
+--        end
+--    end
+--end
+--
+----私聊
+--function UserMgr:channel_private(ch_id, from_name, to_name, text, item_list)
+--    --print("channel_private", ch_id, from_name, to_name, text)
+--    local info = self.name_users[to_name]
+--    --print(mogo.cpickle(info))
+--    if info then
+--        local mb = info[_USERINFO_KEY_MAILBOX]
+--        if mb then
+--            mb.client.channel_resp(ch_id, from_name, text, item_list)
+--        end
+--    end
+--end
+--
+--function UserMgr:set_guild_info(dbid, udbid, uname, umb)
+--    local user = self.dbid_users[dbid]
+--    if user then
+--        local mb = user[_USERINFO_KEY_MAILBOX]
+--        if mb then
+--            mb.on_set_guild_info_from_usermgr(udbid, uname, umb)
+--        end
+--    end
+--end
+--
+----获取帮派的成员信息
+--function UserMgr:guild_get_members_req(base_mbstr, udbid, req_type, members)
+--    if req_type == public_config.GUILD_MEMBER_QUERY_TYPE_FULL then
+--        local info = {}
+--
+--        --查看完整信息--dbid,性别,姓名,职位/等级/职业/战斗力/周帮贡/总帮贡/最后在线时间,在线标记
+--        local dbid_users = self.dbid_users
+--        for dbid, tmp in pairs(members) do
+--            local user = dbid_users[dbid]
+--            if user then
+--                local is_online = 0         --是否在线标记
+--                if user[_USERINFO_KEY_MAILBOX] then
+--                    is_online = 1
+--                end
+--
+--                table.insert(info, {dbid, user[_USERINFO_KEY_GENDER], user[_USERINFO_KEY_NAME],
+--                    tmp[1], user[_USERINFO_KEY_LEVEL], user[_USERINFO_KEY_VOCATION],
+--                    user[_USERINFO_KEY_COMBAT_VALUE], tmp[2], tmp[3], tmp[4], is_online,
+--                    user[_USERINFO_KEY_VIP] })
+--            end
+--        end
+--
+--        mailbox_client_call(base_mbstr, 'guild_get_members_resp', udbid, req_type, mogo.cpickle(info))
+--    end
+--end
+--
+----查询申请我帮的玩家信息列表
+--function UserMgr:guild_get_our_apply_req(base_mbstr, adata)
+--    local info = {}
+--    local dbid_users = self.dbid_users
+--    for _, aa in pairs(adata) do
+--        local dbid = aa[1]
+--        local user = dbid_users[dbid]
+--        if user then
+--            --dbid,name,level,职业,战斗力
+--            table.insert(info, { dbid, user[_USERINFO_KEY_NAME], user[_USERINFO_KEY_LEVEL],
+--                user[_USERINFO_KEY_VOCATION], user[_USERINFO_KEY_COMBAT_VALUE]})
+--        end
+--    end
+--
+--    local mb = mogo.unpickle_base_mailbox(base_mbstr)
+--    mb.client.guild_get_our_apply_resp(mogo.cpickle(info))
+--end
+--
+----查询元气炉参加信息
+--function UserMgr:guild_yql_get_req(base_mbstr, yql)
+--    local info = {}
+--    local dbid_users = self.dbid_users
+--    for _, tmp in ipairs(yql) do
+--        local flag = tmp[3]
+--        if flag == public_config.GUILD_YQL_FLAG_ZH then
+--            --召唤的小仙童,非玩家
+--            table.insert(info, tmp)
+--        else
+--            local dbid = tmp[1]
+--            local user = dbid_users[dbid]
+--            if user then
+--                table.insert(info, {dbid, tmp[2], flag, user[_USERINFO_KEY_GENDER], user[_USERINFO_KEY_VOCATION]})
+--            end
+--        end
+--    end
+--    mailbox_client_call(base_mbstr, 'guild_yql_get_resp', info)
+--end
+--
+--
+----全世界系统公告
+--function UserMgr:sys_info(sys_id, params_str)
+--    for dbid, user in pairs(self.online_users) do
+--        local mb = user[_USERINFO_KEY_MAILBOX]
+--        if mb then
+--            mb.client.sys_info_resp(sys_id, params_str )
+--        end
+--    end
+--end
+--
+----新邮件到达通知
+--function UserMgr:on_mail_recved(dbid, mtype)
+--    local user = self.dbid_users[dbid]
+--    if user then
+--        local mb = user[_USERINFO_KEY_MAILBOX]
+--        if mb then
+--            mb.client.on_mail_recved_resp(mtype)
+--        end
+--    end
+--end
+--
+----发送普通邮件
+--local _MAIL_TYPE_AVATAR = public_config.MAIL_TYPE_AVATAR
+--function UserMgr:mail_send_req(to_name, mail)
+--    local user = self.name_users[to_name]
+--    if user then
+--        globalbase_call("MailMgr", "send_mail", user[_USERINFO_KEY_DBID],
+--            _MAIL_TYPE_AVATAR, mail)
+--    end
+--end
+--
+----获取好友的其他信息
+--function UserMgr:friend_get_req(dbid, frd)
+--    local users = self.dbid_users
+--    local user = users[dbid]
+--    if user then
+--        local mb = user[_USERINFO_KEY_MAILBOX]
+--        if mb then
+--            local tmp = {}
+--            for dbid2,hyd in pairs(frd) do
+--                local user2 = users[dbid2]
+--                if user2 then
+--                    local is_online = 0
+--                    if user2[_USERINFO_KEY_MAILBOX] then
+--                        is_online = 1
+--                    end
+--
+--                    table.insert(tmp, {user2[_USERINFO_KEY_DBID],user2[_USERINFO_KEY_NAME],
+--                        user2[_USERINFO_KEY_VOCATION],user2[_USERINFO_KEY_GENDER],
+--                        user2[_USERINFO_KEY_LEVEL], is_online, hyd })
+--                end
+--            end
+--            mb.client.social_friend_get_resp(tmp)
+--        end
+--    end
+--end
+--
+----增加一个好友成功,将该好友的信息发给客户端
+--function UserMgr:social_friend_add_resp(dbid, other_dbid)
+--    local users = self.dbid_users
+--    local u = users[dbid]
+--    if u then
+--        local mb = u[_USERINFO_KEY_MAILBOX]
+--        if mb then
+--            local user2 = users[other_dbid]
+--            if user2 then
+--                local is_online = 0
+--                if user2[_USERINFO_KEY_MAILBOX] then
+--                    is_online = 1
+--                end
+--
+--                mb.client.social_friend_add_resp({user2[_USERINFO_KEY_DBID],user2[_USERINFO_KEY_NAME],
+--                        user2[_USERINFO_KEY_VOCATION],user2[_USERINFO_KEY_GENDER],
+--                        user2[_USERINFO_KEY_LEVEL], is_online } )
+--            end
+--        end
+--    end
+--end
+--
+--
+--function UserMgr:get_user_name(dbid, mbstr, callback_func)
+--    local t = self.dbid_users[dbid]
+--    if t then
+--        mailbox_call(mbstr, callback_func, t[_USERINFO_KEY_NAME])
+--    end
+--end
+--
+----玩家获取另外一个玩家的简单信息
+--function UserMgr:get_userinfo_req(mbstr, other_name)
+--    local u = self.name_users[other_name]
+--    if u then
+--        --性别/职业/等级/vip
+--        local t = {
+--            [1] = u[_USERINFO_KEY_GENDER], [2] = u[_USERINFO_KEY_VOCATION],
+--            [3] = u[_USERINFO_KEY_LEVEL], [4] = u[_USERINFO_KEY_VIP],
+--        }
+--        mailbox_client_call(mbstr, "social_get_userinfo_resp", other_name, t)
+--    end
+--end
+--
+----有道具展示信息需要保存
+--function UserMgr:send_item_seq_data(item_data)
+--    --print('UserMgr:send_item_seq_data')
+--    local data = self.item_seq_data
+--    for k,v in pairs(item_data) do
+--        --print(k, v[1], mogo.cpickle(v))
+--        data[k] = v    --如果seq重复了,新的直接顶掉老的;v已经是打包后的string了
+--    end
+--end
+--
+--function UserMgr:channel_get_item(base_mbstr, seq)
+--    local data = self.item_seq_data[seq]
+--    if data then
+--        mailbox_client_call(base_mbstr, "channel_get_item_resp", seq, data)
+--    end
+--end
+--
+----获取展示道具的流水号
+--local _ITEM_SEQ_USERMGR_MIN = 10000
+--local _ITEM_SEQ_USERMGR_MAX = 20000
+--function UserMgr:get_item_seq()
+--    return channel_mgr:get_item_seq(self, _ITEM_SEQ_USERMGR_MIN, _ITEM_SEQ_USERMGR_MAX)
+--end

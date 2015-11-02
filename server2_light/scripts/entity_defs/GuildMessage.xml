@@ -1,0 +1,27 @@
+<root>
+    <Properties>
+        <!-- 该消息所属的公会ID -->
+        <guildId>
+            <Type>UINT32</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </guildId>
+        <!-- 该消息的类型 -->
+        <type>
+            <Type>UINT8</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </type>
+        <extend>
+            <Type>LUA_TABLE</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </extend>
+        <timestamp>
+            <Type>UINT32</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </timestamp>
+    </Properties>
+
+</root>

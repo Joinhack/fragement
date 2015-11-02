@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <Account>1</Account>
+    <GameMgr> </GameMgr>
+    <UserMgr> </UserMgr>
+    <Avatar>1</Avatar>
+    <MapMgr> </MapMgr>
+    <SpaceLoader> </SpaceLoader>
+    <Monster> </Monster>
+    <SpawnPoint> </SpawnPoint>
+    <TeleportPointSrc></TeleportPointSrc>
+    <!--
+    <TeleportPointDes></TeleportPointDes>
+    -->
+    <OfflineMgr> </OfflineMgr>
+    <OfflineData> </OfflineData>
+    <Mercenary></Mercenary>
+    <MailMgr> </MailMgr>
+    <Mail> </Mail>
+    <GuildMgr></GuildMgr>
+    <Guild></Guild>
+    <GuildMessage></GuildMessage>
+    <MissionMgr></MissionMgr>
+    <MissionRecord></MissionRecord>
+    <OblivionGateMgr> </OblivionGateMgr>
+    <EventMgr> </EventMgr>
+    <WorldBossMgr> </WorldBossMgr>
+    <WorldBossData> </WorldBossData>
+    <Collector> </Collector>
+    <NameMgr> </NameMgr>
+    <ArenaMgr> </ArenaMgr>
+    <ArenaData> </ArenaData>
+    <UserMgrData> </UserMgrData>
+    <GlobalDataMgr> </GlobalDataMgr>
+	<last_server_account></last_server_account>
+    <mail_private></mail_private>
+    <mail_public></mail_public>
+	<RankListData></RankListData>
+    <ActivityMgr></ActivityMgr>
+    <FlyDragonMgr></FlyDragonMgr>
+    <mgr_compensate></mgr_compensate>
+    <ChargeMgr></ChargeMgr>
+    <ChargeMgr_recs></ChargeMgr_recs>
+    <DefensePvPMgr> </DefensePvPMgr>
+    <RouletteMgr></RouletteMgr>
+ </root>

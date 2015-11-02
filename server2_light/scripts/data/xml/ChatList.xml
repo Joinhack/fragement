@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ChatList>
+		<mission_i>8</mission_i>
+		<chatList_l>39005,39006,39007</chatList_l>
+	</ChatList>
+	<ChatList>
+		<mission_i>11</mission_i>
+		<chatList_l>39000,39001,39002,39003,39004</chatList_l>
+	</ChatList>
+</root>

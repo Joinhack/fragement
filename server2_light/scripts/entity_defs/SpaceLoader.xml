@@ -1,0 +1,332 @@
+<root>
+
+<Properties>
+
+    <map_id>
+        <Type> STRING </Type>
+        <Flags> BASE </Flags>
+        <BaseAndCell> true </BaseAndCell>
+    </map_id>
+
+    <!-- base上的玩法管理器 -->
+    <BasePlayManager>
+        <Type> LUA_OBJECT </Type>
+        <Flags> BASE </Flags>
+    </BasePlayManager>
+
+    <!-- 记录该SpaceLoader管理的实体 -->
+    <EntitiesInfo>
+        <Type> LUA_TABLE </Type>
+        <Flags> CELL </Flags>
+    </EntitiesInfo>
+
+    <!-- cell上的玩法管理器 -->
+    <PlayManager>
+        <Type> LUA_OBJECT </Type>
+        <Flags> CELL </Flags>
+    </PlayManager>
+
+    <IdleEid>
+        <Type> LUA_TABLE </Type>
+        <Flags> CELL </Flags> 
+    </IdleEid>
+
+    <BusyEid>
+        <Type> LUA_TABLE </Type>
+        <Flags> CELL </Flags> 
+    </BusyEid>
+
+    <CliEntityManager>
+        <Type> LUA_OBJECT </Type>
+        <Flags> CELL </Flags>
+    </CliEntityManager>
+    <!--地图类型-->
+    <MapType>
+        <Type> UINT8 </Type>
+        <Flags> CELL </Flags>
+    </MapType>
+
+    <!--是否激活-->
+    <IsActived>
+        <Type> UINT8 </Type>
+        <Flags> CELL </Flags>
+        <Default> 0 </Default>
+    </IsActived>
+
+    <AliveMonster>           
+        <Type> LUA_OBJECT </Type> 
+        <Flags> CELL </Flags>    
+    </AliveMonster>          
+
+    <factionCounter>
+        <Type> UINT8 </Type>
+        <Flags> CELL </Flags>
+        <Default> 0 </Default>
+    </factionCounter>
+
+    <!-- 初始化时用到的timer，用于确保场景加载成功后能成功通知MapMgr -->
+    <registerTimerId>
+        <Type> INT32 </Type>
+        <Flags> BASE </Flags>
+        <Default> 0 </Default>
+    </registerTimerId>
+
+    <cell_mbstr>
+        <Type> STRING </Type>
+        <Flags> CELL </Flags>
+        <Default> '' </Default>
+    </cell_mbstr>
+
+</Properties>
+
+<BaseMethods>
+
+    <!-- 设置space的mapId -->
+    <SetMapId>
+        <Arg> STRING </Arg>    <!-- mb -->
+        <Arg> UINT16 </Arg>     <!-- sceneId -->
+        <Arg> UINT16 </Arg>     <!-- line -->
+        <Arg> UINT64 </Arg>    <!-- 玩家dbid -->
+        <Arg> STRING </Arg>    <!-- 玩家名字 -->
+        <Arg> LUA_TABLE </Arg> <!-- 附加参数 -->
+    </SetMapId>
+
+    <!-- 修改地图分线人数 -->
+    <ChangeMapCount>
+        <Arg> UINT8 </Arg>    <!-- 标记该操作是累加还是扣除 -->
+        <Arg> UINT16 </Arg>   <!-- 修改的数量 -->
+    </ChangeMapCount>
+
+    <!-- 副本数据初始化 -->
+    <InitData>
+        <Arg> LUA_TABLE </Arg>   <!--参数表-->
+    </InitData>
+
+    <!--副本开启-->
+    <Open/>
+    <!-- 副本开始 -->
+    <Start>
+        <Arg> UINT32 </Arg>   <!-- 副本的开启时间-->
+    </Start>
+    <!-- 副本开始 -->
+    <StartByServer>
+        <Arg> UINT32 </Arg>   <!-- 副本的开启时间-->
+    </StartByServer>
+    
+    <KickAllPlayer>
+
+    </KickAllPlayer>
+    <!-- 副本结束 -->
+    <Stop/>
+
+    <!-- 检查玩家是否可以进入该副本 -->
+    <CheckEnter>
+        <Arg> STRING </Arg>    <!-- 玩家mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家dbid -->
+        <Arg> STRING </Arg>    <!-- 玩家名字 -->
+    </CheckEnter>
+
+    <!-- cell上数据重置后通知base -->
+    <OnDataReseted/>
+
+    <SetMissionInfo>
+        <Arg> UINT64 </Arg>    <!-- 副本所有者的dbid -->
+        <Arg> STRING </Arg>    <!-- 副本所有者的名字 -->
+        <Arg> STRING </Arg>    <!-- 副本所有者的mb -->
+        <Arg> UINT16 </Arg>    <!-- 副本的关卡ID -->
+        <Arg> UINT8 </Arg>     <!-- 副本的难度 -->
+    </SetMissionInfo>
+
+    <Restart>
+        <Arg> UINT64 </Arg>    <!-- 副本所有者的dbid -->
+        <Arg> STRING </Arg>    <!-- 副本所有者的名字 -->
+        <Arg> STRING </Arg>    <!-- 副本所有者的mb -->
+        <Arg> UINT16 </Arg>    <!-- 副本的关卡ID -->
+        <Arg> UINT8 </Arg>     <!-- 副本的难度 -->
+    </Restart>
+
+    <Reset/>
+
+    <!--触发刷怪点事件的接口-->
+    <SpawnPointEvent>
+        <Arg> UINT8 </Arg>    <!-- 事件类型ID，现在0表示关闭；1标识开启 -->
+        <Arg> UINT64 </Arg>   <!-- 玩家的dbid -->
+        <Arg> INT16 </Arg>    <!-- 触发这的x坐标 -->
+        <Arg> INT16 </Arg>    <!-- 触发这的y坐标 -->
+        <Arg> UINT8 </Arg>    <!-- 刷怪点的ID -->
+    </SpawnPointEvent>
+
+    <!-- 玩家查看奖励池的数据 -->
+    <GetMissionRewards>
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </GetMissionRewards>
+
+    <!-- 客户端断线后通知副本关卡的接口 -->
+    <onClientDeath>
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </onClientDeath>
+
+    <!-- boss被杀死 -->
+    <WorldBossDie>
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </WorldBossDie>
+    <!--更新即时排行榜数据-->
+    <UpdateWBRankList>
+        <Arg> LUA_TABLE </Arg>    <!-- 玩家的贡献数据-->
+    </UpdateWBRankList>
+
+    <onMultiLogin>
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </onMultiLogin>
+
+    <Summon>
+        <Arg> UINT32 </Arg>    <!-- spawnId -->
+        <Arg> UINT32 </Arg>    <!-- 刷怪点的ID -->
+    </Summon>
+
+    <ExitMission>
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </ExitMission>
+
+    <QuitMission>
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </QuitMission>
+
+    <AddFriendDegree>
+        <Arg> UINT64 </Arg>    <!-- 玩家自己的dbid -->
+        <Arg> UINT64 </Arg>    <!-- 雇佣兵的dbid -->
+    </AddFriendDegree>
+
+
+    <AddFinishedSpawnPoint>
+        <Arg> UINT16 </Arg>    <!-- cell通知base已经完成的spawnpoint的id-->
+    </AddFinishedSpawnPoint>
+
+    <DeathEvent>
+        <Arg> UINT64 </Arg>    <!-- 死亡玩家dbid -->
+    </DeathEvent>
+
+    <CreateClientDrop>
+        <Arg> STRING </Arg>    <!-- 玩家mb -->
+        <Arg> UINT16 </Arg>    <!-- 掉落ID -->
+        <Arg> INT16 </Arg>     <!-- 掉落的坐标x -->
+        <Arg> INT16 </Arg>     <!-- 掉落的坐标y -->
+    </CreateClientDrop>
+
+    <PlayerLeave>
+        <Arg> UINT64 </Arg>    <!-- 死亡玩家dbid -->
+    </PlayerLeave>
+
+    <Chat>
+        <Arg> UINT8 </Arg>    <!-- 频道 -->
+        <Arg> UINT64 </Arg>   <!-- 对方的dbid -->
+        <Arg> STRING </Arg>   <!-- 内容 -->
+        <Arg> STRING </Arg>
+    </Chat>
+
+</BaseMethods>
+
+<CellMethods>
+
+    <!-- 副本开始 -->
+    <Start>
+        <Arg> UINT32 </Arg>   <!-- 副本的开启时间-->
+    </Start>
+
+    <!-- 副本结束 -->
+    <Stop/>
+
+    <SetCellInfo>
+        <Arg> UINT64 </Arg>    <!-- 副本所有者的dbid -->
+        <Arg> STRING </Arg>    <!-- 副本所有者的名字 -->
+        <Arg> STRING </Arg>    <!-- 副本所有者的mb -->
+        <Arg> UINT16 </Arg>    <!-- 副本的关卡ID -->
+        <Arg> UINT8 </Arg>     <!-- 副本的难度 -->
+    </SetCellInfo>
+
+    <Restart>
+        <Arg> UINT64 </Arg>    <!-- 副本所有者的dbid -->
+        <Arg> STRING </Arg>    <!-- 副本所有者的名字 -->
+        <Arg> STRING </Arg>    <!-- 副本所有者的mb -->
+        <Arg> UINT16 </Arg>    <!-- 副本的关卡ID -->
+        <Arg> UINT8 </Arg>     <!-- 副本的难度 -->
+    </Restart>
+
+    <!--触发刷怪点事件的接口-->
+    <SpawnPointEvent>
+        <Arg> UINT8 </Arg>    <!-- 事件类型ID，现在0表示关闭；1标识开启 -->
+        <Arg> UINT64 </Arg>   <!-- 玩家的dbid -->
+        <Arg> INT16 </Arg>    <!-- 触发这的x坐标 -->
+        <Arg> INT16 </Arg>    <!-- 触发这的y坐标 -->
+        <Arg> UINT8 </Arg>    <!-- 刷怪点的ID -->
+    </SpawnPointEvent>
+
+    <!-- 玩家查看奖励池的数据 -->
+    <GetMissionRewards>
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </GetMissionRewards>
+
+    <!-- 客户端断线后通知副本关卡的接口 -->
+    <onClientDeath>
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </onClientDeath>
+
+    <SetWorldBossMgr>
+        <Arg> STRING </Arg>    <!-- 世界boss管理器的mailbox -->
+    </SetWorldBossMgr>
+    <SynWorldBossHp>
+        <Arg> UINT32 </Arg>    <!-- eid -->
+        <Arg> UINT32 </Arg>    <!-- 世界Boss血量 -->
+    </SynWorldBossHp>
+    <UpdateBossHp>
+        <Arg> UINT64 </Arg>    <!-- dbid -->
+        <Arg> INT32 </Arg>    <!-- harm -->
+    </UpdateBossHp>
+    
+    <Summon>
+        <Arg> UINT32 </Arg>    <!-- spawnId -->
+        <Arg> UINT32 </Arg>    <!-- 刷怪点的ID -->
+    </Summon>
+
+    <ExitMission>
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </ExitMission>
+
+    <QuitMission>
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </QuitMission>
+
+    <!-- 设置space的mapId -->
+    <SetMapId>
+        <Arg> STRING </Arg>    <!-- mb -->
+        <Arg> UINT16 </Arg>     <!-- sceneId -->
+        <Arg> UINT16 </Arg>     <!-- line -->
+        <Arg> UINT64 </Arg>    <!-- 玩家dbid -->
+        <Arg> STRING </Arg>    <!-- 玩家名字 -->
+        <Arg> LUA_TABLE </Arg> <!-- 附加参数 -->
+    </SetMapId>
+
+    <!-- 初始化space数据 -->
+    <InitData>
+        <Arg> LUA_TABLE </Arg>   <!--参数表-->
+    </InitData>
+
+    <KickAllPlayer>
+
+    </KickAllPlayer>
+
+    <AddFriendDegree>
+        <Arg> UINT64 </Arg>    <!-- 玩家自己的dbid -->
+        <Arg> UINT64 </Arg>    <!-- 雇佣兵的dbid -->
+    </AddFriendDegree>
+
+    <ProcessWaguanDie>
+        <Arg> UINT16 </Arg>     <!-- 怪物ID -->
+        <Arg> INT16 </Arg>
+        <Arg> INT16 </Arg>
+    </ProcessWaguanDie>
+
+</CellMethods>
+
+
+</root>

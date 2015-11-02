@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<story>
+		<id>1</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>2</id>
+		<storyText>WhiteCamera 0,0 250</storyText>
+	</story>
+	<story>
+		<id>3</id>
+		<storyText>CreateModel 1 1082 4000 4723 0,284,0</storyText>
+	</story>
+	<story>
+		<id>4</id>
+		<storyText>RemoveEntities</storyText>
+	</story>
+	<story>
+		<id>5</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>6</id>
+		<storyText>SetPosition 0 33.25,11.2,51.76</storyText>
+	</story>
+	<story>
+		<id>7</id>
+		<storyText>SetRotation 0 0,127,0</storyText>
+	</story>
+	<story>
+		<id>8</id>
+		<storyText>MoveCamera 0 0.1,353,103,0 0.5,353,103,0 5000 36.6,11.24,48.579</storyText>
+	</story>
+	<story>
+		<id>9</id>
+		<storyText>NormalCamera 0,0 500</storyText>
+	</story>
+	<story>
+		<id>10</id>
+		<storyText>Sleep 250</storyText>
+	</story>
+	<story>
+		<id>11</id>
+		<storyText>PlayOneAction 1 17</storyText>
+	</story>
+	<story>
+		<id>12</id>
+		<storyText>ShowDialog 10506,10506 399,399 105127,105128</storyText>
+	</story>
+	<story>
+		<id>13</id>
+		<storyText>OpenUI</storyText>
+	</story>
+	<story>
+		<id>14</id>
+		<storyText>Wait 6</storyText>
+	</story>
+	<story>
+		<id>15</id>
+		<storyText>CloseUI</storyText>
+	</story>
+	<story>
+		<id>16</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>17</id>
+		<storyText>PlaySfx 1 6018</storyText>
+	</story>
+	<story>
+		<id>18</id>
+		<storyText>MoveCamera 0 0.1,10,108.93,0 0.5,10,108.93,0 5000 31.53,12.8988,53.82</storyText>
+	</story>
+	<story>
+		<id>19</id>
+		<storyText>ShowDialog 150010 {0} 105129</storyText>
+	</story>
+	<story>
+		<id>20</id>
+		<storyText>OpenUI</storyText>
+	</story>
+	<story>
+		<id>21</id>
+		<storyText>Wait 6</storyText>
+	</story>
+	<story>
+		<id>22</id>
+		<storyText>CloseUI</storyText>
+	</story>
+	<story>
+		<id>23</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>24</id>
+		<storyText>LockSight</storyText>
+	</story>
+	<story>
+		<id>25</id>
+		<storyText>DestroyModel 1</storyText>
+	</story>
+	<story>
+		<id>26</id>
+		<storyText>End</storyText>
+	</story>
+</root>

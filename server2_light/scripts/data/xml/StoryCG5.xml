@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<story>
+		<id>1</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>2</id>
+		<storyText>CreateModel 1 150004 3801 6641 0,243,0</storyText>
+	</story>
+	<story>
+		<id>3</id>
+		<storyText>MoveCamera 0 9,45,135,0 12,20,50,0 2000 19.9,21.03,42.546</storyText>
+	</story>
+	<story>
+		<id>4</id>
+		<storyText>SetPosition 0 24.366,13.49,37.45</storyText>
+	</story>
+	<story>
+		<id>5</id>
+		<storyText>SetRotation 0 0,2.4,0</storyText>
+	</story>
+	<story>
+		<id>6</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>7</id>
+		<storyText>MoveTo 0 24.94,16.49,45.69 1500</storyText>
+	</story>
+	<story>
+		<id>8</id>
+		<storyText>Sleep 1500</storyText>
+	</story>
+	<story>
+		<id>9</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>10</id>
+		<storyText>PlaySfx 1 6016</storyText>
+	</story>
+	<story>
+		<id>11</id>
+		<storyText>ZoomCamera 1 4 31,52 1000 1000</storyText>
+	</story>
+	<story>
+		<id>12</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>13</id>
+		<storyText>PlayOneAction 1 2</storyText>
+	</story>
+	<story>
+		<id>14</id>
+		<storyText>ShowDialog 150010 {0} 105005</storyText>
+	</story>
+	<story>
+		<id>15</id>
+		<storyText>OpenUI</storyText>
+	</story>
+	<story>
+		<id>16</id>
+		<storyText>Wait 6</storyText>
+	</story>
+	<story>
+		<id>17</id>
+		<storyText>CloseUI</storyText>
+	</story>
+	<story>
+		<id>18</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>19</id>
+		<storyText>PlaySfx 1 6016</storyText>
+	</story>
+	<story>
+		<id>20</id>
+		<storyText>MoveCamera 0 0.1,40,51.3,0 0.5,40,51.3,0 4000 35.41,19.418,64.399</storyText>
+	</story>
+	<story>
+		<id>21</id>
+		<storyText>PlayOneAction 1 2</storyText>
+	</story>
+	<story>
+		<id>22</id>
+		<storyText>ShowDialog 150000 305 105006</storyText>
+	</story>
+	<story>
+		<id>23</id>
+		<storyText>OpenUI</storyText>
+	</story>
+	<story>
+		<id>24</id>
+		<storyText>Wait 6</storyText>
+	</story>
+	<story>
+		<id>25</id>
+		<storyText>CloseUI</storyText>
+	</story>
+	<story>
+		<id>26</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>27</id>
+		<storyText>DestroyModel 1</storyText>
+	</story>
+	<story>
+		<id>28</id>
+		<storyText>LockSight</storyText>
+	</story>
+	<story>
+		<id>29</id>
+		<storyText>End</storyText>
+	</story>
+</root>

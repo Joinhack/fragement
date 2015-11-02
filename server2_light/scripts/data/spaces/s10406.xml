@@ -1,0 +1,73 @@
+<root>
+  <entities>
+    <entity>
+      <id>3</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>2736,5577,2372,5279,2581,5776,1987,5362,2647,5334,2971,5674,2284,5082,1971,5164,2221,5465,2455,5551</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>104063, 204063</levelID>
+      <triggeRangeX>2598</triggeRangeX>
+      <triggeRangeY>5257</triggeRangeY>
+      <triggeRangeLength>3927</triggeRangeLength>
+      <triggeRangeWidth>1000</triggeRangeWidth>
+      <homerangeX>2423</homerangeX>
+      <homerangeY>5321</homerangeY>
+      <homerangeLength>3370</homerangeLength>
+      <homerangeWidth>2200</homerangeWidth>
+    </entity>
+    <entity>
+      <id>2</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>2693,3927,2351,3164,2632,3727,2038,3313,2698,3285,2358,3778,2186,2973,2639,3049,2272,3416,2506,3502</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>104062, 204062</levelID>
+      <triggeRangeX>0</triggeRangeX>
+      <triggeRangeY>0</triggeRangeY>
+      <triggeRangeLength>0</triggeRangeLength>
+      <triggeRangeWidth>0</triggeRangeWidth>
+      <homerangeX>2421</homerangeX>
+      <homerangeY>3351</homerangeY>
+      <homerangeLength>3370</homerangeLength>
+      <homerangeWidth>2200</homerangeWidth>
+    </entity>
+    <entity>
+      <id>1</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>2371,1206,2007,908,2216,1404,1622,990,2282,962,2606,1303,1919,711,1606,792,1856,1094,2090,1179</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>104061, 204061</levelID>
+      <triggeRangeX>1784</triggeRangeX>
+      <triggeRangeY>907</triggeRangeY>
+      <triggeRangeLength>1645</triggeRangeLength>
+      <triggeRangeWidth>1000</triggeRangeWidth>
+      <homerangeX>1584</homerangeX>
+      <homerangeY>965</homerangeY>
+      <homerangeLength>3370</homerangeLength>
+      <homerangeWidth>2200</homerangeWidth>
+    </entity>
+    <entity>
+      <id>99</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>2512,5384</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>104060, 204060</levelID>
+      <triggeRangeX>0</triggeRangeX>
+      <triggeRangeY>0</triggeRangeY>
+      <triggeRangeLength>0</triggeRangeLength>
+      <triggeRangeWidth>0</triggeRangeWidth>
+      <homerangeX>2472</homerangeX>
+      <homerangeY>5422</homerangeY>
+      <homerangeLength>2860</homerangeLength>
+      <homerangeWidth>3039</homerangeWidth>
+    </entity>
+  </entities>
+  <mapname>10306_Griffin_s</mapname>
+</root>

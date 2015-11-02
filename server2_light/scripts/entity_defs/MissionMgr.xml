@@ -1,0 +1,59 @@
+<root>
+
+<Properties>
+
+    <!-- 记录 -->
+    <missionRecords>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Default> {} </Default>
+    </missionRecords>
+
+    <!-- 所有记录的总数量 -->
+    <AllRecordsCount>
+        <Type> UINT64 </Type>
+        <Flags> BASE </Flags>
+        <Default> 0 </Default>
+    </AllRecordsCount>
+
+    <!-- 所有已加载记录的总数量 -->
+    <AllLoadedRecordsCount>
+        <Type> UINT64 </Type>
+        <Flags> BASE </Flags>
+        <Default> 0 </Default>
+    </AllLoadedRecordsCount>
+
+
+</Properties>
+
+<ClientMethods>
+
+</ClientMethods>
+
+<BaseMethods>
+
+    <!-- 当所有公会从数据库加载回来时回调 -->
+    <OnMissionRecordLoaded>
+        <Arg> UINT32 </Arg>     <!-- 个数 -->
+    </OnMissionRecordLoaded>
+
+    <UpdateMissionRecord>
+        <Arg> UINT16 </Arg>    <!-- 关卡ID -->
+        <Arg> UINT8 </Arg>     <!-- 关卡难度 -->
+        <Arg> UINT64 </Arg>    <!-- 玩家dbid -->
+        <Arg> STRING </Arg>    <!-- 玩家姓名 -->
+        <Arg> UINT8 </Arg>     <!-- 职业 -->
+        <Arg> UINT32 </Arg>    <!-- 通关时间 -->
+        <Arg> UINT16 </Arg>    <!-- 连击数 -->
+        <Arg> UINT32 </Arg>    <!-- 分数 -->
+    </UpdateMissionRecord>
+
+    <GetMissionRecord>
+        <Arg> STRING </Arg>    <!-- 玩家mb -->
+        <Arg> UINT16 </Arg>    <!-- 关卡ID -->
+        <Arg> UINT8 </Arg>     <!-- 关卡难度 -->
+    </GetMissionRecord>
+</BaseMethods>
+
+
+</root>

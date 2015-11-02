@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<story>
+		<id>1</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>2</id>
+		<storyText>CreateModel 1 150010 1828 4988 0,0,0</storyText>
+	</story>
+	<story>
+		<id>3</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>4</id>
+		<storyText>ZoomCamera 1 7 45,135 1000 1000</storyText>
+	</story>
+	<story>
+		<id>5</id>
+		<storyText>Sleep 2000</storyText>
+	</story>
+	<story>
+		<id>6</id>
+		<storyText>DestroyModel 1</storyText>
+	</story>
+	<story>
+		<id>7</id>
+		<storyText>ZoomCamera 0 7 45,135 1000 1000</storyText>
+	</story>
+	<story>
+		<id>8</id>
+		<storyText>Sleep 1500</storyText>
+	</story>
+	<story>
+		<id>9</id>
+		<storyText>LockSight</storyText>
+	</story>
+	<story>
+		<id>10</id>
+		<storyText>End</storyText>
+	</story>
+</root>

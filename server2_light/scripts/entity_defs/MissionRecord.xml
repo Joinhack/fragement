@@ -1,0 +1,74 @@
+<root>
+    <Properties>
+        <MissionId>
+            <Type>UINT16</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </MissionId>
+
+        <Difficulty>
+            <Type>UINT8</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </Difficulty>
+
+        <PlayerDbid>
+            <Type>UINT64</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </PlayerDbid>
+
+        <PlayerName>
+            <Type>STRING</Type>
+            <Flags>BASE</Flags>
+            <Persistent>TRUE</Persistent>
+        </PlayerName>
+
+        <PlayerVocation>
+            <Type>UINT8</Type>
+            <Flags>BASE</Flags>
+            <Persistent>TRUE</Persistent>
+        </PlayerVocation>
+
+        <!-- 通关时间 -->
+        <PassTime>
+            <Type>UINT32</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </PassTime>
+
+        <!--连击数-->
+        <Combo>
+            <Type>UINT16</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </Combo>
+
+        <!-- 通关分数 -->
+        <Point>
+            <Type>UINT32</Type>
+            <Flags>BASE</Flags>
+            <Persistent>TRUE</Persistent>
+        </Point>
+
+        <!-- 记录产生时间 -->
+        <TimeStamp>
+            <Type>UINT32</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </TimeStamp>
+
+        <!-- 记录自己的mb -->
+        <base_mbstr>
+            <Type>STRING</Type>
+            <Flags>BASE</Flags>
+        </base_mbstr>
+
+        <mgr>
+            <Type>LUA_OBJECT</Type>
+            <Flags>BASE</Flags>
+        </mgr>
+
+    </Properties>
+
+</root>

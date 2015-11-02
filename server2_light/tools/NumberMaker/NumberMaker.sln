@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NumberMaker", "NumberMaker\NumberMaker.vcxproj", "{A5217C7D-508A-452E-B46D-E3A97981412C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5217C7D-508A-452E-B46D-E3A97981412C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A5217C7D-508A-452E-B46D-E3A97981412C}.Debug|Win32.Build.0 = Debug|Win32
+		{A5217C7D-508A-452E-B46D-E3A97981412C}.Release|Win32.ActiveCfg = Release|Win32
+		{A5217C7D-508A-452E-B46D-E3A97981412C}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

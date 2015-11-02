@@ -1,0 +1,43 @@
+<root>
+    <Properties>
+        <id>
+            <Type> UINT64 </Type>
+            <Flags> BASE </Flags>
+        </id>
+     
+        <name>
+            <Type> STRING </Type>
+            <Flags> BASE </Flags>
+        </name>
+
+        <level>
+            <Type> UINT8 </Type>
+            <Flags> BASE </Flags>
+        </level>
+
+        <vocation>
+            <Type> UINT8 </Type>
+            <Flags> BASE </Flags>
+        </vocation>
+
+        <equipeds>
+            <Type> LUA_TABLE </Type>
+            <Flags> BASE </Flags>
+        </equipeds>
+        
+        <weekContribution>
+            <Type> UINT32 </Type>
+            <Flags> BASE </Flags>
+        </weekContribution>
+
+        <weekScore>
+            <Type> UINT32 </Type>
+            <Flags> BASE </Flags>
+        </weekScore>
+        
+        <fightForce>
+            <Type> UINT32 </Type>
+            <Flags> BASE </Flags>
+        </fightForce>
+    </Properties>
+</root>

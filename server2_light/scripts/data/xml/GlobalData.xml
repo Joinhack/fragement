@@ -1,0 +1,16 @@
+<root>
+  <record>
+    <id>0</id>
+    <chooseServerScene>10001</chooseServerScene>
+    <loginScene>10002</loginScene>
+    <chooseCharaterScene>10003</chooseCharaterScene>
+    <homeScene>10004</homeScene>
+    <loginUI>MogoMainUI.prefab</loginUI>
+    <chooseServerUI>MogoMainUI.prefab</chooseServerUI>
+    <chooseCharaterUI>MogoMainUI.prefab</chooseCharaterUI>
+    <homeUI>MogoMainUI.prefab</homeUI>
+    <battleUI>MogoMainUI.prefab</battleUI>
+    <mainCamera>Main_Camera.prefab</mainCamera>
+    <tower_all_sweep_vip_level_i>5</tower_all_sweep_vip_level_i>
+  </record>
+</root>

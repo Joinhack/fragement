@@ -1,0 +1,56 @@
+<root>
+  <entities>
+    <entity>
+      <id>3</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>3104,4691,3819,4953,3502,5334,2971,5046,3360,5026,3533,4676,3084,5308,3849,5280</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>105061, 205061</levelID>
+      <triggeRangeX>3399</triggeRangeX>
+      <triggeRangeY>5033</triggeRangeY>
+      <triggeRangeLength>1430</triggeRangeLength>
+      <triggeRangeWidth>1085</triggeRangeWidth>
+      <homerangeX>3426</homerangeX>
+      <homerangeY>5020</homerangeY>
+      <homerangeLength>3418</homerangeLength>
+      <homerangeWidth>3340</homerangeWidth>
+    </entity>
+    <entity>
+      <id>99</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>3385,5022</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>105060, 205060</levelID>
+      <triggeRangeX>3399</triggeRangeX>
+      <triggeRangeY>5033</triggeRangeY>
+      <triggeRangeLength>1430</triggeRangeLength>
+      <triggeRangeWidth>1085</triggeRangeWidth>
+      <homerangeX>3426</homerangeX>
+      <homerangeY>5020</homerangeY>
+      <homerangeLength>3418</homerangeLength>
+      <homerangeWidth>3340</homerangeWidth>
+    </entity>
+    <entity>
+      <id>1</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>3104,4691,3819,4953,3502,5334,2971,5046,3360,5026,3533,4676,3084,5308,3849,5280</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>105061, 205061</levelID>
+      <triggeRangeX>0</triggeRangeX>
+      <triggeRangeY>0</triggeRangeY>
+      <triggeRangeLength>0</triggeRangeLength>
+      <triggeRangeWidth>0</triggeRangeWidth>
+      <homerangeX>3426</homerangeX>
+      <homerangeY>5020</homerangeY>
+      <homerangeLength>3418</homerangeLength>
+      <homerangeWidth>3340</homerangeWidth>
+    </entity>
+  </entities>
+  <mapname>20003_Trials_s</mapname>
+</root>

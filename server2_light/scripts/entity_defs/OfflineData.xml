@@ -1,0 +1,18 @@
+<root>
+
+<Properties>
+    <avatarDbid>
+        <Type> UINT64 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </avatarDbid>
+    <!--1:命令 2：邮件 3：留言 4：好友请求 -->
+    <content>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </content>
+
+</Properties>
+
+</root>

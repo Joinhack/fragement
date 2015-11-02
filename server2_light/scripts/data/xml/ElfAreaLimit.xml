@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<item>
+		<id_i>1</id_i>
+		<areaId_i>1</areaId_i>
+		<nameCode_i>29001</nameCode_i>
+		<limitLevel_i>30</limitLevel_i>
+	</item>
+	<item>
+		<id_i>2</id_i>
+		<areaId_i>2</areaId_i>
+		<nameCode_i>29002</nameCode_i>
+		<limitLevel_i>40</limitLevel_i>
+	</item>
+	<item>
+		<id_i>3</id_i>
+		<areaId_i>3</areaId_i>
+		<nameCode_i>29003</nameCode_i>
+		<limitLevel_i>45</limitLevel_i>
+	</item>
+	<item>
+		<id_i>4</id_i>
+		<areaId_i>4</areaId_i>
+		<nameCode_i>29004</nameCode_i>
+		<limitLevel_i>50</limitLevel_i>
+	</item>
+	<item>
+		<id_i>5</id_i>
+		<areaId_i>5</areaId_i>
+		<nameCode_i>29005</nameCode_i>
+		<limitLevel_i>55</limitLevel_i>
+	</item>
+</root>

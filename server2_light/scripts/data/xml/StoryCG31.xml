@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<story>
+		<id>1</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>2</id>
+		<storyText>WhiteCamera 0,0 250</storyText>
+	</story>
+	<story>
+		<id>3</id>
+		<storyText>RemoveEntities</storyText>
+	</story>
+	<story>
+		<id>4</id>
+		<storyText>SetPosition 0 12.44,-14,46.24</storyText>
+	</story>
+	<story>
+		<id>5</id>
+		<storyText>SetRotation 0 0,183,0</storyText>
+	</story>
+	<story>
+		<id>6</id>
+		<storyText>CreateModel 1 2017 1272 3777 0,0,0</storyText>
+	</story>
+	<story>
+		<id>7</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>8</id>
+		<storyText>SetRotation 1 0,0,0</storyText>
+	</story>
+	<story>
+		<id>9</id>
+		<storyText>NormalCamera 0,0 1000</storyText>
+	</story>
+	<story>
+		<id>10</id>
+		<storyText>Sleep 200</storyText>
+	</story>
+	<story>
+		<id>11</id>
+		<storyText>MoveCamera 0 0.5,353,183,0 0.1,353,183,0 3000 12.649,-11.83,44.121</storyText>
+	</story>
+	<story>
+		<id>12</id>
+		<storyText>CreateModel 2 150003 753 4534 0,157,0</storyText>
+	</story>
+	<story>
+		<id>13</id>
+		<storyText>ShowDialog 150009 399 105059</storyText>
+	</story>
+	<story>
+		<id>14</id>
+		<storyText>OpenUI</storyText>
+	</story>
+	<story>
+		<id>15</id>
+		<storyText>Wait 6</storyText>
+	</story>
+	<story>
+		<id>16</id>
+		<storyText>CloseUI</storyText>
+	</story>
+	<story>
+		<id>17</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>18</id>
+		<storyText>MoveCamera 2 3,5,297,0 3.5,5,297,0 4000</storyText>
+	</story>
+	<story>
+		<id>19</id>
+		<storyText>Sleep 100</storyText>
+	</story>
+	<story>
+		<id>20</id>
+		<storyText>PlayOneAction 2 22</storyText>
+	</story>
+	<story>
+		<id>21</id>
+		<storyText>PlaySfx 2 6018</storyText>
+	</story>
+	<story>
+		<id>22</id>
+		<storyText>ShowDialog 150003 302 105060</storyText>
+	</story>
+	<story>
+		<id>23</id>
+		<storyText>OpenUI</storyText>
+	</story>
+	<story>
+		<id>24</id>
+		<storyText>Wait 6</storyText>
+	</story>
+	<story>
+		<id>25</id>
+		<storyText>CloseUI</storyText>
+	</story>
+	<story>
+		<id>26</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>27</id>
+		<storyText>MoveCamera 0 4,5,0,0 4.5,5,0,0 4000</storyText>
+	</story>
+	<story>
+		<id>28</id>
+		<storyText>ShowDialog 150010 {0} 105061</storyText>
+	</story>
+	<story>
+		<id>29</id>
+		<storyText>OpenUI</storyText>
+	</story>
+	<story>
+		<id>30</id>
+		<storyText>Wait 6</storyText>
+	</story>
+	<story>
+		<id>31</id>
+		<storyText>CloseUI</storyText>
+	</story>
+	<story>
+		<id>32</id>
+		<storyText>PlayOneAction 2 100</storyText>
+	</story>
+	<story>
+		<id>33</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>34</id>
+		<storyText>MoveCamera 0 0.1,351.8,164.8,0 0.2,351.8,164.8,0 1000 8.28,-14,47.26</storyText>
+	</story>
+	<story>
+		<id>35</id>
+		<storyText>MoveTo 2 11.166,-14.24,39.276 1000</storyText>
+	</story>
+	<story>
+		<id>36</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>37</id>
+		<storyText>MoveCamera 0 4,5,0,0 4.5,5,0,0 4000</storyText>
+	</story>
+	<story>
+		<id>38</id>
+		<storyText>ShowDialog 150000 305 105062</storyText>
+	</story>
+	<story>
+		<id>39</id>
+		<storyText>OpenUI</storyText>
+	</story>
+	<story>
+		<id>40</id>
+		<storyText>Wait 6</storyText>
+	</story>
+	<story>
+		<id>41</id>
+		<storyText>CloseUI</storyText>
+	</story>
+	<story>
+		<id>42</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>43</id>
+		<storyText>MoveCamera 0 0.1,34,237.6,0 0.5,34,237.6,0 2000 16.21,-7.31,41.96</storyText>
+	</story>
+	<story>
+		<id>44</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>45</id>
+		<storyText>PlayOneAction 2 21</storyText>
+	</story>
+	<story>
+		<id>46</id>
+		<storyText>PlaySfx 2 200814</storyText>
+	</story>
+	<story>
+		<id>47</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>48</id>
+		<storyText>PlaySfx 1 6001</storyText>
+	</story>
+	<story>
+		<id>49</id>
+		<storyText>PlayOneAction 1 16</storyText>
+	</story>
+	<story>
+		<id>50</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>51</id>
+		<storyText>PlaySfx 2 6018</storyText>
+	</story>
+	<story>
+		<id>52</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>53</id>
+		<storyText>DestroyModel 2</storyText>
+	</story>
+	<story>
+		<id>54</id>
+		<storyText>MoveCamera 1 0.1,0,180,0 0.1,0,175,0 8000 13.139,-11.23,43.41</storyText>
+	</story>
+	<story>
+		<id>55</id>
+		<storyText>PlaySfx 1 6030</storyText>
+	</story>
+	<story>
+		<id>56</id>
+		<storyText>ShowDialog 150009,150009 399,399 105063,105064</storyText>
+	</story>
+	<story>
+		<id>57</id>
+		<storyText>OpenUI</storyText>
+	</story>
+	<story>
+		<id>58</id>
+		<storyText>Wait 6</storyText>
+	</story>
+	<story>
+		<id>59</id>
+		<storyText>CloseUI</storyText>
+	</story>
+	<story>
+		<id>60</id>
+		<storyText>PlaySfx 1 6030</storyText>
+	</story>
+	<story>
+		<id>61</id>
+		<storyText>Sleep 1500</storyText>
+	</story>
+	<story>
+		<id>62</id>
+		<storyText>PlayOneAction 1 17</storyText>
+	</story>
+	<story>
+		<id>63</id>
+		<storyText>PlaySfx 1 201709</storyText>
+	</story>
+	<story>
+		<id>64</id>
+		<storyText>Sleep 2000</storyText>
+	</story>
+	<story>
+		<id>65</id>
+		<storyText>DestroyModel 1</storyText>
+	</story>
+	<story>
+		<id>66</id>
+		<storyText>LockSight</storyText>
+	</story>
+	<story>
+		<id>67</id>
+		<storyText>End</storyText>
+	</story>
+</root>

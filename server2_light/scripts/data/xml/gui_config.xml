@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<node>
+		<id_i>1</id_i>
+		<prefab_s>ClimbTowerUI</prefab_s>
+		<guard_l>0,0</guard_l>
+	</node>
+	<node>
+		<id_i>2</id_i>
+		<prefab_s>ChallengeUI</prefab_s>
+	</node>
+	<node>
+		<id_i>3</id_i>
+		<prefab_s>ArenaUI</prefab_s>
+	</node>
+	<node>
+		<id_i>4</id_i>
+		<prefab_s>ArenaRewardUI</prefab_s>
+	</node>
+	<node>
+		<id_i>5</id_i>
+		<prefab_s>DialogUI</prefab_s>
+	</node>
+</root>

@@ -1,0 +1,303 @@
+<root>
+    <Properties>
+
+    <spawnPointCfgId>                        
+        <Type> UINT32 </Type>   
+        <Flags> CELL </Flags>       
+    </spawnPointCfgId> 
+    
+  <name>
+    <Type> STRING </Type>
+    <Flags> OTHER_CLIENTS </Flags>
+  </name>
+
+  <gender>
+    <Type> UINT8 </Type>
+    <Flags> OTHER_CLIENTS </Flags>
+  </gender>
+    
+  <vocation>             
+      <Type> UINT8 </Type> 
+      <Flags> OTHER_CLIENTS </Flags>
+  </vocation> 
+  <!--玩家穿在身上的武器-->
+  <loadedWeapon>
+    <Type> UINT32 </Type>
+    <Flags> OTHER_CLIENTS </Flags>
+  </loadedWeapon>
+
+  <!--玩家穿在身上的衣服-->
+  <loadedCuirass>
+    <Type> UINT32 </Type>
+    <Flags> OTHER_CLIENTS </Flags>
+  </loadedCuirass>
+
+  <!--玩家穿在身上的护手-->
+  <loadedArmguard>
+    <Type> UINT32 </Type>
+    <Flags> OTHER_CLIENTS </Flags>
+  </loadedArmguard>
+
+  <!--玩家穿在身上的腿部-->
+  <loadedLeg>
+    <Type> UINT32 </Type>
+    <Flags> OTHER_CLIENTS </Flags>
+  </loadedLeg>
+
+  <!--玩家穿在身上的客户端特效-->
+  <loadedBodyEffect>
+    <Type> UINT32 </Type>
+    <Flags> OTHER_CLIENTS </Flags>
+  </loadedBodyEffect>
+
+    <!--cell的SpaceLoader实体引用-->
+    <sp_ref>
+        <Type> LUA_OBJECT </Type>
+        <Flags> CELL </Flags>
+    </sp_ref>
+    
+    	<!--玩家所在场景地图id-->
+    <map_id>
+        <Type> UINT16 </Type>
+        <Flags> CELL </Flags>
+    </map_id>
+
+    <!-- 类型 -->
+    <c_etype>
+        <Type> UINT8 </Type>
+        <Flags> CELL </Flags>
+    </c_etype>
+
+    <curHp>
+        <Type> UINT32 </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+    </curHp>
+
+    <!--玩家战斗属性临时表-->
+    <battleProps>
+        <Type> LUA_TABLE </Type>
+        <Flags> CELL </Flags>
+    </battleProps>
+
+    <!--速度-->
+    <speed>
+        <Type> UINT16 </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+    </speed>
+
+    <!--给AI用的共享内存-->
+    <blackBoard>
+        <Type> LUA_TABLE </Type>
+        <Flags> CELL </Flags>
+    </blackBoard>
+    
+    <skillSystem>
+        <Type> LUA_TABLE </Type>
+        <Flags> CELL </Flags>
+    </skillSystem>
+
+    <!--角色状态标志位-->
+    <stateFlag>     
+        <Type> UINT64 </Type>           
+        <Flags> OTHER_CLIENTS </Flags> 
+        <Default> 0 </Default>         
+    </stateFlag>
+
+    <!--战斗阵营标识-->
+    <factionFlag>
+        <Type> UINT8 </Type>
+        <Flags> OTHER_CLIENTS </Flags> 
+        <Default> 0 </Default>
+    </factionFlag>
+    
+    <borned>                  
+        <Type> UINT8 </Type>  
+        <Flags> CELL </Flags> 
+        <Default> 0 </Default>
+    </borned>                   
+  <!--                        二级信息end                           -->
+
+  <!-- 主人的eid -->
+    <ownerEid>
+        <Type> UINT32 </Type>
+        <Flags> CELL </Flags>
+    </ownerEid>
+
+    <monsterId>
+        <Type> UINT32 </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+    </monsterId>
+
+    <notTurn>
+        <Type> UINT8 </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+        <Default> 0 </Default>
+    </notTurn>
+
+    <clientTrapId>                    
+        <Type> UINT8 </Type>          
+        <Flags> OTHER_CLIENTS </Flags>
+        <Default> 0 </Default>        
+    </clientTrapId>    
+
+
+
+    <skillBag>
+        <Type> LUA_TABLE </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+    </skillBag>
+	
+	<!--角色等级-->
+	<level>
+		<Type> UINT8 </Type>
+		<Flags> OTHER_CLIENTS </Flags>
+		<Default> 0 </Default>
+	</level>
+
+    <isPVP>                           
+        <Type> UINT8 </Type>          
+        <Flags> CELL </Flags>
+        <Default> 0 </Default>        
+    </isPVP>     
+    <!--角色id-->                 
+	<avatarDbid>                           
+        <Type> UINT64 </Type>          
+        <Flags> CELL </Flags>
+        <Default> 0 </Default>        
+    </avatarDbid> 
+	
+	<!--伤害-->
+    <atk>
+        <Type> UINT32 </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+    </atk>
+
+    <!--防御-->
+    <def>
+        <Type> UINT32 </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+    </def>
+
+    <!--最大生命-->
+    <hp>
+        <Type> UINT32 </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+    </hp>
+
+    <!--命中-->
+    <hitRate>
+        <Type> FLOAT </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+    </hitRate>
+
+    <!--命中-->
+    <attackBase>
+        <Type> UINT32 </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+    </attackBase>
+
+     <!--命中-->
+    <baseHitRate>
+        <Type> FLOAT </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+    </baseHitRate>
+    <!--暴击-->
+    <crit>
+        <Type> UINT32 </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+    </crit>
+    
+    <!--抗暴击-->
+    <critRate>
+        <Type> FLOAT </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+    </critRate>
+
+    <!--抗暴击-->
+    <defenceRate>
+        <Type> FLOAT </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+    </defenceRate>
+
+    <!--抗暴击-->
+    <antiCritRate>
+        <Type> FLOAT </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+    </antiCritRate>
+
+    <!--抗暴击-->
+    <damageReduceRate>
+        <Type> FLOAT </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+    </damageReduceRate>
+    <!--破击-->
+    <trueStrike>
+        <Type> UINT32 </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+    </trueStrike>
+
+    <!--破击-->
+    <trueStrikeRate>
+        <Type> FLOAT </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </trueStrikeRate>
+    <!--抗破击-->
+    <antiTrueStrikeRate>
+        <Type> FLOAT </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </antiTrueStrikeRate>
+
+    <!--穿透-->
+    <antiDefense>
+        <Type> UINT32 </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </antiDefense>
+    
+    <!--穿透-->
+    <antiDefenseRate>
+        <Type> FLOAT </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </antiDefenseRate>
+
+    <!--暴伤加成-->
+    <critExtraAttack>
+        <Type> UINT32 </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </critExtraAttack>
+    
+    <!--PVP强度-->
+    <pvpAddition>
+        <Type> UINT32 </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </pvpAddition>
+
+    <!--PVP强度-->
+    <pvpAdditionRate>
+        <Type> FLOAT </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </pvpAdditionRate>
+    <!--PVP抗性-->
+    <pvpAnti>
+        <Type> UINT32 </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </pvpAnti>
+    <!--PVP抗性-->
+    <pvpAntiRate>
+        <Type> FLOAT </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </pvpAntiRate>
+    
+    <!--闪避率率-->
+    <missRate>
+        <Type> FLOAT </Type>
+        <Flags> CELL_AND_CLIENT </Flags>
+    </missRate>
+    
+    <difficulty>	
+        <Type> UINT32 </Type>
+        <Flags> OTHER_CLIENTS </Flags>
+    </difficulty>
+
+    </Properties>
+
+</root>

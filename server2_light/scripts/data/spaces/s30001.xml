@@ -1,0 +1,30 @@
+<root>
+  <entities>
+    <entity>
+      <type>SpawnPoint</type>
+      <id>1</id>
+      <monsterSpawntPoint>4260,1526</monsterSpawntPoint>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>325, 325, 325, 325, 325, 325, 325, 325, 325, 325, 325, 325, 325, 325, 325, 325, 325, 325, 325, 325, 325, 325, 325, 325, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360</levelID>
+      <triggeRangeX>0</triggeRangeX>
+      <triggeRangeY>0</triggeRangeY>
+      <triggeRangeLength>0</triggeRangeLength>
+      <triggeRangeWidth>0</triggeRangeWidth>
+      <homerangeX>4098</homerangeX>
+      <homerangeY>1490</homerangeY>
+      <homerangeLength>2350</homerangeLength>
+      <homerangeWidth>2448</homerangeWidth>
+    </entity>
+    <entity>
+      <type>TeleportPointSrc</type>
+      <id>16</id>
+      <posx>1941</posx>
+      <posy>1177</posy>
+      <targetSceneId>30001</targetSceneId>
+      <targetX>3224</targetX>
+      <targetY>1214</targetY>
+    </entity>
+  </entities>
+  <mapname>30001_Boss_s</mapname>
+</root>

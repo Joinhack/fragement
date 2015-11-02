@@ -1,0 +1,575 @@
+<root>
+
+<Properties>
+
+    <DbidToPlayers>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </DbidToPlayers>
+
+    <NameToDbid>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </NameToDbid>
+
+    <LevelToDbid>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </LevelToDbid>
+
+    <AccountToDbid>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </AccountToDbid>
+
+    <UnionDbidToPlayerDbid>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </UnionDbidToPlayerDbid>
+
+    <m_lFights> <!-- 全服所有玩家的历史最好战斗力 -->
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </m_lFights>
+
+    <OnlineCount>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+    </OnlineCount>
+
+    <!-- 全服所有玩家的数量 -->
+    <AllPlayersCount>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+    </AllPlayersCount>
+
+    <!-- 全服所有道具的数量 -->
+    <AllItemsCount>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+    </AllItemsCount>
+
+    <!-- 已加载道具的数量 -->
+    <LoadedItemsCount>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+    </LoadedItemsCount>
+
+    <!-- 全服所有usermgrdata表的数量 -->
+    <AllUserMgrDataCount>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+    </AllUserMgrDataCount>
+
+    <m_user_data_count>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+    </m_user_data_count>
+    <m_user_loaded_count>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+    </m_user_loaded_count>
+    <!--保存队列-->
+    <m_save>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </m_save>
+    <!--定时器id map-->
+    <m_timers>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </m_timers>
+
+    <m_redisUd>
+        <Type> REDIS_HASH </Type>
+        <Flags> BASE </Flags>
+    </m_redisUd>
+    <!---->
+    <redis_key_format>
+        <Type> STRING </Type>
+        <Flags> BASE </Flags>
+    </redis_key_format>
+    <weak_factor>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+        <Default> 80 </Default>
+    </weak_factor>
+    <strong_factor>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+        <Default> 120 </Default>
+    </strong_factor>
+    <enemy_factor>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+        <Default> 150 </Default>
+    </enemy_factor>
+    <!--当一个角色找不到竞技场合理对手时，会自动创建一个来自于自身属性的robot-->
+    <m_robots>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </m_robots>
+    <!--机器人的名称-->
+    <m_robotsName>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </m_robotsName>
+
+
+    <RankList>
+        <Type> LUA_TABLE </Type> <!-- 玩家的排名表 -->
+        <Flags> BASE </Flags>
+    </RankList>
+
+    <DbidToRank>
+        <Type> LUA_TABLE </Type> <!--  玩家的等级到dbid的映射-->
+        <Flags> BASE </Flags>
+    </DbidToRank>
+
+    <InfoToRank>
+        <Type> LUA_TABLE </Type> <!--  玩家的个人信息映射-->
+        <Flags> BASE </Flags>
+    </InfoToRank>
+
+    <DbidToFans>
+        <Type> LUA_TABLE </Type> <!--记录玩家的dbid到粉丝数量的映射-->
+        <Flags> BASE </Flags>
+    </DbidToFans>
+    
+    <RankToRedis>
+        <Type> REDIS_HASH </Type> <!--零点结算战力排行榜Redis存储数据-->
+        <Flags> BASE </Flags>
+    </RankToRedis>
+
+    <RankToReward>
+        <Type> LUA_TABLE </Type> <!--粉丝系统每日排名备份数据-->
+        <Flags> BASE </Flags>
+    </RankToReward>
+
+</Properties>
+
+<BaseMethods>
+    <AddPlayer>
+        <Arg> UINT64 </Arg>    <!-- PlayerDbid -->
+        <Arg> STRING </Arg>    <!-- accountName -->
+        <Arg> UINT64 </Arg>  <!--gm_setting -->
+    </AddPlayer>
+    <!-- 玩家上线、数据更新时调用 -->
+    <PlayerOnLine>
+        <Arg> STRING </Arg>    <!-- PlayerBaseMbStr -->
+        <Arg> STRING </Arg>    <!-- PlayerCellMbStr -->
+        <Arg> UINT64 </Arg>    <!-- PlayerDbid -->
+        <Arg> STRING </Arg>    <!-- PlayerName -->
+        <Arg> UINT8 </Arg>     <!-- PlayerLevel -->
+        <Arg> UINT8 </Arg>     <!-- PlayerVocation -->
+        <Arg> UINT8 </Arg>     <!-- PlayerGender -->
+        <Arg> UINT64 </Arg>    <!-- PlayerUnionDbid -->
+        <Arg> UINT32 </Arg>    <!-- PlayerFight -->
+        <Arg> UINT8 </Arg>     <!-- PlayerFriendsNum -->
+    </PlayerOnLine>
+
+    <PlayerOffLine>
+        <Arg> UINT64 </Arg>    <!-- PlayerDbid -->
+    </PlayerOffLine>
+
+    <QueryInfoByPlayerName>
+        <Arg> UINT32 </Arg>    <!-- MsgId -->
+        <Arg> STRING </Arg>    <!-- PlayerMbStr -->
+        <Arg> STRING </Arg>    <!-- PlayerName -->
+    </QueryInfoByPlayerName>
+
+    <QueryInfoByPlayerDbid>
+        <Arg> UINT32 </Arg>    <!-- MsgId -->
+        <Arg> STRING </Arg>    <!-- PlayerMbStr -->
+        <Arg> UINT64 </Arg>    <!-- PlayerDbid -->
+    </QueryInfoByPlayerDbid>
+
+    <QueryInfoByPlayerDbids>
+        <Arg> UINT32 </Arg>       <!-- MsgId -->
+        <Arg> STRING </Arg>       <!-- PlayerMbStr -->
+        <Arg> LUA_TABLE </Arg>    <!-- PlayerDbid的列表 -->
+        <Arg> LUA_TABLE </Arg>    <!-- Format -->
+    </QueryInfoByPlayerDbids>
+
+    <GuildQueryInfoByPlayerDbids>
+        <Arg> UINT64 </Arg>       <!-- GuildDbid -->
+        <Arg> STRING </Arg>       <!-- PlayerMbStr -->
+        <Arg> LUA_TABLE </Arg>    <!-- PlayerDbid的列表 -->
+        <Arg> LUA_TABLE </Arg>    <!-- Format -->
+    </GuildQueryInfoByPlayerDbids>
+
+    <!-- 玩家新创建一个角色时，通过该接口把数据注册到UserMgr 
+    <InsertPlayer>
+        <Arg> LUA_TABLE </Arg> 
+    </InsertPlayer>
+    -->
+    <!-- 聊天系统接口 -->
+    <Chat>
+        <Arg> UINT8 </Arg>    <!-- 频道 -->
+        <Arg> UINT64 </Arg>   <!-- 发消息的人的dbid -->
+        <Arg> STRING </Arg>   <!-- 发消息的人的名字 -->
+        <Arg> UINT8 </Arg>   <!-- 发消息的人的等级 -->
+        <Arg> STRING </Arg>   <!-- 发消息的人的mb -->
+        <Arg> UINT64 </Arg>   <!-- 收消息的人的dbid -->
+        <Arg> STRING </Arg>   <!-- 发送的内容 -->
+    </Chat>
+
+    <RpcRelayCall>
+        <Arg> UINT64 </Arg>   <!-- mydbid -->
+        <Arg> UINT8 </Arg>   <!-- callback id -->
+        <Arg> UINT64 </Arg>   <!-- 对方dbid -->
+        <Arg> UINT8 </Arg>   <!-- 发送的参数id -->
+        <Arg> LUA_TABLE </Arg>   <!-- 被调用接口的参数信息 -->
+        <Arg> UINT8 </Arg>   <!-- 离线处理方式 --> 
+        <Arg> UINT8 </Arg>   <!-- 离线处理类型 -->
+        <Arg> LUA_TABLE </Arg>   <!-- 离线处理数据 -->
+    </RpcRelayCall>
+
+    <!-- 雇佣某个玩家 -->
+    <Employ>
+        <Arg> STRING </Arg>    <!-- 雇佣者的cellMbStr -->
+        <Arg> UINT64 </Arg>    <!-- 雇佣者的dbid -->
+    </Employ>
+
+    <!-- 获取推荐给玩家的雇佣兵列表 -->
+    <QueryMercenaryList>
+        <Arg> STRING </Arg>    <!-- 雇佣者的baseMbStr -->
+        <Arg> UINT64 </Arg>    <!-- 雇佣者的dbid -->
+        <Arg> LUA_TABLE </Arg>    <!-- 雇佣者的好友dbid列表 -->
+    </QueryMercenaryList>
+
+  <!-- GM 处理接口 -->
+  <GM_Dispacher>
+    <Arg> STRING </Arg>    <!-- gm使用者:账号 -->
+    <Arg> STRING </Arg>    <!-- gm命令函数 -->   
+    <Arg> LUA_TABLE </Arg>   <!-- 参数表 -->
+ 	<Arg> LUA_TABLE </Arg>   <!-- dbid -->
+  </GM_Dispacher>
+
+    <!-- 广播RPC -->
+    <BroacastRpcToOthers>
+        <Arg> UINT32 </Arg>       <!-- MsgId -->
+        <Arg> LUA_TABLE </Arg>    <!-- 收到邮件通知信息 -->
+        <Arg> LUA_TABLE </Arg>    <!-- dbids -->
+    </BroacastRpcToOthers>
+    <!-- 广播RPC -->
+    <BroacastRpc>
+        <Arg> UINT32 </Arg>       <!-- MsgId -->
+        <Arg> LUA_TABLE </Arg>    <!-- 收到邮件通知信息 -->
+    </BroacastRpc>
+    <!--
+    <test>
+        <Arg> UINT32 </Arg>
+        <Arg> STRING </Arg>
+        <Arg> STRING </Arg>
+    </test>
+    -->  
+
+  <join_event>
+        <Arg> UINT32 </Arg>       <!-- event_id -->
+    </join_event>
+
+    <leave_event>
+        <Arg> UINT32 </Arg>       <!-- event_id -->
+    </leave_event>
+
+    <!--事件分派，通过dbid找到对应的avatar，并调用其相关接口-->
+    <EventDispatch>
+        <Arg> UINT64 </Arg>       <!-- dbid -->
+        <Arg> STRING </Arg>       <!-- 子系统名称，若为"client"则分派至客户端，若为空则分派至avatar自身 -->
+        <Arg> STRING </Arg>       <!-- 函数名称 -->
+        <Arg> LUA_TABLE </Arg>    <!-- 参数列表 -->
+    </EventDispatch>
+
+   <GetOnlineCount>
+    </GetOnlineCount>
+
+
+    <Update>
+        <Arg> UINT64 </Arg>       <!-- dbid -->
+        <Arg> LUA_TABLE </Arg>    <!-- 更新的数据 -->
+    </Update>
+    
+    <FriendOffline>
+        <Arg> UINT64 </Arg>       <!-- dbid -->
+        <Arg> LUA_TABLE </Arg>    <!-- 好友list -->
+    </FriendOffline>
+    <FriendOnline>
+        <Arg> UINT64 </Arg>       <!-- dbid -->
+        <Arg> LUA_TABLE </Arg>    <!-- 好友list -->
+    </FriendOnline>
+
+    <KickOut>
+        <Arg> STRING </Arg>
+    </KickOut>
+
+    <!--CheckName(mbStr, name, param, cbFunc)-->
+    <CheckName>
+        <Arg> STRING </Arg>
+        <Arg> STRING </Arg>
+        <Arg> LUA_TABLE </Arg>
+        <Arg> STRING </Arg>
+    </CheckName>
+    <!--
+    <InitNameMgr/>
+    -->
+    <SendSDRewards>
+         <Arg> LUA_TABLE </Arg>    <!-- rewards -->
+         <Arg> UINT64 </Arg>       <!-- dbid -->
+         <Arg> UINT32 </Arg>       <!-- weekRank -->
+    </SendSDRewards>
+
+    <GetPlayerBattleProperties>
+        <Arg> UINT64 </Arg>    <!-- mydbid -->
+        <Arg> STRING </Arg>    <!-- funcName -->
+        <Arg> UINT64 </Arg>    <!-- dbid -->
+        <Arg> INT8 </Arg>      <!-- isPvp -->
+    </GetPlayerBattleProperties>
+    
+    <!--通知所有人显示-->
+     <ShowTextID>
+        <Arg> UINT16 </Arg>    <!-- channel_id -->  
+        <Arg> UINT32 </Arg>    <!-- textid -->
+        <Arg> LUA_TABLE </Arg>    <!-- args -->
+    </ShowTextID>
+    <!--
+    <InitArenaMgr/>
+    <InitedArenaMgr/>
+    -->
+    <GetWeakFoes>
+        <Arg> UINT64 </Arg>       <!-- 玩家的dbid -->
+        <Arg> UINT32 </Arg>       <!-- 战斗力标准 -->
+    </GetWeakFoes>
+    <GetStrongFoes>
+        <Arg> UINT64 </Arg>       <!-- 玩家的dbid -->
+        <Arg> UINT32 </Arg>       <!-- 战斗力标准 -->
+    </GetStrongFoes>
+    <GetPlayerFightMax>
+        <Arg> UINT32 </Arg>       <!-- 战斗力下限 -->
+        <Arg> UINT32 </Arg>       <!-- 战斗力上限 -->
+        <Arg> UINT64 </Arg>       <!-- 玩家的dbid -->
+        <Arg> UINT16 </Arg>       <!-- 个数 -->
+        <Arg> STRING </Arg>    <!-- mbstr -->
+        <Arg> STRING </Arg>    <!-- funcName -->
+    </GetPlayerFightMax>
+    <GetPlayerFightBetween>
+        <Arg> UINT32 </Arg>       <!-- 战斗力下限 -->
+        <Arg> UINT32 </Arg>       <!-- 战斗力上限 -->
+        <Arg> UINT64 </Arg>       <!-- 玩家的dbid -->
+        <Arg> UINT16 </Arg>       <!-- 个数 -->
+		<Arg> STRING </Arg>    <!-- subSystem -->
+        <Arg> STRING </Arg>    <!-- callback_func -->
+    </GetPlayerFightBetween>
+    <SendArenicDetailToClient>
+        <Arg> UINT64 </Arg>       <!-- 玩家的dbid -->
+        <Arg> UINT64 </Arg>       <!-- 玩家的dbid -->
+        <Arg> STRING </Arg>    <!-- callback_func -->
+        <Arg> LUA_TABLE </Arg>    <!-- format -->
+    </SendArenicDetailToClient>
+
+    <GuildInvite>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+    </GuildInvite>
+
+    <UpdatePlayerGuildDbid>
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> UINT64 </Arg>    <!-- 公会的dbid -->
+    </UpdatePlayerGuildDbid>
+
+    <GetRecommedList>
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+    </GetRecommedList>
+    
+      <ban_chat>
+        <Arg> STRING </Arg>    <!-- 待禁言/解禁的玩家角色名 若存在多个以逗号分隔 -->
+        <Arg> UINT8 </Arg>    <!-- 禁言/解禁标识。1=禁言； 0=解禁 -->
+        <Arg> STRING </Arg>    <!-- 禁言的截至日期-->
+        <Arg> STRING </Arg>    <!-- 禁言原因 -->
+    </ban_chat>
+
+    <kick_user>
+        <Arg> STRING </Arg>    <!-- 待踢的玩家昵称(kick_all=1时，此参数为空) 若存在多个以逗号分隔 -->
+        <Arg> UINT8 </Arg>    <!-- 1=踢出所有玩家； 0=踢出单个玩家 -->
+    </kick_user>
+    
+    <!-- 发邮件给所有user_names内的玩家 -->
+    <send_mail_by_names>
+        <Arg> STRING </Arg>    <!-- user_names 玩家昵称 若存在多个以逗号分隔 -->
+        <Arg> STRING </Arg>    <!-- mail_title -->
+        <Arg> STRING </Arg>    <!-- mail_content -->
+        <Arg> LUA_TABLE </Arg>    <!-- items -->
+    </send_mail_by_names>
+    
+     <!-- 发邮件给所有在线玩家 -->
+    <send_mail_online>      
+        <Arg> STRING </Arg>    <!-- mail_title -->
+        <Arg> STRING </Arg>    <!-- mail_content -->
+        <Arg> LUA_TABLE </Arg>    <!-- items -->
+    </send_mail_online>
+    
+
+    <DataDated>
+        <Arg> STRING </Arg>    <!-- subsystem -->
+        <Arg> STRING </Arg>    <!-- fun_name -->
+        <Arg> LUA_TABLE </Arg>    <!-- params -->
+    </DataDated>
+    <RefreshRefFightReq>
+    </RefreshRefFightReq>
+    <UpdateDefierInfo>
+        <Arg> UINT64 </Arg>       <!-- 玩家的dbid -->
+        <Arg> UINT64 </Arg>       <!-- 玩家的dbid -->
+    </UpdateDefierInfo>
+    
+    <DeleteMyFriendNumBe>
+        <Arg> UINT64 </Arg>       <!-- 玩家的dbid -->
+    </DeleteMyFriendNumBe>
+    <!--gm-->
+    <foe>
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> UINT64 </Arg>    <!-- 对手的dbid -->
+        <Arg> UINT8 </Arg>    <!-- flag -->
+    </foe>
+    <SetRobotNames>
+        <Arg> LUA_TABLE </Arg>    <!-- names -->
+    </SetRobotNames>
+    
+    <complain_reply>
+        <Arg> STRING </Arg>    <!-- names -->
+        <Arg> STRING </Arg>    <!-- text -->
+        <Arg> STRING </Arg>    <!-- names -->
+    </complain_reply>
+    
+    <SanctuaryStart/>
+
+    <Init/>
+
+    <OfflineMgrCallback>
+        <Arg> UINT8 </Arg>  <!-- msg -->
+        <Arg> UINT64 </Arg>  <!-- dbid -->
+        <Arg> LUA_TABLE </Arg> <!-- otherInfo -->
+        <Arg> UINT8 </Arg>  <!-- error code -->
+    </OfflineMgrCallback>
+
+    <RankListReq>
+        <Arg> STRING  </Arg>  <!--玩家的mb -->
+        <Arg> UINT8   </Arg>  <!--排行榜类型  -->
+        <Arg> UINT16  </Arg>  <!--起始数据索引-->  
+        <Arg> UINT16  </Arg>  <!--请求数据条数-->
+        <Arg> UINT32  </Arg>  <!--时间戳-->
+    </RankListReq>
+    
+    <HasOnRankReq>
+        <Arg> STRING </Arg>  <!--玩家的mb    -->
+        <Arg> UINT8  </Arg>  <!--排行榜类型  -->
+        <Arg> UINT64 </Arg>  <!--dbid        -->
+    </HasOnRankReq>
+
+    <RankAvatarInfoReq>
+        <Arg> STRING </Arg>   <!--玩家的mb -->
+        <Arg> UINT64 </Arg>   <!--dbid     -->
+        <Arg> UINT8 </Arg>    <!--角色偶像字段-->
+    </RankAvatarInfoReq>
+
+    <RegisterFans>
+        <Arg> UINT64 </Arg>   <!--dbid     -->
+    </RegisterFans>
+
+    <UnregisterFans>
+        <Arg> UINT64 </Arg>   <!--dbid     -->
+    </UnregisterFans>
+     <AddGiftBag>
+     	<Arg> UINT64 </Arg>   <!--dbid     -->
+      <Arg> UINT32 </Arg>   <!--礼包道具id-->
+      <Arg> UINT32 </Arg>   <!--数量-->
+    </AddGiftBag>
+
+    <FansRewardOnlineReq>
+        <Arg> STRING </Arg>  <!--玩家的mb -->
+        <Arg> UINT64 </Arg>  <!--dbid     -->
+    </FansRewardOnlineReq>
+
+    <CampaignGetOnlineFriends>
+        <Arg> STRING </Arg>    <!-- PlayerMbStr -->
+        <Arg> UINT64 </Arg>    <!-- PlayerDbid -->
+        <Arg> LUA_TABLE </Arg>    <!-- dbids -->
+        <Arg> UINT16 </Arg>    <!-- Campaign -->
+    </CampaignGetOnlineFriends>
+
+    <CampaignInvite>
+        <Arg> STRING </Arg>    <!-- PlayerMbStr -->
+        <Arg> UINT64 </Arg>    <!-- PlayerDbid -->
+        <Arg> STRING </Arg>    <!-- Player名字 -->
+        <Arg> UINT16 </Arg>    <!-- 活动ID -->
+        <Arg> UINT64 </Arg>    <!-- 被邀请方的dbid -->
+    </CampaignInvite>
+
+    <AvatarIdolNameReq>
+        <Arg> STRING </Arg>    <!-- PlayerMbStr -->
+        <Arg> UINT64 </Arg>  <!--dbid     -->
+    </AvatarIdolNameReq>
+    <GmSetting>
+        <Arg> UINT64 </Arg>  <!--dbid       -->
+        <Arg> UINT64 </Arg>  <!--gm_setting -->
+    </GmSetting>
+    <ClearData>
+    </ClearData>
+    <EventListAvatarNameReq>
+        <Arg> STRING </Arg>    <!-- PlayerMbStr -->
+        <Arg> LUA_TABLE </Arg>  <!--event list  -->
+    </EventListAvatarNameReq>
+
+    <DragonAdversariesReq>
+        <Arg> STRING </Arg>    <!-- PlayerMbStr -->
+        <Arg> LUA_TABLE </Arg>  <!--event list  -->
+    </DragonAdversariesReq>
+
+
+    <run_func>
+    	<Arg> STRING </Arg>    <!-- role_name -->
+        <Arg> STRING </Arg>    <!-- func_name -->
+        <Arg> LUA_TABLE </Arg>  <!--var  -->
+    </run_func>
+
+    <DragonAttackPvpNameReq>
+        <Arg> STRING </Arg>    <!-- atkMbStr -->
+        <Arg> UINT64 </Arg>    <!-- atkDbid -->
+        <Arg> UINT64 </Arg>    <!-- atkedDbid -->
+    </DragonAttackPvpNameReq>
+
+    <AllPlayerDbidReq/>
+
+    <DragonShowText>
+        <Arg> UINT64 </Arg>    <!-- atkDbid -->
+        <Arg> UINT64 </Arg>    <!-- atkedDbid -->
+        <Arg> LUA_TABLE </Arg> <!-- 奖励 -->
+    </DragonShowText>
+
+    <NotifyCharge>
+        <Arg> STRING </Arg>       <!-- account -->
+        <Arg> UINT64 </Arg>       <!-- avatar_dbid -->
+        <Arg> LUA_TABLE </Arg>    <!--充值列表 -->
+        <Arg> UINT32 </Arg>    <!-- fd -->
+    </NotifyCharge>
+
+    <!--GM 加载排行榜 -->
+    <GMLoadingRankList>
+        <Arg> UINT8 </Arg>      <!--0:默认不加GM，1加载GM -->
+    </GMLoadingRankList>
+
+    <SetGMAccount>
+        <Arg> UINT64 </Arg>    <!-- dbid -->
+        <Arg> UINT8  </Arg>    <!-- sys bit -->
+        <Arg> UINT8 </Arg>     <!-- set stat-->
+        <Arg> UINT64 </Arg>    <!-- gm id -->
+        <Arg> STRING </Arg>    <!--  gm name-->
+    </SetGMAccount>
+
+    <FlyDragonMgrGetPlayerCount/>
+    
+  </BaseMethods>
+  
+  
+
+</root>

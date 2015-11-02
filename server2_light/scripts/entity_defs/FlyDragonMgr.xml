@@ -1,0 +1,117 @@
+<root>
+	<Properties>
+		<PlayerCount>
+			<Type> UINT32 </Type>
+			<Flags> BASE </Flags>
+		</PlayerCount>
+	    <DbidToPlayers>
+	        <Type> LUA_TABLE </Type>
+	        <Flags> BASE </Flags>
+	    </DbidToPlayers>	    
+	    <LevelList>
+	        <Type> LUA_TABLE </Type>
+	        <Flags> BASE </Flags>
+	    </LevelList>
+	    <DragonRedis>
+        	<Type> REDIS_HASH </Type>
+        	<Flags> BASE </Flags>
+   		</DragonRedis>
+	</Properties>
+    <BaseMethods>
+    	<PartPlayerDbidResp>
+    		<Arg> LUA_TABLE </Arg>
+    	</PartPlayerDbidResp>
+    	<!--开始护送飞龙请求-->
+    	<StartConvoyDragon>
+    		<Arg> UINT64 </Arg>
+    		<Arg> UINT8 </Arg>
+    		<Arg> UINT8 </Arg>
+    	</StartConvoyDragon>
+    	<DragonContestSettleReq>
+    		<Arg> STRING </Arg>
+    		<Arg> UINT64 </Arg>
+    	</DragonContestSettleReq>
+    	<DragonConvoyCompleteResp>
+    		<Arg> STRING </Arg>
+    		<Arg> UINT64 </Arg>
+    		<Arg> LUA_TABLE </Arg>
+    	</DragonConvoyCompleteResp>
+    	<StartDragonConvoyReq>
+    		<Arg> STRING </Arg>    <!--mbstr -->
+    		<Arg> UINT64 </Arg>    <!--dbid -->
+    		<Arg> UINT8  </Arg>    <!--level -->
+    		<Arg> UINT8  </Arg>    <!--curr ring -->
+    		<Arg> UINT8  </Arg>    <!--quality -->
+            <Arg> LUA_TABLE </Arg> <!--equipment -->
+    	</StartDragonConvoyReq> 
+
+    	<AllDragonEventListReq>
+    		<Arg> STRING </Arg>
+    		<Arg> UINT64 </Arg> 
+    	</AllDragonEventListReq>
+
+    	<DragonAttackReq>
+    		<Arg> STRING </Arg>
+    		<Arg> UINT64 </Arg> 
+    		<Arg> UINT64 </Arg> 
+    	</DragonAttackReq>
+
+    	<DragonRevengeCheckReq>
+    		<Arg> STRING </Arg>
+    		<Arg> UINT64 </Arg> 
+            <Arg> UINT64 </Arg> 
+    	</DragonRevengeCheckReq>
+
+    	<ReduceConvoyTimeReq>
+    		<Arg> STRING </Arg>
+    		<Arg> UINT64 </Arg> 
+    		<Arg> UINT32 </Arg> 
+    	</ReduceConvoyTimeReq>
+
+    	<DragonAdversariesReq>
+    		<Arg> STRING </Arg>
+    		<Arg> UINT64 </Arg> 
+    	</DragonAdversariesReq>
+
+    	<FreshDragonAdversariesReq>
+    		<Arg> STRING </Arg>
+    		<Arg> UINT64 </Arg> 
+    		<Arg> UINT8  </Arg>
+    	</FreshDragonAdversariesReq>
+    	
+    	<DragonAttackPvpNameCallback>
+    		<Arg> STRING </Arg>
+    		<Arg> LUA_TABLE </Arg>
+    		<Arg> LUA_TABLE </Arg>
+    	</DragonAttackPvpNameCallback>
+
+    	<DragonBattleCallback>
+    		<Arg> STRING </Arg>
+    		<Arg> UINT64 </Arg> 
+    		<Arg> UINT64 </Arg>
+    		<Arg> UINT8  </Arg>
+    		<Arg> UINT8  </Arg>
+    		<Arg> LUA_TABLE  </Arg>
+    	</DragonBattleCallback>
+
+        <FreshConvoyRewardReq>
+            <Arg> STRING </Arg>
+            <Arg> UINT64 </Arg> 
+        </FreshConvoyRewardReq>
+
+        <RegisterInfoRecoveryReq>
+            <Arg> UINT64 </Arg>    <!--dbid -->
+            <Arg> UINT8  </Arg>    <!--level -->
+            <Arg> UINT8  </Arg>    <!--curr ring -->
+            <Arg> UINT8  </Arg>    <!--quality -->
+            <Arg> UINT32  </Arg>   <!--end time -->
+            <Arg> LUA_TABLE </Arg> <!--equipment -->
+        </RegisterInfoRecoveryReq>
+
+        <OnInited>
+            <Arg> UINT64 </Arg>
+        </OnInited>
+
+        <Init/>
+	</BaseMethods>
+</root>

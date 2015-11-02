@@ -1,0 +1,37 @@
+<root>
+
+<Properties>
+
+    <avatarDbid>
+        <Type> UINT64 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </avatarDbid>
+
+    <items>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </items>
+
+    <battleProps>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </battleProps>
+
+    <skillBag>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </skillBag>
+
+    <arenicFight>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> true </Persistent>
+    </arenicFight>
+
+</Properties>
+
+</root>

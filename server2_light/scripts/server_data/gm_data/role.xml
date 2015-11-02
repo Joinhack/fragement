@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<group>
+	<name_s>admin</name_s>
+	<accounts_s>
+            gongli521,
+			gongli520,
+	</accounts_s>
+</group>
+<group>
+	<name_s>arch</name_s>
+	<accounts_s>	gongli521,
+			gongli520,
+	</accounts_s>
+</group>
+	
+</root>

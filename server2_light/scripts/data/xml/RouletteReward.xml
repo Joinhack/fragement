@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<config>
+		<id_i>1</id_i>
+		<roulette_i>1</roulette_i>
+		<des_i>1</des_i>
+		<icon_i>100</icon_i>
+		<place_i>1</place_i>
+		<reward_type_i>1</reward_type_i>
+		<chance_i>10000</chance_i>
+	</config>
+	<config>
+		<id_i>2</id_i>
+		<roulette_i>1</roulette_i>
+		<des_i>1</des_i>
+		<icon_i>101</icon_i>
+		<place_i>2</place_i>
+		<reward_type_i>2</reward_type_i>
+		<chance_i>100000</chance_i>
+	</config>
+</root>

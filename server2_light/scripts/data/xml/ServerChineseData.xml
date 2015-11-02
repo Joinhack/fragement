@@ -1,0 +1,67 @@
+<root>
+	<record>
+		<id_i>0</id_i>
+		<content_s>无</content_s>
+	</record>
+	<record>
+		<id_i>1</id_i>
+		<content_s>ssss</content_s>
+	</record>
+	<record>
+		<id_i>2</id_i>
+		<content_s>排行榜</content_s>
+	</record>
+	<record>
+		<id_i>3</id_i>
+		<content_s>粉丝每日福利</content_s>
+	</record>
+	<record>
+		<id_i>4</id_i>
+		<content_s>由于没有偶像，今天的粉丝福利就和你无缘啦！\n快去排行榜上找一名强力的玩家，成为他的粉丝吧！\n\n【提示】\n  -偶像的战力排名越高，粉丝奖励越高\n  -第1名的粉丝可获得\n  -粉丝福利礼包（有几率开出金币和钻石）</content_s>
+	</record>
+	<record>
+		<id_i>5</id_i>
+		<content_s>你的支持是我提升战力的不朽动力！\n愿荣耀与我们同在！\n\n【提示】\n  -偶像的战力排名越高，粉丝奖励越高\n  -第1名的粉丝可获得神秘宝箱（打开可获得金币或者钻石）</content_s>
+	</record>
+	<record>
+		<id_i>6</id_i>
+		<content_s>亲爱的</content_s>
+	</record>
+	<record>
+		<id_i>7</id_i>
+		<content_s>不能成为自己的粉丝</content_s>
+	</record>
+	<record>
+		<id_i>8</id_i>
+		<content_s>亲，今日护送次数已用完明天再来吧!</content_s>
+	</record>
+	<record>
+		<id_i>9</id_i>
+		<content_s>亲爱的暗黑战神玩家</content_s>
+	</record>
+	<record>
+		<id_i>10</id_i>
+		<content_s>一测回馈大礼包</content_s>
+	</record>
+	<record>
+		<id_i>11</id_i>
+		<content_s>亲爱的玩家，您是《暗黑战神》的元老级用户。您在一测中表现活跃，达到%d级，请收下一测回馈大礼包，感谢您对《暗黑战神》一如既往的支持！</content_s>
+	</record>
+	<record>
+		<id_i>12</id_i>
+		<content_s>《暗黑战神》团队</content_s>
+	</record>
+	<record>
+		<id_i>13</id_i>
+		<content_s> 亲爱的</content_s>
+	</record>
+	<record>
+		<id_i>14</id_i>
+		<content_s> 上次您更换装备时摘除的宝石未能全部镶嵌在新装备上，因背包已满剩余宝石已发送到此，敬请查收！
+		感谢您对《暗黑战神》一如既往的支持！</content_s>
+	</record>
+	<record>
+		<id_i>15</id_i>
+		<content_s> 换装物品未能进入背包</content_s>
+	</record>
+</root>

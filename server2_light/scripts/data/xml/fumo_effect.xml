@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<config>
+		<id_i>1</id_i>
+		<prop_weight_m>1:1000,2:1000,3:100,4:1000,5:100,6:100,7:100,8:1000,9:1000</prop_weight_m>
+		<range_weight_m>1:10000,2:1000,3:10</range_weight_m>
+	</config>
+	<config>
+		<id_i>2</id_i>
+		<prop_weight_m>1:1000,2:1000,3:100,4:1000,5:100,6:100,7:100,8:1000,9:1000,10:1,11:1,12:1,13:1,14:1,15:1</prop_weight_m>
+		<range_weight_m>2:10000,3:1000,4:10</range_weight_m>
+	</config>
+	<config>
+		<id_i>3</id_i>
+		<prop_weight_m>1:1000,2:1000,3:100,4:1000,5:100,6:100,7:100,8:1000,9:1000,10:2,11:2,12:2,13:2,14:2,15:2</prop_weight_m>
+		<range_weight_m>3:10000,4:1000,5:10</range_weight_m>
+	</config>
+</root>

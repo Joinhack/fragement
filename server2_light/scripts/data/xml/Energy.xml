@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<energy>
+		<id_i>1</id_i>
+		<fixedPoints_i>30</fixedPoints_i>
+		<recoverPoints_i>1</recoverPoints_i>
+		<recoverInterval_i>4</recoverInterval_i>
+	</energy>
+</root>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<type>
+		<id_i>1</id_i>
+		<buffId_i>3</buffId_i>
+		<cd_i>30</cd_i>
+	</type>
+	<type>
+		<id_i>2</id_i>
+		<buffId_i>4</buffId_i>
+		<cd_i>30</cd_i>
+	</type>
+	<type>
+		<id_i>3</id_i>
+		<buffId_i>5</buffId_i>
+		<cd_i>30</cd_i>
+	</type>
+	<type>
+		<id_i>4</id_i>
+		<buffId_i>6</buffId_i>
+		<cd_i>30</cd_i>
+	</type>
+</root>

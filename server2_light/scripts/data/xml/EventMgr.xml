@@ -1,0 +1,78 @@
+<root>
+
+<Properties>
+  
+    <funcTable>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </funcTable>
+
+<eventTable>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </eventTable>
+
+<dateRec>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </dateRec>
+
+<lastCheckDay>
+        <Type> UINT16 </Type>
+        <Flags> BASE </Flags>
+    </lastCheckDay>
+
+<lastCheckWeek>
+        <Type> UINT16 </Type>
+        <Flags> BASE </Flags>
+</lastCheckWeek>
+
+<lastCheckMonth>
+        <Type> UINT16 </Type>
+        <Flags> BASE </Flags>
+</lastCheckMonth>
+
+<lastCheckYear>
+        <Type> UINT16 </Type>
+        <Flags> BASE </Flags>
+</lastCheckYear>
+
+
+
+
+
+</Properties>
+
+<ClientMethods>
+
+</ClientMethods>
+
+<BaseMethods>
+
+    <OnMgrLoaded>
+        <Arg> STRING </Arg>
+    </OnMgrLoaded>
+    <onDestroy>
+    </onDestroy>
+	
+   <EnterEvents>
+ 	<Arg> STRING </Arg>
+    </EnterEvents>
+    
+       <EventOpenList>
+ 	<Arg> STRING </Arg>
+    </EventOpenList>
+    
+
+
+    <ReFresh>
+    </ReFresh>
+  <join_event>
+ 	<Arg> UINT32  </Arg>
+	<Arg> STRING  </Arg>
+    </join_event>
+
+</BaseMethods>
+
+
+</root>

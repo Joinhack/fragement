@@ -1,0 +1,58 @@
+<root>
+
+<Properties>
+    <!--db callback_id-->
+    <callback_id>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+    </callback_id>
+
+    <!--正在存盘中的充值数据-->
+    <recs_tmp>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </recs_tmp>
+
+    <!--可领取的充值记录-->
+    <recs>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </recs>
+
+    <!--正在删除中的充值数据-->
+    <recs_exc>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </recs_exc>
+
+</Properties>
+
+<ClientMethods>
+
+</ClientMethods>
+
+<BaseMethods>
+    <!--fd,plat_id,ord_info-->
+    <onChargeReq>
+        <Arg> UINT32 </Arg>
+        <Arg> STRING </Arg>
+        <Arg> STRING </Arg>
+    </onChargeReq>
+
+    <WithdrawReq>
+        <Arg> STRING </Arg>
+        <Arg> STRING </Arg>
+        <Arg> UINT64 </Arg>    <!-- avatar_dbid -->
+        <Arg> UINT64 </Arg>    <!-- ord_dbid -->
+    </WithdrawReq>
+
+    <CheckChargeReq>
+        <Arg> STRING </Arg>
+        <Arg> STRING </Arg>
+        <Arg> UINT64 </Arg>    <!-- avatar_dbid -->
+    </CheckChargeReq>
+
+</BaseMethods>
+
+
+</root>

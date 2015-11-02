@@ -1,0 +1,160 @@
+<root>
+    <Properties>
+        <name>
+            <Type>STRING</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+            <UniqueIndex/>
+        </name>
+        <level>
+            <Type>UINT8</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </level>
+        <members>
+            <Type>LUA_TABLE</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </members>
+        <contribute>
+            <Type>LUA_TABLE</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </contribute>
+        <announcement>
+            <Type>STRING</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </announcement>
+        <money>
+            <Type>UINT32</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </money>
+
+        <!-- 公会的开始创建时间 -->
+        <buildtime>
+            <Type>UINT32</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </buildtime>
+
+        <!-- 开始进入删除冷冻时间的时间戳 -->
+        <timestamp>
+            <Type>UINT32</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </timestamp>
+
+        <!-- 公会内玩家的上线时间 -->
+        <members_online_time>
+            <Type>LUA_TABLE</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </members_online_time>
+
+        <!-- 公会的状态 -->
+        <status>
+            <Type>UINT8</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </status>
+
+        <!-- 龙晶成长值 -->
+        <dragon_value>
+            <Type>UINT32</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </dragon_value>
+
+        <!-- 上一次清除龙晶成长值的时间 -->
+        <dragon_clear_time>
+            <Type>UINT32</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </dragon_clear_time>
+
+        <!-- 玩家的上一次充魔的时间 -->
+        <player_recharge_times>
+            <Type>LUA_TABLE</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </player_recharge_times>
+
+        <!-- 玩家的冲魔次数 -->
+        <player_recharge_number_of_times>
+            <Type>LUA_TABLE</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </player_recharge_number_of_times>
+
+        <!-- 玩家获得龙晶的次数 -->
+        <player_get_dragon_times>
+            <Type>LUA_TABLE</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </player_get_dragon_times>
+
+        <!-- 公会技能 -->
+        <skill>
+            <Type>LUA_TABLE</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </skill>
+
+        <!-- 公会创建者的dbid -->
+        <builder_dbid>
+            <Type>UINT64</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </builder_dbid>
+
+        <!-- 公会长的dbid -->
+        <president_dbid>
+            <Type>UINT64</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </president_dbid>
+
+        <!-- 副公会长1的dbid -->
+        <vice_president1_dbid>
+            <Type>UINT64</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </vice_president1_dbid>
+
+        <!-- 副公会长2的dbid -->
+        <vice_president2_dbid>
+            <Type>UINT64</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </vice_president2_dbid>
+
+        <!-- 副公会长3的dbid -->
+        <vice_president3_dbid>
+            <Type>UINT64</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </vice_president3_dbid>
+
+        <!-- 公会消息(申请加入等消息) -->
+        <messages>
+            <Type>LUA_TABLE</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </messages>
+
+        <!-- 记录自己的mb -->
+        <base_mbstr>
+            <Type>STRING</Type>
+            <Flags>BASE</Flags>
+        </base_mbstr>
+
+        <mgr>
+            <Type>LUA_OBJECT</Type>
+            <Flags>BASE</Flags>
+        </mgr>
+
+    </Properties>
+
+</root>

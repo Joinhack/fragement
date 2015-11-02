@@ -1,0 +1,39 @@
+<root>
+  <entities>
+    <entity>
+      <id>99</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>3581,3891</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>103090, 203090</levelID>
+      <triggeRangeX>0</triggeRangeX>
+      <triggeRangeY>0</triggeRangeY>
+      <triggeRangeLength>0</triggeRangeLength>
+      <triggeRangeWidth>0</triggeRangeWidth>
+      <homerangeX>3562</homerangeX>
+      <homerangeY>3914</homerangeY>
+      <homerangeLength>2546</homerangeLength>
+      <homerangeWidth>2570</homerangeWidth>
+    </entity>
+    <entity>
+      <id>3</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>3112,3952,3520,3528,3520,4292,3923,4246,3887,3926,3758,3704,3334,3781,3340,4086,3680,4132</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>103091, 203091</levelID>
+      <triggeRangeX>3577</triggeRangeX>
+      <triggeRangeY>3899</triggeRangeY>
+      <triggeRangeLength>1000</triggeRangeLength>
+      <triggeRangeWidth>1000</triggeRangeWidth>
+      <homerangeX>3562</homerangeX>
+      <homerangeY>3914</homerangeY>
+      <homerangeLength>2546</homerangeLength>
+      <homerangeWidth>2570</homerangeWidth>
+    </entity>
+  </entities>
+  <mapname>10109_Minos_s</mapname>
+</root>

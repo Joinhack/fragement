@@ -1,0 +1,82 @@
+<root>
+    <Properties>
+<!--角色数据库id,唯一索引-->
+    <characterDbid> 
+        <Type> UINT64 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> TRUE </Persistent>  
+        <Default> 0 </Default>
+        <UniqueIndex/>
+    </characterDbid>
+
+    <head>
+        <Type> UINT16 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> TRUE </Persistent>
+        <Default> 0 </Default>
+    </head>
+
+    <neck>
+        <Type> UINT16 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> TRUE </Persistent>
+        <Default> 0 </Default>
+    </neck>
+
+    <shoulder>
+        <Type> UINT16 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> TRUE </Persistent>
+        <Default> 0 </Default>
+    </shoulder>
+
+    <chest>
+        <Type> UINT16 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> TRUE </Persistent>
+        <Default> 0 </Default>
+    </chest>
+
+    <waist>
+        <Type> UINT16 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> TRUE </Persistent>
+        <Default> 0 </Default>
+    </waist>
+
+    <arm>
+        <Type> UINT16 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> TRUE </Persistent>
+        <Default> 0 </Default>
+    </arm>
+
+    <leg>
+        <Type> UINT16 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> TRUE </Persistent>
+        <Default> 0 </Default>
+    </leg>
+
+    <foot>
+        <Type> UINT16 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> TRUE </Persistent>
+        <Default> 0 </Default>
+    </foot>
+
+    <finger>
+        <Type> UINT16 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> TRUE </Persistent>
+        <Default> 0 </Default>
+    </finger>
+
+    <weapon>
+        <Type> UINT16 </Type>
+        <Flags> BASE </Flags>
+        <Persistent> TRUE </Persistent>
+        <Default> 0 </Default>
+    </weapon>
+	</Properties>
+</root>

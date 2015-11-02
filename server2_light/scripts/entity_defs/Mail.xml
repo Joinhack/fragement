@@ -1,0 +1,48 @@
+<root>
+    <Properties>
+        <!--邮件头-->
+        <title> 
+            <Type>STRING</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </title>
+        <!--邮件称呼-->
+        <to> 
+            <Type>STRING</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </to>
+        <!--邮件文字内容-->
+        <text> 
+            <Type>STRING</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </text>
+        <!--邮件人-->
+        <from> 
+            <Type>STRING</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </from>
+        <!--邮件时间-->
+        <time> 
+            <Type>INT32</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </time>
+        <!--邮件过期时间-->
+        <timeout> 
+            <Type>INT32</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </timeout>
+        <!--特殊扩展内容-->
+        <attachment> 
+            <Type>LUA_TABLE</Type>
+            <Flags>BASE</Flags> 
+            <Persistent>TRUE</Persistent>
+        </attachment>
+    </Properties>
+
+    
+</root>

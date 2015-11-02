@@ -1,0 +1,73 @@
+<root>
+  <entities>
+    <entity>
+      <id>5</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>3599,7050,2976,6994,2687,7139,3811,7175,2964,7760,3777,6873,2980,7308,3674,7787,2827,7517,2557,7369</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>106033, 206033</levelID>
+      <triggeRangeX>3543</triggeRangeX>
+      <triggeRangeY>7121</triggeRangeY>
+      <triggeRangeLength>3150</triggeRangeLength>
+      <triggeRangeWidth>1000</triggeRangeWidth>
+      <homerangeX>3647</homerangeX>
+      <homerangeY>7242</homerangeY>
+      <homerangeLength>3500</homerangeLength>
+      <homerangeWidth>3290</homerangeWidth>
+    </entity>
+    <entity>
+      <id>99</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>3310,7667</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>106030, 206030</levelID>
+      <triggeRangeX>0</triggeRangeX>
+      <triggeRangeY>0</triggeRangeY>
+      <triggeRangeLength>0</triggeRangeLength>
+      <triggeRangeWidth>0</triggeRangeWidth>
+      <homerangeX>3647</homerangeX>
+      <homerangeY>7242</homerangeY>
+      <homerangeLength>3500</homerangeLength>
+      <homerangeWidth>3290</homerangeWidth>
+    </entity>
+    <entity>
+      <id>3</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>3599,7050,2976,6994,2687,7139,3811,7175,2964,7760,3777,6873,2980,7308,3674,7787,2827,7517,2557,7369</monsterSpawntPoint>
+      <triggerType>0</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>106032, 206032</levelID>
+      <triggeRangeX>0</triggeRangeX>
+      <triggeRangeY>0</triggeRangeY>
+      <triggeRangeLength>0</triggeRangeLength>
+      <triggeRangeWidth>0</triggeRangeWidth>
+      <homerangeX>3647</homerangeX>
+      <homerangeY>7242</homerangeY>
+      <homerangeLength>3500</homerangeLength>
+      <homerangeWidth>3290</homerangeWidth>
+    </entity>
+    <entity>
+      <id>2</id>
+      <type>SpawnPoint</type>
+      <monsterSpawntPoint>3824,4747,4059,4612,3857,4493,4016,3820,4103,3659,3555,4743,3629,3864,3624,4560,3522,4333,4043,4326</monsterSpawntPoint>
+      <triggerType>1</triggerType>
+      <preSpawnPointId>
+      </preSpawnPointId>
+      <levelID>106031, 206031</levelID>
+      <triggeRangeX>0</triggeRangeX>
+      <triggeRangeY>0</triggeRangeY>
+      <triggeRangeLength>0</triggeRangeLength>
+      <triggeRangeWidth>0</triggeRangeWidth>
+      <homerangeX>3804</homerangeX>
+      <homerangeY>4100</homerangeY>
+      <homerangeLength>2120</homerangeLength>
+      <homerangeWidth>2379</homerangeWidth>
+    </entity>
+  </entities>
+  <mapname>10603_s</mapname>
+</root>

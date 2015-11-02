@@ -1,0 +1,182 @@
+<root>
+
+<Properties>
+
+    <MapCount>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+    </MapCount>
+
+    <MapLoadedCount>
+        <Type> UINT32 </Type>
+        <Flags> BASE </Flags>
+    </MapLoadedCount>
+
+    <State>
+        <Type> UINT8 </Type>
+        <Flags> BASE </Flags>
+    </State>
+
+    <SpaceLoaderCount>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </SpaceLoaderCount>
+
+    <!-- 记录玩家的信息 -->
+    <PlayerInfo>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </PlayerInfo>
+
+    <!-- entity id对应space的池 -->
+    <MapPool>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </MapPool>
+
+    <!-- 空闲副本池 -->
+    <IdleSpecialMapPool>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </IdleSpecialMapPool>
+
+    <!-- 正在启用的副本池 -->
+    <BusySpecialMapPool>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </BusySpecialMapPool>
+
+    <!-- 记录全服总人数的值 -->
+    <SumPlayerCount>
+        <Type> UINT16 </Type>
+        <Flags> BASE </Flags>
+    </SumPlayerCount>
+
+    <!-- 记录全服总人数的值 -->
+    <!--
+    <ScenePlayerCount>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </ScenePlayerCount>
+    -->
+
+    <!-- 记录每一个分线的base和cell的mailbox -->
+    <!--
+    <MapInfo>
+        <Type> LUA_TABLE </Type>
+        <Flags> BASE </Flags>
+    </MapInfo>
+    -->
+
+</Properties>
+
+<BaseMethods>
+    <OnMapLoaded>
+        <Arg> UINT32 </Arg>    <!-- entity id -->
+        <Arg> STRING </Arg>    <!-- 注册的SpaceLoader的base部分mb -->
+        <Arg> STRING </Arg>    <!-- 注册的SpaceLoader的cell部分mb -->
+    </OnMapLoaded>
+
+    <!-- 修改地图分线人数 -->
+    <ChangeMapCount>
+        <Arg> UINT8 </Arg>    <!-- 标记该操作是累加还是扣除 -->
+        <Arg> UINT16 </Arg>    <!-- 场景ID -->
+        <Arg> UINT16 </Arg>   <!-- 分线ID -->
+        <Arg> UINT16 </Arg>   <!-- 修改的数量 -->
+    </ChangeMapCount>
+
+    <!-- 玩家登陆前调用，选择地图分线 -->
+    <SelectMapReq>
+        <Arg> STRING </Arg>    <!-- 回调实体的mailbox -->
+        <Arg> UINT16 </Arg>    <!-- 玩家的实际地图ID -->
+        <Arg> UINT16 </Arg>    <!-- 玩家的实际地图分线ID -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> STRING </Arg>    <!-- 玩家的名字 -->
+        <Arg> LUA_TABLE </Arg> <!-- 若干参数 -->
+    </SelectMapReq>
+
+    <CreateOblivionMapInstance>
+        <Arg> STRING </Arg>    <!-- 回调实体的mailbox -->
+        <Arg> UINT32 </Arg>    <!-- 湮灭之门ID -->
+        <Arg> UINT16 </Arg>    <!-- 实际地图ID -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> STRING </Arg>    <!-- 玩家的名字 -->
+        <Arg> UINT8 </Arg>     <!-- 玩家的等级 -->
+    </CreateOblivionMapInstance>
+
+    <CreateMirrorPvpMapInstance>
+        <Arg> STRING </Arg>    <!-- 回调实体的mailbox -->
+        <Arg> UINT32 </Arg>    <!-- 竞技场地图ID -->
+        <Arg> LUA_TABLE </Arg>    <!-- pvp数据 -->
+    </CreateMirrorPvpMapInstance>
+
+    <!--
+    <Teleport>
+        <Arg> STRING </Arg>    玩家的base的mailbox
+        <Arg> STRING </Arg>    玩家的cell的mailbox
+        <Arg> UINT16 </Arg>    targetSceneId
+        <Arg> INT16 </Arg>     targetX
+        <Arg> INT16 </Arg>     targetY
+    </Teleport>
+    -->
+
+    <CheckEnterResp>
+        <Arg> INT8 </Arg>      <!-- Spaceloader返回的错误码 -->
+        <Arg> STRING </Arg>    <!-- 玩家的mb -->
+        <Arg> UINT16 </Arg>    <!-- 实际地图ID -->
+        <Arg> UINT16 </Arg>    <!-- 实际地图分线ID -->
+        <Arg> UINT64 </Arg>    <!-- 玩家的dbid -->
+        <Arg> STRING </Arg>    <!-- 玩家的名字 -->
+    </CheckEnterResp>
+
+    <!--
+    <TeleportSpaceLoader>
+        <Arg> STRING </Arg>     玩家的base的mailbox
+        <Arg> STRING </Arg>     玩家的cell的mailbox
+        <Arg> UINT16 </Arg>     地图ID
+        <Arg> UINT16 </Arg>     分线ID
+    </TeleportSpaceLoader>
+    -->
+
+    <!--
+    <GetSpaceLoaderMbReq>
+        <Arg> STRING </Arg>
+        <Arg> UINT16 </Arg>
+        <Arg> UINT16 </Arg>
+    </GetSpaceLoaderMbReq>
+    -->
+
+    <Reset>
+        <Arg> STRING </Arg>
+    </Reset>
+
+    <!--
+    <AddToBusyPool>
+        <Arg> STRING </Arg>
+    </AddToBusyPool>
+    -->
+
+    <!-- 创建塔防副本 -->
+    <CreateTowerDefenceMapInstance>
+        <Arg> UINT16 </Arg>    <!-- 地图ID -->
+        <Arg> UINT16 </Arg>    <!-- 分线ID -->
+    </CreateTowerDefenceMapInstance>
+
+
+    <CreateDragonPvpMapInstance>
+        <Arg> STRING </Arg>    <!-- 回调实体的mailbox -->
+        <Arg> UINT32 </Arg>    <!-- 飞龙地图ID -->
+        <Arg> LUA_TABLE </Arg> <!-- pvp数据 -->
+    </CreateDragonPvpMapInstance>
+
+    <CreateDefensePvPMapInstance>
+        <Arg> UINT32 </Arg>    <!-- 游戏ID -->
+        <Arg> UINT16 </Arg>    <!-- 实际地图ID -->
+        <Arg> LUA_TABLE </Arg> <!-- pvp数据 -->
+        <Arg> UINT16 </Arg>    <!-- 玩家的最大等级 -->
+    </CreateDefensePvPMapInstance>
+
+</BaseMethods>
+
+
+</root>

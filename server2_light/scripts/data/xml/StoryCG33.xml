@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<story>
+		<id>1</id>
+		<storyText>ResetControlStick</storyText>
+	</story>
+	<story>
+		<id>2</id>
+		<storyText>WhiteCamera 0,0 250</storyText>
+	</story>
+	<story>
+		<id>3</id>
+		<storyText>RemoveEntities</storyText>
+	</story>
+	<story>
+		<id>4</id>
+		<storyText>CreateModel 1 150003 6200 1150 0,319,0</storyText>
+	</story>
+	<story>
+		<id>5</id>
+		<storyText>Sleep 250</storyText>
+	</story>
+	<story>
+		<id>6</id>
+		<storyText>SetPosition 0 56.99,1.21,16.25</storyText>
+	</story>
+	<story>
+		<id>7</id>
+		<storyText>SetRotation 0 0,325,0</storyText>
+	</story>
+	<story>
+		<id>8</id>
+		<storyText>NormalCamera 0,0 1000</storyText>
+	</story>
+	<story>
+		<id>9</id>
+		<storyText>Sleep 200</storyText>
+	</story>
+	<story>
+		<id>10</id>
+		<storyText>MoveCamera 0 0.1,4.2,295.5,0 0.3,4.2,295.5,0 1500 63.823,2.517,11.811</storyText>
+	</story>
+	<story>
+		<id>11</id>
+		<storyText>PlaySfx 1 6018</storyText>
+	</story>
+	<story>
+		<id>12</id>
+		<storyText>PlayOneAction 1 22</storyText>
+	</story>
+	<story>
+		<id>13</id>
+		<storyText>CreateModel 2 150005 6018 2123 0,193,0</storyText>
+	</story>
+	<story>
+		<id>14</id>
+		<storyText>Sleep 1500</storyText>
+	</story>
+	<story>
+		<id>15</id>
+		<storyText>PlayOneAction 1 100</storyText>
+	</story>
+	<story>
+		<id>16</id>
+		<storyText>ZoomCamera 2 4 4.2,295 500 500</storyText>
+	</story>
+	<story>
+		<id>17</id>
+		<storyText>ShowDialog 150010 {0} 105068</storyText>
+	</story>
+	<story>
+		<id>18</id>
+		<storyText>OpenUI</storyText>
+	</story>
+	<story>
+		<id>19</id>
+		<storyText>Wait 6</storyText>
+	</story>
+	<story>
+		<id>20</id>
+		<storyText>CloseUI</storyText>
+	</story>
+	<story>
+		<id>21</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>22</id>
+		<storyText>MoveCamera 0 0.1,17.5,203,0 0.5,17.5,203,0 2000 61.623,5.817,22.723</storyText>
+	</story>
+	<story>
+		<id>23</id>
+		<storyText>SetRotation 0 0,145,0</storyText>
+	</story>
+	<story>
+		<id>24</id>
+		<storyText>MoveTo 2 59.11,1.13,16.64 1000</storyText>
+	</story>
+	<story>
+		<id>25</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>26</id>
+		<storyText>MoveTo 1 59.23,1.1,14.8 500</storyText>
+	</story>
+	<story>
+		<id>27</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>28</id>
+		<storyText>PlaySfx 2 6030</storyText>
+	</story>
+	<story>
+		<id>29</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>30</id>
+		<storyText>MoveCamera 1 4,10,130,0 4.5,10,130,0 4000</storyText>
+	</story>
+	<story>
+		<id>31</id>
+		<storyText>SetPosition 1 61.65,1.111,11.923</storyText>
+	</story>
+	<story>
+		<id>32</id>
+		<storyText>PlayOneAction 1 17</storyText>
+	</story>
+	<story>
+		<id>33</id>
+		<storyText>Sleep 2500</storyText>
+	</story>
+	<story>
+		<id>34</id>
+		<storyText>PlaySfx 1 6018</storyText>
+	</story>
+	<story>
+		<id>35</id>
+		<storyText>Sleep 1000</storyText>
+	</story>
+	<story>
+		<id>36</id>
+		<storyText>DestroyModel 1</storyText>
+	</story>
+	<story>
+		<id>37</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>38</id>
+		<storyText>MoveCamera 0 0.1,17.5,115.6,0 0.5,17.5,115.6,0 6000 55.83,3.178,17.9</storyText>
+	</story>
+	<story>
+		<id>39</id>
+		<storyText>SetRotation 0 0,70,0</storyText>
+	</story>
+	<story>
+		<id>40</id>
+		<storyText>SetRotation 2 0,266,0</storyText>
+	</story>
+	<story>
+		<id>41</id>
+		<storyText>ShowDialog 150005,150010 304,{0} 105069,105070</storyText>
+	</story>
+	<story>
+		<id>42</id>
+		<storyText>OpenUI</storyText>
+	</story>
+	<story>
+		<id>43</id>
+		<storyText>Wait 6</storyText>
+	</story>
+	<story>
+		<id>44</id>
+		<storyText>CloseUI</storyText>
+	</story>
+	<story>
+		<id>45</id>
+		<storyText>Sleep 500</storyText>
+	</story>
+	<story>
+		<id>46</id>
+		<storyText>LockSight</storyText>
+	</story>
+	<story>
+		<id>47</id>
+		<storyText>DestroyModel 2</storyText>
+	</story>
+	<story>
+		<id>48</id>
+		<storyText>End</storyText>
+	</story>
+</root>

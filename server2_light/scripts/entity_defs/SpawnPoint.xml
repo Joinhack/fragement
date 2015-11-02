@@ -1,0 +1,66 @@
+<root>
+    <Properties>
+
+    <cfgId>
+        <Type> UINT16 </Type>
+        <Flags> CELL </Flags>
+    </cfgId>
+    <!--cell的SpaceLoader实体引用-->
+    <sp_ref>
+        <Type> LUA_OBJECT </Type>
+        <Flags> CELL </Flags>
+    </sp_ref>
+
+	<!--玩家所在场景地图id-->
+    <map_id>
+        <Type> UINT16 </Type>
+        <Flags> CELL </Flags>
+    </map_id>
+	
+    <c_etype>
+        <Type> UINT8 </Type>
+        <Flags> CELL </Flags>
+    </c_etype>
+	
+    <monsterNumber>
+        <Type> UINT32 </Type>
+        <Flags> CELL </Flags>
+    </monsterNumber>
+
+    <monsterSpawntPoint>
+        <Type> LUA_TABLE </Type>
+        <Flags> CELL </Flags>
+    </monsterSpawntPoint>
+
+    <monsterDifficltCfg>
+        <Type> LUA_TABLE </Type>
+        <Flags> CELL </Flags>
+    </monsterDifficltCfg>
+
+    <homerangeX>            
+        <Type> INT16 </Type>
+        <Flags> CELL </Flags>
+    </homerangeX>      
+
+    <homerangeY>            
+        <Type> INT16 </Type>
+        <Flags> CELL </Flags>
+    </homerangeY>           
+
+    <homerangeLength>       
+        <Type> INT16 </Type>
+        <Flags> CELL </Flags>
+    </homerangeLength>      
+
+    <homerangeWidth>        
+        <Type> INT16 </Type>
+        <Flags> CELL </Flags>
+    </homerangeWidth>       
+
+    <avatarCount>
+        <Type> INT8 </Type>
+        <Flags> CELL </Flags>
+    </avatarCount>
+
+	</Properties>
+</root>
