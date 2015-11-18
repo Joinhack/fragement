@@ -8,7 +8,9 @@ main:
 	movw %ax, %es
 	movw %ax, %ds
 	movw $0xffff, %sp #alloc stack
+	
 	call clear
+	call put_test
 	call hello
 	call loop
 clear:
@@ -19,6 +21,32 @@ clear:
 	movb $24, %dh  #d right bottom position: row
 	movb $79, %dh  #d right bottom position: col
 	int $0x10
+	ret
+put_test:
+	mov $24,%cx
+	.pt_c:
+	mov $0, %dh
+	mov %cl, %dl
+	call set_cursor
+	movb %cl, %al
+	addb $65, %al
+	movb %cl, %bl
+	subb $255, %bl
+	push %cx
+	call put
+	pop %cx
+	dec %cx
+	jnz .pt_c
+	ret
+put:
+	movb $0x9, %ah
+	movb $0x0, %bh
+	movb $0x1, %cx
+	int $0x10
+	ret
+set_cursor:
+	movb $0x02, %ah  
+	int $0x10 
 	ret
 hello:
 	movw $msg, %bp  #msg relative address, es is the segment address.
