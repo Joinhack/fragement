@@ -41,7 +41,7 @@ put_test:
 put:
 	movb $0x9, %ah
 	movb $0x0, %bh
-	movb $0x1, %cx
+	movb $0x1, %cl
 	int $0x10
 	ret
 set_cursor:
