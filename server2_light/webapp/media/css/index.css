@@ -1,0 +1,133 @@
+.addCommunity .dialog {
+	width: 450px;
+}
+
+.row .col .input {
+	height: 29px;
+}
+
+
+.addCommunity {
+	position: relative;
+}
+
+
+.addCommunity .select { 
+	width: 100px;
+}
+
+.dialog .r3 .col input {
+	width:35px;
+}
+
+.img-upload {
+	float: left;
+	width: 160px;
+}
+
+.img-box {
+	width: 130px;
+	height: 100px;
+	padding: 3px 6px;
+	margin: 11px 0 0 20px;
+	position: relative;
+	background: url(../img/type_img_box.png);
+}
+
+
+.select { 
+	width: 100px;
+}
+
+input {
+	width: 80px;
+	margin: auto;
+}
+
+.row .col>label {
+	width:55px;
+}
+
+input[name=location],.addCommunity input[name=community] {
+	width: 100px;
+}
+
+input[name=desc] {
+	width: 430px;
+}
+
+input[name=builder],.addCommunity input[name=complete_time] {
+	width: 100px;
+}
+
+.addSection .dialog {
+	width: 450px;
+}
+
+
+.select[name=property_free_unit] .droplist {
+	width: 65px;
+}
+
+.select[name=property_free_unit] .droplist .item {
+	padding: 6px 8px 6px 10px
+}
+
+.editorWrapper {
+	display: inline-block;
+}
+
+.save-btn {
+	display: block;
+	border: none;
+	height: 35px;
+	background: url(../img/type_btn_save.gif) -234px 0 no-repeat;
+}
+
+.save-btn:hover {
+	background: url(../img/type_btn_save.gif) 0px 0 no-repeat;	
+}
+
+.save-btn:active {
+	background: url(../img/type_btn_save.gif) -117px 0 no-repeat;	
+}
+
+.addCommunity .save-btn {
+	position: absolute;
+	bottom: 0px;
+	right: 20px;
+	width: 116px;
+}
+
+.globalMsg .content {
+	font-size: 18px;
+	padding-left: 10px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+input[name=community] {
+	width: 120px;
+}
+
+input[name=cell],input[name=floor],input[name=num]  {
+	width: 40px;
+}
+
+.row .col>*.c4 {
+	width:55px;
+}
+
+
+.row .col>*.c3 {
+	width:45px;
+}
+
+.row .col>.c2 {
+	width:30px;
+}
+
+.row .col>.c1 {
+	width:10px;
+}
+

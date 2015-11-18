@@ -1,0 +1,58 @@
+/**
+ * @fileOverview CSS for jquery-autocomplete, the jQuery Autocompleter
+ * @author <a href="mailto:dylan@dyve.net">Dylan Verheul</a>
+ * @license MIT | GPL | Apache 2.0, see LICENSE.txt
+ * @see https://github.com/dyve/jquery-autocomplete
+ */
+.acResults {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	-webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+	box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+	-webkit-transition: opacity .218s;
+	-moz-transition: opacity .218s;
+	-o-transition: opacity .218s;
+	transition: opacity .218s;
+	background: #fff;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0,0,0,.2);
+	font-size: 12px;
+	margin: 0;
+	outline: none;
+	display: none;
+	padding: 6px 0;
+	position: absolute;
+	left: 0px;
+	cursor: pointer;
+	max-height: 400px;
+	overflow-y: auto;
+	z-index: 999;
+}
+
+.acResults ul {
+	margin: 0px;
+	padding: 0px;
+	list-style-position: outside;
+	list-style: none;	
+}
+
+.acResults ul li {
+	position: relative;
+	cursor: pointer;
+	color: #333;
+	list-style: none;
+	margin: 0;
+	padding: 6px 8em 6px 10px;
+	white-space: nowrap;
+}
+
+.acLoading {
+	background : url('indicator.gif') right center no-repeat;
+}
+
+.acSelect {
+	background-color: Highlight;
+	color: HighlightText;
+}

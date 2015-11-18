@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}登录{% endblock title %}
+{% block exthead %}<script type="text/javascript" src='/media/js/ajaxupload.js'></script>
+<script type="text/javascript" src='/media/js/login.js'></script>
+<link rel="stylesheet" type="text/css" href="/media/css/login.css">{% endblock exthead %}
+
+{% block body %}
+<div>
+<div style='height:200px'></div>
+<div class='main'>
+<form action='/login/do'>
+<div class='title'><H1>登录</H1></div>
+<div class='content'>
+<div ><label>用户:</label><input type='text' name='loginid' /></div>
+<div><label>密码:</label><input type='password' name='password'/></div>
+</div>
+<div></div>
+<div class='bottom'><a class='button submit non-select'>确定</a><span> </span><span><a class='button cancel non-select'>取消</a></span></div>
+</div>
+</form>
+</div>
+{% endblock body %}

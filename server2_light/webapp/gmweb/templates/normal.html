@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block body %}
+<div>
+<div class="header">
+<div class="container">	
+<div class='menu'>
+<ul>
+<li><a href='/message'>消息</a></li>
+<li class="line">|</li>
+<li><a href='/help'>帮助</a></li>
+<li class="line">|</li>
+{%if user%}
+<li >欢迎您&nbsp;&nbsp;<a href='#'>{{user.loginid}}</a></li>
+<li class="line">|</li>
+<li><a href="/logout">退出</a></li>
+{%else%}
+<li class="login"><a href='/login'>登录</a></li>
+{%endif%}
+<li class="r">&nbsp;</li>
+</ul>
+</div>
+</div>
+</div>
+{%block extbody%}
+{%endblock extbody%}
+{% endblock body %}

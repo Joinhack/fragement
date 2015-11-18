@@ -1,0 +1,155 @@
+{% extends "normal.html" %}
+{% block title %}中介管理系统{% endblock title %}
+{% block exthead %}
+<link rel="stylesheet" type="text/css" href="/media/css/index.css">
+<link rel="stylesheet" type="text/css" href="/media/js/jq-ac/jquery.autocomplete.css">
+<script type="text/javascript" src='/media/js/common.js'></script>
+<script type="text/javascript" src='/media/js/ajaxupload.js'></script>
+<script type="text/javascript" src='/media/js/jq-ac/jquery.autocomplete.min.js'></script>
+{% endblock exthead %}
+{%block extbody%}
+<div>
+<div class='t'>
+<div class='top_blank'>
+</div>
+<div class="t-header">
+<div class="t-l"></div>
+<div class="t-m">
+<ul class='t-menu'>
+<li><a href='javascript:;' class='active' bind='addHouse' >用户管理</a></li>
+<li class='line'></li>
+<li><a href='javascript:;' >充值查询</a></li>
+<li class='line'></li>
+</ul>
+<div class='t-body'>
+<div class='addHouse'>
+<div class="img-upload">
+<div class="img-box"></div>
+</div>
+<div class='row'>
+<div class='col'>
+<label>楼盘:</label>
+<input name='community'  hideField='community_id' type=text />
+</div>
+
+<div class='col'>
+<label>单元:</label>
+<input type='text' v-regex='\d{1,999}' v-msg="请填写单元"   name='cell'/>
+</div>
+<div class='col'>
+<label>楼层:</label>
+<input type='text' v-regex='\d{1,999}' v-msg="请填写楼层" name='floor'/>
+</div>
+<div class='col'>
+<label>门号:</label>
+<input type='text' v-regex='\d{1,999}' v-msg="请填写门号" name='num'/>
+</div>
+
+<div class='col'>
+<label>朝向:</label>
+<div class='select' name='face'>
+<select>
+<option value='南北通透' selected>南北通透</option>
+<option value='东西向'>东西向</option>
+<option value='朝南'>朝南</option>
+<option value='朝北'>朝北</option>
+<option value='朝东'>朝东</option>
+<option value='朝西'>朝西</option>
+</select>
+</div>
+</div>
+
+
+<div class='col'>
+<label>总价:</label>
+<input placeholder='单位元' type='text' v-regex='\d{1,99999}' v-msg="请填写总价" name='area'/>
+<label class='c1'>元</label>
+</div>
+
+</div>
+
+<div class=row>
+
+<div class='col'>
+<label>面积:</label>
+<input placeholder='单位平米' type='text' v-regex='\d{1,99999}' v-msg="请填写面积" name='area'/>
+<label class='c2'>平米</label>
+</div>
+
+
+<div class='col'>
+<label>单价:</label>
+<input placeholder='单位元' type='text' v-regex='\d{1,99999}' v-msg="请填写单价" name='price'/>
+<label class='c1'>元</label>
+</div>
+
+<div class='col'>
+<label>租金:</label>
+<input placeholder='单位元' type='text' v-regex='\d{1,99999}' v-msg="请填写租金" name='rent'/>
+<label class='c1'>元/</label>
+<div class='select c4' name='rent_unit'>
+<select>
+<option value='月' selected>月</option>
+<option value='季度'>季度</option>
+<option value='半年'>半年</option>
+<option value='年'>年</option>
+</select>
+</div>
+</div>
+
+<div class='col'>
+<label>装修:</label>
+<div class='select c4' name='decorate'>
+<select>
+<option value='毛胚' selected>毛胚</option>
+<option value='简装' >简装</option>
+<option value='精装' >精装</option>
+<option value='豪装' >豪装</option>
+</select>
+</div>
+</div>
+
+<div class='col'>
+<label>客户名字:</label>
+<input type='text' v-regex='\d{1,999}' v-msg="请填写门号" name='num'/>
+
+</div>
+
+</div>
+
+</div>
+</div>
+</div>
+
+<div class="t-r"></div>
+</div>
+</div>
+</div>
+
+<div class='dls'>
+<div class='addSection' d-title="添加商圈">
+<form action="/section/add" method='post'>
+<div class='row'>
+<div class='col'>
+<label>区县:</label>
+<div class="select" style="width:100px" v-regex='.+' v-msg="请选择区县" v-type='select' name="area" >
+<select>
+{%for c in cities%}<option value={{c.id}}>{{c.name}}</option>{%endfor%}
+</select>
+</div>
+</div>
+
+<div class='col'>
+<label>商圈:</label>
+<input name="section" v-regex='.+' v-msg="请填写商圈"  style="width:120" type="text"/>
+</div>
+</div>
+</form>
+</div>
+
+<div class='globalMsg' d-title="消息">
+<div class='content'></div>
+</div>
+</div>
+<script type="text/javascript" src='/media/js/index.js'></script>
+{%endblock extbody%}

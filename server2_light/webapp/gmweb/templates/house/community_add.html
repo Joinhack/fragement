@@ -1,0 +1,87 @@
+<div class='addCommunity' d-title="添加楼盘">
+<form action="/community/add/do">
+<div class='img-upload'>
+<div class='img-box'></div>
+</div>
+<div class='row'>
+<div class='col'>
+<label>区县:</label>
+<div class="select" style="width:100px" v-regex='.+' v-msg="请选择区县" v-type='select' name="area" >
+<select>
+{%for c in cities%}<option value={{c.id}}>{{c.name}}</option>{%endfor%}
+</select>
+</div>
+</div>
+
+<div class='col'>
+<label>商圈:</label>
+<div class="select" name="section" v-regex='.+' v-msg="请选择商圈" v-type='select'>
+</div>
+</div>
+
+<div class='col'>
+<label>楼盘:</label>
+<input type="text" v-regex='.+' v-msg="请填写楼盘名字"  name="community" />
+</div>
+
+
+<div class='col'>
+<label>街道:</label>
+<input type="text" v-regex='.+' v-msg="请填写街道"  name="location" />
+</div>
+
+<div class='col'>
+<label>容积率:</label>
+<input class='c2' type="text" v-regex='(\d{1,2}|^$)' v-msg="请填写容积率"  name="plot_ratio" />
+<label class='c1'>%</label>
+</div>
+</div>
+
+<div class='row'>
+<div class='col'>
+<label>开发商:</label>
+<input type="text" v-regex='.*' v-msg="请填写开发商名字"  name="builder" />
+</div>
+<div class='col'>
+<label>年代:</label>
+<input type="text" v-regex='(\d{4}-\d{1,2}-\d{1,2}|^$)' v-msg="请选择正确的时间"  name="complete_time" />
+</div>
+<div class='col'>
+<label>门牌:</label>
+<input type="text" v-regex='\d+|^$' v-msg="请填写街道门牌号"  name="number" />
+</div>
+
+<div class='col'>
+<label>邮编:</label>
+<input type="text" v-regex='(^[1-9]\d{5}$|^$)' v-msg="请填写正确的邮编"  name="zip_code" />
+</div>
+
+<div class='col'>
+<label>物管费:</label>
+<input class='c3' type="text" v-regex='(\d{1,6}|^$)' v-msg="请填写物管费"  name="property_free" />
+<label class='c1'>元</label>
+<div class='select c3' name="property_free_unit"></div>
+</div>
+
+</div>
+
+<div class='row'>
+<div class='col'>
+<label>绿化率:</label>
+<input  class='c2' type="text" v-regex='(\d{1,2}|^$)' v-msg="请填写绿化率"  name="greening_ratio" />
+<label class='c1'>%</label>
+</div>
+<div class="col">
+<label>描述:</label>
+<input type="text" v-regex='.*' v-msg="请填写描述"  name="desc" />
+</div>
+</div>
+<input type='button' class='save-btn'/>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.select[name=property_free_unit]','.addCommunity').data('data', [{content:'月', value:0},{content:'年', value:1},{content:'m2', value:2}]);
+});
+</script>
+</form>
+</div>

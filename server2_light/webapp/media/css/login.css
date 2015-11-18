@@ -1,0 +1,50 @@
+
+.main {
+	background-color: #f4f0ec;
+	margin: 0 auto;
+	width: 400px;
+}
+
+.bottom {
+	padding:5px;
+	padding-bottom: 15px;
+	text-align:right;
+	position: relative;
+}
+
+.title {
+	background-color: #f4f4ec;
+	padding: 10px;
+	background: url(/media/img/header-bg.png) repeat-x;
+}
+
+.title h1 {
+	font-size: 23px;
+	text-shadow: 1px 2px 5px #888;
+}
+
+.content {
+	margin: 12px;
+}
+
+.content label {
+	display: inline-block;
+	width: 50px;
+	text-align: right;
+	padding-right: 5px;
+}
+
+.content input {
+	width: 300px;
+}
+
+.content > div {
+	line-height: 30px;
+}
+
+.alert {
+	position: absolute;
+	color: red;
+	left: 10px;
+	top: 2px;
+}
