@@ -2,23 +2,26 @@
 .code16
 
 .section .text  
-.global _start  
-_start:
+.global main  
+main:
 	movw $0, %ax
 	movw %ax, %es
-
 	movw %ax, %ds
-	movw $msg, %bp
 
-	movb $0x13, %ah
-	movb $0x1, %al
-	movb $0x0, %bh
-	movb $0x1, %bl
+hello:
+	
+	movw $msg, %bp  #msg relative address, es is the segment address.
+
+	movb $0x13, %ah #ah function no. 0x13
+	movb $0x1, %al  #dispaly model
+	movb $0x0, %bh 
+	movb $0x23, %bl  #display attribute, 1:blue, 2:green, 3...
 	movw len, %cx
 	movb $0x9, %dh  #row
 	movb $0x08, %dl  #col
 	int $0x10
-
+loop:
+	jmp loop
   
 msg:  
 	.asciz "Hello world, say hi"

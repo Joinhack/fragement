@@ -15,6 +15,9 @@ int0x10: int0x10.o
 int0x10.img: int0x10  
 	dd if=int0x10 of=int0x10.img bs=512 count=1 
 
+run:
+	qemu-system-i386 -drive file=int0x10.img,index=0,media=disk,format=raw
+
 clean:  
 	rm ./int0x10 ./int0x10.img ./int0x10.o
 
