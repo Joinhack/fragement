@@ -66,5 +66,5 @@ msg:
 	.asciz "Hello world, say hi"
 len:
 	.int . - msg
-	.org 510, 'A' #fill A util 510. total need 512, left is follow.
+	.org 510, '-' #fill with "-" util 510. total need 512, left is follow.
 	.word 0xaa55
