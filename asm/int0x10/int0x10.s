@@ -15,7 +15,7 @@ main:
 loop:	
 	call wait
 	jmp loop
-	
+
 clear:
 	movb $0x6, %ah #clear function no. 
 	movb $0, %al
@@ -70,8 +70,8 @@ wait:
 	movb $0, %ah
 	int $0x16
 	ret
-  
-msg:  
+
+msg:
 	.asciz "Hello world, say hi"
 len:
 	.int . - msg
