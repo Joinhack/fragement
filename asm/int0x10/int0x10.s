@@ -12,30 +12,36 @@ main:
 	call clear
 	call put_test
 	call hello
-	call loop
+loop:	
+	call wait
+	jmp loop
+	
 clear:
 	movb $0x6, %ah #clear function no. 
 	movb $0, %al
-	movb $0x7, %bh
+	movb $0, %bh
 	movw $0, %cx  #cl ch left top position
 	movb $24, %dh  #d right bottom position: row
 	movb $79, %dh  #d right bottom position: col
 	int $0x10
 	ret
 put_test:
-	mov $24,%cx
+	mov $0, %cx
 	.pt_c:
-	mov $0, %dh
-	mov %cl, %dl
+	movb $0, %dh
+	movb $0, %dl
+	addb %cl, %dl
+	call set_cursor
 	call set_cursor
 	movb %cl, %al
 	addb $65, %al
-	movb %cl, %bl
-	subb $255, %bl
+	movb $1, %bl
+	addb %cl, %bl
 	push %cx
 	call put
 	pop %cx
-	dec %cx
+	incb %cx
+	cmp $26, %cx
 	jnz .pt_c
 	ret
 put:
@@ -45,8 +51,8 @@ put:
 	int $0x10
 	ret
 set_cursor:
-	movb $0x02, %ah  
-	int $0x10 
+	movb $0x02, %ah
+	int $0x10
 	ret
 hello:
 	movw $msg, %bp  #msg relative address, es is the segment address.
@@ -59,12 +65,15 @@ hello:
 	movb $0x08, %dl  #col
 	int $0x10
 	ret
-loop:
-	jmp loop
+
+wait:
+	movb $0, %ah
+	int $0x16
+	ret
   
 msg:  
 	.asciz "Hello world, say hi"
 len:
 	.int . - msg
-	.org 510, '-' #fill with "-" util 510. total need 512, left is follow.
+	.org 510, '.' #fill with "." util 510. total need 512, left is follow.
 	.word 0xaa55
