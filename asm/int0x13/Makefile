@@ -16,8 +16,8 @@ int0x13.img: int0x13
 	dd if=int0x13 of=int0x13.img bs=512 count=1 
 
 run:
-	dd if=/dev/zero of=floppy.img  count=2879
-	qemu-system-i386 -drive file=int0x13.img,index=0,media=disk,format=raw 
+	dd if=Makefile of=floppy.img bs=1  count=512
+	qemu-system-i386 -drive file=int0x13.img,index=0,media=disk,format=raw -fda floppy.img
 
 clean:  
 	-rm ./int0x13 ./int0x13.img ./floppy.img ./int0x13.o -rf
