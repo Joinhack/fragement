@@ -40,7 +40,7 @@ put_test:
 	push %cx
 	call put
 	pop %cx
-	incb %cx
+	inc %cx
 	cmp $26, %cx
 	jnz .pt_c
 	ret
