@@ -2,8 +2,30 @@
 .code16
 
 .section .text
-.global main
-main:
+.org 0
+	jmp _start
+bpbOEM: .ascii "TEST FLO"
+bpbBytesPerSector: .short 512
+bpbSectorsPerCluster: .byte 1
+bpbReservedSectors: .short 1
+bpbNumberOfFATs: .byte 2
+bpbRootEntries: .short 224
+bpbTotalSectors: .short 2880
+bpbMedia: .byte 0xf0
+bpbSectorsPerFAT: .short 9
+bpbSectorsPerTrack: .short 18
+bpbHeadsPerCylinder: .short 2
+bpbHiddenSectors: .int 0
+bpbTotalSectorsBig: .int 0
+bsDriveNumber: .byte 0
+bsUnused: .byte 0
+bsExtBootSignature: .byte 0x29
+bsSerialNumber: .int 0xa0a1a2a3
+bsVolumeLabel: .ascii "TEST FLOPPY"
+bsFileSystem: .ascii "FAT12   "
+
+.global _start
+_start:
 	movw $0, %ax
 	movw %ax, %es
 	movw %ax, %ds
@@ -46,8 +68,8 @@ clear:
 	movb $0, %al
 	movb $0, %bh
 	movw $0, %cx  #cl ch left top position
-	movb $24, %dh  #d right bottom position: row
-	movb $79, %dh  #d right bottom position: col
+	movb $79, %dh  #d right bottom position: row
+	movb $24, %dh  #d right bottom position: col
 	int $0x10
 	ret
 
