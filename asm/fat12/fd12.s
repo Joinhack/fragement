@@ -32,6 +32,7 @@ _start:
 	movw $0xffff, %sp #alloc stack
 	movw $msg, %si
 	call print
+	call load_root
 	
 loop:	
 	call wait
