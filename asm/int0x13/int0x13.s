@@ -105,22 +105,6 @@ read_sector:
 .sector_sucess:
 	ret
 
-load_root:
-
-	#compute how many sectors is used, and stored in cx
-	xorw %cx, %cx
-	xorw %dx, %dx
-	movw $0x20, %ax #compute total size of root entries
-	mulw bpbRootEntries #bpbRootEntries * 0x20  is total size
-	divw bpbBytesPerSector #compute how many sectors are used.
-	xchgw %ax, %cx #set cx to ax
-
-	#compute location of root directory and store in "ax"
-	movw bpbNumberOfFATs, %ax
-	mulw bpbSectorsPerFAT            #sectors used by FATs (9, ax = 18)
-	addw bpbReservedSectors, %ax     #adjust for bootsector(1, ax = 19)
-	movw %ax, datasector             #base of root directory([datasector] = 19)
-	addw %cx, datasector
 
 wait:
 	movb $0, %ah
