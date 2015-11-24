@@ -80,6 +80,8 @@ load_root:
 	addw %cx, datasector             #[datasector] = 19 + 14 = 33
 
 	#read  to (0x7C00:0x0200)
+	#in nasm assign the es is not necessary, because use start address for es, ds, ss, and etc
+	#there some different between nasm and gas.
 	movw $begin, %bx
 	movw %bx, %es
 	movw $0x200, %bx
