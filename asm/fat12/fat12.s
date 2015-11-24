@@ -37,7 +37,7 @@ _start:
 	movw %ax, %gs
 
 	#stack alloc
-	movw $0, %ax
+	movw 0xf000, %ax
 	movw %ax, %ss
 	movw $0xffff, %sp
 	sti
