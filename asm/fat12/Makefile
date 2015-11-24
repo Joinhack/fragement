@@ -3,18 +3,18 @@ CC=$(CROSS_COMPILE)gcc
 LD=$(CROSS_COMPILE)ld
 AS=$(CROSS_COMPILE)as
 DD=dd
-IMG_NAME=fd12.img
+IMG_NAME=fat12.img
 
 all: $(IMG_NAME)
 
-fd12.o: fd12.s
+fat12.o: fat12.s
 	$(AS) -o $@ $<  
 
-fd12: fd12.o  
-	$(LD) --oformat binary -N -Ttext 0x7c00 -o $@ $< 
+fat12: fat12.o  
+	$(LD) -e _start --oformat binary  -N -Ttext 0x7c00   -o $@ $< 
 
-$(IMG_NAME): fd12  
-	$(DD) if=fd12 of=$@ seek=0 count=1
+$(IMG_NAME): fat12  
+	$(DD) if=fat12 of=$@ seek=0 count=1
 	$(DD) if=/dev/zero of="$@" seek=1 count=2879
 
 package: $(IMG_NAME)
@@ -22,8 +22,8 @@ package: $(IMG_NAME)
 	mdir -i "$(IMG_NAME)"
 
 run: package
-	qemu-system-i386 -fda fd12.img
+	qemu-system-i386 -fda fat12.img
 
 
 clean:  
-	-rm ./fd12 ./fd12.img ./floppy.img ./fd12.o -rf
+	-rm ./fat12 ./fat12.img ./floppy.img ./fat12.o -rf
