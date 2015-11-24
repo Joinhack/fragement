@@ -160,5 +160,5 @@ absDHHead: .byte 0
 datasector: .short 0
 
 headSec: .int 20000
-	.=510
+	.=510 #.org 510, '.'
 	.word 0xaa55
