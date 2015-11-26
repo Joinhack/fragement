@@ -1,16 +1,18 @@
-# A bootsect, http://baike.baidu.com/item/FAT12(int 0x13)  
+# A bootsect, refers
+#https://en.wikipedia.org/wiki/INT_13H(int 0x13)  
+#https://en.wikipedia.org/wiki/File_Allocation_Table#FAT12
+.text
 .code16
-
 .section .text
 begin:
-.=0
+
 	jmp _start
 bpbOEM: .ascii "TEST FLO"
 bpbBytesPerSector: .short 512
 bpbSectorsPerCluster: .byte 1
 bpbReservedSectors: .short 1
 bpbNumberOfFATs: .byte 2
-bpbRootEntries: .short 224  #define 20 enteries
+bpbRootEntries: .short 224  #define 224 enteries
 bpbTotalSectors: .short 2880
 bpbMedia: .byte 0xf0
 bpbSectorsPerFAT: .short 9
@@ -32,8 +34,6 @@ _start:
 	movw $0, %ax
 	movw %ax, %es
 	movw %ax, %ds
-	movw %ax, %ds
-	movw %ax, %es
 	movw %ax, %gs
 
 	#stack alloc
@@ -44,8 +44,12 @@ _start:
 
 	movw $msg, %si
 	call print
+
+	movw begin, %ax
+	movw %ax, %es
 	call load_root
-	call FAIL_LOAD
+
+	call search_kernel_fat
 	# should not happened follow steps.
 loop:	
 	call wait
@@ -82,9 +86,7 @@ load_root:
 	#read  to (0x7C00:0x0200)
 	#in nasm assign the es is not necessary, because use start address for es, ds, ss, and etc
 	#there some different between nasm and gas.
-	movw $begin, %bx
-	movw %bx, %es
-	movw $0x200, %bx
+	movw kernel_offset, %bx
 	call readSectors
 	ret
 
@@ -143,22 +145,63 @@ wait:
 	int $0x16
 	ret
 
-FAIL_LOAD:
+search_kernel_fat:
+	movw bpbRootEntries, %cx
+	movw kernel_offset, %di
+	.search_kernel_fat_loop:
+	pushw %cx
+	pushw %di
+	movw $11, %cx #compare 11 bytes.
+	xorw %si, %si
+	movw $kernel_name, %si
+	rep cmpsb
+	je load_fat
+	popw %di
+	popw %cx
+	addw $0x0020, %di #compare 11 bytes every 0x20 block.
+	loop .search_kernel_fat_loop
+	call fail_load
+	ret
+	
+load_fat:
+	popw %di  #fetch the origin di in stack pushed in search_kernel_fat before jmp to here.
+	movw 0x1A(%di), %dx #0x1A is the first cluster, refer fat12 root entity.
+
+	# compute size of FAT and store in "cx"
+	xorw %ax, %ax
+	movb bpbNumberOfFATs, %al
+	mulw bpbSectorsPerFAT  
+	movw %ax, %cx
+	mulw bpbBytesPerSector
+	movw %ax, fatsize
+	movw bpbReservedSectors, %ax
+
+	#read FAT into memory (7C00:0200)
+	mov kernel_offset, %bx
+	call readSectors
+	
+
+fail_load:
 	movw $failedMsg, %si
 	call print
 	call wait
 	int $0x19
 	ret
 
+
 msg: .asciz "Loading"
+kernel_name: .ascii "kernel.img"
 msgProgess: .asciz "."
-failedMsg: .asciz "\r\nLoading failed"
+failedMsg: .asciz "\r\nLoading failed\r\n"
 absCHTrack: .byte 0
 absCLSector: .byte 0
+kernel_offset: .short 0x200
 devNO: .byte 0	
+fstCluster: .short 0
+fatsize: .short 0
 absDHHead: .byte 0
 datasector: .short 0
 
 headSec: .int 20000
-	.=510 #.org 510, '.'
+	.org 510, '.'
 	.word 0xaa55
