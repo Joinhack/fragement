@@ -57,7 +57,7 @@ loop:
 
 
 print:
-	lodsb
+	lodsb %ds:(%si)
 	or %al, %al
 	jz .print_done
 	movb $0x0e, %ah #ah function no. 0x13
@@ -152,9 +152,8 @@ search_kernel_fat:
 	pushw %cx
 	pushw %di
 	movw $11, %cx #compare 11 bytes.
-	xorw %si, %si
 	movw $kernel_name, %si
-	repnz cmpsb
+	repnz cmpsb %es:(%di), %ds:(%si)
 	je load_fat
 	popw %di
 	popw %cx
