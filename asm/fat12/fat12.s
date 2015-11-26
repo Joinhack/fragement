@@ -154,7 +154,7 @@ search_kernel_fat:
 	movw $11, %cx #compare 11 bytes.
 	xorw %si, %si
 	movw $kernel_name, %si
-	rep cmpsb
+	repnz cmpsb
 	je load_fat
 	popw %di
 	popw %cx
@@ -190,7 +190,7 @@ fail_load:
 
 
 msg: .asciz "Loading"
-kernel_name: .ascii "kernel.img"
+kernel_name: .asciz "Makefile"
 msgProgess: .asciz "."
 failedMsg: .asciz "\r\nLoading failed\r\n"
 absCHTrack: .byte 0
