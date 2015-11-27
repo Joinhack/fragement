@@ -7,11 +7,11 @@ IMG_NAME=fat12.img
 
 all: $(IMG_NAME)
 
-fat12.o: fat12.s
-	$(AS) -o $@ $<  
+fat12.o: fat12.S
+	$(CC) -c -N -o $@ $<  
 
 fat12: fat12.o  
-	$(LD) -e _start --oformat binary  -N -Ttext 0x7c00   -o $@ $< 
+	$(LD) -e _start --oformat binary  -Ttext 0x7c0 -o $@ $< 
 
 $(IMG_NAME): fat12  
 	$(DD) if=fat12 of=$@ seek=0 count=1
