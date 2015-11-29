@@ -1,12 +1,19 @@
-/**A bootsect, refers
-https://en.wikipedia.org/wiki/INT_13H(int 0x13)  
-https://en.wikipedia.org/wiki/File_Allocation_Table//FAT12*/
+/**
+ * A bootsect, refers
+ * https://en.wikipedia.org/wiki/INT_13H(int 0x13)  
+ * https://en.wikipedia.org/wiki/File_Allocation_Table//FAT12
+ * http://tigcc.ticalc.org/doc/gnuasm.html#SEC39
+ */
 
-#define RELADDR(x) $(x - begin)
 
-.text
+.section .text 
+/**
+ * link use this for relative address. example in Makefile ld use parameter -Tdata 0
+ *	movw $begin, %ax now ax is 0
+ * if -Tdata 0x7c0 $begin, %ax now ax is 0x7c0
+ */
+.section .data  
 .code16
-.section .text
 begin:
 
 	jmp _start
@@ -34,6 +41,7 @@ bsFileSystem: .ascii "FAT12   "
 _start:
 	
 	cli
+	movw bpbNumberOfFATs, %ax
 	movw $0x7c0, %ax
 	movw %ax, %ds
 	movw %ax, %gs
@@ -46,7 +54,7 @@ _start:
 	movw $0xffff, %sp
 	sti
 
-	movw RELADDR(msg), %si
+	movw $msg, %si
 	call print
 	
 	call load_root
@@ -88,6 +96,7 @@ load_root:
 	/**read  to (0x7C00:0x0200)
 	in nasm assign the es is not necessary, because use start address for es, ds, ss, and etc
 	there some different between nasm and gas.*/
+
 	movw kernel_offset, %bx
 	call readSectors
 	ret
@@ -117,7 +126,7 @@ readSectors:
 	jnz .readS_main
 	int $0x18
 	.readS_success:
-	movw RELADDR(msgProgess), %si //print "."
+	movw $msgProgess, %si //print "."
 	call print
 	popw %cx
 	popw %bx
@@ -183,7 +192,7 @@ load_fat:
 	
 
 fail_load:
-	movw RELADDR(failedMsg), %si
+	movw $failedMsg, %si
 	call print
 	call wait
 	int $0x19
@@ -193,7 +202,7 @@ fail_load:
 msg: .asciz "Loading"
 kernel_name: .ascii "kernel.img"
 msgProgess: .asciz "."
-failedMsg: .asciz "\r\nLoading failed\r\n"
+failedMsg: .asciz "\r\nLoading failed.\r\n"
 absCHTrack: .byte 0
 absCLSector: .byte 0
 kernel_offset: .short 0x200
