@@ -11,7 +11,7 @@ fat12.o: fat12.S
 	$(CC) -c -N -o $@ $<  
 
 fat12: fat12.o  
-	$(LD) -e _start --oformat binary  -Ttext 0x7c00 -Tdata 0 -o $@ $< 
+	$(LD) --verbose -e _start --oformat binary  -T ld.lds -o $@ $< 
 
 $(IMG_NAME): fat12  
 	$(DD) if=fat12 of=$@ seek=0 count=1

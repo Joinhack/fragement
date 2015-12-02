@@ -6,14 +6,15 @@
  */
 
 
-.section .text 
 /**
  * link use this for relative address. example in Makefile ld use parameter -Tdata 0
  *	movw $begin, %ax now ax is 0
  * if -Tdata 0x7c0 $begin, %ax now ax is 0x7c0
  */
-.section .data  
 .code16
+.section .text
+.section .data
+
 begin:
 
 	jmp _start
