@@ -16,7 +16,6 @@
 .section .data
 
 begin:
-
 	jmp _start
 bpbOEM: .ascii "TEST FLO"
 bpbBytesPerSector: .short 512

@@ -8,7 +8,7 @@ IMG_NAME=fat12.img
 all: $(IMG_NAME)
 
 fat12.o: fat12.S
-	$(CC) -c -N -o $@ $<  
+	$(CC) -c -N -o $@ $< 
 
 fat12: fat12.o  
 	$(LD) --verbose -e _start --oformat binary  -T ld.lds -o $@ $< 

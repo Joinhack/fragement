@@ -1,7 +1,9 @@
 SECTIONS
 {
 	. = 0x7c00;
-	.text : { *(.text ) }
+	.text : {
+		*(.text) 
+	}
 	. = 0x0;
 	.data : { *(.data ) }
 }
