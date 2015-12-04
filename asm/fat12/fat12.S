@@ -39,9 +39,7 @@ bsFileSystem: .ascii "FAT12   "
 
 .global _start
 _start:
-	
 	cli
-	movw bpbNumberOfFATs, %ax
 	movw $0x7c0, %ax
 	movw %ax, %ds
 	movw %ax, %gs
