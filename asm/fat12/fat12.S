@@ -12,7 +12,7 @@
  * if -Tdata 0x7c0 $begin, %ax now ax is 0x7c0
  */
 .code16
-.section .data
+.section ".mytext", "ax"
 
 begin:
 	jmp _start

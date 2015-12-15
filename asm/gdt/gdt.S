@@ -13,6 +13,8 @@
 begin:
 	jmp _start
 
+	ready_msg:.asciz "ready install gdt...\r\n"
+	install_msg_success:.asciz "install gdt success\r\n"
 
 .global _start
 _start:
@@ -31,7 +33,7 @@ _start:
 
 	movw $ready_msg, %si
 	call print
-	call install_gdt	
+	call install_gdt
 
 	
 loop:	
@@ -111,13 +113,15 @@ install_gdt:
 
 	xorw	%ax, %ax
 	movw	%ax, %ds
-	movw $install_msg_success, %si
-	call print
-	call wait
+	jmp $1, $(SADDR + test32)
 
-ready_msg:.asciz "ready install gdt...\r\n"
-install_msg_success:.asciz "install gdt success\r\n"
+.code32
+test32:
+	movl $0, %eax
 
+	
+	.org 510, '.'
+	.word 0xaa55
 
 
 	
