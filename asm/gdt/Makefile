@@ -12,16 +12,23 @@ IMG_NAME=gdt.img
 
 all: gdt
 
-gdt.o: gdt.S
-	$(CC) -c -N -o $@ $< 
+loader.o:loader.S
+	$(CC) -c $<
 
-gdt: gdt.o  
-	$(LD) -e _start  -T ld.lds -o $@.elf $< 
-	$(OBJCOPY)   $@.elf  -O binary $@
+gdt.o: gdt.S
+	$(CC) -c  $< 
+
+gdt: gdt.o  loader.o
+	$(LD)  -Ttext 0x7c00 -o loader.bin loader.o  --oformat binary
+	$(LD)  -Ttext 0 -o gdt.bin gdt.o --oformat binary
+	cat gdt.bin >> loader.bin
 
 run: gdt
-	qemu-system-i386  gdt
+	qemu-system-i386  -fda loader.bin
 
+
+debug: gdt
+	qemu-system-i386  -fda loader.bin -s -S -monitor stdio
 
 clean:  
-	-rm ./gdt ./gdt.img ./floppy.img ./gdt.o ./gdt.elf -rf
+	-rm *.o *.bin -rf
