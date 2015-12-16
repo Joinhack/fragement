@@ -22,5 +22,8 @@ loader.o:
 os.o:
 	${CC} -c os.S
 
+run: loader.bin
+	qemu-system-i386 -fda $<
+
 clean:
 	rm -f *.o *.bin

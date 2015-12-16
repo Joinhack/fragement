@@ -1,6 +1,5 @@
 SECTIONS
 {
-	. = 0x0;
-	.text : { *(.mytext ) }
+	.text 0x7C00 : { *(.mytext ) }
 } 
 

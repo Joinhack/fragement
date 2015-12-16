@@ -7,8 +7,28 @@
 #define SADDR 0x7c00
 #define MEMORY_CPU_CR0_PE_ON 0x1
 
+.macro SEG_DESC Base, Limit, Attr
+.2byte (\Limit & 0xFFFF)
+.2byte (\Base & 0xFFFF)
+.byte  ((\Base >> 16) & 0xFF)
+.2byte ((\Attr & 0xF0FF) | ((\Limit >> 8) & 0x0F00))
+.byte  ((\Base >> 24) & 0xFF)
+.endm
+
+.macro InitSegDescriptor OFFSET GDT_SEG_ADDR
+xor     %ax, %ax
+mov     %cs, %ax
+shl     $4, %eax
+addl    $(\OFFSET), %eax
+movw    %ax, (\GDT_SEG_ADDR + 2)
+shr     $16, %eax
+movb    %al, (\GDT_SEG_ADDR + 4)
+movb    %ah, (\GDT_SEG_ADDR + 7)
+.endm
+
 .code16
 .section ".mytext", "ax"
+
 
 begin:
 	jmp _start
@@ -16,10 +36,27 @@ begin:
 	ready_msg:.asciz "ready install gdt...\r\n"
 	install_msg_success:.asciz "install gdt success\r\n"
 
+gdt:
+	GDT_DESC_NULL: SEG_DESC 0, 0, 0
+	GDT_DESC_C32: SEG_DESC 0, (c32len - 1), (0x9A | 0x4000)
+
+.set GdtLen, (. - GDT_DESC_NULL)	
+
+.set c32selector, (GDT_DESC_C32 - GDT_DESC_NULL)
+
+gdtdesc:
+	.word	(GdtLen - 1)			/* limit */
+	.long	0
+
+
+	
+
+
+
 .global _start
 _start:
 	cli
-	movw $0x7c0, %ax
+	movw %cs, %ax
 	movw %ax, %ds
 	movw %ax, %gs
 	movw %ax, %fs
@@ -58,73 +95,41 @@ wait:
 	ret
 
 
-	.p2align	5	/* force 4-byte alignment, mean 1<<5 32 bits  */
-gdt:
-	.word	0, 0
-	.byte	0, 0, 0, 0
-
-	/* -- code segment --
-	 * base = 0x00000000, limit = 0xFFFFF (4 KiB Granularity), present
-	 * type = 32bit code execute/read, DPL = 0
-	 */
-	.word	0xFFFF, 0
-	.byte	0, 0x9A, 0xCF, 0
-
-	/* -- data segment --
-	 * base = 0x00000000, limit 0xFFFFF (4 KiB Granularity), present
-	 * type = 32 bit data read/write, DPL = 0
-	 */
-	.word	0xFFFF, 0
-	.byte	0, 0x92, 0xCF, 0
-
-	/* -- 16 bit real mode CS --
-	 * base = 0x00000000, limit 0x0FFFF (1 B Granularity), present
-	 * type = 16 bit code execute/read only/conforming, DPL = 0
-	 */
-	.word	0xFFFF, 0
-	.byte	0, 0x9E, 0, 0
-
-	/* -- 16 bit real mode DS --
-	 * base = 0x00000000, limit 0x0FFFF (1 B Granularity), present
-	 * type = 16 bit data read/write, DPL = 0
-	 */
-	.word	0xFFFF, 0
-	.byte	0, 0x92, 0, 0
-
-
-	.p2align 5 //1<<5
-/* this is the GDT descriptor */
-gdtdesc:
-	.word	0x27			/* limit */
-	.long	( SADDR + gdt	)
-
 
 install_gdt:
 	// install gdt
 	cli
 
+	InitSegDescriptor c32, GDT_DESC_C32
 	/* load the GDT register */
-	xorw %ax, %ax
-	movw %ax, %es
-	lgdtl	%es:(SADDR + gdtdesc)
+	xor     %ax, %ax
+	mov     %cs, %ax
+	shl     $4, %eax
+	addl    $GDT_DESC_NULL, %eax
+	movl     %eax, (gdtdesc + 2) 
+
+	xor     %ax,   %ax
+	in      $0x92, %al
+	or      $2,    %al
+	out     %al,   $0x92
+
+	lgdtl gdtdesc
 	//go to prot_model
 	movl	%cr0, %eax
 	orl	$MEMORY_CPU_CR0_PE_ON, %eax
 	movl	%eax, %cr0
-	sti
 
 	xorw	%ax, %ax
 	movw	%ax, %ds
-	ljmp $0x08, $(SADDR + test32)
+	ljmp $c32selector, $0
 
 .code32
-test32:
+c32:
 	movl $0, %eax
-loop32:
-	jmp test32
+	jmp c32
 
+.set c32len, ( . - c32 )
 
-	
 	.org 510, '.'
 	.word 0xaa55
 
