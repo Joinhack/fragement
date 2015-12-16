@@ -104,7 +104,9 @@ install_gdt:
 	cli
 
 	/* load the GDT register */
-	lgdtl	%cs:(0x7c00 + gdtdesc)
+	xorw %ax, %ax
+	movw %ax, %es
+	lgdtl	%es:(SADDR + gdtdesc)
 	//go to prot_model
 	movl	%cr0, %eax
 	orl	$MEMORY_CPU_CR0_PE_ON, %eax
@@ -113,16 +115,18 @@ install_gdt:
 
 	xorw	%ax, %ax
 	movw	%ax, %ds
-	jmp $1, $(SADDR + test32)
+	ljmp $0x08, $(SADDR + test32)
 
 .code32
 test32:
 	movl $0, %eax
+loop32:
+	jmp test32
+
 
 	
 	.org 510, '.'
 	.word 0xaa55
-
 
 	
 	

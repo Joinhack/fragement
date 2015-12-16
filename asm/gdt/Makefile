@@ -10,7 +10,7 @@ AS=$(CROSS_COMPILE)as
 DD=dd
 IMG_NAME=gdt.img
 
-all: $(IMG_NAME)
+all: gdt
 
 gdt.o: gdt.S
 	$(CC) -c -N -o $@ $< 
@@ -19,13 +19,8 @@ gdt: gdt.o
 	$(LD) -e _start  -T ld.lds -o $@.elf $< 
 	$(OBJCOPY)   $@.elf  -O binary $@
 
-$(IMG_NAME): gdt  
-	$(DD) if=gdt of=$@ seek=0 count=1
-	$(DD) if=/dev/zero of="$@" seek=1 count=2879
-
-
-run: $(IMG_NAME)
-	qemu-system-i386  $(IMG_NAME)
+run: gdt
+	qemu-system-i386  gdt
 
 
 clean:  
