@@ -12,23 +12,19 @@ IMG_NAME=gdt.img
 
 all: gdt
 
-loader.o:loader.S
-	$(CC) -c $<
 
 gdt.o: gdt.S
 	$(CC) -c  $< 
 
-gdt: gdt.o  loader.o
-	$(LD)  -Ttext 0x7c00 -o loader.bin loader.o  --oformat binary
-	$(LD)  -Ttext 0 -o gdt.bin gdt.o --oformat binary
-	cat gdt.bin >> loader.bin
+gdt: gdt.o 
+	$(LD)  -Ttext 0x7c00 -o gdt.bin gdt.o --oformat binary
 
 run: gdt
-	qemu-system-i386  -fda loader.bin
+	qemu-system-i386 gdt.bin
 
 
 debug: gdt
-	qemu-system-i386  -fda loader.bin -s -S -monitor stdio
+	qemu-system-i386  gdt.bin -s -S -monitor stdio
 
 clean:  
 	-rm *.o *.bin -rf

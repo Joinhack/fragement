@@ -19,6 +19,7 @@
 .endm
 
 .code16
+.section .text
 
 	jmp 1f
 
@@ -39,8 +40,6 @@ gdtdesc:
 	.word	(GdtLen - 1)			/* limit */
 	.long	0
 
-
-.global _start
 1:
 	cli
 	movw %cs, %ax
@@ -73,8 +72,6 @@ print:
 	ret
 
 
-
-
 install_gdt:
 	// install gdt
 	cli
@@ -101,18 +98,18 @@ c32:
 	mov $(vselector), %ax
 	mov %ax, %gs
 	movb $'o', %al
+	movb $0xc, %ah
 	.loop:
 	/* Output the data */
 	mov $((90 * 10 + 0) * 2), %edi
-	movb $0xC, %ah
 	inc %al
+	inc %ah
 	mov %ax, %gs:(%edi)
-
 	jmp .loop
 
 .set c32len, ( . - c32 )
 
-.org (510*2), '.'
+.org (510), '.'
 .word 0xaa55
 
 	
