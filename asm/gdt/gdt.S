@@ -20,7 +20,6 @@
 
 .code16
 .section .text
-
 	jmp 1f
 
 	ready_msg:.asciz "ready install gdt...\r\n"
@@ -36,7 +35,7 @@ gdt:
 .set c32selector, (GDT_DESC_C32 - GDT_DESC_NULL)
 .set vselector,  (GDT_DESC_VIDEO - GDT_DESC_NULL)
 
-gdtdesc:
+gdtptr:
 	.word	(GdtLen - 1)			/* limit */
 	.long	0
 
@@ -77,15 +76,17 @@ install_gdt:
 	cli
 
 	InitSegDescriptor c32, GDT_DESC_C32
-	/* load the GDT register */
-	xor     %ax, %ax
-	mov     %cs, %ax
-	shl     $4, %eax
-	addl    $GDT_DESC_NULL, %eax
-	movl     %eax, (gdtdesc + 2) 
 
+	//cs*0x10 + relativeAddr(gdt) == absoluteAddress(gdt)
+	xor %eax, %eax
+	xor %ebx, %ebx
+	mov %cs, %ax
+	shr $4, %eax
+	lea gdt, %bx
+	add %ebx, %eax
+	movl %eax, (gdtptr+2)
 
-	lgdtl gdtdesc
+	lgdtl gdtptr
 	//go to prot_model
 	movl	%cr0, %eax
 	orl	$1, %eax
@@ -97,8 +98,8 @@ install_gdt:
 c32:
 	mov $(vselector), %ax
 	mov %ax, %gs
-	movb $'o', %al
-	movb $0xc, %ah
+	movb $'a', %al
+	movb $0x1, %ah
 	.loop:
 	/* Output the data */
 	mov $((90 * 10 + 0) * 2), %edi
