@@ -1,6 +1,4 @@
 /* boot_loader.S
-*
-*
 */
 
 .code16
@@ -16,7 +14,7 @@ _start:
  jmp       start_prog         # jmp instruction
 
 .byte     0x90
-.ascii    "ADRIAN  "         # OEM name (8 bytes)
+.ascii    "Joinhack"         # OEM name (8 bytes)
 .word     512                # Bytes per sector
 .byte     1                  # Sector per cluster
 .word     1                  # Reserved sector count: should be 1 for FAT12
@@ -35,6 +33,8 @@ _start:
 .long     0x12345678         # Serial Number
 .ascii    "HELLO-OS   "      # Volume Label
 .ascii    "FAT12   "         # FAT file system type
+KERNSECTORS:
+.byte     2
 .fill     18, 1, 0           # fill 18 characters with zero
 
 start_prog:
@@ -57,7 +57,7 @@ movb    $2,          %cl  # sector
 
 
 cont:
-movb     $0x02, %ah  # Read sectors from drive
+movb     KERNSECTORS, %ah  # Read sectors from drive
 movb     $0x1,  %al  # Sectors to read count
 movb     $0x0,  %ch  # track
 movb     $0x0,  %dh  # head

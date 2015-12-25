@@ -27,7 +27,6 @@
 .endm
 
 
-
 .code16
 .section .text
 	jmp 1f
