@@ -130,7 +130,7 @@ c32:
 	inc %ah
 	mov %ax, %gs:(%edi)
 	addl $2, %edi
-	jnz .gdt
+	jmp .gdt
 
 useldt:
 	mov $LDTSELCTOR, %ax
@@ -159,7 +159,7 @@ lc32:
 	inc %ah
 	mov %ax, %gs:(%edi)
 	addl $2, %edi
-	jnz .ldt
+	jmp .ldt
 
 	.end:
 	jmp .
