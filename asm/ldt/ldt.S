@@ -34,20 +34,20 @@ gdt:
 	GDT_DESC_C32: SEG_DESC 0, (c32len - 1), (0x9A | 0x4000)
 	GDT_DESC_DATA: SEG_DESC 0, (datalen - 1), 0x92
 	GDT_DESC_VIDEO: SEG_DESC 0xB8000, 0xFFFF, 0x92
-	GDT_LDT: SEG_DESC  0, (ldtlen - 1), 0x82
+	GDT_LDT_ENTRY: SEG_DESC  0, (ldtlen - 1), 0x82
 
 .set GdtLen, (. - GDT_DESC_NULL)	
 
 .set C32SELECTOR, (GDT_DESC_C32 - GDT_DESC_NULL)
 .set DATASELECTOR, (GDT_DESC_DATA - GDT_DESC_NULL)
 .set VSELECTOR,  (GDT_DESC_VIDEO - GDT_DESC_NULL)
-.set LDTSELCTOR,  (GDT_LDT - GDT_DESC_NULL)
+.set LDTSELCTOR,  (GDT_LDT_ENTRY - GDT_DESC_NULL)
 
 ldt:
 	LDT_DESC_C32: SEG_DESC 0, (lc32len - 1), (0x9A | 0x4000)
 
 .set ldtlen, (. - ldt)
-.set ldtc32selector,     (LDT_DESC_C32 - ldt + 4)
+.set LDTC32SELECTOR, (LDT_DESC_C32 - ldt + 1<<2)
 
 gdtptr:
 	.word	(GdtLen - 1)			/* limit */
@@ -89,7 +89,7 @@ install_gdt:
 
 	InitSegDescriptor c32, GDT_DESC_C32
 	InitSegDescriptor dataseg, GDT_DESC_DATA
-	InitSegDescriptor ldt, GDT_LDT
+	InitSegDescriptor ldt, GDT_LDT_ENTRY
 	InitSegDescriptor lc32, LDT_DESC_C32
 
 	//cs*0x10 + relativeAddr(gdt) == absoluteAddress(gdt)
@@ -135,7 +135,7 @@ c32:
 useldt:
 	mov $LDTSELCTOR, %ax
 	lldt %ax
-	ljmp $ldtc32selector, $0
+	ljmp $LDTC32SELECTOR, $0
 
 .set c32len, ( . - c32 )
 
