@@ -3,6 +3,7 @@ SECTIONS
 	.text16 : {
 		*(.text16)
 	}
+	c32_begin = .;
 	.text32 : {
 		*(.text32)
 	}

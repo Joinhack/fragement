@@ -96,7 +96,7 @@ install_gdt:
 	xor %eax, %eax
 	xor %ebx, %ebx
 	mov %cs, %ax
-	shr $4, %eax
+	shl $4, %eax
 	lea gdt, %bx
 	add %ebx, %eax
 	movl %eax, (gdtptr+2)
