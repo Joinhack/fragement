@@ -10,17 +10,6 @@
 	.byte  ((\Base >> 24) & 0xFF)
 .endm
 
-.macro InitSegDescriptor OFFSET GDT_SEG_ADDR
-	xor %ax, %ax
-	mov %cs, %ax
-	shl $4, %eax
-	addl $(\OFFSET), %eax
-	movw %ax, (\GDT_SEG_ADDR + 2)
-	shr $16, %eax
-	movb %al, (\GDT_SEG_ADDR + 4)
-	movb %ah, (\GDT_SEG_ADDR + 7)
-.endm
-
 jmp installgdt
 TEMPGDT:
 	GDT_DESC_NULL: SEG_DESC 0, 0, 0
