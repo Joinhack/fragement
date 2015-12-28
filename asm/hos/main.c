@@ -5,10 +5,10 @@ struct gdt_ptr {
 	u32 ptr;
 } __attribute__((packed));
 
-static u32 cs() {
+static u32 ds() {
 	u32 rs;
 	asm volatile (
-		"mov %%cs, %%ax\n"
+		"mov %%ds, %%ax\n"
 		:"=a"(rs)
 		:
 	);
@@ -23,7 +23,7 @@ void install_gdt() {
 	static struct gdt_ptr gdtptr = {
 		.len = sizeof(boot_gdt)
 	};
-	gdtptr.ptr = (u32)boot_gdt + cs()<<4;
+	gdtptr.ptr = (u32)boot_gdt + ds()<<4;
 	asm volatile ("lgdtw %0\n" : : "m"(gdtptr));
 }
 
