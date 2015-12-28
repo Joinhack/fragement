@@ -88,7 +88,7 @@ jmp      fail_loop
 
 
 os_entry:
-ljmp $OS_SEG, $OS_OFFSET  # jump to os context
+ljmp $OS_SEG, $0x0  # jump to os context
 
 end:
  hlt
