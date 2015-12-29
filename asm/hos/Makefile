@@ -10,12 +10,12 @@ OBJCOPY=$(CROSS_COMPILE)objcopy
 AS=$(CROSS_COMPILE)as
 CSOURCE=$(wildcard *.c)
 COBJS=$(CSOURCE:.c=.o)
-OBJS=os.o $(COBJS)
+OBJS=os.o pmjmp.o $(COBJS)
 
 CODE16GCC_CFLAGS := -m32 -Wa,code16gcc.h
 REALMODE_CFLAGS	:= $(CODE16GCC_CFLAGS)
 
-CFLAGS=$(REALMODE_CFLAGS)
+CFLAGS16=$(REALMODE_CFLAGS)
 
 all: raw.img
 
@@ -30,11 +30,14 @@ raw.img: os.elf loader.elf
 	$(OBJCOPY) -I elf32-i386 -O binary os.elf os.img
 	cat os.img >> raw.img
 
+main.o: main.c
+	$(CC) $(CFLAGS16) -c $<		
+
 %.o: %.S
 	$(CC) -c $<	
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $<		
+	$(CC) -c $<	
 
 run: raw.img
 	qemu-system-i386 -fda $<

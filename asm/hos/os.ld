@@ -5,8 +5,8 @@ ENTRY(_start)
 SECTIONS
 {
 	. = 0;
-	.text16 : {
-		*(.text16)
+	.initsec : {
+		*(.initsec)
 	}
 	c32_begin = .;
 	.text32 : {

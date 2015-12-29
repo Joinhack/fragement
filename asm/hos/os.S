@@ -1,5 +1,5 @@
 .code16
-.section ".text16", "ax"
+.section ".initsec", "ax"
 
 .global _start
 _start:
