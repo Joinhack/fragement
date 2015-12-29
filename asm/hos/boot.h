@@ -48,4 +48,7 @@ inline static u32 cs() {
 #define GDT_ENTRY_BOOT_DS	2
 
 #define __BOOT_CS	(GDT_ENTRY_BOOT_CS*8)
+#define __BOOT_DS	(GDT_ENTRY_BOOT_DS*8)
+
+
 #endif
