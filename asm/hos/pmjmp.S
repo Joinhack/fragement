@@ -10,12 +10,11 @@ realmode2protect:
 	addl %eax, 1f
 	
 	
-	movl	%cr0, %edx
-	orl	$1, %edx	
-	movl	%edx, %cr0
+	movl %cr0, %edx
+	orl $1, %edx	
+	movl %edx, %cr0
 	
 	movl $__BOOT_DS, %ecx
-
 
 
 	.byte	0x66, 0xea
