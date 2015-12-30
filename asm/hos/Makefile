@@ -8,27 +8,34 @@ CC=$(CROSS_COMPILE)gcc
 LD=$(CROSS_COMPILE)ld
 OBJCOPY=$(CROSS_COMPILE)objcopy
 AS=$(CROSS_COMPILE)as
-CSOURCE=$(wildcard *.c)
-COBJS=$(CSOURCE:.c=.o)
-OBJS=os.o pmjmp.o $(COBJS)
+SETUPOBJS=os.o pmjmp.o main.o
+KOBJS=kernel.o
 
 CODE16GCC_CFLAGS := -m32 -Wa,code16gcc.h
 REALMODE_CFLAGS	:= $(CODE16GCC_CFLAGS)
 
 CFLAGS16=$(REALMODE_CFLAGS)
 
-all: raw.img
+all: kernel.img
 
 loader.elf: loader.o
 	$(LD) -Ttext 0x7c00 -o $@ $< 
 
-os.elf: $(OBJS)
-	$(LD) -T os.ld -o $@ $(OBJS)
+setup.elf: $(SETUPOBJS)
+	$(LD) -T setup.ld -o $@ $(SETUPOBJS)
 
-raw.img: os.elf loader.elf
+setup.img: setup.elf loader.elf
 	$(OBJCOPY) -I elf32-i386 -O binary loader.elf raw.img
-	$(OBJCOPY) -I elf32-i386 -O binary os.elf os.img
-	cat os.img >> raw.img
+	$(OBJCOPY) -I elf32-i386 -O binary setup.elf setup.img
+	cat setup.img >> raw.img
+
+kernel.elf: $(KOBJS) setup.img
+	./linkscript.sh
+	$(LD) -T kernel.ld -o $@ $(KOBJS)
+
+kernel.img: kernel.elf
+	$(OBJCOPY) -I elf32-i386 -O binary kernel.elf kernel.img
+	cat kernel.img >> raw.img
 
 main.o: main.c
 	$(CC) $(CFLAGS16) -c $<		
@@ -39,11 +46,11 @@ main.o: main.c
 %.o: %.c
 	$(CC) -c $<	
 
-run: raw.img
-	qemu-system-i386 -fda $<
+run: kernel.img
+	qemu-system-i386 -fda raw.img
 
-debug: raw.img
-	qemu-system-i386 -s -S -monitor stdio -fda $<
+debug: kernel.img
+	qemu-system-i386 -s -S -monitor stdio -fda raw.img
 
 clean:
-	rm -f *.o *.elf *.img
+	rm -f *.o *.elf *.img kernel.ld

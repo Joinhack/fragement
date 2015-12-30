@@ -12,7 +12,7 @@ SECTIONS
 		*(.text32)
 	}
 	. = ALIGN(16);
-	.rodata : { 
+	.rodata : {
 		*(.rodata*) 
 	}
 	.data : {
@@ -22,9 +22,6 @@ SECTIONS
 		*(.bss)
 	}
 	
-	.bootendsec : {
-		*(.bootendsec)
-	}
 	_end = .;
 	/DISCARD/ : {
 		*(.MIPS.options)
