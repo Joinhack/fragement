@@ -8,6 +8,7 @@ struct gdt_ptr {
 
 
 void install_gdt() {
+	asm volatile("cli");
 	static const u64 boot_gdt[] __attribute__((aligned(16))) = {
 		[GDT_ENTRY_BOOT_CS] = GDT_ENTRY(0xc09b, 0, 0xfffff),
 		[GDT_ENTRY_BOOT_DS] = GDT_ENTRY(0xc093, 0, 0xfffff),
@@ -19,8 +20,14 @@ void install_gdt() {
 	asm volatile ("lgdtl %0\n" : : "m"(gdtptr));
 }
 
+void install_idt() {
+	static const struct gdt_ptr null_idt = {0, 0};
+	asm volatile("lidtl %0" : : "m" (null_idt));
+}
+
 
 void main() {
 	install_gdt();
+	install_idt();
 	realmode2protect();
 }
