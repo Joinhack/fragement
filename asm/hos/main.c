@@ -16,7 +16,7 @@ void install_gdt() {
 	static struct gdt_ptr gdtptr = {
 		.len = sizeof(boot_gdt)
 	};
-	gdtptr.ptr = ((u32)boot_gdt) + (ds()<<4);
+	gdtptr.ptr = (u32)boot_gdt + (ds()<<4);
 	asm volatile ("lgdtl %0\n" : : "m"(gdtptr));
 }
 
