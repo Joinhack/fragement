@@ -1,6 +1,6 @@
 #include "boot.h"
 .code16
-.text
+.section ".initsec", "ax"
 .global realmode2protect
 
 realmode2protect:
@@ -16,16 +16,18 @@ realmode2protect:
 	
 	movl $__BOOT_DS, %ecx
 
-
 	.byte	0x66, 0xea
 1:.long	pmbridge
 	.word	__BOOT_CS
 
+.text
 .code32
+.extern _end
 pmbridge:
 	movl	%ecx, %ds
 	movl	%ecx, %es
 	movl	%ecx, %fs
 	movl	%ecx, %gs
 	movl	%ecx, %ss
-	jmp .
+.section ".bootendsec", "aw"	
+2:.word _end

@@ -25,7 +25,6 @@ void install_idt() {
 	asm volatile("lidtl %0" : : "m" (null_idt));
 }
 
-
 void main() {
 	install_gdt();
 	install_idt();

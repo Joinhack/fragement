@@ -8,7 +8,6 @@ SECTIONS
 	.initsec : {
 		*(.initsec)
 	}
-	c32_begin = .;
 	.text32 : {
 		*(.text32)
 	}
@@ -22,6 +21,11 @@ SECTIONS
 	.bss : {
 		*(.bss)
 	}
+	
+	.bootendsec : {
+		*(.bootendsec)
+	}
+	_end = .;
 	/DISCARD/ : {
 		*(.MIPS.options)
 		*(.options)
