@@ -39,7 +39,7 @@ inline static u32 cs() {
 	 (((flags) & UNIT(0x0000f0ff,ULL)) << 40) |	\
 	 (((limit) & UNIT(0x000f0000,ULL)) << (48-16)) |	\
 	 (((base)  & UNIT(0x00ffffff,ULL)) << 16) |	\
-	 (((limit) & UNIT(0x0000ffff,ULL))))
+	 (((limit) & UNIT(0x0000ffff,ULL))))	
 
 #endif
 
@@ -49,6 +49,7 @@ inline static u32 cs() {
 
 #define __BOOT_CS	(GDT_ENTRY_BOOT_CS*8)
 #define __BOOT_DS	(GDT_ENTRY_BOOT_DS*8)
+
 
 
 #endif

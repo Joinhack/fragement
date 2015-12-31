@@ -1,11 +1,11 @@
 #include "boot.h"
 
+extern u16 _end;
+
 struct gdt_ptr {
 	u16 len;
 	u32 ptr;
 } __attribute__((packed));
-
-
 
 void install_gdt() {
 	asm volatile("cli");

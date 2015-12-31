@@ -16,7 +16,9 @@ REALMODE_CFLAGS	:= $(CODE16GCC_CFLAGS)
 
 CFLAGS16=$(REALMODE_CFLAGS)
 
-all: kernel.img
+IMGS=kernel.img setup.img loader.img
+
+all: raw.img
 
 loader.elf: loader.o
 	$(LD) -Ttext 0x7c00 -o $@ $< 
@@ -24,21 +26,21 @@ loader.elf: loader.o
 setup.elf: $(SETUPOBJS)
 	$(LD) -T setup.ld -o $@ $(SETUPOBJS)
 
-setup.img: setup.elf loader.elf
-	$(OBJCOPY) -I elf32-i386 -O binary loader.elf raw.img
-	$(OBJCOPY) -I elf32-i386 -O binary setup.elf setup.img
-	cat setup.img >> raw.img
 
 kernel.elf: $(KOBJS) setup.img
 	./linkscript.sh
 	$(LD) -T kernel.ld -o $@ $(KOBJS)
 
-kernel.img: kernel.elf
-	$(OBJCOPY) -I elf32-i386 -O binary kernel.elf kernel.img
+raw.img: $(IMGS)
+	mv loader.img raw.img
+	cat setup.img >> raw.img
 	cat kernel.img >> raw.img
 
 main.o: main.c
 	$(CC) $(CFLAGS16) -c $<		
+
+%.img: %.elf
+	$(OBJCOPY) -I elf32-i386 -O binary  $< $@
 
 %.o: %.S
 	$(CC) -c $<	
@@ -46,10 +48,10 @@ main.o: main.c
 %.o: %.c
 	$(CC) -c $<	
 
-run: kernel.img
+run: all
 	qemu-system-i386 -fda raw.img
 
-debug: kernel.img
+debug: all
 	qemu-system-i386 -s -S -monitor stdio -fda raw.img
 
 clean:

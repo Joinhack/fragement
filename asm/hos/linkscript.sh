@@ -1,17 +1,43 @@
-#! /usr/bin/env sh
+#! /usr/bin/env python
 
-ADDR=$(printf "0x%x" $(( $(wc -c setup.img|awk '{print $1}') + 0x9000 )))
+import os
 
-cat > kernel.ld << END
+size = os.path.getsize("setup.img")
+
+appendChars = [
+	[],
+	['\xff'],
+	['\xfe', '\xff'],
+	['\xfd', '\xfe', '\xff']
+]
+
+align = size%4
+if align != 0:
+	size += align
+	with open("setup.img", "a") as appendfile:
+		for v in appendChars[align]:
+			appendfile.write(v)
+
+outvalue='''
+
 OUTPUT_FORMAT("elf32-i386", "elf32-i386", "elf32-i386")
 OUTPUT_ARCH(i386)
 ENTRY(kstart)
 
 SECTIONS
 {
-	. = $ADDR;
-	.text : {
+	. = 0x%x;
+	.text : AT (0x%x) {
 		* (.text)
+	}
+	.rodata ALIGN(0x1) : AT (ADDR (.text) + SIZEOF (.text))  {
+		*(.rodata) 
+	}
+	.data : {
+		*(.data)
+	}
+	.bss : {
+		*(.bss)
 	}
 	/DISCARD/ : {
 		*(.MIPS.options)
@@ -23,4 +49,9 @@ SECTIONS
 		*(.note)
 	}
 }
-END
+
+'''
+
+size += 0x9000
+with open("kernel.ld", "w") as ld:
+	ld.write(outvalue%(size, size))
