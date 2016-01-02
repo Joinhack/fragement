@@ -34,6 +34,7 @@ void install_idt() {
 	asm volatile("lidtl %0" : : "m" (null_idt));
 }
 
+//can't use entry named main, will cause the stack align.
 void m16entry() {
 	enable_a20_fast();
 	install_gdt();
