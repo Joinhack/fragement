@@ -20,12 +20,22 @@ void install_gdt() {
 	asm volatile ("lgdtl %0\n" : : "m"(gdtptr));
 }
 
+static void enable_a20_fast(void) {
+	u8 port_a;
+
+	port_a = inb(0x92);	/* Configuration port A */
+	port_a |=  0x02;	/* Enable A20 */
+	port_a &= ~0x01;	/* Do not reset machine */
+	outb(port_a, 0x92);
+}
+
 void install_idt() {
 	static const struct gdt_ptr null_idt = {0, 0};
 	asm volatile("lidtl %0" : : "m" (null_idt));
 }
 
-void main() {
+void m16entry() {
+	enable_a20_fast();
 	install_gdt();
 	install_idt();
 	realmode2protect();

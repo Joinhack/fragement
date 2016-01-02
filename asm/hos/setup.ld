@@ -11,7 +11,6 @@ SECTIONS
 	.text32 : {
 		*(.text32)
 	}
-	. = ALIGN(16);
 	.rodata : {
 		*(.rodata*) 
 	}

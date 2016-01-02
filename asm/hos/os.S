@@ -12,5 +12,5 @@ _start:
 	movw %ax, %ss
 	mov $4096, %sp
 	
-	jmp main
+	jmp m16entry
 	
