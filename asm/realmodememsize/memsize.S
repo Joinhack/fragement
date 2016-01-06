@@ -1,7 +1,7 @@
 
 .code16
 .section .text
-	jmp 1f
+	ljmp $0x7c0, $1f
 
 	buf:.fill 10
 	.byte 0
@@ -16,7 +16,7 @@
 	movw %ax, %es
 
 	movw %ax, %ss
-	movw $0x510, %sp
+	movw $500, %sp
 	int $0x12 //result in ax
 
 	lea buf, %di

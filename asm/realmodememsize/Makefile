@@ -16,7 +16,7 @@ memsize.o: memsize.S
 	$(CC) -c  $< 
 
 memsize: memsize.o 
-	$(LD)  -Ttext 0x7c00 -o memsize.bin memsize.o --oformat binary
+	$(LD)  -Ttext 0 -o memsize.bin memsize.o --oformat binary
 
 run: memsize
 	qemu-system-i386 memsize.bin
