@@ -17,9 +17,41 @@
 
 	movw %ax, %ss
 	movw $500, %sp
+
+
 	int $0x12 //result in ax
 
 	lea buf, %di
+	call p2asc
+
+	lea buf, %si
+	call print
+
+	lea suffix, %si
+	call print
+
+	call get_memory_size
+
+	lea buf, %di
+	call p2asc
+
+	lea buf, %si
+	call print
+
+	lea suffix, %si
+	call print
+
+
+	mov	$0x00, %ah		# get_keystroke
+	int	$0x16			# invoke BIOS service
+get_memory_size: //address 0x413 for memory size
+	push %ds
+	mov $0x0040, %ax
+	mov %ax, %ds
+	mov %ds:0x13, %ax
+	pop %ds
+	ret
+
 p2asc:
 	xor %dx, %dx
 	divw ten
@@ -27,19 +59,8 @@ p2asc:
 	movb %dl, (%di)
 	inc %di
 	or %ax, %ax
-	jnz p2asc
-	
-
-	lea buf, %si
-	call print
-
-	lea suffix, %si
-	call print
-	
-
-	mov	$0x00, %ah		# get_keystroke
-	int	$0x16			# invoke BIOS service
-	
+	jnz p2asc	
+	ret
 
 print:
 	lodsb %ds:(%si)
