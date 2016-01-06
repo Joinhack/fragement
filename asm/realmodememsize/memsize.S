@@ -4,6 +4,7 @@
 	ljmp $0x7c0, $1f
 
 	buf:.fill 10
+.set lbuf, . - buf
 	.byte 0
 	suffix:.asciz "KB memory \r\n"
 	ten: .2byte 10
@@ -21,10 +22,11 @@
 
 	int $0x12 //result in ax
 
-	lea buf, %di
+	mov $(buf + lbuf - 1), %di
 	call p2asc
 
-	lea buf, %si
+	mov %di, %si
+	add $1, %si
 	call print
 
 	lea suffix, %si
@@ -32,10 +34,11 @@
 
 	call get_memory_size
 
-	lea buf, %di
+	mov $(buf + lbuf - 1), %di
 	call p2asc
 
-	lea buf, %si
+	mov %di, %si
+	add $1, %si
 	call print
 
 	lea suffix, %si
@@ -57,7 +60,7 @@ p2asc:
 	divw ten
 	add	$'0', %dl
 	movb %dl, (%di)
-	inc %di
+	dec %di
 	or %ax, %ax
 	jnz p2asc	
 	ret
