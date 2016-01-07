@@ -6,6 +6,7 @@
 isr_tick:
 	push %ax
 	incw tick
+	//EOI command: if have no EOI, will no this interrupt again.
 	mov $0x20, %al
 	out %al, $0x20
 	pop %ax
