@@ -39,9 +39,6 @@ _start:
 	movw %cs, %es:0x08*4+2
 	sti
 
-
-
-	
 again:
 	mov $(buf + lbuf - 1), %di
 	movw tick, %ax
