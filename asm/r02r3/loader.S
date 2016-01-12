@@ -51,11 +51,11 @@ sti                     # set interrupt flag
 movw    $OS_SEG,     %ax
 mov     %ax,         %es  # ES:BX-> destination buffer address pointer
 movw    $OS_OFFSET,  %bx
-movb    $2,          %cl  # sector
+movb    $2, %cl  # sector
 
 
 cont:
-movb     $2, %ah  # Read sectors from drive
+movb     $0x2, %ah  # Read sectors from drive
 movb     $0x1,  %al  # Sectors to read count
 movb     $0x0,  %ch  # track
 movb     $0x0,  %dh  # head
@@ -69,7 +69,7 @@ addw     $0x20, %ax  # move to the next sector
 movw     %ax,   %es  # move to the next sector
 incb     %cl
 
-cmpb     $3, %cl     # has finished reading 3 sectors?
+cmpb     $7, %cl     # has finished reading 3 sectors?
 jbe      cont        # continue to read the sector
 
 jmp      os_entry    # jump to OS entry point
