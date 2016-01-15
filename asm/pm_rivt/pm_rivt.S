@@ -94,7 +94,7 @@ install_gdt:
 
 	movw $(isr_tick - c32), idt+0x08*8+0	# write vector's lo-word
 	movw $C32SEL, idt + 0x08*8+2
-	movw	$0x8e00, idt + 0x08*8+4
+	movw	$0x8e00, idt + 0x08*8+4 //0x8e  32bits interrupt.
 	movw	$0x0000, idt + 0x08*8+6
 
 	lgdtl gdtptr
@@ -124,7 +124,7 @@ install_gdt:
 	sti
 
 
-	ljmp $C32SEL, $(main - c32)
+	ljmp $C32SEL, $(main - c32) //jmp to main
 
 .code32
 
@@ -138,7 +138,8 @@ isr_tick:
 	out %al, $0x20
 	popl %eax
 	iret
-.set isr_ticklen, (. - isr_tick)	
+.set isr_ticklen, (. - isr_tick)
+
 
 
 main:
