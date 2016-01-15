@@ -121,6 +121,7 @@ install_gdt:
 	out	%al, $0x21 		# write Master-PIC mask
 	mov $0xff, %al
 	out	%al, $0xA1
+
 	sti
 
 
