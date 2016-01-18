@@ -27,7 +27,10 @@ ENTRY(kstart)
 SECTIONS
 {
 	. = 0x%x;
-	.text : AT (0x%x) {
+	._textenrty : AT (0x%x) {
+		*(._textenrty)
+	}
+	.text : {
 		* (.text)
 	}
 	.rodata ALIGN(0x1) : AT (ADDR (.text) + SIZEOF (.text))  {
@@ -39,6 +42,7 @@ SECTIONS
 	.bss : {
 		*(.bss)
 	}
+	__end = .;
 	/DISCARD/ : {
 		*(.MIPS.options)
 		*(.options)

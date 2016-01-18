@@ -8,8 +8,8 @@ SECTIONS
 	.initsec : {
 		*(.initsec)
 	}
-	.text32 : {
-		*(.text32)
+	.text : {
+		*(.text)
 	}
 	.rodata : {
 		*(.rodata*) 
@@ -20,7 +20,6 @@ SECTIONS
 	.bss : {
 		*(.bss)
 	}
-	
 	_end = .;
 	/DISCARD/ : {
 		*(.MIPS.options)
