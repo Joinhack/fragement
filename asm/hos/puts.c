@@ -5,6 +5,7 @@ static u32 cols = 0;
 
 static u16 *vga = (u16*)0xB8000;
 
+
 static void scroll() {
 	u8 attr = 0x0;
 	u16 v = ' '&(attr<<0x8);

@@ -34,5 +34,6 @@ static void idt_set_gate(u8 num, u32 base, u16 sel, u8 flags) {
 }
 
 void irq_handler(u32 id) {
-   
+   put(id+'0');
+   outb(0x20, 0x20);
 }
