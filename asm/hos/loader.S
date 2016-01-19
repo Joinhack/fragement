@@ -69,7 +69,7 @@ addw     $0x20, %ax  # move to the next sector
 movw     %ax,   %es  # move to the next sector
 incb     %cl
 
-cmpb     $5, %cl     # has finished reading 5 sectors?
+cmpb     $10, %cl     # has finished reading 5 sectors?
 jbe      cont        # continue to read the sector
 
 jmp      os_entry    # jump to OS entry point

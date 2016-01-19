@@ -10,7 +10,7 @@ realmode2protect:
 	addl %eax, 2f
 
 	//re init stack  4k temp  for 32 flat model
-	addl $4096, %eax
+	subl $4, %eax
 	movl %eax, %esp
 
 	movl 2f, %eax

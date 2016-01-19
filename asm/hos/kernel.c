@@ -1,7 +1,9 @@
 #include "kernel.h"
 
-extern u32 __end;
-
 void __entry kentry() {
+	screen_clear();
+	puts("kernel is starting...\n");
+	reinstall_idt();
+	
 	while(1);
 }
