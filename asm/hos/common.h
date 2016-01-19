@@ -48,4 +48,5 @@ static inline u32 inl(u16 port) {
 	return v;
 }
 #endif
+#define NULL 0
 #endif //__COMMON_H

@@ -10,6 +10,7 @@ OBJCOPY=$(CROSS_COMPILE)objcopy
 AS=$(CROSS_COMPILE)as
 SETUPOBJS=os.o pmjmp.o main.o
 KOBJS=kernel.o irq.o idt.o puts.o
+CFLAGS= -fno-builtin
 
 CODE16GCC_CFLAGS := -m32 -Wa,code16gcc.h
 REALMODE_CFLAGS	:= $(CODE16GCC_CFLAGS)
@@ -46,7 +47,7 @@ main.o: main.c
 	$(CC) -c $<	
 
 %.o: %.c
-	$(CC) -c $<	
+	$(CC) $(CFLAGS) -c $<	
 
 run: all
 	qemu-system-i386 -fda raw.img

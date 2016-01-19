@@ -3,6 +3,7 @@ extern u32 __end;
 
 static gate_way gateway[IRQLEN];
 
+static irq_handle_t irq_handles[IRQLEN] = {0};
 
 #define idt_handle_len (idt_handler_array_end - idt_handler_array)
 
@@ -33,7 +34,16 @@ static void idt_set_gate(u8 num, u32 base, u16 sel, u8 flags) {
 	gateway[num].flags   = flags /* | 0x60 */;
 }
 
+void set_irq_handle(u32 type, irq_handle_t handle) {
+	irq_handles[type] = handle;
+}
+
+void remove_irq_handle(u32 type) {
+	irq_handles[type] = NULL;
+}
+
 void irq_handler(u32 id) {
-   put(id+'0');
-   outb(0x20, 0x20);
+	irq_handle_t handle = irq_handles[id];
+	if(handle) handle();
+  outb(0x20, 0x20);
 }

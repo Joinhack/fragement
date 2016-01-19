@@ -39,6 +39,12 @@ void puts(char *c);
 
 void screen_clear();
 
+typedef void (*irq_handle_t) ();
+
+void set_irq_handle(u32 type, irq_handle_t handle);
+
+void remove_irq_handle(u32 type);
+
 #endif
 
 #include "common.h"
