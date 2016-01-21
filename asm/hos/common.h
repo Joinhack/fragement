@@ -47,6 +47,7 @@ static inline u32 inl(u16 port) {
 	asm volatile("inl %1,%0" : "=a" (v) : "dN" (port));
 	return v;
 }
+
 #endif
 #define NULL 0
 #endif //__COMMON_H

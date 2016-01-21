@@ -45,6 +45,12 @@ void set_irq_handle(u32 type, irq_handle_t handle);
 
 void remove_irq_handle(u32 type);
 
+void init_mmu();
+
+void memset(void* p, u32 c, u32 len);
+
+char* l2str(char* buf, int len, long n);
+
 #endif
 
 #include "common.h"

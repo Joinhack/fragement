@@ -17,7 +17,7 @@ void reinstall_idt() {
 	asm volatile ("mov $idt_handler_array,%0":"=r"(handler):);
 	asm volatile ("mov $idt_handler_array_len,%0":"=r"(len):);
 	for(i = 0; i < IRQLEN; i++) {
-		idt_set_gate(i, handler + len/IRQLEN, 0x08, 0x8E);
+		idt_set_gate(i, handler + (len/IRQLEN)*i, 0x08, 0x8E);
 	}
 	asm volatile ("lidtl %0\n sti\n" : : "m" (idt_tables));
 }
@@ -44,6 +44,11 @@ void remove_irq_handle(u32 type) {
 
 void irq_handler(u32 id) {
 	irq_handle_t handle = irq_handles[id];
-	if(handle) handle();
+	if(handle) 
+		handle();
+	else {
+		put('0'+id);
+		puts(" is not installed.\n");
+	}
   outb(0x20, 0x20);
 }
