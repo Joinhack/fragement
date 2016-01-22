@@ -44,10 +44,12 @@ void remove_irq_handle(u32 type) {
 
 void irq_handler(u32 id) {
 	irq_handle_t handle = irq_handles[id];
+
 	if(handle) 
 		handle();
 	else {
-		put('0'+id);
+		char buf[4];
+		puts(l2str(buf, sizeof(buf), id));
 		puts(" is not installed.\n");
 	}
   outb(0x20, 0x20);

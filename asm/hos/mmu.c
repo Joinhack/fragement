@@ -1,39 +1,6 @@
 #include "kernel.h"
 
-
-
-u32 memend = 0x10000;
-
-static u32 kmalloc_alloc(u32 sz, int align, u32 *phys) {
-	if (align == 1 && (memend & 0xFFFFF000) ) {
-		// Align the placement address;
-		memend &= 0xFFFFF000;
-		memend += 0x1000;
-	}
-	if (phys) {
-	    *phys = memend;
-	}
-	u32 tmp = memend;
-	memend += sz;
-	return tmp;
-}
-
-u32 kmalloc_a(u32 sz) {
-	return kmalloc_alloc(sz, 1, 0);
-}
-
-u32 kmalloc_p(u32 sz, u32 *phys) {
-	return kmalloc_alloc(sz, 0, phys);
-}
-
-u32 kmalloc_ap(u32 sz, u32 *phys) {
-	return kmalloc_alloc(sz, 1, phys);
-}
-
-u32 kmalloc(u32 sz) {
-	return kmalloc_alloc(sz, 0, 0);
-}
-
+extern u32 memend;
 
 typedef struct page {
 	u32 present    : 1;   // Page present in memory
@@ -80,7 +47,7 @@ page_directory_t *current_directory=0;
 u32 *frames;
 u32 nframes;
 
-page_t *get_page(u32 address, int make, page_directory_t *dir);
+page_t *get_page(u32 address, page_directory_t *dir);
 
 void switch_page_directory(page_directory_t *dir);
 
@@ -158,6 +125,36 @@ void free_frame(page_t *page) {
 	}
 }
 
+
+void switch_page_dir(page_directory_t *dir) {
+	current_directory = dir;
+	asm volatile("mov %0, %%cr3":: "r"(&dir->tablesPhysical));
+	u32 cr0;
+	asm volatile("mov %%cr0, %0": "=r"(cr0));
+	cr0 |= 0x80000000; // Enable paging!
+	asm volatile("mov %0, %%cr0":: "r"(cr0));
+}
+
+page_t *get_page(u32 address, page_directory_t *dir) {
+	// Turn the address into an index.
+	address /= 0x1000;
+	u32 table_idx = address / 1024;
+	if (dir->tables[table_idx]) {
+		return &dir->tables[table_idx]->pages[address%1024];
+	} else {
+		u32 tmp;
+		dir->tables[table_idx] = (page_table_t*)kmalloc_alignp(sizeof(page_table_t), &tmp);
+		dir->tablesPhysical[table_idx] = tmp | 0x7; // PRESENT, RW, US.
+		return &dir->tables[table_idx]->pages[address%1024];
+	}
+}
+
+void page_fault(u32 i) {
+	u32 faulting_address;
+	asm volatile("mov %%cr2, %0" : "=r" (faulting_address));
+	puts("page fault\n");
+} 
+
 void init_mmu() {
 	// The size of physical memory. For the moment we 
 	// assume it is 16MB big.
@@ -168,49 +165,13 @@ void init_mmu() {
 	memset(frames, 0, INDEX_FROM_BIT(nframes));
 
 	// Let's make a page directory.
-	kernel_directory = (page_directory_t*)kmalloc_a(sizeof(page_directory_t));
-	current_directory = kernel_directory;
+	kernel_directory = (page_directory_t*)kmalloc_align(sizeof(page_directory_t));
 	int i = 0;
 	while (i < memend) {
 		// Kernel code is readable but not writeable from userspace.
-		alloc_frame( get_page(i, 1, kernel_directory), 0, 0);
+		alloc_frame(get_page(i, kernel_directory), 0, 0);
 		i += 0x1000;
 	}
-	// Before we enable paging, we must register our page fault handler.
-	//register_interrupt_handler(14, page_fault);
-
-	// Now, enable paging!
-	switch_page_directory(kernel_directory);
-}
-
-void switch_page_directory(page_directory_t *dir) {
-	current_directory = dir;
-	asm volatile("mov %0, %%cr3":: "r"(&dir->tablesPhysical));
-	u32 cr0;
-	asm volatile("mov %%cr0, %0": "=r"(cr0));
-	cr0 |= 0x80000000; // Enable paging!
-	asm volatile("mov %0, %%cr0":: "r"(cr0));
-}
-
-page_t *get_page(u32 address, int make, page_directory_t *dir) {
-	// Turn the address into an index.
-	address /= 0x1000;
-	// Find the page table containing this address.
-	u32 table_idx = address / 1024;
-	// If this table is already assigned
-	if (dir->tables[table_idx]) {
-		return &dir->tables[table_idx]->pages[address%1024];
-	} else if(make) {
-		u32 tmp;
-		dir->tables[table_idx] = (page_table_t*)kmalloc_ap(sizeof(page_table_t), &tmp);
-		dir->tablesPhysical[table_idx] = tmp | 0x7; // PRESENT, RW, US.
-		return &dir->tables[table_idx]->pages[address%1024];
-	} else {
-	    return 0;
-	}
-}
-
-
-void page_fault(u32 i) {
-
+	set_irq_handle(13, page_fault);
+	switch_page_dir(kernel_directory);
 }

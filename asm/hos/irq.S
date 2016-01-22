@@ -16,4 +16,5 @@ i = i + 1
 idt_handler_common:
 call irq_handler
 addl $4, %esp
+
 iret

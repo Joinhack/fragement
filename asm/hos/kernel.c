@@ -1,15 +1,13 @@
 #include "kernel.h"
 
 u32 tick = 0;
-void print_tick() {
+void print_tick(u32 i) {
 	char buf[16] = {0};
-	//puts("ticks:");
-	//puts(l2str(buf, sizeof(buf), tick));
-	//puts("\n");
+	// puts("ticks:");
+	// puts(l2str(buf, sizeof(buf), tick));
+	// puts("\n");
 	tick++;
 }
-
-extern u32 __end;
 
 void __entry kentry() {
 	screen_clear();
@@ -17,5 +15,6 @@ void __entry kentry() {
 	reinstall_idt();
 	set_irq_handle(8, print_tick);
 	init_mmu();
+	
 	while(1);
 }
