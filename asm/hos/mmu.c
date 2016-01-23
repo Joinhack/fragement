@@ -149,7 +149,7 @@ page_t *get_page(u32 address, page_directory_t *dir) {
 	}
 }
 
-void page_fault(u32 i) {
+void page_fault() {
 	u32 faulting_address;
 	asm volatile("mov %%cr2, %0" : "=r" (faulting_address));
 	puts("page fault\n");
@@ -172,6 +172,6 @@ void init_mmu() {
 		alloc_frame(get_page(i, kernel_directory), 0, 0);
 		i += 0x1000;
 	}
-	set_irq_handle(13, page_fault);
+	set_irq_handle(14, page_fault);
 	switch_page_dir(kernel_directory);
 }

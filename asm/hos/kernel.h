@@ -38,4 +38,7 @@ void init_mmu();
 #define IRQLEN 32
 
 #define IDT_HANDLER_SIZE 9
+
+#define EXCEPTION_ERRCODE_MASK		0x00027d00
+
 #endif

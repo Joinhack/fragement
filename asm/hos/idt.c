@@ -42,15 +42,15 @@ void remove_irq_handle(u32 type) {
 	irq_handles[type] = NULL;
 }
 
-void irq_handler(u32 id) {
-	irq_handle_t handle = irq_handles[id];
+void irq_handler(registers_t reg) {
+	irq_handle_t handle = irq_handles[reg.int_no];
 
 	if(handle) 
 		handle();
 	else {
 		char buf[4];
-		puts(l2str(buf, sizeof(buf), id));
-		puts(" is not installed.\n");
+		puts(l2str(buf, sizeof(buf), reg.int_no));
+		puts(" : is not installed\n");
 	}
   outb(0x20, 0x20);
 }

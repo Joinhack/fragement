@@ -1,7 +1,6 @@
 #ifndef __IDT_H
 #define __IDT_H
 
-
 struct gdt_ptr {
 	u16 len;
 	u32 ptr;
@@ -24,5 +23,11 @@ void reinstall_idt();
 void set_irq_handle(u32 type, irq_handle_t handle);
 
 void remove_irq_handle(u32 type);
+
+typedef struct registers {
+	u32 edi, esi, ebp, esp, ebx, edx, ecx, eax; // Pushed by pusha.
+	u32 int_no, err_code;    // Interrupt number and error code (if applicable)
+	u32 eip, cs, eflags, useresp, ss; // Pushed by the processor automatically.
+} registers_t;
 
 #endif
