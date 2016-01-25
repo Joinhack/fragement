@@ -9,7 +9,7 @@ LD=$(CROSS_COMPILE)ld
 OBJCOPY=$(CROSS_COMPILE)objcopy
 AS=$(CROSS_COMPILE)as
 SETUPOBJS=os.o pmjmp.o main.o
-KOBJS=kernel.o irq.o idt.o puts.o mmu.o string.o kmalloc.o
+KOBJS=kernel.o irq.o idt.o puts.o mmu.o string.o kmalloc.o seg.o
 CFLAGS= -fno-builtin -nostdlib -nostdinc -fno-builtin -fno-stack-protector
 
 CODE16GCC_CFLAGS := -m32 -Wa,code16gcc.h

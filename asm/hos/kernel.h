@@ -24,7 +24,7 @@ void screen_clear();
 
 void init_mmu();
 
-#include "idt.h"
+#include "seg.h"
 #include "string.h"
 #include "idt.h"
 #include "kmalloc.h"
@@ -35,7 +35,7 @@ void init_mmu();
 
 #define STACKLEN (1024*1024);
 
-#define IRQLEN 32
+#define IRQLEN 256
 
 #define IDT_HANDLER_SIZE 9
 
