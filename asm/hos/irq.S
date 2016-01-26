@@ -1538,10 +1538,10 @@ __vectors:
   .4byte vector255
 
 idt_handler_common:
-pusha                    // Pushes edi,esi,ebp,esp,ebx,edx,ecx,eax
+pushal                    // Pushes edi,esi,ebp,esp,ebx,edx,ecx,eax
 
 call irq_handler
-popa
+popal
 
 addl $8, %esp
 sti
