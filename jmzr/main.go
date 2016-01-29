@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"time"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"net/http"
@@ -34,6 +35,7 @@ func progressLogin(account, passwd string) (code int, msg string) {
 	var db *sql.DB
 	var err error
 	auth := Auth{}
+	var row *sql.Row
 	if db, err = sql.Open("mysql", dbstring); err != nil {
 		msg = DBConnError
 		goto err
@@ -48,8 +50,8 @@ func progressLogin(account, passwd string) (code int, msg string) {
 		msg = DBConnError
 		goto err
 	}
-
-	err = db.QueryRow("SELECT Account,Passwd  FROM Auth WHERE Account=?", account).Scan(&auth.Account, &auth.Passwd)
+	row = db.QueryRow("SELECT Account,Passwd  FROM Auth WHERE Account=?", account)
+	err = row.Scan(&auth.Account, &auth.Passwd)
 	if err == sql.ErrNoRows {
 		_, err = db.Exec("insert into Auth(Account,Passwd) values(?,?)", account, passwd)
 		if err != nil {
@@ -62,7 +64,8 @@ func progressLogin(account, passwd string) (code int, msg string) {
 	} else {
 		if passwd != auth.Passwd {
 			msg = "user or password error"
-			goto err
+			code = -1
+			return
 		}
 	}
 	code = 0
@@ -95,6 +98,7 @@ func BasicAuth(pass handler) handler {
 }
 
 func loginHandle(w http.ResponseWriter, req *http.Request) {
+
 	account := strings.TrimSpace(req.PostFormValue("Account"))
 	passwd := strings.TrimSpace(req.PostFormValue("Password"))
 	rs := map[string]interface{}{}
@@ -124,7 +128,15 @@ func shutdown(w http.ResponseWriter, r *http.Request) {
 func main() {
 	flag.Parse()
 	http.HandleFunc("/login", loginHandle)
+	http.HandleFunc("/alived", func (w http.ResponseWriter, r *http.Request){
+		w.Write([]byte("success\x01\x09"))
+	})
 	http.HandleFunc("/shutdown", BasicAuth(shutdown))
+	go func() {
+		time.Sleep(1*time.Second)
+		fmt.Println("Server start.")
+		sendMyIp()
+	}()
 	err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
 	if err != nil {
 		log.Fatal(err)
